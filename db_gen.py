@@ -180,28 +180,3 @@ db.to_txt(
     # coefficients=True
     )
 
-# %%
-db = mario.parse_from_txt(
-    path = os.path.join(paths[user]['export'],str(past_year+1),"flows"),
-    table = 'SUT',
-    mode = 'flows',
-    )
-
-# %%
-db.query(matrices=["f"],scenarios=["ee_trades"]).loc["Carbon dioxide, fossil (air - Emiss)",('IT','Commodity','Electricity need')]
-
-# %% tests
-db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity"),("IT","Activity","Electricity supply")]
-
-db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity need"),("IT","Activity","Electricity supply")]
-
-db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity need"),("IT","Activity",slice(None))]
-
-db.matrices['ee_trades']['Y'].loc[("IT","Commodity","Electricity"),("IT","Consumption category",slice(None))]
-
-db.matrices['ee_trades']['Y'].loc[("IT","Commodity","Electricity need"),("IT","Consumption category",slice(None))]
-
-db.matrices['ee_trades']['z'].loc[(slice(None),"Activity","Electricity supply"),("IT","Commodity","Electricity need")]
-
-db.matrices['ee_trades']['z'].loc[("IT","Activity",slice(None)),("IT","Commodity","Electricity")]
-

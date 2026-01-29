@@ -12,13 +12,13 @@ def map_ember_to_classification(
     df = pd.read_csv(path)
     df = df.query(
         'Category=="Electricity generation" & \
-        `Country code`.notna() & \
+        `ISO 3 code`.notna() & \
         Subcategory=="Fuel" & \
         Unit=="TWh"'
     )
 
     df['Region'] = coco.convert(
-        names=df['Country code'],
+        names=df['ISO 3 code'],
         to=classification
     )
 
