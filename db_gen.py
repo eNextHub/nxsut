@@ -51,50 +51,157 @@ z.update(s)
 db.update_scenarios('baseline',z=z)
 db.reset_to_coefficients('baseline')
 
-#%%
-# db.get_add_sectors_excel("support/add_sectors.xlsx")
 
-# %%    
-db.read_add_sectors_excel(
-    path="support/add_sectors.xlsx",
-    read_inventories=True,
-    )
+#%%. Add new sectors for electricity supply and electricity need (MARIO stable version)
+# db.get_add_sectors_excel(
+#     new_sectors = ["Electricity supply"],
+#     regions = db.get_index("Region"),
+#     path ="support/add_sectors_activities.xlsx",
+#     item = "Activity",
+#     )
+
+# db.get_add_sectors_excel(
+#     new_sectors = ["Electricity need"],
+#     regions = db.get_index("Region"),
+#     path ="support/add_sectors_commodities.xlsx",
+#     item = "Commodity",
+#     )
+
 
 # %%
-db.add_sectors()
+db.add_sectors(
+    new_sectors = ["Electricity supply"],
+    regions = db.get_index("Region"),
+    io ="support/add_sectors_activities.xlsx",
+    item = "Activity",
+    inplace = True,
+)
+
+db.add_sectors(
+    new_sectors = ["Electricity need"],
+    regions = db.get_index("Region"),
+    io ="support/add_sectors_commodities.xlsx",
+    item = "Commodity",
+    inplace = True,
+)
+
+# %% Alternatively, using the MARIO development version:
+# db.get_add_sectors_excel("add_sectors_new.xlsx")
+# db.read_add_sectors_excel(
+#     path="support/add_sectors.xlsx",
+#     read_inventories=True,
+#     )
+# db.add_sectors()
+
+#%%% Export
+db.to_txt(
+    path = os.path.join(paths[user]['export'],str(past_year+1)),
+    )
 
 # %% Shock on the use side: 
-# "Electricity supply" activity must come consume only domestic "electricity" commodity
-# "Electricity" commodity consumption (both domestic and imported) must be transferred to domestic "Electricity need" consumption
+# "Supply" activity must consume only domestic "original" commodity
+# Original commodity consumption (both domestic and imported) must be transferred to domestic "Need" commodity consumption (both for use and final demand)
+
+traded_commodities = ['Electricity']
+
 u_new = db.u.copy()
+Y_new = db.Y.copy()
+
+U = db.U.copy().loc[(slice(None),"Commodity",traded_commodities),:].groupby(level=[0],axis=1).sum()
+Y = Y_new.loc[(slice(None),"Commodity",traded_commodities),:].groupby(level=[0],axis=1).sum()
+UY = U + Y
+
 z_new = db.z.copy()
 
-u_new.loc[:,(slice(None),"Activity","Electricity supply")] *= 0
+trades_df = {}
 
-for region in db.get_index("Region"):
-    u_new.loc[(region,"Commodity","Electricity"),(region,"Activity","Electricity supply")] = 1
+for commodity in traded_commodities:
+    trades_df[commodity] = pd.DataFrame()
+    u_new.loc[:,(slice(None),"Activity",f"{commodity} supply")] *= 0
+    oth_activities = [i for i in db.get_index("Activity") if i != f"{commodity} supply"]
+    
+    for region in db.get_index("Region"):
+        u_new.loc[(region,"Commodity",commodity),(region,"Activity",f"{commodity} supply")] = 1
 
-    ee_consumption = db.u.loc[(slice(None),"Commodity","Electricity"),(region,"Activity",slice(None))].sum(0).to_frame().T
-    ee_consumption.index = pd.MultiIndex.from_arrays([[region],["Commodity"],["Electricity need"]],names=db.u.index.names)
+        ee_consumption_u = db.u.loc[(slice(None),"Commodity",commodity),(region,"Activity",oth_activities)].sum(0).to_frame().T
+        ee_consumption_u.index = pd.MultiIndex.from_arrays([[region],["Commodity"],[f"{commodity} need"]],names=db.u.index.names)
 
-    u_new.loc[(slice(None),"Commodity","Electricity"),(region,"Activity",slice(None))] *= 0
-    u_new.update(ee_consumption)
+        ee_consumption_Y = db.Y.loc[(slice(None),"Commodity",commodity),(region,"Consumption category",slice(None))].sum(0).to_frame().T
+        ee_consumption_Y.index = pd.MultiIndex.from_arrays([[region],["Commodity"],[f"{commodity} need"]],names=db.Y.index.names)
+
+        u_new.update(ee_consumption_u)
+        Y_new.update(ee_consumption_Y)
+
+        u_new.loc[(slice(None),"Commodity",commodity),(region,"Activity",oth_activities)] *= 0
+        Y_new.loc[(slice(None),"Commodity",commodity),(region,"Consumption category",slice(None))] *= 0
+
+        trades_df[commodity] = pd.concat([
+            trades_df[commodity], 
+            UY.loc[:,region]/UY.loc[:,region].sum()
+        ], axis=1
+        )
 
 z_new.update(u_new)
 
-db.update_scenarios(scenario='baseline',z=z_new)
+#%% Shock on the supply side
+# "Supply" activities must provide "need" commodity according to trades dataframe
+
+s_new = db.s.copy()
+for commodity in traded_commodities:
+    trades_df[commodity].index = pd.MultiIndex.from_arrays([
+        trades_df[commodity].index.get_level_values(0),
+        ['Activity']*len(trades_df[commodity].index),
+        [f"{commodity} supply"]*len(trades_df[commodity].index)],
+        names=db.s.index.names)
+    
+    trades_df[commodity].columns = pd.MultiIndex.from_arrays([
+        trades_df[commodity].columns,
+        ['Commodity']*len(trades_df[commodity].columns),
+        [f"{commodity} need"]*len(trades_df[commodity].columns)],
+        names=db.s.columns.names)
+
+    s_new.update(trades_df[commodity])
+
+z_new.update(s_new)
+
+#%% Update scenario and reset coefficients
+db.update_scenarios(scenario='baseline',z=z_new, Y=Y_new)
 db.reset_to_coefficients('baseline')
 
 # %% Shock on the supply side
 # db.get_shock_excel(os.path.join(paths[user]['export'],str(past_year+1),"trades.xlsx"))
-db.shock_calc(os.path.join(paths[user]['export'],str(past_year+1),"trades.xlsx"), z=True, scenario='ee_trades')
+db.shock_calc(os.path.join(paths[user]['export'],str(past_year+1),"trades.xlsx"), z=True, scenario='ee_trades', force_rewrite=True)
 
 #%% Shock on the supply side
 db.to_txt(
-    path = os.path.join(paths[user]['export'],str(past_year+1)),
+    path = os.path.join(paths[user]['export'],str(past_year+1)+"_new"),
     scenario = 'ee_trades',
     # flows=True,
     # coefficients=True
     )
 
 # %%
+db = mario.parse_from_txt(
+    path = os.path.join(paths[user]['export'],str(past_year+1),"flows"),
+    table = 'SUT',
+    mode = 'flows',
+    )
+
+# %%
+db.query(matrices=["f"],scenarios=["ee_trades"]).loc["Carbon dioxide, fossil (air - Emiss)",('IT','Commodity','Electricity need')]
+
+# %% tests
+db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity"),("IT","Activity","Electricity supply")]
+
+db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity need"),("IT","Activity","Electricity supply")]
+
+db.matrices['ee_trades']['z'].loc[("IT","Commodity","Electricity need"),("IT","Activity",slice(None))]
+
+db.matrices['ee_trades']['Y'].loc[("IT","Commodity","Electricity"),("IT","Consumption category",slice(None))]
+
+db.matrices['ee_trades']['Y'].loc[("IT","Commodity","Electricity need"),("IT","Consumption category",slice(None))]
+
+db.matrices['ee_trades']['z'].loc[(slice(None),"Activity","Electricity supply"),("IT","Commodity","Electricity need")]
+
+db.matrices['ee_trades']['z'].loc[("IT","Activity",slice(None)),("IT","Commodity","Electricity")]
+
