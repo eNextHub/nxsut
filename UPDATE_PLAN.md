@@ -1,16 +1,58 @@
-# eNextSUT — All-Commodity Trade & Supply-Mix Update Plan
+# nxsut — Energy-Chain Reference & Benchmark Plan
 
-Working instructions for extending the eNextSUT database update beyond
-electricity: refreshing the **trade mixes of (potentially) all commodities**
-with BACI/Comtrade-class data and the **market shares of selected
-commodities** with technology-mix statistics.
+Working instructions for developing nxsut into a **reference database for
+the environmental impact analysis of energy-transition technologies and
+energy policies**. The update machinery
+(trade mixes from bilateral trade statistics, market shares from
+technology-mix statistics) is unchanged, but perimeter and priorities are
+set by that goal: fidelity of the energy supply chain first, a benchmark
+pipeline against independent data as a first-class deliverable, level
+nowcasting deferred. nxsut develops hand in hand with **nxbase**, the
+eNextGen data backbone where every raw input becomes a governed, versioned
+source (WP0).
 
 Status: planning. The electricity pipeline (v1.0/v2.0) is implemented in
 `db_gen.ipynb` (formerly `db_gen_new.ipynb`; superseded notebooks live in
 `_old/`) on the new MARIO methods and serves as the template for everything
-below.
+below. nxbase is under construction but far enough along to start writing
+parsers: schema scaffolded, generic parser runtime (`from_xlsx_flat`) live,
+GHG/GWP governance and the first MARIO export (`export-mario-ghg`) already
+working.
 
 ---
+
+## 0. Goal and priorities
+
+The database has one precise job: supporting reliable statements about the
+environmental impacts of energy technologies and energy policies. Four
+consequences:
+
+1. **Energy-chain fidelity first.** The supply chains that feed energy
+   technologies — carriers, conversion steps, and the materials that
+   dominate embodied impacts — get updated mixes and trades before anything
+   else. Generic all-commodity coverage is no longer a target in itself.
+2. **Benchmarking is a standing pipeline, not a release gate.** Every
+   version ships with a reproducible comparison of table-derived indicators
+   against independent references (IEA, EMBER, EDGAR/GCB, LCA literature).
+   The credibility of the energy representation *is* the product.
+3. **Raw data are governed in nxbase, not scattered.** Every dataset
+   feeding the pipeline — mix statistics, bilateral trades, benchmark
+   references — is ingested into nxbase as a `source` with a reusable
+   `parser` recipe, and reaches the pipeline through materialized exports.
+   No new loose files in `support/` (WP0).
+4. **Nowcasting the levels is deferred.** It stays on the roadmap (WP7) and
+   will reuse the benchmark suite as its constraint set, but it comes after
+   the energy chain is right — and measurably so.
+
+Priority ladder:
+
+- **P1 — energy carriers & conversion**: electricity (done), natural gas,
+  coal, crude oil, refined products, biofuels/blending, heat & CHP.
+- **P2 — energy-technology supply chains**: the materials that dominate the
+  embodied impacts of transition technologies — steel, aluminium, copper,
+  cement/clinker, glass, plastics (and their primary/secondary splits).
+- **P3 — everything else**: only where cheap and demonstrably relevant to
+  the footprints of P1/P2 chains; otherwise skip.
 
 ## 1. Where we start from
 
@@ -18,7 +60,7 @@ below.
 in four moves, all native MARIO:
 
 | Step | Method | What it does |
-|---|---|---|
+| --- | --- | --- |
 | Aggregate | `db.aggregate(...)` | electricity commodities → 1 `Electricity`; activities → EMBER technology labels |
 | Supply mix | `db.update_supply_mix("electricity", year=..., ember_path=...)` | rewrites technology market shares on each region's `Electricity` column of `s` from EMBER data (plain-EMBER labels, raw full release and RoW regions handled natively; requires `db.meta.source` to mention EXIOBASE) |
 | Pool | `db.pool_trade(["Electricity"])` | adds the `"{c} - supply"` / `"{c} - need"` pass-through layer; observed trade shares are written into `s` automatically |
@@ -32,11 +74,11 @@ pages *Update the electricity supply mix* and *Update trade mixes*):
 - **Subset rescaling**: labels/origins not listed in the shares keep their
   current share. Listing only foreign origins updates the sourcing among
   imports *without touching the domestic share* — this is the default
-  strategy for Comtrade-class data, which cannot see domestic flows.
+  strategy for trade data that cannot see domestic flows.
 - **Chenery-Moses uniformity**: one destination-level mix applied to all
   buyer columns imposes uniform sourcing on those buyers. Fine (and more
-  physical than Isard) for grid/bulk commodities; an information loss for
-  differentiated goods.
+  physical than Isard) for grid/bulk commodities — which is exactly the P1
+  perimeter; an information loss for differentiated goods.
 
 ## 2. Two regimes — do not pool everything
 
@@ -46,63 +88,129 @@ Pooling is a representation choice, not a prerequisite:
   trade we update repeatedly and where the market-share view is valuable —
   electricity now; candidates: natural gas, possibly transport fuels.
   Cost: each pooled commodity adds one activity + one commodity per region
-  (~+49 rows/cols each on the full table). Pooling all ~200 commodities would
-  nearly double the table — don't.
+  (~+49 rows/cols each on the full table). Pooling everything would nearly
+  double the table — don't.
 - **Isard-mode** (`update_trade_mix` directly on `u`/`Yc`, Commodity level):
   everything else. Same information applied, zero structural cost.
 
 ## 3. Work packages
 
-### WP1 — Screening: which commodities get what
+### WP0 — nxbase data backbone (parallel track)
 
-Data-driven shortlist before any data work:
+nxbase (repo: [github.com/eNextHub/nxbase](https://github.com/eNextHub/nxbase),
+local sibling checkout; knowledge base in `docs/knowledge/`, in Italian —
+nxsut stays English) is the relational home of eNextGen's ESG/energy data:
+a `data` table fed source-first by reusable `parser` recipes, with a
+Rosetta-Stone parent-child set hierarchy for cross-nomenclature
+reconciliation. nxsut is its first structured customer: the datasets used
+to build nxsut from EXIOBASE Hybrid 3.3.18 drive the parser roadmap.
 
-1. From the baseline `s`, per commodity: number of activities with market
-   share above a threshold (multi-producer structure) → supply-mix candidates.
-2. Rank by footprint relevance (contribution to GHG/energy footprints) and
-   trade volume (import share of total use, from `u`).
-3. Output: one table `commodity → {trade: pooled | isard | skip, supply_mix:
-   source | skip}` committed to this repo.
+Division of labour (same pattern as the GHG/GWP case, already live):
+**nxbase** governs raw data and mappings and materializes exports;
+**MARIO/nxsut** does the table algebra and gives footprints back for
+ingestion (`from_mario`).
 
-Expected supply-mix families (EXIOBASE already exposes the competing
-activities): **primary vs `Re-processing of secondary X`** for steel,
-aluminium, copper, other non-ferrous, paper, plastic, glass; electricity
-(done); possibly heat/CHP and biofuel blending in transport fuels.
+Current inputs to retrofit (they define the first parser recipes):
 
-Preliminary tier list (from the post-aggregation activity/commodity labels;
-to be confirmed by the screening):
+| Raw input | Today | Target in nxbase |
+| --- | --- | --- |
+| Electricity bilateral trades, hand-scraped from Electricity Maps | `support/trades_{year}.xlsx`, scraping undocumented | one `source` per vintage + parser; exporter regenerates the trades workbook. **Highest-value retrofit**: the collection is manual and currently unreproducible |
+| EMBER yearly full release (supply mixes) | loose CSV on OneDrive (`paths.yml: ember`) | source `EMBER` + parser (CSV twin of `from_xlsx_flat`); exporter feeds `update_supply_mix` |
+| GWP factors & GHG label mapping | were hardcoded in MARIO | **done** — governed in nxbase, exported via `export-mario-ghg`; the pattern to copy |
+| EXIOBASE Hybrid 3.3.18 flows | OneDrive (`paths.yml: raw`) | stays a file input to MARIO (deliberately *not* an nxbase source — see the GHG bridge doc); MARIO-computed footprints are ingested back via `from_mario` |
 
-- **Tier A — easy on both mixes**: Basic iron and steel (worldsteel EAF/BOF ×
-  BACI HS72), Aluminium (IAI × HS76), Copper (ICSG × HS74), Pulp (FAO
-  recovered-paper utilization × HS47/48), Lead-zinc-tin (ILZSG × HS78-80),
-  Plastics basic (OECD Global Plastics Outlook, regional only × HS39).
-- **Tier B — trade only** (single producer, footprint-heavy): crops (FAOSTAT
-  detailed trade matrix, preferable to BACI for agriculture), coal qualities,
-  crude, natural gas (IEA bilateral), refined products (HS2710 split, medium).
-- **Tier C — mix with caveats**: glass (FEVE, EU only), cement/clinker (ash →
-  clinker, GCCA/GNR clinker ratios, trade negligible), steam/hot water
-  (multi-producer via CHP by-products, IEA, not traded — mix only, subset
-  semantics ideal), fuel blending (Biogasoline/Biodiesels vs fossil fuels as a
-  commodity-level use mix, IEA).
-- **Tier D — skip**: differentiated manufacturing (weak CM assumption, no
-  supply mix), services, waste treatment.
+Sources the plan will need, one parser per family, aligned with the WPs
+that consume them: IEA WEB + bilateral energy trade (WP3a, WP4, WP6.2),
+BACI (WP3b), worldsteel / IAI / ICSG / OECD plastics (WP4), EMBER published
+intensities + EDGAR/GCB + LCA reference sets (WP6).
 
-Suggested start: Tier A top-4 (steel, aluminium, copper, pulp) plus the
-heaviest Tier B trade-only flows (fossil fuels, cereals).
+Exports, not live reads: the nxsut pipeline consumes **materialized
+exports** in exactly the formats `db_gen.ipynb` already reads
+(`trades_{year}.xlsx`, mix shares), produced by nxbase exporters shaped
+like `export-mario-ghg` (target names: `export-nxsut-trades`,
+`export-nxsut-mixes`), each stamped with nxbase version + source vintages.
+
+Interim rule: until a source is ingested, the notebook keeps reading the
+existing files in `support/`; every **new** adapter (WP3/WP4/WP6) is born
+as an nxbase parser + exporter, never as another loose file.
+
+### WP1 — Screening: size the energy perimeter
+
+Data-driven confirmation of the priority ladder before any data work:
+
+1. **Footprint decomposition of the energy chains**: from the baseline,
+   decompose the GHG/energy footprint of each electricity technology and
+   energy carrier into upstream commodity contributions → which flows
+   actually matter for technology assessments. This — not generic footprint
+   relevance — is what promotes a commodity into P2.
+2. Per commodity in P1/P2: import share of total use (from `u`) and
+   multi-producer structure in `s` (market shares above a threshold) →
+   trade-update and supply-mix candidates respectively.
+3. Output: one table `commodity → {priority: P1 | P2 | P3, trade: pooled |
+   isard | skip, supply_mix: source | skip}` committed to this repo.
+
+Expected perimeter (from the post-aggregation labels; to be confirmed):
+
+- **P1 carriers**: natural gas (IEA bilateral trade; pooling candidate),
+  coal qualities, crude oil, refined products (HS2710 split, medium),
+  fuel blending (Biogasoline/Biodiesels vs fossil fuels as a
+  commodity-level use mix, IEA), steam/hot water (multi-producer via CHP
+  by-products, not traded — mix only, subset semantics ideal), electricity
+  (done).
+- **P2 materials**: Basic iron and steel (worldsteel EAF/BOF × BACI HS72),
+  Aluminium (IAI × HS76), Copper (ICSG × HS74), cement/clinker (ash →
+  clinker, GCCA/GNR clinker ratios, trade negligible), glass (FEVE, EU
+  only), Plastics basic (OECD Global Plastics Outlook, regional only ×
+  HS39).
+- **P3 / skip**: crops & food, pulp & paper, differentiated manufacturing,
+  services, waste treatment — revisit only if the WP1 decomposition shows a
+  material contribution to P1/P2 footprints.
+
+Suggested start: gas + coal + crude + refined products (trades), heat and
+fuel blending (mixes), then steel + aluminium + copper.
 
 ### WP2 — Concordances
 
-- **Product ↔ HS**: EXIOBASE ~200 products ↔ HS6, via the published
-  EXIOBASE↔CPA/CPC↔HS crosswalks. Deliverable: one versioned CSV in
-  `support/` (`concordance_hs_exiobase.csv`), many-to-one HS6 → product,
-  with an explicit column for the aggregation weight basis (quantity/value).
+Long-term, cross-nomenclature mappings are exactly what nxbase's
+Rosetta-Stone set hierarchy is for: concordances should live there as
+parent-child relations between classifications, with the CSVs below as
+seeds / materialized views, not as the primary home.
+
+- **Energy carriers ↔ IEA products** (P1): energy flows bypass HS — the
+  natural source is IEA (products × flows, energy units). Deliverable: a
+  small hand-curated mapping IEA product codes ↔ EXIOBASE energy
+  commodities (`support/concordance_iea_exiobase.csv`).
+- **Product ↔ HS** (P2 materials): EXIOBASE products ↔ HS6 via the
+  published EXIOBASE↔CPA/CPC↔HS crosswalks, restricted to the P2 shortlist
+  (tens of HS headings, not the full ~5000). Deliverable:
+  `support/concordance_hs_exiobase.csv`, many-to-one HS6 → product, with an
+  explicit column for the aggregation weight basis (quantity/value).
 - **Regions**: ISO3 ↔ EXIOBASE 44 regions + 5 RoW. Reuse MARIO's resolver
   (`mario.clusters.coverage`, EXIOBASE RoW members are packaged) — no new
-  asset needed.
+  asset needed; nxbase's canonical `site` set is the eventual home.
 
-### WP3 — Trade adapter (goods)
+### WP3 — Trade adapters
 
-- **Source: BACI (CEPII)** rather than raw Comtrade: mirror-reconciled,
+Each adapter = nxbase parser (raw → `data`) + exporter (→ the
+origins×destinations workbook the notebook consumes), per WP0.
+
+#### 3a — Energy carriers (P1, first)
+
+- Source: IEA World Energy Balances + bilateral trade (imports by origin /
+  exports by destination); Eurostat for intra-EU detail. Energy units,
+  consistent with the hybrid table. Electricity keeps the current
+  EE-maps/ENTSO-E source.
+- Because balances report production alongside imports, the **full origin
+  mix including the domestic share is observable** for carriers — unlike
+  HS-based trade. Decide per carrier whether to update the domestic split
+  too or stay import-only (subset rescaling).
+- Output format: the same one `db_gen.ipynb` already consumes —
+  `support/trades_{year}.xlsx`, one sheet per commodity, origins on rows,
+  destinations on columns.
+
+#### 3b — Materials (P2, second)
+
+- Source: **BACI (CEPII)** rather than raw Comtrade: mirror-reconciled,
   quantities in tonnes, one static yearly file (reproducibility over
   freshness). Raw Comtrade remains a fallback.
 - Pipeline: BACI HS6 bilateral flows → concordance → per-commodity
@@ -110,33 +218,28 @@ heaviest Tier B trade-only flows (fossil fuels, cereals).
   quantities are unreliable) → **import-only shares** (origins summing to 1
   over foreign origins; the domestic share stays as observed in the table,
   by the subset-rescaling semantics).
-- Output format: the same one `db_gen.ipynb` already consumes —
-  `support/trades_{year}.xlsx`, one sheet per commodity, origins on rows,
-  destinations on columns.
-- **Energy carriers**: use IEA/Eurostat physical trade (energy units,
-  consistent with the hybrid table) instead of HS tonnages. Electricity keeps
-  the current EE-maps/ENTSO-E source.
-- **Services**: no Comtrade coverage. v1: leave observed shares untouched.
-  Later option: OECD-WTO BaTIS (EBOPS).
-- **Known limitation** to document: gross bilateral flows include re-exports
-  (Rotterdam/Hong Kong effect), while the table wants production-origin
-  shares. BACI mitigates but does not eliminate this; accept and document in
-  v1.
+- **Known limitation** to document: gross bilateral flows include
+  re-exports (Rotterdam/Hong Kong effect), while the table wants
+  production-origin shares. BACI mitigates but does not eliminate this;
+  accept and document.
+
+**Services**: out of scope (P3). If ever needed: OECD-WTO BaTIS (EBOPS).
 
 ### WP4 — Supply-mix adapters
 
 One adapter per family, shaped exactly like the EMBER one (label profile +
-per-country-per-year shares source):
+per-country-per-year shares source), in priority order — and, per WP0, each
+backed by an nxbase source + parser rather than a loose file:
 
-| Family | Competing activities | Source |
-|---|---|---|
-| Electricity | EMBER technologies | EMBER (done) |
-| Steel | primary vs secondary re-processing | worldsteel (BOF/EAF by country) |
-| Aluminium | primary vs secondary | IAI |
-| Paper | virgin vs recycled | FAO / CEPI |
-| Plastics | virgin vs recycled | PlasticsEurope / OECD |
-| Heat | CHP / boilers | IEA balances |
-| Transport fuels | fossil vs bio blending | IEA / EMBER |
+| Family | Competing activities | Source | Priority |
+| --- | --- | --- | --- |
+| Electricity | EMBER technologies | EMBER (done) | P1 |
+| Heat | CHP / boilers | IEA balances | P1 |
+| Transport fuels | fossil vs bio blending | IEA / EMBER | P1 |
+| Steel | primary vs secondary re-processing | worldsteel (BOF/EAF by country) | P2 |
+| Aluminium | primary vs secondary | IAI | P2 |
+| Plastics | virgin vs recycled | PlasticsEurope / OECD | P2 |
+| Paper | virgin vs recycled | FAO / CEPI | P3 |
 
 Adapters live in `support/` first; stable ones can be promoted into MARIO as
 packaged profiles (string modes like `"electricity"`) later.
@@ -146,18 +249,64 @@ packaged profiles (string modes like `"electricity"`) later.
 - Extend `traded_commodities` and add a `supply_mix_sources` mapping in
   `db_gen.ipynb`; both loops already scale by construction
   (`meta.pooled_trade_map` carries the labels).
-- **Performance gate**: the current `update_trade_mix` iterates
-  destination×item with dense row rewrites. Fine for a handful of
-  commodities; for ~150 commodities × 49 destinations on the full table it
-  needs a vectorized bulk pass in MARIO (same API, faster engine). Benchmark
-  first on ~10 commodities before requesting it.
+- **Performance note**: the current `update_trade_mix` iterates
+  destination×item with dense row rewrites. The energy-first perimeter is
+  tens of commodities, not ~150, so the vectorized bulk pass in MARIO may
+  not be needed at all — benchmark on ~10 commodities before requesting it.
 
-### WP6 — Nowcasting levels (GDP / final demand benchmarks)
+### WP6 — Benchmark pipeline (core deliverable)
+
+A standing, versioned comparison of table-derived indicators against
+independent references. Runs at the end of every `db_gen.ipynb` execution
+(or as a dedicated `benchmark.ipynb`) and produces one tidy CSV of
+`(indicator, region, table_value, reference_value, source, vintage)` plus a
+short report per release. Reference values are themselves data: their
+natural home is nxbase (one `source` per reference, with vintage), queried
+or exported by the benchmark notebook; `support/benchmarks/` snapshot files
+are the interim cache until the corresponding parsers exist.
+
+Benchmark families, in order of implementation:
+
+1. **Electricity mix & carbon intensity** per region vs EMBER published
+   values (partly exists in the footprint-comparison section — formalize).
+2. **Energy balances**: production, transformation and final use per
+   carrier×region vs IEA WEB — direct unit match (TJ) thanks to the hybrid
+   table.
+3. **Technology footprints**: gCO2eq/kWh per electricity technology per
+   region vs LCA literature ranges (UNECE 2021, IPCC AR5 Annex III,
+   ecoinvent where licensed); gCO2eq/MJ for fuel supply chains vs
+   well-to-tank literature (e.g. JEC WTW).
+4. **Emission totals**: territorial CO2/GHG per region vs EDGAR / Global
+   Carbon Budget / UNFCCC inventories.
+5. **Trade round-trip & coverage**: import shares per (carrier,
+   destination) vs the injected source (IEA/Eurostat/BACI) — closes the
+   loop on the update itself — plus coverage stats for what was *not*
+   updated.
+6. **Policy indicators**: embodied carbon in electricity / gas / fuel
+   imports per region — plausibility vs literature; these double as
+   showcase outputs of the database.
+
+GWP handling: the aggregation schemes (AR4/AR5/AR6 baskets) are governed in
+nxbase and exported to MARIO via `export-mario-ghg` — the footprint and
+benchmark calculations should consume that export, not MARIO's legacy
+hardcoded dictionaries. Computed footprints flow back into nxbase
+(`from_mario`), closing the loop.
+
+Plus the structural checks: `db.is_balanced("flows")` residual not worse
+than baseline; per-commodity changelog (what was updated, from which
+source, which regions fell back to other years).
+
+Acceptance policy: start with documented deviations (value, reference,
+explanation) rather than hard thresholds; graduate to thresholds once the
+pipeline is stable.
+
+### WP7 — Nowcasting levels (deferred)
 
 Mix and trade updates change the *composition* of the table and deliberately
 preserve totals: the levels (Y, X, VA, emissions) stay at the base year of
-EXIOBASE Hybrid 3.3.18 (2011). Nowcasting the levels is a separate, final
-step:
+EXIOBASE Hybrid 3.3.18 (2011). Nowcasting the levels is a separate, later
+step — deliberately after WP6, because the benchmark suite doubles as the
+nowcast target/constraint set:
 
 1. **Scale final demand** per region × category, and per commodity family
    where physical benchmarks exist — a luxury of the hybrid units: IEA energy
@@ -166,11 +315,10 @@ step:
    GDP/consumption growth (WDI/AMECO) as the fallback scalar.
 2. **Recompute** X, VA, E through the Leontief closure (MARIO: scaled `Y` via
    `update_scenarios` or a Percentage shock on `Y`).
-3. **Benchmark ex post** — GDP from the monetary VA layer vs national
-   accounts, energy totals vs IEA, CO2 vs EDGAR/GCB — and reconcile
-   conflicting constraints with GRAS/RAS. Note: MARIO has a RAS balancing API
-   on the unmerged `dev_gtap` branch; reconciling that branch is part of this
-   work package.
+3. **Benchmark ex post** — same WP6 suite, now used as targets — and
+   reconcile conflicting constraints with GRAS/RAS. Note: MARIO has a RAS
+   balancing API on the unmerged `dev_gtap` branch; reconciling that branch
+   is part of this work package.
 
 Properties: composition and level updates commute (mixes preserve column
 totals, Y scaling scales columns), so the order composition → levels →
@@ -179,20 +327,15 @@ technology recipes (`u`) and per-activity emission intensities stay at 2011
 wherever no mix is updated — the same philosophy as EXIOBASE's own
 extrapolated years and GLORIA nowcasts.
 
-### WP7 — Validation & release
+### WP8 — Release & versioning
 
-Automated checks at the end of the notebook (extend the existing footprint
-comparison section):
-
-1. Carbon intensity of electricity per region vs EMBER published values.
-2. Import shares per (commodity, destination) vs BACI aggregates (round-trip).
-3. Footprint comparison old-vs-new per release (existing section).
-4. Balance check: `db.is_balanced("flows")` residual not worse than baseline.
-5. Per-commodity changelog: what was updated, from which source, which
-   regions fell back to other years.
-
-Version the output as v3.0 (v1.0 = supply mixes only, v2.0 = + electricity
-trades, v3.0 = + multi-commodity trades and mixes, v4.0 = + nowcast levels).
+- v1.0 = supply mixes only; v2.0 = + electricity trades (existing).
+- **v3.0 = P1 energy-chain trades + mixes, shipped with the first benchmark
+  report (WP6 families 1, 2 and 5 at minimum) and with its raw inputs
+  governed in nxbase (at minimum the two retrofits: Electricity Maps trades
+  and EMBER).**
+- v3.x = P2 material chains as adapters land, benchmark report extended.
+- v4.0 = + nowcast levels (WP7).
 
 ## 4. Conventions
 
@@ -202,10 +345,17 @@ trades, v3.0 = + multi-commodity trades and mixes, v4.0 = + nowcast levels).
 - Trades input: `support/trades_{year}.xlsx`, one sheet per commodity,
   origins×destinations matrix, columns summing to 1 over the listed origins.
   Legacy shock-format workbooks are pivoted on the fly by the notebook.
+- Raw-data governance: new raw inputs enter through nxbase (source +
+  parser + exporter, see WP0), never as new loose files; nxbase exports are
+  stamped with nxbase version + source vintages, and the pipeline never
+  fetches live data.
+- Language: this repo and everything written into nxbase records (shorts,
+  names, set contents, commit messages) are in **English**; the nxbase
+  knowledge base is in Italian.
 - Set `db.meta.source` to a string containing "EXIOBASE" right after parsing:
   it enables the RoW region expansion in the EMBER (and future) adapters.
-- Scenario names: `baseline` = updated mixes (v1.0 content), `ee_trades` =
-  + updated trades. New scenarios per data vintage rather than overwriting.
+- Scenario names: `baseline` = updated mixes (v1.0 content), `ee_trades` = +
+  updated trades. New scenarios per data vintage rather than overwriting.
 - Requires MARIO ≥ the `dev` branch with `update_supply_mix`,
   `update_trade_mix`, `pool_trade` (see MARIO CHANGELOG, *Unreleased*).
 
@@ -213,13 +363,20 @@ trades, v3.0 = + multi-commodity trades and mixes, v4.0 = + nowcast levels).
 
 - [ ] Pooling perimeter: electricity only, +gas, +fuels? (proposal: minimal,
       extend when a use case demands the market-share view)
-- [ ] BACI vintage policy: pin one release per database version?
-- [ ] Supply-mix shortlist: confirm the primary/secondary family after the
-      WP1 screening, or start from steel+aluminium+paper directly?
-- [ ] Domestic share: confirmed observed-only in v1 (import sourcing from
-      BACI); revisit with production data (PRODCOM/IEA) in v2?
-- [ ] GWP set for the validation footprints: AR4 (25/298, current v2.0
-      convention) vs AR6 (29.8/273, used for the raw-table runs) — align.
-- [ ] Nowcast target year and benchmark set (GDP only vs GDP + IEA energy +
-      FAO food); whether reconciliation (RAS) is in scope for the first
-      nowcast release.
+- [ ] Domestic share for energy carriers: IEA balances see production, so
+      the full origin mix (domestic + imports) is updatable for P1 — update
+      the domestic split in v3.0, or stay import-only like the materials?
+- [ ] GWP set: AR4 (25/298, current v2.0 convention) vs AR6 (29.8/273, used
+      for the raw-table runs). nxbase already governs AR4/AR5/AR6 baskets
+      and exports them via `export-mario-ghg` — proposal: move the
+      validation footprints to AR6 consumed from that export.
+- [ ] nxbase↔pipeline interface: materialized export files only (proposal:
+      reproducible, no runtime dependency) vs live DB/API reads; and
+      whether exports are committed to this repo or regenerated on demand.
+- [ ] LCA reference set for technology footprints (WP6.3): UNECE 2021 vs
+      IPCC AR5 Annex III vs ecoinvent (licensing!); ranges or point values.
+- [ ] Benchmark scope gating v3.0: families 1+2+5 only, or also 3
+      (technology footprints)?
+- [ ] BACI vintage policy for P2: pin one release per database version?
+- [ ] Nowcast target year and benchmark set — deferred with WP7, revisit
+      after v3.0.
