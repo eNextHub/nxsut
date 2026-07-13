@@ -6,14 +6,15 @@ with BACI/Comtrade-class data and the **market shares of selected
 commodities** with technology-mix statistics.
 
 Status: planning. The electricity pipeline (v1.0/v2.0) is implemented in
-`db_gen_new.ipynb` on the new MARIO methods and serves as the template for
-everything below.
+`db_gen.ipynb` (formerly `db_gen_new.ipynb`; superseded notebooks live in
+`_old/`) on the new MARIO methods and serves as the template for everything
+below.
 
 ---
 
 ## 1. Where we start from
 
-`db_gen_new.ipynb` builds the reference database from EXIOBASE Hybrid v3.3.18
+`db_gen.ipynb` builds the reference database from EXIOBASE Hybrid v3.3.18
 in four moves, all native MARIO:
 
 | Step | Method | What it does |
@@ -109,7 +110,7 @@ heaviest Tier B trade-only flows (fossil fuels, cereals).
   quantities are unreliable) → **import-only shares** (origins summing to 1
   over foreign origins; the domestic share stays as observed in the table,
   by the subset-rescaling semantics).
-- Output format: the same one `db_gen_new.ipynb` already consumes —
+- Output format: the same one `db_gen.ipynb` already consumes —
   `support/trades_{year}.xlsx`, one sheet per commodity, origins on rows,
   destinations on columns.
 - **Energy carriers**: use IEA/Eurostat physical trade (energy units,
@@ -143,7 +144,7 @@ packaged profiles (string modes like `"electricity"`) later.
 ### WP5 — Pipeline integration
 
 - Extend `traded_commodities` and add a `supply_mix_sources` mapping in
-  `db_gen_new.ipynb`; both loops already scale by construction
+  `db_gen.ipynb`; both loops already scale by construction
   (`meta.pooled_trade_map` carries the labels).
 - **Performance gate**: the current `update_trade_mix` iterates
   destination×item with dense row rewrites. Fine for a handful of
