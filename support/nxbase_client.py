@@ -73,7 +73,7 @@ def get_provenance(api_url: str = DEFAULT_API, source_names: list[str] | None = 
 
 def get_ember_snapshot(
     api_url: str = DEFAULT_API,
-    source: str = "EMBER Yearly Electricity Data 2025",
+    source: str = "EMBER Yearly Electricity Data (generation) 2025",
 ) -> pd.DataFrame:
     """Electricity generation snapshot in MARIO's reduced EMBER format.
 
