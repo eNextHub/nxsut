@@ -107,7 +107,19 @@ def get_ember_snapshot(
     dropped = out["ISO3"].isna() | out["Variable"].isna()
     if dropped.any():
         print(f"nxbase_client: dropped {int(dropped.sum())} unmappable rows")
-    return out.loc[~dropped].reset_index(drop=True)
+    out = out.loc[~dropped]
+
+    # nxbase stores no zero rows (skip-zeros policy): rebuild the full
+    # (country, year) x fuel grid so MARIO sees explicit zero shares.
+    grid = (
+        out.pivot_table(index=["ISO3", "Year"], columns="Variable", values="Value")
+        .reindex(columns=sorted(label_by_short.values()))
+        .fillna(0.0)
+        .stack()
+        .rename("Value")
+        .reset_index()
+    )
+    return grid
 
 
 def get_trade_matrix(
@@ -138,6 +150,11 @@ def get_trade_matrix(
     matrix = pd.DataFrame(
         {"origin": origin, "destination": destination, "value": frame["value"].astype(float)}
     ).pivot(index="origin", columns="destination", values="value")
+    # nxbase stores no zero rows (skip-zeros policy): re-materialize them so
+    # every destination column carries the full origin universe (a missing
+    # origin must force a zero share in update_trade_mix, not subset-rescale).
+    universe = sorted(set(matrix.index) | set(matrix.columns))
+    matrix = matrix.reindex(index=universe, columns=universe).fillna(0.0)
     matrix.index.name = None
     matrix.columns.name = None
     return matrix

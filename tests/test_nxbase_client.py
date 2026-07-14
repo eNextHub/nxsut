@@ -121,10 +121,15 @@ def test_ember_snapshot_round_trips_the_raw_release() -> None:
 
     snapshot = nxc.get_ember_snapshot()
 
+    # nxbase stores no zeros and the client refills the fuel grid, so compare
+    # the two frames as aligned grids (absent == 0 on both sides).
     key = ["ISO3", "Year", "Variable"]
-    snapshot = snapshot.sort_values(key).reset_index(drop=True)
-    expected = expected.sort_values(key).reset_index(drop=True)
-
-    assert len(snapshot) == len(expected)
-    pd.testing.assert_frame_equal(snapshot[key], expected[key], check_dtype=False)
-    assert (snapshot["Value"] - expected["Value"]).abs().max() < 1e-9
+    a = snapshot.set_index(key)["Value"]
+    b = expected.set_index(key)["Value"]
+    union = a.index.union(b.index)
+    a = a.reindex(union, fill_value=0.0)
+    b = b.reindex(union, fill_value=0.0)
+    assert (a - b).abs().max() < 1e-9
+    # and every nonzero raw value must be present in the snapshot
+    nonzero = expected.loc[expected["Value"] != 0]
+    assert nonzero.set_index(key).index.isin(snapshot.set_index(key).index).all()
