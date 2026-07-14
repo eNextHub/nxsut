@@ -8,3 +8,6 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# transient files regenerated from the nxbase API at run time
+support/_nxbase_*.csv

@@ -1,0 +1,26 @@
+[project]
+name = "nxsut"
+version = "0.1.0"
+description = "Reference supply-use database for energy-transition analysis (EXIOBASE Hybrid + MARIO)"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0",
+    "openpyxl>=3.1",
+    "country-converter>=1.2",
+    "pyyaml>=6.0",
+]
+
+# The db_gen notebook additionally needs `mario` (>= the dev branch with
+# update_supply_mix / update_trade_mix / pool_trade) in its kernel env;
+# it is not declared here because it is installed from a git checkout.
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["support"]
+addopts = "-ra"

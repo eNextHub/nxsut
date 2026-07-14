@@ -11,13 +11,13 @@ nowcasting deferred. nxsut develops hand in hand with **nxbase**, the
 eNextGen data backbone where every raw input becomes a governed, versioned
 source (WP0).
 
-Status: planning. The electricity pipeline (v1.0/v2.0) is implemented in
-`db_gen.ipynb` (formerly `db_gen_new.ipynb`; superseded notebooks live in
-`_old/`) on the new MARIO methods and serves as the template for everything
-below. nxbase is under construction but far enough along to start writing
-parsers: schema scaffolded, generic parser runtime (`from_xlsx_flat`) live,
-GHG/GWP governance and the first MARIO export (`export-mario-ghg`) already
-working.
+Status: **WP0 closed (2026-07-14)**. The electricity pipeline
+(v1.0/v2.0/v2.1) is implemented in `db_gen.ipynb` (superseded notebooks live
+in `_old/`) on the new MARIO methods and serves as the template for
+everything below. Both of its raw inputs — EMBER generation and the
+Electricity Maps bilateral trades — are governed in nxbase and consumed
+through the **nxbase query API** via `support/nxbase_client.py`, with
+round-trip acceptance tests in `tests/`. Next up: WP1 screening.
 
 ---
 
@@ -114,8 +114,8 @@ Current inputs to retrofit (they define the first parser recipes):
 
 | Raw input | Today | Target in nxbase |
 | --- | --- | --- |
-| Electricity bilateral trades, hand-scraped from Electricity Maps | `support/trades_{year}.xlsx`, scraping undocumented | one `source` per vintage + parser; exporter regenerates the trades workbook. **Highest-value retrofit**: the collection is manual and currently unreproducible |
-| EMBER yearly full release (supply mixes) | loose CSV on OneDrive (`paths.yml: ember`) | source `EMBER` + parser (CSV twin of `from_xlsx_flat`); exporter feeds `update_supply_mix` |
+| Electricity bilateral trades, hand-scraped from Electricity Maps | **done** — one source `EMAPS` with `period_range` (period slices, not versions), glob path over the committed legacy workbooks; consumed via `get_trade_matrix()` | ~~one `source` per vintage + parser~~ |
+| EMBER yearly full release (supply mixes) | **done** — source `EMBER25` + `from_csv` parser (45,429 OUT rows); consumed via `get_ember_snapshot()` | ~~exporter feeds `update_supply_mix`~~ |
 | GWP factors & GHG label mapping | were hardcoded in MARIO | **done** — governed in nxbase, exported via `export-mario-ghg`; the pattern to copy |
 | EXIOBASE Hybrid 3.3.18 flows | OneDrive (`paths.yml: raw`) | stays a file input to MARIO (deliberately *not* an nxbase source — see the GHG bridge doc); MARIO-computed footprints are ingested back via `from_mario` |
 
@@ -124,15 +124,19 @@ that consume them: IEA WEB + bilateral energy trade (WP3a, WP4, WP6.2),
 BACI (WP3b), worldsteel / IAI / ICSG / OECD plastics (WP4), EMBER published
 intensities + EDGAR/GCB + LCA reference sets (WP6).
 
-Exports, not live reads: the nxsut pipeline consumes **materialized
-exports** in exactly the formats `db_gen.ipynb` already reads
-(`trades_{year}.xlsx`, mix shares), produced by nxbase exporters shaped
-like `export-mario-ghg` (target names: `export-nxsut-trades`,
-`export-nxsut-mixes`), each stamped with nxbase version + source vintages.
+**API-first interface (decided 2026-07-13, supersedes the exporter
+plan):** nxbase exposes its data only through the query API (`/data`,
+`/data.csv`, `/sets/*` — live SQL on Postgres, local today, Supabase in
+phase 2). The pipeline consumes it via `support/nxbase_client.py`, which
+reshapes API rows into what MARIO already reads (reduced EMBER snapshot,
+origins x destinations trade matrices) and logs the provenance (nxbase
+version + source vintages) at every run. Deferred, optional: MARIO could
+accept `ember_data=` as a DataFrame (provider-agnostic) so the transient
+snapshot file disappears — not required.
 
-Interim rule: until a source is ingested, the notebook keeps reading the
-existing files in `support/`; every **new** adapter (WP3/WP4/WP6) is born
-as an nxbase parser + exporter, never as another loose file.
+Rule for what comes next: every **new** adapter (WP3/WP4/WP6) is born as
+an nxbase parser + client function, never as another loose file in
+`support/`.
 
 ### WP1 — Screening: size the energy perimeter
 
@@ -346,9 +350,10 @@ extrapolated years and GLORIA nowcasts.
   origins×destinations matrix, columns summing to 1 over the listed origins.
   Legacy shock-format workbooks are pivoted on the fly by the notebook.
 - Raw-data governance: new raw inputs enter through nxbase (source +
-  parser + exporter, see WP0), never as new loose files; nxbase exports are
-  stamped with nxbase version + source vintages, and the pipeline never
-  fetches live data.
+  parser, see WP0), never as new loose files; the pipeline reads nxbase
+  through the query API (`support/nxbase_client.py`, provenance logged per
+  run). "Never fetch live data" keeps applying to internet sources —
+  governed nxbase is the legitimate exception.
 - Language: this repo and everything written into nxbase records (shorts,
   names, set contents, commit messages) are in **English**; the nxbase
   knowledge base is in Italian.
@@ -370,9 +375,9 @@ extrapolated years and GLORIA nowcasts.
       for the raw-table runs). nxbase already governs AR4/AR5/AR6 baskets
       and exports them via `export-mario-ghg` — proposal: move the
       validation footprints to AR6 consumed from that export.
-- [ ] nxbase↔pipeline interface: materialized export files only (proposal:
-      reproducible, no runtime dependency) vs live DB/API reads; and
-      whether exports are committed to this repo or regenerated on demand.
+- [x] nxbase↔pipeline interface — **closed (2026-07-13)**: query API via
+      the `support/nxbase_client.py` client module; no materialized export
+      files; provenance (nxbase version + source vintages) logged per run.
 - [ ] LCA reference set for technology footprints (WP6.3): UNECE 2021 vs
       IPCC AR5 Annex III vs ecoinvent (licensing!); ranges or point values.
 - [ ] Benchmark scope gating v3.0: families 1+2+5 only, or also 3
