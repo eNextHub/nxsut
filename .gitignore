@@ -11,3 +11,8 @@ __pycache__/
 
 # transient files regenerated from the nxbase API at run time
 support/_nxbase_*.csv
+
+# data does not live in git — trades workbooks are Electricity Maps' proprietary
+# ToS data (non-redistributable); they live in the OneDrive archive
+# (Databases/nxsut/_trades_data/) and are governed in nxbase (electricity_maps/)
+support/trades_*.xlsx
