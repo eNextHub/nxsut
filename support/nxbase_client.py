@@ -126,24 +126,34 @@ def get_trade_matrix(
     api_url: str = DEFAULT_API,
     year: int = 2024,
     commodity: str = "Electricity",
+    source: str | None = None,
 ) -> pd.DataFrame:
     """Origins x destinations share matrix for one commodity and year.
 
     Queries `/data.csv?parameter=Import mix&period=<year>&commodity=...` and
     pivots to the matrix `update_trade_mix` consumes (region shorts on both
     axes, every destination column summing to 1, domestic diagonal included).
+
+    `source` pins the origin dataset by name (several import-mix sources now
+    coexist in nxbase): the proprietary Electricity Maps set
+    (`"Electricity Maps Import mix <year>"`, used by v2.x) or the open ENTSO-E
+    physical set (`"ENTSO-E electricity import mix <year>"`, used by v3.0).
+    Leave `None` only when a single source is present.
     """
-    frame = _get_csv(
-        api_url,
-        {
-            "parameter": "Import mix",
-            "period": str(year),
-            "commodity": commodity,
-            "sort": "id",
-        },
-    )
+    params: dict[str, object] = {
+        "parameter": "Import mix",
+        "period": str(year),
+        "commodity": commodity,
+        "sort": "id",
+    }
+    if source is not None:
+        params["source"] = source
+    frame = _get_csv(api_url, params)
     if frame.empty:
-        raise ValueError(f"no Import mix rows for {commodity!r} in {year}")
+        raise ValueError(
+            f"no Import mix rows for {commodity!r} in {year}"
+            + (f" from source {source!r}" if source else "")
+        )
 
     destination = frame["item_1"].map(lambda s: split_item(s)[1])
     origin = frame["item_2"].map(lambda s: split_item(s)[0])
