@@ -11,13 +11,18 @@ nowcasting deferred. nxsut develops hand in hand with **nxbase**, the
 eNextGen data backbone where every raw input becomes a governed, versioned
 source (WP0).
 
-Status: **WP0 closed (2026-07-14)**. The electricity pipeline
-(v1.0/v2.0/v2.1) is implemented in `db_gen.ipynb` (superseded notebooks live
-in `_old/`) on the new MARIO methods and serves as the template for
-everything below. Both of its raw inputs — EMBER generation and the
-Electricity Maps bilateral trades — are governed in nxbase and consumed
-through the **nxbase query API** via `support/nxbase_client.py`, with
-round-trip acceptance tests in `tests/`. Next up: WP1 screening.
+Status: **WP0 closed (2026-07-14)**, **v3.0 shipped (2026-07-21)**. The
+electricity pipeline is split into three standalone generators —
+`gen_v1.ipynb`, `gen_v2.ipynb`, `gen_v3.ipynb` (retired notebooks, including
+the combined `db_gen.ipynb` and the MARIO-native-on-proprietary-mix `v2.1`,
+live in `_old/`) — on the new MARIO methods, serving as the template for
+everything below. `gen_v3.ipynb` sources its trades from the **open
+ENTSO-E** scheduled-exchange set (replacing the proprietary Electricity Maps
+mix `gen_v2.ipynb` still uses) — both EMBER generation and ENTSO-E trades are
+governed in nxbase and consumed through the **nxbase query API** via
+`support/nxbase_client.py`, with round-trip acceptance tests in `tests/`.
+`v3.0` is the first fully-open, publishable nxsut version (public in
+nxbase). Next up: WP1 screening.
 
 ---
 
@@ -56,7 +61,7 @@ Priority ladder:
 
 ## 1. Where we start from
 
-`db_gen.ipynb` builds the reference database from EXIOBASE Hybrid v3.3.18
+`gen_v3.ipynb` builds the reference database from EXIOBASE Hybrid v3.3.18
 in four moves, all native MARIO:
 
 | Step | Method | What it does |
@@ -208,7 +213,7 @@ origins×destinations workbook the notebook consumes), per WP0.
   mix including the domestic share is observable** for carriers — unlike
   HS-based trade. Decide per carrier whether to update the domestic split
   too or stay import-only (subset rescaling).
-- Output format: the same one `db_gen.ipynb` already consumes —
+- Output format: the same one `gen_v3.ipynb` already consumes —
   `support/trades_{year}.xlsx`, one sheet per commodity, origins on rows,
   destinations on columns.
 
@@ -251,7 +256,7 @@ packaged profiles (string modes like `"electricity"`) later.
 ### WP5 — Pipeline integration
 
 - Extend `traded_commodities` and add a `supply_mix_sources` mapping in
-  `db_gen.ipynb`; both loops already scale by construction
+  `gen_v3.ipynb`; both loops already scale by construction
   (`meta.pooled_trade_map` carries the labels).
 - **Performance note**: the current `update_trade_mix` iterates
   destination×item with dense row rewrites. The energy-first perimeter is
@@ -261,7 +266,7 @@ packaged profiles (string modes like `"electricity"`) later.
 ### WP6 — Benchmark pipeline (core deliverable)
 
 A standing, versioned comparison of table-derived indicators against
-independent references. Runs at the end of every `db_gen.ipynb` execution
+independent references. Runs at the end of every `gen_v3.ipynb` execution
 (or as a dedicated `benchmark.ipynb`) and produces one tidy CSV of
 `(indicator, region, table_value, reference_value, source, vintage)` plus a
 short report per release. Reference values are themselves data: their

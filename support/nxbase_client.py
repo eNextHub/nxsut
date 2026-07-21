@@ -1,8 +1,9 @@
 """Query-API client for nxbase — the pipeline's only data doorway.
 
 nxbase exposes its PostgreSQL content through a query API (`/data`,
-`/data.csv`, `/sets/*`); this module wraps the calls db_gen.ipynb needs and
-reshapes the rows into the exact structures MARIO consumes. The translation
+`/data.csv`, `/sets/*`); this module wraps the calls the gen_v*.ipynb
+notebooks need and reshapes the rows into the exact structures MARIO
+consumes. The translation
 logic lives here (the consumer), the base is always the API — see
 nxbase docs/knowledge/nxsut_bridge.md, decision 2026-07-13.
 
