@@ -16,3 +16,7 @@ support/_nxbase_*.csv
 # ToS data (non-redistributable); they live in the OneDrive archive
 # (Databases/nxsut/_trades_data/) and are governed in nxbase (electricity_maps/)
 support/trades_*.xlsx
+
+# transient add_sectors artifacts (rebuilt from nxbase at run time)
+_steel_master.xlsx
+_aggregate_ee_steel.xlsx
