@@ -169,3 +169,48 @@ def get_trade_matrix(
     matrix.index.name = None
     matrix.columns.name = None
     return matrix
+
+
+def get_add_sectors_recipe(
+    api_url: str = DEFAULT_API,
+    source: str = "Ghezzi et al. 2026 - steel & H2 inventory",
+) -> pd.DataFrame:
+    """Fetch an add_sectors unit-process recipe from nxbase, reshaped by route.
+
+    Queries `/data.csv?source=<name>` and returns the per-route inventory the
+    pipeline reattaches to a base table (via its own clusters/placement) before
+    MARIO `add_sectors`. Columns: `route` (the new activity), `input` (the
+    resolved item name), `item_type` (`Commodity` | `Satellite account` |
+    `Factor of production` | `output`), `quantity`, `unit`.
+
+    nxbase holds only the *generic recipe* (quantities + backbone-anchored
+    items). The *base-DB attachment* — which EXIOBASE commodity each input maps
+    to (the cluster / DB Item), the GLOBAL/market-share placement, the
+    furnace-gas emission reallocation — stays here in the pipeline: the recipe's
+    resolved concepts (e.g. `Carbon dioxide, fossil`) are mapped back to the
+    base table's labels by the caller. Round-trip verified: the reconstructed
+    quantities equal the original master.
+    """
+    frame = _get_csv(api_url, {"source": source, "sort": "id", "limit": 100000})
+    if frame.empty:
+        raise ValueError(f"no add_sectors rows for source {source!r}")
+
+    def _item_type(row: pd.Series) -> str:
+        if row["parameter"] == "VA":
+            return "Factor of production"
+        if row["parameter"] == "SUP":
+            return "output"
+        if row["i1_set"] == "flow":
+            return "Satellite account"
+        return "Commodity"
+
+    out = pd.DataFrame(
+        {
+            "route": frame["i2_name"].fillna(frame["i1_name"]).astype(str).str.strip(),
+            "input": frame["i1_name"].astype(str).str.strip(),
+            "item_type": frame.apply(_item_type, axis=1),
+            "quantity": frame["value"].astype(float),
+            "unit": frame["unit"],
+        }
+    )
+    return out.reset_index(drop=True)

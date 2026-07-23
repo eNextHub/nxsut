@@ -133,3 +133,75 @@ def test_ember_snapshot_round_trips_the_raw_release() -> None:
     # and every nonzero raw value must be present in the snapshot
     nonzero = expected.loc[expected["Value"] != 0]
     assert nonzero.set_index(key).index.isin(snapshot.set_index(key).index).all()
+
+
+# --- add_sectors recipe round-trip (steel/H2 inventory) -----------------------
+
+# The pipeline's cluster: the base-DB label an nxbase-resolved concept maps back
+# to (satellites/factors resolve to canonical flow names; commodities keep their
+# label). This lives here, not in nxbase, by design.
+_ADD_SECTORS_CLUSTER = {
+    "Carbon dioxide, fossil": "CO2",
+    "Methane, fossil": "CH4",
+    "Nitrous oxide": "N2O",
+    "Operating surplus: Consumption of fixed capital": "CAPEX",
+    "Coke Oven Coke": "Coke",
+}
+_STEEL_MASTER = REPO / "support" / "add_sectors" / "Master_steel_h2.xlsx"
+
+
+def _master_recipe() -> dict[tuple[str, str], float]:
+    """(activity, input label) -> summed quantity, from the original master."""
+    import openpyxl
+
+    wb = openpyxl.load_workbook(_STEEL_MASTER, read_only=True)
+    ms = wb["Master"]
+    mh = [c.value for c in next(ms.iter_rows(min_row=1, max_row=1))]
+    mi = {h: i for i, h in enumerate(mh)}
+    sheet_to_act = {
+        r[mi["Inventory sheet"]]: r[mi["Activity"]]
+        for r in ms.iter_rows(min_row=2, values_only=True)
+        if r[mi["Inventory sheet"]] is not None
+    }
+    out: dict[tuple[str, str], float] = {}
+    skip = {"Master", "Commodities Clusters", "Regions Clusters", "DB units"}
+    for sheet in wb.sheetnames:
+        if sheet in skip:
+            continue
+        ws = wb[sheet]
+        hdr = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+        idx = {h: i for i, h in enumerate(hdr)}
+        act = str(sheet_to_act.get(sheet, "")).strip()
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            label = row[idx["Input"]]
+            try:
+                qty = float(row[idx["Quantity"]] or 0)
+            except (TypeError, ValueError):
+                qty = 0.0
+            if label and qty:
+                out[(act, str(label).strip())] = out.get((act, str(label).strip()), 0.0) + qty
+    return out
+
+
+def test_add_sectors_recipe_round_trips_the_master() -> None:
+    _skip_unless_api()
+    if not _STEEL_MASTER.exists():
+        pytest.skip(f"{_STEEL_MASTER} not present")
+
+    recipe = nxc.get_add_sectors_recipe()
+    recon: dict[tuple[str, str], float] = {}
+    for _, r in recipe[recipe["item_type"] != "output"].iterrows():
+        label = _ADD_SECTORS_CLUSTER.get(r["input"], r["input"])  # resolved -> base label
+        recon[(r["route"], label)] = recon.get((r["route"], label), 0.0) + r["quantity"]
+
+    master = _master_recipe()
+    # Every non-trivial recipe cell must match the master's quantity (tolerance
+    # set by the CSV channel's ~6 significant figures, not a real deviation).
+    for key, qty in master.items():
+        if abs(qty) < 1e-7:  # below every real coefficient (~1e-6+): numerical noise
+            continue
+        got = recon.get(key, 0.0)
+        assert abs(got - qty) <= 1e-4 * abs(qty) + 1e-9, f"{key}: nxbase {got} != master {qty}"
+
+    # And every route produces its commodity (one SUP per route).
+    assert (recipe["item_type"] == "output").sum() == 24
