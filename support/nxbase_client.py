@@ -214,3 +214,131 @@ def get_add_sectors_recipe(
         }
     )
     return out.reset_index(drop=True)
+
+
+# Pipeline-side cluster: nxbase-resolved concept -> the base table's label.
+_ADD_SECTORS_REVERSE_CLUSTER = {
+    "Carbon dioxide, fossil": "CO2",
+    "Methane, fossil": "CH4",
+    "Nitrous oxide": "N2O",
+    "Operating surplus: Consumption of fixed capital": "CAPEX",
+    "Coke Oven Coke": "Coke",
+}
+# Base-table remap applied to the master's DB Item column. add_sectors runs on
+# the RAW 3.3.18 table (before aggregate_ee) where electricity is split by
+# generation type — the ETE master's consolidated "Electricity"/"Electricity
+# RES" have no single target, so point them at "Electricity nec" (a valid
+# electricity commodity that aggregate_ee later folds into the grid Electricity).
+# A finer electricity attachment is a known later refinement.
+_ADD_SECTORS_DBITEM_REMAP = {
+    "Electricity": "Electricity nec",
+    "Electricity RES": "Electricity nec",
+}
+
+
+def build_add_sectors_master(
+    template_path: str,
+    out_path: str,
+    api_url: str = DEFAULT_API,
+    source: str = "Ghezzi et al. 2026 - steel & H2 inventory",
+) -> str:
+    """Write an add_sectors master driven by the nxbase recipe.
+
+    The **recipe** (per-route quantities) comes from nxbase; the **base-DB
+    attachment** — the DB Item clusters, GLOBAL/market-share placement, the
+    Regions/Commodities cluster sheets — is kept from ``template_path`` (the
+    original master). The DB Item column is remapped for nxsut's aggregated base
+    (Electricity RES -> Electricity). Returns ``out_path``.
+    """
+    import openpyxl
+
+    recipe = get_add_sectors_recipe(api_url, source)
+    # (activity, base-table label) -> quantity from nxbase
+    qty: dict[tuple[str, str], float] = {}
+    for _, r in recipe[recipe["item_type"] != "output"].iterrows():
+        label = _ADD_SECTORS_REVERSE_CLUSTER.get(r["input"], r["input"])
+        qty[(r["route"].strip(), label.strip())] = r["quantity"]
+
+    wb = openpyxl.load_workbook(template_path)
+    ms = wb["Master"]
+    mh = [c.value for c in next(ms.iter_rows(min_row=1, max_row=1))]
+    mi = {h: i for i, h in enumerate(mh)}
+    sheet_to_act = {
+        ms.cell(row=rr, column=mi["Inventory sheet"] + 1).value: ms.cell(row=rr, column=mi["Activity"] + 1).value
+        for rr in range(2, ms.max_row + 1)
+        if ms.cell(row=rr, column=mi["Inventory sheet"] + 1).value
+    }
+    struct = {"Master", "Commodities Clusters", "Regions Clusters", "DB units"}
+    for sheet in wb.sheetnames:
+        if sheet in struct:
+            continue
+        ws = wb[sheet]
+        hdr = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+        idx = {h: i for i, h in enumerate(hdr)}
+        act = str(sheet_to_act.get(sheet, "")).strip()
+        for rr in range(2, ws.max_row + 1):
+            label = ws.cell(row=rr, column=idx["Input"] + 1).value
+            if label is None:
+                continue
+            # remap the DB Item for nxsut's aggregated base
+            dbi_cell = ws.cell(row=rr, column=idx["DB Item"] + 1)
+            if dbi_cell.value in _ADD_SECTORS_DBITEM_REMAP:
+                dbi_cell.value = _ADD_SECTORS_DBITEM_REMAP[dbi_cell.value]
+            # overwrite quantity from nxbase where the recipe carries this input
+            key = (act, str(label).strip())
+            if key in qty:
+                ws.cell(row=rr, column=idx["Quantity"] + 1).value = qty[key]
+    wb.save(out_path)
+    return out_path
+
+
+def add_steel_and_aggregate(
+    db,
+    aggregation_path: str,
+    *,
+    api_url: str = DEFAULT_API,
+    template: str = "support/add_sectors/Master_steel_h2.xlsx",
+    source: str = "Ghezzi et al. 2026 - steel & H2 inventory",
+):
+    """Add the steel/H2 sectors (recipe from nxbase) then aggregate, in gen_v3.
+
+    Slots in **in place of** ``db.aggregate(aggregation_path)`` and must run on
+    the RAW table, **before** the electricity mix update: add_sectors needs the
+    standard EXIOBASE activity structure (aggregate_ee's EMBER-labelled
+    electricity activities break its copy_from_parent). Steps:
+
+    1. build the add_sectors master from nxbase (recipe) + the template
+       (clusters/placement), remapping the electricity input to a valid raw
+       commodity;
+    2. ``read_add_sectors_excel`` + ``add_sectors`` -> the 24 routes join the raw
+       table;
+    3. aggregate with the map **extended** so the new sectors survive as-is
+       (electricity is still folded into the grid ``Electricity``).
+
+    Returns ``(new_activities, new_commodities)``.
+    """
+    import shutil
+    import tempfile
+
+    import openpyxl
+
+    master = tempfile.mktemp(suffix=".xlsx")
+    build_add_sectors_master(template, master, api_url=api_url, source=source)
+
+    pre_a = set(map(str, db.get_index("Activity")))
+    pre_c = set(map(str, db.get_index("Commodity")))
+    db.read_add_sectors_excel(master, read_inventories=True)
+    db.add_sectors()
+    new_a = [a for a in map(str, db.get_index("Activity")) if a not in pre_a]
+    new_c = [c for c in map(str, db.get_index("Commodity")) if c not in pre_c]
+
+    ext = tempfile.mktemp(suffix=".xlsx")
+    shutil.copy(aggregation_path, ext)
+    wb = openpyxl.load_workbook(ext)
+    for label in new_a:
+        wb["Activity"].append([label, None])
+    for label in new_c:
+        wb["Commodity"].append([label, None])
+    wb.save(ext)
+    db.aggregate(ext, ignore_nan=True)
+    return new_a, new_c
