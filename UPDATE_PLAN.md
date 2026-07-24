@@ -11,7 +11,8 @@ nowcasting deferred. nxsut develops hand in hand with **nxbase**, the
 eNextGen data backbone where every raw input becomes a governed, versioned
 source (WP0).
 
-Status: **WP0 closed (2026-07-14)**, **v3.0 shipped (2026-07-21)**. The
+Status: **WP0 closed (2026-07-14)**, **v3.0 shipped (2026-07-21)**,
+**WP1 screening delivered (2026-07-24)**. The
 electricity pipeline is split into three standalone generators —
 `gen_v1.ipynb`, `gen_v2.ipynb`, `gen_v3.ipynb` (retired notebooks, including
 the combined `db_gen.ipynb` and the MARIO-native-on-proprietary-mix `v2.1`,
@@ -22,7 +23,9 @@ mix `gen_v2.ipynb` still uses) — both EMBER generation and ENTSO-E trades are
 governed in nxbase and consumed through the **nxbase query API** via
 `support/nxbase_client.py`, with round-trip acceptance tests in `tests/`.
 `v3.0` is the first fully-open, publishable nxsut version (public in
-nxbase). Next up: WP1 screening.
+nxbase). `wp1_screening.ipynb` sizes the energy perimeter from the v3.0
+baseline (three native-MARIO analyses) and commits the driver list to
+`support/wp1_perimeter.csv`. Next up: WP3a energy-carrier trades.
 
 ---
 
@@ -145,6 +148,32 @@ an nxbase parser + client function, never as another loose file in
 
 ### WP1 — Screening: size the energy perimeter
 
+> **Delivered (2026-07-24)** — `wp1_screening.ipynb` (loads the exported v3.0
+> table directly; no pipeline, no nxbase API) → `support/wp1_perimeter.csv`,
+> one row per commodity with `{priority, trade, supply_mix}` and the supporting
+> metrics (GHG intensity, import share, domestic-producer count, energy-chain
+> contribution). Outcome on the 2023 baseline (AR6 GWP-100): **P1 = 52 energy
+> carriers** (40 with import share ≥5% → *isard* trade candidates; electricity
+> already *pooled* + EMBER-mixed; natural gas the next pooling candidate),
+> **P2 = 15 transition-material rows** confirming the shortlist (steel,
+> aluminium, copper — with ores & secondary — cement, glass, plastics). **All
+> five carry an observable virgin/recycled supply split** in `S` (a
+> `Re-processing of secondary … into new …` activity feeds the primary
+> commodity): steel 17%, aluminium 21%, copper 13%, glass 47%, plastics 5% of
+> domestic supply — so steel/aluminium/plastics → supply-mix *source*
+> (worldsteel/IAI/OECD), copper/cement/glass → *candidate* (same structure, no
+> WP4 mix source listed yet — ICSG could serve copper); all trade 13–88%.
+> **P3 = 130**. Sanity: IT electricity
+> footprint 92 tCO2eq/TJ (~331 gCO2eq/kWh). Notable methodological finding: the
+> upstream **decomposition promotes no new material into P2** — in this hybrid
+> SUT the material embodiment of energy *technologies* lives in capital
+> formation (final demand), not intermediate use, so the P2 shortlist is
+> domain-driven and confirmed here by direct materiality/trade/multi-producer
+> metrics rather than by the intermediate-footprint decomposition (which cleanly
+> confirms the fossil chains, e.g. Gas/Diesel ≈ 50% crude, natural gas ≈ 93% own
+> extraction). Screening parameters (thresholds, curated sets) are notebook
+> constants — re-tune and re-run to regenerate the CSV.
+
 Data-driven confirmation of the priority ladder before any data work:
 
 1. **Footprint decomposition of the energy chains**: from the baseline,
@@ -245,13 +274,91 @@ backed by an nxbase source + parser rather than a loose file:
 | Electricity | EMBER technologies | EMBER (done) | P1 |
 | Heat | CHP / boilers | IEA balances | P1 |
 | Transport fuels | fossil vs bio blending | IEA / EMBER | P1 |
-| Steel | primary vs secondary re-processing | worldsteel (BOF/EAF by country) | P2 |
-| Aluminium | primary vs secondary | IAI | P2 |
-| Plastics | virgin vs recycled | PlasticsEurope / OECD | P2 |
+| Steel | primary (BF-BOF / DRI-EAF) vs secondary (scrap-EAF) | worldsteel WSIF by country + DRI series | P2 |
+| Aluminium | primary vs secondary | IAI (by region) | P2 |
+| Copper | primary vs secondary | ICSG World Copper Factbook (by country) | P2 |
+| Plastics | virgin vs recycled | OECD Global Plastics Outlook (by region, SDMX API) | P2 |
+| Glass | virgin vs recycled | FEVE (EU only) | P2 |
 | Paper | virgin vs recycled | FAO / CEPI | P3 |
 
-Adapters live in `support/` first; stable ones can be promoted into MARIO as
-packaged profiles (string modes like `"electricity"`) later.
+**MARIO mechanism — standard `update_supply_mix`, not an electricity-style vertical
+(2026-07-24).** The generic activity-mix mode already does exactly what the
+primary/secondary split needs:
+
+```python
+db.update_supply_mix(
+    {region: {primary_activity: p, secondary_activity: 1 - p} for region in shares},
+    level="Activity",
+    commodities=["Basic iron and steel and of ferro-alloys and first products thereof"],
+    scenario=scenario, rescale=True,
+)
+```
+
+It redistributes the market shares inside the supply block `s`, restricted to the
+named commodity, rescaled onto the combined share currently held by the listed
+activities — so by-product suppliers of the same commodity keep their share
+untouched. WP1 confirmed all five materials carry an observable primary +
+`Re-processing of secondary …` split in `s`, so this maps 1:1. **No MARIO change,
+no `pool_trade`** (materials trade Isard-mode, WP3b); the `"electricity"` string
+stays the bespoke exception (EMBER aggregation). Adapters (region → shares) live
+in `support/` first, each backed by an nxbase source + parser (WP0).
+
+**Source feasibility & accessibility (verified 2026-07-24).** Accessibility, not
+P2 impact, sets the order:
+
+| Family (source) | Access | Cadence | Form | Coverage | Licence |
+| --- | --- | --- | --- | --- | --- |
+| Plastics — OECD Global Plastics Outlook | ✅ open **SDMX API** | modelled baseline (periodic) | CSV/JSON/XML | ~15 model regions | open (OECD terms) → publishable |
+| Steel — worldsteel WSIF | free PDF, no API | annual | PDF table (p.6) | per country (majors) + DRI series | © worldsteel, free, attribute |
+| Copper — ICSG World Copper Factbook | free PDF, no API | annual | PDF chart (p.25) | ~20 countries | © ICSG, **restricted** (paid DB for exact #) |
+| Aluminium — IAI | free web, no API | monthly / annual | HTML/Excel scrape | ~8 macro-regions | free, verify ToS |
+| Glass — FEVE | free PDF | annual | PDF | EU only | free |
+
+None match EMBER's API + per-country + annual combination. Corrections to the
+family table above, from reading the free PDFs:
+
+- **Steel mapping**: Oxygen = BF-BOF (primary); Electric = **EAF = scrap (secondary)
+  *plus* DRI-based (primary)** — not pure secondary; "Other" ≈ 0 (open hearth), **not
+  DRI**. So `secondary(scrap) ≈ Electric − DRI` and `primary ≈ Oxygen + DRI + Other`,
+  using worldsteel's separate free **DRI-by-country** series (keeping DRI distinct
+  matters for the H2-DRI transition route). The free WSIF already has the per-country
+  by-process table → the paid Steel Statistical Yearbook (€730) is not needed for a
+  first cut.
+- **Copper**: the free factbook **p.25** has per-country Primary / SX-EW / Secondary
+  refined (`secondary = Refinery Secondary / total refined`; `primary = Primary +
+  SX-EW`). "Copper smelter production" (p.20) is the smelting stage only, **not**
+  refined — do not use it. Feasible first cut, governed restricted. (Copper is no
+  longer "deferred".)
+- **Cement excluded** (WP1): its multi-producer `n=2` is cement/lime/plaster
+  co-production under one aggregated commodity, not a real virgin/recycled or
+  technology split.
+
+**Scraping status (2026-07-24).** Snapshot-first extraction to CSV (the nxbase
+parser reads the CSV, never the PDF), scripts in nxbase `scripts/materials/`:
+
+- **Steel ✅** — `scrape_worldsteel.py` → `worldsteel/steel_by_process.csv` (172 rows:
+  data 2023/24/25, ~40-42 countries + aggregates each; Oxygen/Electric/Other %).
+  Verified (IT 2024 10.7/89.3, EU27 55.6/44.4, world 70.4/29.1/0.5). DRI-by-country
+  (WSIF p.10) still TODO to split Electric into scrap-EAF vs DRI-EAF.
+- **Copper ⚠️** — `scrape_icsg.py`: the free factbook is **chart-locked**. Per-country
+  primary/secondary (p.25) is a bar chart, not text; even the world split is prose only
+  in the 2025 edition. Extracted just `icsg/copper_refined_world.csv` (1 row, 2024
+  world 65.5/17.4/17.1). To feed a per-country copper mix: digitize p.25 by hand,
+  buy the ICSG Yearbook/DB, use an open alternative (USGS/BGS), or apply the world
+  ~17% secondary uniformly. **Decision pending.**
+- **Plastics ✅** — `pull_oecd_plastics.py` (OECD SDMX API, snapshot). Virgin/recycled
+  USE split is World-only (2019 secondary = 6.3%, matches EXIOBASE 5.4%); per-region
+  modulation from the waste **recycled rate** (`plastics_recycled_share_by_region.csv`,
+  15 GPO regions: EU-OECD 14.2%, China 12.8%, US 4.5%, 2019). OECD baseline stops at
+  2019 → hold for ref years. Open licence (publishable).
+- Pending: **IAI** aluminium (web scrape), **FEVE** glass (PDF, EU).
+
+**Raws archived (2026-07-24)** in `$NXBASE_RAW_ROOT/nxbase_raw/`, snapshot-first,
+each with a README (source URL, data-year mapping, extraction, licence):
+`worldsteel/World-Steel-in-Figures-{2024,2025,2026}.pdf` (data 2023/24/25) and
+`icsg/World-Copper-Factbook-{2024,2025}.pdf` (data 2023/24; ref-2025 copper awaits
+the 2026 factbook → hold last year). Pending pulls: **IAI** aluminium (web/Excel
+scrape) and **OECD** plastics (SDMX API snapshot) — script/API, not single files.
 
 ### WP5 — Pipeline integration
 

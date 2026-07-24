@@ -19,6 +19,7 @@ exports.
 | `gen_v1.ipynb` | v1.0 generator: legacy supply-mix update only, no trade layer. |
 | `gen_v2.ipynb` | v2.0 generator: legacy supply mix + legacy pooled trade on the proprietary Electricity Maps mix. Standalone (re-derives everything `gen_v1.ipynb` does). |
 | `gen_v3.ipynb` | v3.0 generator (**current**): MARIO-native pipeline, EMBER supply mix + open ENTSO-E trade mix via the nxbase query API. Fully open input chain — the publishable version. Includes a v2.0-vs-v3.0 footprint comparison. |
+| `wp1_screening.ipynb` | WP1 screening: sizes the energy perimeter from the v3.0 baseline (GHG footprint decomposition, import share, multi-producer structure) → `support/wp1_perimeter.csv`. |
 | `calc_footprints.ipynb` | Footprint calculations on the generated database. |
 | `support/` | Adapters and input files (trade workbooks, aggregation maps, EMBER remapping) — being retrofitted into nxbase sources per WP0. |
 | `paths.yml` | Per-user paths to raw inputs (EXIOBASE flows, EMBER release) and export target. Add your own user key. |
