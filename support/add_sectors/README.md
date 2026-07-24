@@ -6,11 +6,12 @@ COMPACT Study 9) is **governed in nxbase** as an add_sectors unit-process
 recipe (source `Ghezzi et al. 2026 - steel & H2 inventory`); this folder keeps
 only the **base-DB attachment** the pipeline needs on top of that recipe.
 
-## The one file here
+## The files here
 
 | Path | What |
 | --- | --- |
 | `Master_steel_h2.xlsx` | The add_sectors **master template**: `Master` placement sheet (region / market share / parent activity / DB Item clusters), `Commodities Clusters` / `Regions Clusters`, `DB units`, and the 22 per-route inventory sheets. |
+| `blastfurnacegas.xlsx` | The **furnace-gas reallocation** master: two empty gas-production activities (Blast / Oxygen Steel Furnace Gas) fed to a second `add_sectors` after the routes, used by the reallocation cell below. |
 
 At run time `gen_v3.ipynb` does **not** use this file's quantities directly.
 `support/nxbase_client.build_add_sectors_master(...)` reads the recipe
@@ -35,6 +36,17 @@ db.read_add_sectors_excel('_steel_master.xlsx', read_inventories=True)
 db.add_sectors()
 ```
 
+## Furnace-gas emission reallocation (ExioSteel method)
+
+Right after the routes, a **second** `add_sectors` (from `blastfurnacegas.xlsx`)
+introduces two fictitious activities that produce the blast / oxygen furnace
+gases. The steel sector's supply of those gases is zeroed and its `U`/`V`/`E` are
+recomputed on its steel supply alone (`/ S_main`, not `/ X`): the footprint is
+then per tonne of *actual steel*, not diluted across the co-product gases, and
+the gases become emission-free carriers (their embodied steel emissions no longer
+leak into whoever burns them — e.g. electricity). See the cell right after
+`add_sectors` in `gen_v3.ipynb`.
+
 ## Base-DB attachment (pipeline-side, not in nxbase)
 
 nxbase holds the *generic* recipe (backbone-anchored concepts). The mapping of
@@ -52,5 +64,5 @@ each concept to **this** base table's labels stays here, in
 - **placement** — GLOBAL region, market share, parent activity — read from the
   template's `Master` sheet.
 
-A finer electricity attachment and the furnace-gas emission reallocation are
-known later refinements. **No MARIO package edits** without explicit sign-off.
+A finer electricity attachment is a known later refinement. **No MARIO package
+edits** without explicit sign-off.
