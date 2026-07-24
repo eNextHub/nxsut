@@ -1,71 +1,56 @@
-# Steel & H2 sector addition (from ExioSteel)
+# Steel & H2 sector addition
 
-Support files to add **explicit steel and hydrogen production routes** to the
-nxsut table via MARIO's `add_sectors` machinery. Ported from the ExioSteel /
-IAM COMPACT Study 9 work so nxsut 3.x can carry disaggregated steel & H2
-technologies (a *third lever* alongside the supply-mix and trade updates that
-build v3.0).
+Adds **explicit steel and hydrogen production routes** to the nxsut table via
+MARIO's `add_sectors`. The inventory (22 routes from Ghezzi et al. 2026 / IAM
+COMPACT Study 9) is **governed in nxbase** as an add_sectors unit-process
+recipe (source `Ghezzi et al. 2026 - steel & H2 inventory`); this folder keeps
+only the **base-DB attachment** the pipeline needs on top of that recipe.
 
-## What add_sectors does
+## The one file here
 
-`add_sectors` is structural disaggregation: it inserts new activities and
-commodities (here, steelmaking and H2 routes) into the table, wiring their
-input recipes, outputs, final consumption and satellite (emission) accounts
-from an inventory. It is driven by a single self-contained Excel **master**
-(inventories read from its sheets), following the pattern in
-[`scripts/add_sectors_exiosteel_reference.py`](scripts/add_sectors_exiosteel_reference.py):
+| Path | What |
+| --- | --- |
+| `Master_steel_h2.xlsx` | The add_sectors **master template**: `Master` placement sheet (region / market share / parent activity / DB Item clusters), `Commodities Clusters` / `Regions Clusters`, `DB units`, and the 22 per-route inventory sheets. |
 
-```python
-db.read_add_sectors_excel(master_path, read_inventories=True)
-db.add_sectors()
-```
-
-## Files
-
-| Path | What | Tracked in git |
-| --- | --- | --- |
-| `Master_steel_h2.xlsx` | The add_sectors master: steel + H2 routes (SR, DRI-EAF ×NG/COAL/H2/BECCS, BF-BOF-CCS/BECCS, H2 SR/COAL/ELZ ±CCS, AEL-EAF, MOE…), with `Commodities Clusters` / `Regions Clusters` mapping and inventory sheets. From IAM COMPACT Study 9. | ✅ |
-| `inventories/steelmakingroutes.xlsx`, `inventories/blastfurnacegas.xlsx` | Source inventory workbooks the master is built from (process routes, blast-furnace / oxygen gas). | ✅ |
-| `extensions/add_energy_accounts.xlsx` | Extra energy satellite accounts for the new sectors. | ✅ |
-| `aggregations/*.xlsx` | Region/commodity aggregation helpers, incl. `aggr_to_EU27`, `aggr_to_EU12-EU15`, `aggr_to_EU` (relevant to the later EU disaggregation work) and `aggr_exio_382`. | ✅ |
-| `scripts/add_sectors_exiosteel_reference.py` | The original ExioSteel driver, kept verbatim as reference (paths point to OneDrive ETE). | ✅ |
-| `scripts/gcam_data_prep.py` | GCAM data prep for the steel mixes/imports (used to build the `data/` payloads). | ✅ |
-| `data/Steel_mixes*.xlsx`, `data/Steel_imports.xlsx`, `data/Steel_consumption.xlsx`, `data/Electricity_mixes.xlsx` | GCAM-derived mix/trade payloads for the **later** steel supply-mix / trade updates (WP4/WP3), not needed for the add_sectors step itself. | ✅ (GCAM is open source / redistributable). Will move to nxbase governance per WP0 when the steel adapters land. |
+At run time `gen_v3.ipynb` does **not** use this file's quantities directly.
+`support/nxbase_client.build_add_sectors_master(...)` reads the recipe
+(quantities + backbone-anchored items) from the nxbase API and rewrites the
+master's `Quantity` column from it, keeping the template's clusters / placement
+/ DB-Item mapping. The result is a transient `_steel_master.xlsx` (gitignored).
 
 ## Where it slots into `gen_v3.ipynb`
 
-Between the base parse+aggregate and the electricity mix/trade updates:
-
-```text
-parse_from_txt(raw, SUT, flows)
-db.aggregate("support/aggregate_ee.xlsx")
-► add steel + H2 sectors  ◄  (this folder)
-db.update_supply_mix("electricity", …)   # EMBER
-db.pool_trade(["Electricity"])
-db.update_trade_mix(…)                    # ENTSO-E
-db.to_txt(…)
-```
-
-Ready-to-use call (see `support/steel_sectors.py`):
+`add_sectors` runs **after** `aggregate_ee`: the routes attach to the single
+aggregated grid `Electricity`, and the pre-existing EMBER electricity
+activities keep their supply coefficients. (Running `add_sectors` *before*
+`aggregate` drops those activities from the `s` block, which breaks
+`update_supply_mix`; running it after — with the ETE electricity DB Items /
+cluster fixed, see below — keeps `s` intact.)
 
 ```python
-from support import steel_sectors
-db = steel_sectors.add_steel_h2_sectors(db)   # reads Master_steel_h2.xlsx
+db.aggregate('support/aggregate_ee.xlsx', ignore_nan=True)
+nxc.build_add_sectors_master('support/add_sectors/Master_steel_h2.xlsx',
+                             '_steel_master.xlsx', api_url=nxbase_api)
+db.read_add_sectors_excel('_steel_master.xlsx', read_inventories=True)
+db.add_sectors()
 ```
 
-## ⚠️ Compatibility check before first run
+## Base-DB attachment (pipeline-side, not in nxbase)
 
-The master was authored against **EXIOBASE Hybrid Energy Transition Edition**
-(ExioSteel), whereas nxsut parses **EXIOBASE Hybrid 3.3.18 (with VA)** and then
-applies `support/aggregate_ee.xlsx`. `add_sectors` maps the new sectors onto
-existing commodities/regions through the master's `Commodities Clusters` /
-`Regions Clusters` sheets — **those labels must match the post-`aggregate_ee`
-table**. Before wiring this into the pipeline, verify:
+nxbase holds the *generic* recipe (backbone-anchored concepts). The mapping of
+each concept to **this** base table's labels stays here, in
+`build_add_sectors_master`:
 
-1. the commodity labels referenced in the master exist in the aggregated table;
-2. the region set matches (44 + 5 RoW vs the aggregated region set);
-3. the units of the new commodities are consistent with the hybrid table (the
-   `DB units` sheet).
+- **clusters / DB Item** — e.g. `Carbon dioxide, fossil → CO2`, `Coke Oven Coke
+  → Coke`; and the post-aggregate electricity remap `Electricity / Electricity
+  RES → Electricity` (the single grid commodity `aggregate_ee` produces).
+- **ETE electricity cluster** — the template's `Commodities Clusters` sheet
+  groups generation-split electricity commodities (`Coal`, `Hydro`, `Solar`…)
+  that exist only in the ExioSteel ETE base, not here — and `Coal` collides
+  with the aggregated EMBER **activity** label. `build_add_sectors_master`
+  clears that sheet for our base.
+- **placement** — GLOBAL region, market share, parent activity — read from the
+  template's `Master` sheet.
 
-Mismatches are label-mapping fixes in the master's cluster sheets, not code
-changes. **No MARIO package edits** are to be made without explicit sign-off.
+A finer electricity attachment and the furnace-gas emission reallocation are
+known later refinements. **No MARIO package edits** without explicit sign-off.

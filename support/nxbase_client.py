@@ -224,15 +224,14 @@ _ADD_SECTORS_REVERSE_CLUSTER = {
     "Operating surplus: Consumption of fixed capital": "CAPEX",
     "Coke Oven Coke": "Coke",
 }
-# Base-table remap applied to the master's DB Item column. add_sectors runs on
-# the RAW 3.3.18 table (before aggregate_ee) where electricity is split by
-# generation type — the ETE master's consolidated "Electricity"/"Electricity
-# RES" have no single target, so point them at "Electricity nec" (a valid
-# electricity commodity that aggregate_ee later folds into the grid Electricity).
-# A finer electricity attachment is a known later refinement.
+# Base-table remap applied to the master's DB Item column. add_sectors runs
+# AFTER aggregate_ee, where the electricity generation commodities are folded
+# into a single grid "Electricity" — so the ETE master's consolidated
+# "Electricity" / "Electricity RES" both point at "Electricity". (A finer
+# electricity attachment is a known later refinement.)
 _ADD_SECTORS_DBITEM_REMAP = {
-    "Electricity": "Electricity nec",
-    "Electricity RES": "Electricity nec",
+    "Electricity": "Electricity",
+    "Electricity RES": "Electricity",
 }
 
 
@@ -245,10 +244,14 @@ def build_add_sectors_master(
     """Write an add_sectors master driven by the nxbase recipe.
 
     The **recipe** (per-route quantities) comes from nxbase; the **base-DB
-    attachment** — the DB Item clusters, GLOBAL/market-share placement, the
-    Regions/Commodities cluster sheets — is kept from ``template_path`` (the
-    original master). The DB Item column is remapped for nxsut's aggregated base
-    (Electricity RES -> Electricity). Returns ``out_path``.
+    attachment** — the GLOBAL/market-share placement and the Regions cluster
+    sheet — is kept from ``template_path`` (the original master). Two ETE-legacy
+    fixes are applied for nxsut's post-``aggregate_ee`` base: the DB Item column
+    remaps electricity to the single grid "Electricity", and the ETE
+    "Commodities Clusters" sheet (which groups generation-split electricity
+    commodities that do not exist here — and collide with the aggregated EMBER
+    activity labels) is cleared. add_sectors must run AFTER aggregate_ee.
+    Returns ``out_path``.
     """
     import openpyxl
 
@@ -260,6 +263,12 @@ def build_add_sectors_master(
         qty[(r["route"].strip(), label.strip())] = r["quantity"]
 
     wb = openpyxl.load_workbook(template_path)
+    # Drop the ETE electricity Commodities Clusters (Coal/Hydro/Solar... are not
+    # commodities in the aggregated base, and 'Coal' collides with the EMBER
+    # activity label -> copy_from_parent KeyError). Keep the header row only.
+    cc = wb["Commodities Clusters"]
+    if cc.max_row > 1:
+        cc.delete_rows(2, cc.max_row - 1)
     ms = wb["Master"]
     mh = [c.value for c in next(ms.iter_rows(min_row=1, max_row=1))]
     mi = {h: i for i, h in enumerate(mh)}
