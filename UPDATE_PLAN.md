@@ -351,7 +351,16 @@ parser reads the CSV, never the PDF), scripts in nxbase `scripts/materials/`:
   modulation from the waste **recycled rate** (`plastics_recycled_share_by_region.csv`,
   15 GPO regions: EU-OECD 14.2%, China 12.8%, US 4.5%, 2019). OECD baseline stops at
   2019 → hold for ref years. Open licence (publishable).
-- Pending: **IAI** aluminium (web scrape), **FEVE** glass (PDF, EU).
+- **Glass ✅** — `scrape_feve.py` (Close the Glass Loop Excel) → `feve/glass_collection_by_country.csv`
+  (per-country collection rate, 30-33 EU countries, 2022 & 2024; IT 88.4→91.0%). Anchor =
+  EU cullet recycled content ~53.55% (2023, matches EXIOBASE 47.4%); modulate per country by
+  collection rate. EU-only. The cleanest per-country material source after steel.
+- **Copper & aluminium: no open per-country secondary — dropped (2026-07-24).** ICSG per-country
+  is paid, IAI is gated (Alucycle login), and USGS reports secondary only for the US (its world
+  tables are primary/total). Apply the **world secondary share uniformly** (copper ~17% ICSG
+  factbook, aluminium ~34% IAI world RIR) as the first cut; revisit only if WP6 shows it matters.
+  USGS is still worth ingesting for per-country **primary** production (denominators/benchmark).
+  READMEs in `icsg/`, `iai/` document the options.
 
 **Raws archived (2026-07-24)** in `$NXBASE_RAW_ROOT/nxbase_raw/`, snapshot-first,
 each with a README (source URL, data-year mapping, extraction, licence):
