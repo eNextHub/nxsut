@@ -216,6 +216,89 @@ def get_add_sectors_recipe(
     return out.reset_index(drop=True)
 
 
+_STEEL_ROUTE_LABEL = {"BF.BOF": "BF-BOF", "DRI.EAF": "DRI-EAF", "SCRAP.EAF": "scrap-EAF"}
+
+
+def get_steel_route_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    source: str = "World Steel in Figures - crude steel by route",
+) -> dict[str, dict[str, float]]:
+    """Per-region crude-steel production shares by route, for `update_supply_mix`.
+
+    Queries `/data.csv?parameter=Supply&source=WSTEEL&period=<year>` (SUP holds
+    absolute Mt by route — nxbase ingests the level, the mix is derived here) and
+    returns `{ISO2 region: {route: share}}`, shares summing to 1 per region. Routes:
+    `BF-BOF` (primary, blast furnace), `DRI-EAF` (primary, ore via DRI), `scrap-EAF`
+    (secondary/recycled).
+
+    For the EXIOBASE 2-way split, collapse in the notebook: primary = BF-BOF + DRI-EAF,
+    secondary = scrap-EAF, mapped to the base table's steel activities (primary steel
+    vs the secondary re-processing activity). Region keys are ISO2 — map to the table's
+    regions (44 EXIOBASE + RoW) at the call site.
+    """
+    frame = _get_csv(
+        api_url, {"parameter": "Supply", "source": source, "period": str(year), "sort": "id"}
+    )
+    if frame.empty:
+        raise ValueError(f"no Supply rows for source {source!r} in {year}")
+    parts = frame["item_2"].map(split_item)  # [route_short, ISO2, period]
+    df = pd.DataFrame(
+        {
+            "region": parts.str[1],
+            "route": parts.str[0].map(_STEEL_ROUTE_LABEL),
+            "value": frame["value"].astype(float),
+        }
+    )
+    mix: dict[str, dict[str, float]] = {}
+    for region, g in df.groupby("region"):
+        total = g["value"].sum()
+        if total > 0:
+            mix[region] = {r: round(v / total, 6) for r, v in zip(g["route"], g["value"])}
+    return mix
+
+
+def get_glass_recycled_share(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    source: str = "FEVE / Close the Glass Loop - glass collection rate",
+) -> dict[str, float]:
+    """Per-country recycled/secondary glass share (0-1), `{ISO2: share}`.
+
+    Queries `/data.csv?parameter=Market share&source=FEVE&period=<year>`; the value is
+    the FEVE collection-for-recycling rate (a proxy for the cullet supply share). EU-only.
+    Scale by the EU-average cullet content (~0.535) at the call site if you want the
+    absolute secondary share; use it directly for a relative country modulation.
+    """
+    frame = _get_csv(
+        api_url,
+        {"parameter": "Market share", "source": source, "period": str(year), "sort": "id"},
+    )
+    if frame.empty:
+        raise ValueError(f"no Market share rows for source {source!r} in {year}")
+    region = frame["item_1"].map(lambda s: split_item(s)[1])  # c_GLAW-<ISO2>-<period>
+    return dict(zip(region, frame["value"].astype(float)))
+
+
+def get_plastics_recycled_share(
+    api_url: str = DEFAULT_API,
+    year: int = 2019,
+    source: str = "OECD Global Plastics Outlook - world secondary share",
+) -> float:
+    """World secondary (recycled) plastics use share (0-1) for `year` (site LXX).
+
+    The OECD split is world-only; apply this uniformly across regions (the per-region
+    OECD-macro-region rate is a documented follow-up). OECD baseline stops at 2019.
+    """
+    frame = _get_csv(
+        api_url,
+        {"parameter": "Market share", "source": source, "period": str(year), "sort": "id"},
+    )
+    if frame.empty:
+        raise ValueError(f"no Market share rows for source {source!r} in {year}")
+    return float(frame["value"].iloc[0])
+
+
 # Pipeline-side cluster: nxbase-resolved concept -> the base table's label.
 _ADD_SECTORS_REVERSE_CLUSTER = {
     "Carbon dioxide, fossil": "CO2",
