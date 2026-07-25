@@ -19,3 +19,20 @@ support/trades_*.xlsx
 
 # transient add_sectors master (rebuilt from the nxbase recipe at run time)
 _steel_master.xlsx
+
+# internal-only generators (v1/v2 depend on the proprietary Electricity Maps trade
+# mix — not redistributable): the public repo ships the open v3.0 pipeline only.
+gen_v1.ipynb
+gen_v2.ipynb
+
+# internal working plan / roadmap — not public
+UPDATE_PLAN.md
+
+# superseded generators (also on the proprietary mix); kept locally, out of the repo
+_old/
+
+# personal, un-sanitized paths override (paths.yml is the public template)
+paths_personal.yml
+
+# stray scratch file, kept locally
+fp hyb_vs_f eco.py

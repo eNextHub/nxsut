@@ -1,11 +1,12 @@
-LR:
-  raw: '/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-eNextGen/eNextAll - Documents/Databases/Exiobase Hybrid 3.3.18 with VA/flows'
-  ember: "/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-eNextGen/eNextAll - Documents/Databases/Ember/yearly_full_release_long_format.csv"
-  export: "/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-eNextGen/eNextAll - Documents/Databases/nxsut"
-  nxbase_api: "http://127.0.0.1:8000"
+# nxsut input/output paths — public template.
+#
+# Copy this file to `paths_personal.yml` (git-ignored) and fill in YOUR real
+# paths; the generator notebooks load `paths_personal.yml` if it exists, else
+# this template. Add one block per machine/user and set `user = '<KEY>'` in
+# gen_v3.ipynb to select it.
 
-
-
-
-# nxbase query API (db_gen reads mixes/trades through support/nxbase_client.py)
-# add `nxbase_api: "..."` per user; defaults to http://127.0.0.1:8000
+USER:
+  raw: "/path/to/Exiobase Hybrid 3.3.18 with VA/flows"          # EXIOBASE Hybrid flow files
+  ember: "/path/to/Ember/yearly_full_release_long_format.csv"   # EMBER yearly full release
+  export: "/path/to/nxsut"                                      # where generated tables are written
+  nxbase_api: "http://127.0.0.1:8000"                           # nxbase query API (default: local)
