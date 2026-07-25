@@ -56,9 +56,11 @@ open-access sources **anonymously**, with no login or key.
 
 ## License
 
-Licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)** —
-see [`LICENSE`](LICENSE). Share and adapt for any purpose, including
-commercially, with appropriate credit.
+Licensed under **Creative Commons Attribution-ShareAlike 4.0 International
+(CC BY-SA 4.0)** — see [`LICENSE`](LICENSE). Share and adapt for any purpose,
+including commercially, with appropriate credit and under the same license
+(ShareAlike). nxsut derives from EXIOBASE Hybrid v3.3.18 (CC BY-SA 4.0), so the
+ShareAlike term is inherited.
 
 Copyright © 2026 Nicolò Golinucci, Lorenzo Rinaldi (eNextGen). Attribute as:
-*"nxsut — Nicolò Golinucci & Lorenzo Rinaldi, eNextGen (CC BY 4.0)"*.
+*"nxsut — Nicolò Golinucci & Lorenzo Rinaldi, eNextGen (CC BY-SA 4.0)"*.
