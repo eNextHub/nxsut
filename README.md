@@ -7,9 +7,8 @@ energy-transition technologies and energy policies, built from
 The pipeline updates the *composition* of the table — electricity supply
 mixes from [EMBER](https://ember-energy.org/) statistics and bilateral
 electricity trade mixes — while preserving column totals. Raw inputs are
-progressively governed in [nxbase](https://github.com/eNextHub/nxbase),
-the eNextGen data backbone, and reach this pipeline as materialized
-exports.
+progressively governed in **nxbase**, the eNextGen data backbone, and reach
+this pipeline through nxbase's public read-only API (see *Data access* below).
 
 ## Contents
 
@@ -27,6 +26,21 @@ exports.
   `country_converter`.
 - EXIOBASE Hybrid v3.3.18 flow files and the EMBER yearly full release
   (paths configured in `paths.yml`; not distributed with this repo).
+
+## Data access
+
+The pipeline reads its input data — EMBER electricity supply mixes and ENTSO-E
+bilateral trades — from **nxbase's public read-only query API**. You do **not**
+need an nxbase checkout (the nxbase repository is private): the API serves the
+open-access sources **anonymously**, with no login or key.
+
+- The API base URL is `nxbase_api` in `paths.yml`
+  (default `https://enextgen.it/nxbase-api`). Point it at
+  `http://127.0.0.1:8000` only if you run a local nxbase yourself.
+- `support/nxbase_client.py` wraps the calls (`/data.csv`, `/sets/*`) and
+  reshapes the rows into the structures MARIO consumes.
+- Only open-visibility sources are anonymously reachable (EMBER generation,
+  ENTSO-E trades, and the published nxsut releases).
 
 ## Versioning
 

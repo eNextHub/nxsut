@@ -7,8 +7,11 @@ consumes. The translation
 logic lives here (the consumer), the base is always the API — see
 nxbase docs/knowledge/nxsut_bridge.md, decision 2026-07-13.
 
-Local dev: `uv run nxbase api` in the nxbase checkout (Docker Postgres up).
-Phase 2: point `api_url` at the hosted instance — nothing else changes.
+Data access: the hosted nxbase API serves the open sources anonymously (no
+login, no key) — set `api_url` / `paths.yml:nxbase_api` to the public instance
+(`https://enextgen.it/nxbase-api`); the nxbase repository itself is private.
+Run a local nxbase (`uv run nxbase api`, Docker Postgres up) only if you have
+the checkout, then point `api_url` at `http://127.0.0.1:8000`.
 """
 
 from __future__ import annotations
