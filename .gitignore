@@ -37,3 +37,5 @@ paths_personal.yml
 # stray scratch file, kept locally
 fp hyb_vs_f eco.py
 support/wp1_perimeter.csv
+
+calc_footprints.ipynb
