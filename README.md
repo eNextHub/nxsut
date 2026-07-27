@@ -1,7 +1,8 @@
 # nxsut 3.0 - Global Environmentally-Extended Supply-Use table in physical units
 
-Supply-use database for environmental impact analysis built by [**eNextGen**](https://enextgen.it/en/) and the SESAM research group of Politecnico di Milano
-from [**EXIOBASE Hybrid v3.3.18**](https://zenodo.org/records/10148587) with [**MARIO**](https://github.com/it-is-me-mario/MARIO).
+This repository contains the code required to generate the supply-use database for environmental impact analysis built by [**eNextGen**](https://enextgen.it/en/) and the SESAM research group of Politecnico di Milano
+on top of [**EXIOBASE Hybrid v3.3.18**](https://zenodo.org/records/10148587) with [**MARIO**](https://github.com/it-is-me-mario/MARIO).
+
 
 ## How it is built
 
