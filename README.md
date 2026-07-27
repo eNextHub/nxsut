@@ -1,6 +1,6 @@
 # nxsut 3.0 - Global Environmentally-Extended Supply-Use table in physical units
 
-Supply-use database for environmental impact analysis built by [**eNextGen**](https://enextgen.it/en/)
+Supply-use database for environmental impact analysis built by [**eNextGen**](https://enextgen.it/en/) and the SESAM research group of Politecnico di Milano
 from [**EXIOBASE Hybrid v3.3.18**](https://zenodo.org/records/10148587) with [**MARIO**](https://github.com/it-is-me-mario/MARIO).
 
 ## How it is built
@@ -14,6 +14,8 @@ Electricity commodity is *pooled*: this means that, although the original databa
 a fictitious activity - *Electricity - supply* - is introduced in each region, absorbing all domestic and imported consumption of electricity of its region. Electricity trade is then represented on the supply matrix,
 with a "Chenery-Moses-like" arrangement, where in each region, all *Electricity - supply* activities domestically produce or export a fictitious commodity - *Electricity - need*.
 A didactic example is described on the [MARIO documentation](https://mario-suite.readthedocs.io/en/latest/user_guide/advanced/electricity_mix.html)
+
+![Electricity pooling](assets/electricity_pooling.png)
 
 The nxsut builiding pipeline imports also the procedure provided by [Ghezzi et al](https://doi.org/10.1021/acs.est.5c15099) to introduce
 +20 new activities related to innovative steelmaking technologies, including hydrogen production. 
