@@ -73,7 +73,7 @@ open-access sources **anonymously**, with no login or key.
 ## Ongoing work
 
 - A paper on embedding photovoltaic supply chain is currently under review and will be hopefully embedded soon
-- 
+- Updates of supply and trade mixes is under investigation for other commodities
 
 
 ## License
