@@ -88,5 +88,7 @@ including commercially, with appropriate credit and under the same license
 (ShareAlike). nxsut derives from EXIOBASE Hybrid v3.3.18 (CC BY-SA 4.0), so the
 ShareAlike term is inherited.
 
-Copyright © 2026 Nicolò Golinucci (eNextGen), Lorenzo Rinaldi (Department of Energy, Politecnico di Milano). Attribute as:
+Copyright © 2026 Nicolò Golinucci (eNextGen), Lorenzo Rinaldi (Department of Energy, Politecnico di Milano). 
+
+Attribute as:
 *"nxsut 3.0 — Nicolò Golinucci & Lorenzo Rinaldi, eNextGen (CC BY-SA 4.0)"*.
