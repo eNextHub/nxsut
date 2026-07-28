@@ -3,6 +3,7 @@
 This repository contains the code required to generate the supply-use database for environmental impact analysis built by [**eNextGen**](https://enextgen.it/en/) and the SESAM research group of Politecnico di Milano
 on top of [**EXIOBASE Hybrid v3.3.18**](https://zenodo.org/records/10148587) with [**MARIO**](https://github.com/it-is-me-mario/MARIO).
 
+The database for 2023-2025 is available on [**Zenodo**](10.5281/zenodo.21638002)
 
 ## How it is built
 
