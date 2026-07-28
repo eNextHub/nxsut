@@ -40,7 +40,7 @@ Other work is ongoing - *see section below* - to make these data easily updatabl
 | --- | --- |
 | `gen_v3.ipynb` | v3.0 generator (**current**): MARIO-native pipeline, EMBER supply mix + open ENTSO-E trade mix via the nxbase query API. Fully open input chain — the publishable version. |
 | `support/` | Adapters and input files (aggregation maps, EMBER remapping, the nxbase query client) — being retrofitted into nxbase sources per WP0. |
-| `paths.yml` | Public template for the per-user paths to raw inputs (EXIOBASE flows, EMBER release) and export target. Copy to `paths_personal.yml` (git-ignored) and fill in your real paths. |
+| `paths.yml` | Public template for the per-user paths to raw inputs (EXIOBASE flows, EMBER release) and export target. Fill in your real paths. |
 
 ## Requirements
 
