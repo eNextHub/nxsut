@@ -64,13 +64,11 @@ open-access sources **anonymously**, with no login or key.
 
 ## Versioning
 
-- **v1.0 / v2.0** — legacy supply-mix / + bilateral electricity trades on the
-  proprietary Electricity Maps mix. **Internal use only, not in this public
-  repository** (`gen_v1.ipynb` / `gen_v2.ipynb` are git-ignored — the mix is not
-  redistributable).
-- **v2.1** — *retired* (2026-07-21): the MARIO-native pipeline on the
-  proprietary Electricity Maps mix. Superseded by v3.0, same pipeline on an
-  open mix.
+- **v1.0 / v2.0** - legacy supply-mix / + bilateral electricity trades.
+  **Internal use only, not included in this public repository**
+  (`gen_v1.ipynb` / `gen_v2.ipynb` are git-ignored).
+- **v2.1** - *retired* (2026-07-21): the MARIO-native pipeline. Superseded by
+  v3.0.
 - **v3.0 (current)** — MARIO-native pipeline, open ENTSO-E trade mix
   (`gen_v3.ipynb`). Fully open input chain — the publishable version.
 
