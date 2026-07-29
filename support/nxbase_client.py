@@ -261,6 +261,76 @@ def get_steel_route_mix(
     return mix
 
 
+# base-table (EXIOBASE) activities competing to supply the steel commodity
+STEEL_PRIMARY_ACT = "Manufacture of basic iron and steel and of ferro-alloys and first products thereof"
+STEEL_SECONDARY_ACT = "Re-processing of secondary steel into new steel"
+STEEL_COMMODITY = "Basic iron and steel and of ferro-alloys and first products thereof"
+
+
+def _iso2_to_exiobase_region(iso2s, regions) -> dict[str, str | None]:
+    """ISO2 -> table region: the 44 EXIOBASE members kept, others -> RoW (WA/WE/WF/WL/WM)."""
+    from mario.clusters.coverage import load_exiobase_region_members
+
+    keep = set(regions) if regions is not None else set()
+    iso3_to_row = {}
+    for alias, iso3s in load_exiobase_region_members().items():
+        a = alias.upper()
+        if a in {"WA", "WE", "WF", "WL", "WM"}:  # short aliases only (skip the long names)
+            for i in iso3s:
+                iso3_to_row[i] = a
+    iso3 = dict(zip(iso2s, _iso2_to_iso3(pd.Series(list(iso2s)))))
+    return {c: (c if c in keep else iso3_to_row.get(iso3.get(c))) for c in iso2s}
+
+
+def get_steel_supply_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    regions=None,
+    source: str = "World Steel in Figures - crude steel by route",
+) -> dict[str, dict[str, float]]:
+    """Primary/secondary steel supply mix per EXIOBASE region, for `update_supply_mix`.
+
+    Collapses the WSTEEL route production (BF-BOF + DRI-EAF = primary, scrap-EAF =
+    secondary), maps ISO2 -> the table's regions (`regions` = `db.get_index('Region')`:
+    the 44 EXIOBASE countries kept as-is, everyone else aggregated into their RoW group
+    via MARIO's packaged membership), and returns
+    ``{region: {STEEL_PRIMARY_ACT: p, STEEL_SECONDARY_ACT: s}}`` — the Activity-mix input:
+
+        db.update_supply_mix(mix, level='Activity', commodities=[STEEL_COMMODITY],
+                             scenario=..., rescale=True)
+
+    Aggregation is on absolute Mt so RoW shares are production-weighted. Regions with no
+    route data are absent (they keep their current table share).
+    """
+    frame = _get_csv(
+        api_url, {"parameter": "Supply", "source": source, "period": str(year), "sort": "id"}
+    )
+    if frame.empty:
+        raise ValueError(f"no Supply rows for source {source!r} in {year}")
+    parts = frame["item_2"].map(split_item)  # [route_short, ISO2, period]
+    df = pd.DataFrame(
+        {
+            "iso2": parts.str[1],
+            "side": parts.str[0].map(
+                {"BF.BOF": "primary", "DRI.EAF": "primary", "SCRAP.EAF": "secondary"}
+            ),
+            "mt": frame["value"].astype(float),
+        }
+    )
+    df["region"] = df["iso2"].map(_iso2_to_exiobase_region(df["iso2"].unique(), regions))
+    df = df.dropna(subset=["region"])
+    agg = df.groupby(["region", "side"])["mt"].sum().unstack(fill_value=0.0)
+    mix: dict[str, dict[str, float]] = {}
+    for region, row in agg.iterrows():
+        p, s = float(row.get("primary", 0.0)), float(row.get("secondary", 0.0))
+        if p + s > 0:
+            mix[region] = {
+                STEEL_PRIMARY_ACT: round(p / (p + s), 6),
+                STEEL_SECONDARY_ACT: round(s / (p + s), 6),
+            }
+    return mix
+
+
 def get_glass_recycled_share(
     api_url: str = DEFAULT_API,
     year: int = 2024,
