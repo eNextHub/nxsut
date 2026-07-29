@@ -1,0 +1,497 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1351.2" width="1000" height="1351.2" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" role="img" aria-label="the supply-use table, two regions: Pure Isard format vs Mixed Isard + Chenery-Moses format">
+    <rect width="1000" height="1351.2" fill="#faf9f9"/>
+    <rect x="10" y="16" width="980" height="516" rx="14" fill="#ffffff" stroke="#e5e5e5"/>
+    <rect x="32" y="5" width="166.879" height="22" rx="11" fill="#faf9f9" stroke="#e5e5e5"/>
+    <text x="115.439" y="20" font-size="11.0" font-weight="800" letter-spacing="1.43" text-anchor="middle" fill="#555555">PURE ISARD FORMAT</text>
+    <g transform="translate(87.5,52)">
+  <g font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" fill="#111111">
+
+    
+    <rect x="257" y="117" width="176" height="124"
+          rx="9" fill="#FCC018" fill-opacity=".08"/>
+    <rect x="117" y="257" width="124" height="176"
+          rx="9" fill="#ED6027" fill-opacity=".08"/>
+    <text x="345" y="256"
+          text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1"
+          opacity=".55">USE COEFFICIENTS</text>
+    <text x="179" y="448"
+          text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1"
+          opacity=".55">MARKET SHARE COEFFICIENTS</text>
+
+    <g font-size="10" font-weight="650" opacity=".7"><text x="437" y="139"
+              text-anchor="start">A · other</text>
+        <text x="139" y="254" text-anchor="start"
+              transform="rotate(-90 139 254)">A · other</text><text x="437" y="165"
+              text-anchor="start">A · electricity</text>
+        <text x="165" y="254" text-anchor="start"
+              transform="rotate(-90 165 254)">A · electricity</text><text x="437" y="201"
+              text-anchor="start">B · other</text>
+        <text x="201" y="254" text-anchor="start"
+              transform="rotate(-90 201 254)">B · other</text><text x="437" y="227"
+              text-anchor="start">B · electricity</text>
+        <text x="227" y="254" text-anchor="start"
+              transform="rotate(-90 227 254)">B · electricity</text><text x="113" y="279"
+              text-anchor="end">A · other</text>
+        <text x="279" y="114" text-anchor="start"
+              transform="rotate(-90 279 114)">A · other</text><text x="113" y="305"
+              text-anchor="end">A · Power · fossil</text>
+        <text x="305" y="114" text-anchor="start"
+              transform="rotate(-90 305 114)">A · Power · fossil</text><text x="113" y="331"
+              text-anchor="end">A · Power · RES</text>
+        <text x="331" y="114" text-anchor="start"
+              transform="rotate(-90 331 114)">A · Power · RES</text><text x="113" y="367"
+              text-anchor="end">B · other</text>
+        <text x="367" y="114" text-anchor="start"
+              transform="rotate(-90 367 114)">B · other</text><text x="113" y="393"
+              text-anchor="end">B · Power · fossil</text>
+        <text x="393" y="114" text-anchor="start"
+              transform="rotate(-90 393 114)">B · Power · fossil</text><text x="113" y="419"
+              text-anchor="end">B · Power · RES</text>
+        <text x="419" y="114" text-anchor="start"
+              transform="rotate(-90 419 114)">B · Power · RES</text></g>
+
+    
+            <rect x="264" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="290" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="316" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="352" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="378" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="404" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="264" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="290" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="316" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="352" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="378" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="404" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="264" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="290" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="316" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="352" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="378" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="404" y="186" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="264" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="290" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="316" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="352" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="378" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="404" y="212" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="124" y="264" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="150" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="186" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="290" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="290" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="186" y="290" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="290" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="316" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="186" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="352" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="352" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="186" y="352" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="212" y="352" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="378" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="378" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="186" y="378" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="378" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="124" y="404" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="404" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="186" y="404" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="404" width="22" height="22" rx="4"
+                  fill="#ED6027"/></g>
+</g>
+    <rect x="714" y="214" width="2" height="126" fill="#e5e5e5"/>
+    <text x="732" y="228" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">Every sector buys electricity</tspan><tspan fill="#111111" font-weight="650"> straight</tspan></text>
+    <text x="732" y="248.8" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#111111" font-weight="650">from the use matrix</tspan><tspan fill="#555555">: domestic from its</tspan></text>
+    <text x="732" y="269.6" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">own region, imported from the other.</tspan></text>
+    <text x="732" y="290.4" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">Trade is scattered over as many cells</tspan></text>
+    <text x="732" y="311.2" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">as there are sector-origin pairs, and</tspan></text>
+    <text x="732" y="332" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">supply stays block-diagonal.</tspan></text>
+    <path d="M 383.613 559 l 7 7 l 7 -7" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="507" y="567" font-size="10.5" font-weight="750" letter-spacing=".95" text-anchor="middle" fill="#ED6027">TRADE CHANGES QUADRANT</text>
+    <rect x="10" y="594" width="980" height="620" rx="14" fill="#ffffff" stroke="#e8b29d"/>
+    <rect x="32" y="583" width="310.881" height="22" rx="11" fill="#faf9f9" stroke="#e8b099"/>
+    <text x="187.441" y="598" font-size="11.0" font-weight="800" letter-spacing="1.43" text-anchor="middle" fill="#ED6027">MIXED ISARD + CHENERY-MOSES FORMAT</text>
+    <g transform="translate(35.5,630)">
+  <g font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" fill="#111111">
+
+    
+    <rect x="309" y="117" width="228" height="176"
+          rx="9" fill="#FCC018" fill-opacity=".08"/>
+    <rect x="117" y="309" width="176" height="228"
+          rx="9" fill="#ED6027" fill-opacity=".08"/>
+    <text x="423" y="308"
+          text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1"
+          opacity=".55">USE COEFFICIENTS</text>
+    <text x="205" y="552"
+          text-anchor="middle" font-size="9.5" font-weight="800" letter-spacing="1"
+          opacity=".55">MARKET SHARE COEFFICIENTS</text>
+
+    <g font-size="10" font-weight="650" opacity=".7"><text x="541" y="139"
+              text-anchor="start">A · other</text>
+        <text x="139" y="306" text-anchor="start"
+              transform="rotate(-90 139 306)">A · other</text><text x="541" y="165"
+              text-anchor="start">A · electricity</text>
+        <text x="165" y="306" text-anchor="start"
+              transform="rotate(-90 165 306)">A · electricity</text><text x="541" y="191"
+              text-anchor="start">A · Electricity need</text>
+        <text x="191" y="306" text-anchor="start"
+              transform="rotate(-90 191 306)">A · Electricity need</text><text x="541" y="227"
+              text-anchor="start">B · other</text>
+        <text x="227" y="306" text-anchor="start"
+              transform="rotate(-90 227 306)">B · other</text><text x="541" y="253"
+              text-anchor="start">B · electricity</text>
+        <text x="253" y="306" text-anchor="start"
+              transform="rotate(-90 253 306)">B · electricity</text><text x="541" y="279"
+              text-anchor="start">B · Electricity need</text>
+        <text x="279" y="306" text-anchor="start"
+              transform="rotate(-90 279 306)">B · Electricity need</text><text x="113" y="331"
+              text-anchor="end">A · other</text>
+        <text x="331" y="114" text-anchor="start"
+              transform="rotate(-90 331 114)">A · other</text><text x="113" y="357"
+              text-anchor="end">A · Power · fossil</text>
+        <text x="357" y="114" text-anchor="start"
+              transform="rotate(-90 357 114)">A · Power · fossil</text><text x="113" y="383"
+              text-anchor="end">A · Power · RES</text>
+        <text x="383" y="114" text-anchor="start"
+              transform="rotate(-90 383 114)">A · Power · RES</text><text x="113" y="409"
+              text-anchor="end">A · Electricity supply</text>
+        <text x="409" y="114" text-anchor="start"
+              transform="rotate(-90 409 114)">A · Electricity supply</text><text x="113" y="445"
+              text-anchor="end">B · other</text>
+        <text x="445" y="114" text-anchor="start"
+              transform="rotate(-90 445 114)">B · other</text><text x="113" y="471"
+              text-anchor="end">B · Power · fossil</text>
+        <text x="471" y="114" text-anchor="start"
+              transform="rotate(-90 471 114)">B · Power · fossil</text><text x="113" y="497"
+              text-anchor="end">B · Power · RES</text>
+        <text x="497" y="114" text-anchor="start"
+              transform="rotate(-90 497 114)">B · Power · RES</text><text x="113" y="523"
+              text-anchor="end">B · Electricity supply</text>
+        <text x="523" y="114" text-anchor="start"
+              transform="rotate(-90 523 114)">B · Electricity supply</text></g>
+
+    
+            <rect x="316" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="342" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="368" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="394" y="124" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="430" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="456" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="482" y="124" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="508" y="124" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="316" y="150" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="342" y="150" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="368" y="150" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="394" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="405" y="165" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >1</text>
+            <rect x="430" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="441" y="165" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="456" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="467" y="165" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="482" y="150" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="493" y="165" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="508" y="150" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="316" y="176" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="327" y="191" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="342" y="176" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="353" y="191" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="368" y="176" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="379" y="191" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="394" y="176" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="430" y="176" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="456" y="176" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="482" y="176" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="508" y="176" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="316" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="342" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="368" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".14"/>
+            <rect x="394" y="212" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="430" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="456" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="482" y="212" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="508" y="212" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="316" y="238" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="327" y="253" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="342" y="238" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="353" y="253" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="368" y="238" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".08"
+                  stroke="#ED6027" stroke-opacity=".55" stroke-dasharray="3 3"/>
+            <text x="379" y="253" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#ED6027" opacity=".9"
+                  >0</text>
+            <rect x="394" y="238" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="430" y="238" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="456" y="238" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="482" y="238" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="508" y="238" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="519" y="253" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >1</text>
+            <rect x="316" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="342" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="368" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="394" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="430" y="264" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="441" y="279" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="456" y="264" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="467" y="279" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="482" y="264" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <text x="493" y="279" text-anchor="middle"
+                  font-size="12" font-weight="800"
+                  fill="#fff" opacity=".95"
+                  >&#931;</text>
+            <rect x="508" y="264" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="316" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="150" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="316" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="342" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="342" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="176" y="342" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="342" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="342" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="342" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="368" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="368" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="176" y="368" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="368" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="368" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="368" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="394" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="394" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="394" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="212" y="394" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="394" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="394" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="124" y="430" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="430" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="430" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="430" width="22" height="22" rx="4"
+                  fill="#111111" fill-opacity=".32"/>
+            <rect x="238" y="430" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="430" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="456" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="456" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="456" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="456" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="456" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="264" y="456" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="482" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="482" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="482" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="212" y="482" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="482" width="22" height="22" rx="4"
+                  fill="#ED6027"/>
+            <rect x="264" y="482" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="124" y="508" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="150" y="508" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="176" y="508" width="22" height="22" rx="4"
+                  fill="#ED6027" fill-opacity=".42"/>
+            <rect x="212" y="508" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="238" y="508" width="22" height="22" rx="4"
+                  fill="none" stroke="#111111" stroke-opacity=".12"/>
+            <rect x="264" y="508" width="22" height="22" rx="4"
+                  fill="#ED6027"/></g>
+</g>
+    <rect x="714" y="833.6" width="2" height="146.8" fill="#e8b6a2"/>
+    <text x="732" y="847.6" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">Imported electricity leaves the use</tspan></text>
+    <text x="732" y="868.4" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">matrix (</tspan><tspan fill="#111111" font-weight="650">0</tspan><tspan fill="#555555">) and reappears in supply, in</tspan></text>
+    <text x="732" y="889.2" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">two cells only. Every sector now buys</tspan></text>
+    <text x="732" y="910" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555" font-style="italic">Electricity need</tspan><tspan fill="#555555">, the</tspan><tspan fill="#111111" font-weight="650"> sum</tspan><tspan fill="#555555"> of domestic</tspan></text>
+    <text x="732" y="930.8" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">and imported: a single mix per region</tspan></text>
+    <text x="732" y="951.6" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">instead of one import structure per</tspan></text>
+    <text x="732" y="972.4" font-size="13.4" text-anchor="start" xml:space="preserve"><tspan fill="#555555">sector.</tspan></text>
+    <text x="500.0" y="1248" font-size="11" font-weight="700" letter-spacing=".99" text-anchor="middle" fill="#555555">THE SUPPLY-USE TABLE, TWO REGIONS</text>
+    <text x="165.67" y="1278" font-size="12.0" font-weight="700" fill="#111111">A and B are two regions</text>
+    <rect x="324.138" y="1268" width="13" height="13" rx="3" fill="#111111" fill-opacity="0.32"/>
+    <rect x="333.138" y="1268" width="13" height="13" rx="3" fill="#111111" fill-opacity="0.14"/>
+    <text x="354.138" y="1278" font-size="12.0" fill="#555555">Goods and services</text>
+    <rect x="484.182" y="1268" width="13" height="13" rx="3" fill="#ED6027" fill-opacity="1"/>
+    <rect x="493.182" y="1268" width="13" height="13" rx="3" fill="#ED6027" fill-opacity="0.42"/>
+    <text x="514.182" y="1278" font-size="12.0" fill="#555555">Electricity</text>
+    <text x="589.518" y="1278" font-size="12.0" fill="#555555">full tone = inside the region · pale tone = trade</text>
+    <text x="500" y="1308" font-size="12.0" text-anchor="middle" xml:space="preserve"><tspan fill="#555555">Inside the cells:</tspan><tspan fill="#ED6027" font-weight="650"> 0</tspan><tspan fill="#555555"> the import cells empty out ·</tspan><tspan fill="#ED6027" font-weight="650"> 1</tspan><tspan fill="#555555" font-style="italic"> Electricity supply</tspan><tspan fill="#555555"> takes in all of its region's electricity ·</tspan><tspan fill="#ED6027" font-weight="650"> Σ</tspan><tspan fill="#555555" font-style="italic"> Electricity need</tspan><tspan fill="#555555"> carries the sum of what used to be</tspan></text>
+    <text x="500" y="1327.2" font-size="12.0" text-anchor="middle" xml:space="preserve"><tspan fill="#555555">domestic and imported.</tspan></text>
+</svg>

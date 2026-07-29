@@ -17,7 +17,10 @@ a fictitious activity - *Electricity - supply* - is introduced in each region, a
 with a "Chenery-Moses-like" arrangement, where in each region, all *Electricity - supply* activities domestically produce or export a fictitious commodity - *Electricity - need*.
 A didactic example is described on the [MARIO documentation](https://mario-suite.readthedocs.io/en/latest/user_guide/advanced/electricity_mix.html)
 
-![Electricity pooling](assets/electricity_pooling.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/electricity_pooling-dark.svg">
+  <img alt="Two-region supply-use table before and after electricity pooling: imported electricity leaves the use matrix and reappears in supply, and every sector buys a single 'Electricity - need' commodity." src="assets/electricity_pooling.svg">
+</picture>
 
 The nxsut builiding pipeline imports also the procedure provided by [Ghezzi et al](https://doi.org/10.1021/acs.est.5c15099) to introduce
 +20 new activities related to innovative steelmaking technologies, including hydrogen production. 
