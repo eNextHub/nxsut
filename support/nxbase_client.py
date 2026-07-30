@@ -331,6 +331,72 @@ def get_steel_supply_mix(
     return mix
 
 
+def get_steel_trade_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    regions=None,
+    source: str | None = None,
+) -> dict[str, dict[str, float]]:
+    """Foreign steel sourcing shares per destination region, for `update_trade_mix`.
+
+    Queries the native BACI bilateral trade flows (`parameter=Bilateral trade`,
+    HS chapter 72 = iron & steel, quantity in tonnes — nxbase stores the flows,
+    the mix is derived here), maps exporter/importer ISO2 -> the table's
+    EXIOBASE regions (the 44 members kept, others RoW-aggregated via MARIO
+    membership), drops intra-region pairs (spurious "domestic" produced by RoW
+    aggregation), and returns ``{destination: {origin: share}}`` with each
+    destination's FOREIGN origins summing to 1 — the domestic diagonal is
+    deliberately omitted.
+
+    Passed to `update_trade_mix` WITHOUT a domestic share, the provided foreign
+    shares are rescaled onto the destination's current combined foreign share:
+    the base table's domestic fraction is preserved and only the import sourcing
+    is rewritten. This is what BACI supports — cross-border flows only, no
+    domestic use — so no apparent-consumption estimate is needed:
+
+        db.update_trade_mix(mix, items=[STEEL_COMMODITY], level='Commodity',
+                            scenario=..., rescale=True)
+
+    Steel stays in Isard format (no pooling, unlike electricity): the rewritten
+    columns are each destination's `u` / `Yc` columns for STEEL_COMMODITY. All
+    of chapter 72 is treated as the steel commodity (the subset nxbase ingested
+    under BACI.Q); widen the nxbase recipe + this mapping for other commodities.
+    """
+    if source is not None:
+        frame = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source, "sort": "id"})
+    else:
+        frame = None  # BACI lags the build year: use the latest vintage <= year
+        for y in range(year, year - 3, -1):
+            cand = f"BACI HS22 bilateral trade quantities {y}"
+            f = _get_csv(api_url, {"parameter": "Bilateral trade", "source": cand, "sort": "id"})
+            if not f.empty:
+                frame, source = f, cand
+                if y != year:
+                    print(f"[nxbase] steel trade: BACI {year} unavailable, using {y}")
+                break
+    if frame is None or frame.empty:
+        raise ValueError(f"no Bilateral trade rows for BACI (year <= {year})")
+    df = pd.DataFrame(
+        {
+            "dest": frame["item_1"].map(lambda s: split_item(s)[1]),  # c_<hs6>-<dest>-<period>
+            "origin": frame["item_2"].map(lambda s: split_item(s)[0]),  # s_<origin>
+            "q": frame["value"].astype(float),
+        }
+    )
+    region = _iso2_to_exiobase_region(pd.unique(pd.concat([df["dest"], df["origin"]])), regions)
+    df["dest_r"] = df["dest"].map(region)
+    df["origin_r"] = df["origin"].map(region)
+    df = df.dropna(subset=["dest_r", "origin_r"])
+    df = df[df["dest_r"] != df["origin_r"]]  # foreign only; domestic preserved by omission
+    agg = df.groupby(["dest_r", "origin_r"])["q"].sum()
+    mix: dict[str, dict[str, float]] = {}
+    for dest_r, g in agg.groupby(level=0):
+        total = g.sum()
+        if total > 0:
+            mix[dest_r] = {origin_r: round(v / total, 6) for (_, origin_r), v in g.items()}
+    return mix
+
+
 def get_glass_recycled_share(
     api_url: str = DEFAULT_API,
     year: int = 2024,
@@ -351,6 +417,53 @@ def get_glass_recycled_share(
         raise ValueError(f"no Market share rows for source {source!r} in {year}")
     region = frame["item_1"].map(lambda s: split_item(s)[1])  # c_GLAW-<ISO2>-<period>
     return dict(zip(region, frame["value"].astype(float)))
+
+
+# base-table (EXIOBASE) activities competing to supply the glass commodity
+GLASS_PRIMARY_ACT = "Manufacture of glass and glass products"
+GLASS_SECONDARY_ACT = "Re-processing of secondary glass into new glass"
+GLASS_COMMODITY = "Glass and glass products"
+GLASS_CULLET_EU = 0.5355  # FEVE EU-average recycled (cullet) content of container glass
+
+
+def get_glass_supply_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    regions=None,
+    cullet_eu: float = GLASS_CULLET_EU,
+    source: str = "FEVE / Close the Glass Loop - glass collection rate",
+) -> dict[str, dict[str, float]]:
+    """Primary/secondary glass supply mix per EXIOBASE region (EU-only), for `update_supply_mix`.
+
+    FEVE gives the per-country **collection rate** (waste side); the **cullet content** (supply
+    side, what the SUT split needs) is only published as an EU average (`cullet_eu` ~0.535). So
+    the per-country secondary (cullet) share is approximated by anchoring to that EU average and
+    modulating by the country's collection performance relative to the EU mean:
+
+        secondary_c = min(cullet_eu * collection_c / mean(collection), 0.95)
+
+    Returns ``{region: {GLASS_PRIMARY_ACT: 1-s, GLASS_SECONDARY_ACT: s}}`` for
+    ``db.update_supply_mix(mix, level='Activity', commodities=[GLASS_COMMODITY], rescale=True)``.
+    EU-only: non-FEVE regions keep their base share; the bottle-reuse activity is left untouched.
+    """
+    rates = get_glass_recycled_share(api_url, year, source)  # {ISO2: collection_rate}
+    if not rates:
+        raise ValueError(f"no glass rows for source {source!r} in {year}")
+    eu_avg = sum(rates.values()) / len(rates)
+    region_of = _iso2_to_exiobase_region(list(rates), regions)
+    by_region: dict[str, list[float]] = {}
+    for iso2, rate in rates.items():
+        region = region_of.get(iso2)
+        if region is None:
+            continue
+        by_region.setdefault(region, []).append(min(cullet_eu * rate / eu_avg, 0.95))
+    return {
+        region: {
+            GLASS_PRIMARY_ACT: round(1 - (s := sum(v) / len(v)), 6),
+            GLASS_SECONDARY_ACT: round(s, 6),
+        }
+        for region, v in by_region.items()
+    }
 
 
 def get_plastics_recycled_share(
