@@ -331,36 +331,27 @@ def get_steel_supply_mix(
     return mix
 
 
-def get_steel_trade_mix(
-    api_url: str = DEFAULT_API,
-    year: int = 2024,
-    regions=None,
-    source: str | None = None,
-) -> dict[str, dict[str, float]]:
-    """Foreign steel sourcing shares per destination region, for `update_trade_mix`.
+# base-table (EXIOBASE) commodities pooled via BACI bilateral trade, by HS chapter
+ALUMINIUM_COMMODITY = "Aluminium and aluminium products"
+_BACI_TRADE_CHAPTER = {"steel": "72", "aluminium": "76"}
 
-    Queries the native BACI bilateral trade flows (`parameter=Bilateral trade`,
-    HS chapter 72 = iron & steel, quantity in tonnes — nxbase stores the flows,
-    the mix is derived here), maps exporter/importer ISO2 -> the table's
-    EXIOBASE regions (the 44 members kept, others RoW-aggregated via MARIO
-    membership), drops intra-region pairs (spurious "domestic" produced by RoW
-    aggregation), and returns ``{destination: {origin: share}}`` with each
-    destination's FOREIGN origins summing to 1 — the domestic diagonal is
-    deliberately omitted.
 
-    Passed to `update_trade_mix` WITHOUT a domestic share, the provided foreign
-    shares are rescaled onto the destination's current combined foreign share:
-    the base table's domestic fraction is preserved and only the import sourcing
-    is rewritten. This is what BACI supports — cross-border flows only, no
-    domestic use — so no apparent-consumption estimate is needed:
+def _baci_trade_mix(api_url, year, regions, hs_chapter, source):
+    """Foreign sourcing shares per destination for one HS chapter, from BACI.
 
-        db.update_trade_mix(mix, items=[STEEL_COMMODITY], level='Commodity',
-                            scenario=..., rescale=True)
+    Queries the native BACI bilateral flows (`parameter=Bilateral trade`,
+    quantity in tonnes — nxbase stores the flows, the mix is derived here), keeps
+    the given HS chapter, maps exporter/importer ISO2 -> the table's EXIOBASE
+    regions (44 members kept, others RoW-aggregated via MARIO membership), drops
+    intra-region pairs (spurious "domestic" from RoW aggregation), and returns
+    ``{destination: {origin: share}}`` with each destination's FOREIGN origins
+    summing to 1 — the domestic diagonal is deliberately omitted.
 
-    Steel stays in Isard format (no pooling, unlike electricity): the rewritten
-    columns are each destination's `u` / `Yc` columns for STEEL_COMMODITY. All
-    of chapter 72 is treated as the steel commodity (the subset nxbase ingested
-    under BACI.Q); widen the nxbase recipe + this mapping for other commodities.
+    Passed to `update_trade_mix` WITHOUT a domestic share, the foreign shares are
+    rescaled onto the destination's current combined foreign share: the base
+    domestic fraction is preserved and only the import sourcing is rewritten
+    (BACI has cross-border flows only, no domestic use). Falls back to the latest
+    BACI vintage <= `year`.
     """
     if source is not None:
         frame = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source, "sort": "id"})
@@ -372,13 +363,21 @@ def get_steel_trade_mix(
             if not f.empty:
                 frame, source = f, cand
                 if y != year:
-                    print(f"[nxbase] steel trade: BACI {year} unavailable, using {y}")
+                    print(f"[nxbase] BACI {year} unavailable, using {y}")
                 break
     if frame is None or frame.empty:
         raise ValueError(f"no Bilateral trade rows for BACI (year <= {year})")
+    parts = frame["item_1"].map(split_item)  # c_<hs6>-<dest>-<period>
+    mask = parts.str[0].str.startswith(hs_chapter)
+    frame, parts = frame[mask], parts[mask]
+    if frame.empty:
+        raise ValueError(
+            f"no BACI HS chapter {hs_chapter} rows in {source!r} "
+            "(widen the nxbase baci_q recipe to import it)"
+        )
     df = pd.DataFrame(
         {
-            "dest": frame["item_1"].map(lambda s: split_item(s)[1]),  # c_<hs6>-<dest>-<period>
+            "dest": parts.str[1],
             "origin": frame["item_2"].map(lambda s: split_item(s)[0]),  # s_<origin>
             "q": frame["value"].astype(float),
         }
@@ -395,6 +394,38 @@ def get_steel_trade_mix(
         if total > 0:
             mix[dest_r] = {origin_r: round(v / total, 6) for (_, origin_r), v in g.items()}
     return mix
+
+
+def get_steel_trade_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    regions=None,
+    source: str | None = None,
+) -> dict[str, dict[str, float]]:
+    """Foreign steel (HS ch.72) sourcing shares per destination, for `update_trade_mix`.
+
+    Pooled mode (steel is pooled like electricity)::
+
+        pooled = db.meta.pooled_trade_map[STEEL_COMMODITY]
+        db.update_trade_mix(mix, items=pooled['supply'], commodities=pooled['need'],
+                            scenario=..., rescale=True)
+    """
+    return _baci_trade_mix(api_url, year, regions, _BACI_TRADE_CHAPTER["steel"], source)
+
+
+def get_aluminium_trade_mix(
+    api_url: str = DEFAULT_API,
+    year: int = 2024,
+    regions=None,
+    source: str | None = None,
+) -> dict[str, dict[str, float]]:
+    """Foreign aluminium (HS ch.76) sourcing shares per destination, for `update_trade_mix`.
+
+    Aluminium is pooled but has **no** supply-route mix (no per-country primary/
+    secondary source like worldsteel): only the import origins are rewritten.
+    Same foreign-only convention as steel; maps to ALUMINIUM_COMMODITY.
+    """
+    return _baci_trade_mix(api_url, year, regions, _BACI_TRADE_CHAPTER["aluminium"], source)
 
 
 def get_glass_recycled_share(
