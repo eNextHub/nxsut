@@ -331,35 +331,44 @@ def get_steel_supply_mix(
     return mix
 
 
-# base-table (EXIOBASE) commodities pooled via BACI bilateral trade, by HS chapter
 ALUMINIUM_COMMODITY = "Aluminium and aluminium products"
-_BACI_TRADE_CHAPTER = {"steel": "72", "aluminium": "76"}
+
+# EXIOBASE/nxsut commodity -> the HS6 prefixes (chapters/headings) that resolve to
+# it, DERIVED from the nxbase HS22 -> CN26 -> NXS graph (the anchoring set by
+# scripts/workbook/refine_trade_anchors.py). This is a materialisation of the
+# intrinsic nxbase mapping for the commodities we update; regenerate the prefixes
+# if the anchoring changes. Chemicals nec = chemical section VI minus fertilisers
+# (ch 31); N-fertiliser = the nitrogen headings 3102.
+_COMMODITY_HS: dict[str, tuple[str, ...]] = {
+    STEEL_COMMODITY: ("72",),
+    ALUMINIUM_COMMODITY: ("76",),
+    "Chemicals nec": ("28", "29", "30", "32", "33", "34", "35", "36", "37"),
+    "N-fertiliser": ("3102",),
+    "Other non-metallic mineral products": ("68",),
+    "Other non-ferrous metal products": ("81",),
+}
 
 
-def _baci_trade_mix(api_url, year, regions, hs_chapter, source):
-    """Foreign sourcing shares per destination for one HS chapter, from BACI.
+_BACI_TRD_CACHE: dict = {}
 
-    Queries the native BACI bilateral flows (`parameter=Bilateral trade`,
-    quantity in tonnes — nxbase stores the flows, the mix is derived here), keeps
-    the given HS chapter, maps exporter/importer ISO2 -> the table's EXIOBASE
-    regions (44 members kept, others RoW-aggregated via MARIO membership), drops
-    intra-region pairs (spurious "domestic" from RoW aggregation), and returns
-    ``{destination: {origin: share}}`` with each destination's FOREIGN origins
-    summing to 1 — the domestic diagonal is deliberately omitted.
 
-    Passed to `update_trade_mix` WITHOUT a domestic share, the foreign shares are
-    rescaled onto the destination's current combined foreign share: the base
-    domestic fraction is preserved and only the import sourcing is rewritten
-    (BACI has cross-border flows only, no domestic use). Falls back to the latest
-    BACI vintage <= `year`.
+def _fetch_baci_trd(api_url, year, source):
+    """Fetch (and cache) the full BACI TRD frame for a year.
+
+    One big pull reused across every commodity in a run: the CSV is ~1.4M rows,
+    so fetching it once per commodity would be prohibitive. Falls back to the
+    latest BACI vintage <= ``year`` when ``source`` is not pinned.
     """
+    key = (api_url, source, year)
+    if key in _BACI_TRD_CACHE:
+        return _BACI_TRD_CACHE[key]
     if source is not None:
-        frame = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source, "sort": "id"})
+        frame = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source})
     else:
         frame = None  # BACI lags the build year: use the latest vintage <= year
         for y in range(year, year - 3, -1):
             cand = f"BACI HS22 bilateral trade quantities {y}"
-            f = _get_csv(api_url, {"parameter": "Bilateral trade", "source": cand, "sort": "id"})
+            f = _get_csv(api_url, {"parameter": "Bilateral trade", "source": cand})
             if not f.empty:
                 frame, source = f, cand
                 if y != year:
@@ -367,13 +376,37 @@ def _baci_trade_mix(api_url, year, regions, hs_chapter, source):
                 break
     if frame is None or frame.empty:
         raise ValueError(f"no Bilateral trade rows for BACI (year <= {year})")
+    _BACI_TRD_CACHE[key] = (frame, source)
+    return frame, source
+
+
+def _baci_trade_mix(api_url, year, regions, hs_prefixes, source):
+    """Foreign sourcing shares per destination for the given HS6 prefixes, from BACI.
+
+    Queries the native BACI bilateral flows (`parameter=Bilateral trade`,
+    quantity in tonnes — nxbase stores the flows, the mix is derived here), keeps
+    the HS6 codes under ``hs_prefixes`` (chapters/headings that map to the target
+    commodity in the nxbase graph), maps exporter/importer ISO2 -> the table's
+    EXIOBASE regions (44 members kept, others RoW-aggregated via MARIO
+    membership), drops intra-region pairs (spurious "domestic" from RoW
+    aggregation), and returns ``{destination: {origin: share}}`` with each
+    destination's FOREIGN origins summing to 1 — the domestic diagonal is
+    deliberately omitted.
+
+    Passed to `update_trade_mix` WITHOUT a domestic share, the foreign shares are
+    rescaled onto the destination's current combined foreign share: the base
+    domestic fraction is preserved and only the import sourcing is rewritten
+    (BACI has cross-border flows only, no domestic use). Falls back to the latest
+    BACI vintage <= `year`.
+    """
+    frame, source = _fetch_baci_trd(api_url, year, source)
     parts = frame["item_1"].map(split_item)  # c_<hs6>-<dest>-<period>
-    mask = parts.str[0].str.startswith(hs_chapter)
+    mask = parts.str[0].str.startswith(tuple(hs_prefixes))
     frame, parts = frame[mask], parts[mask]
     if frame.empty:
         raise ValueError(
-            f"no BACI HS chapter {hs_chapter} rows in {source!r} "
-            "(widen the nxbase baci_q recipe to import it)"
+            f"no BACI rows for HS prefixes {tuple(hs_prefixes)} in {source!r} "
+            "(widen the nxbase baci_q recipe to import them)"
         )
     df = pd.DataFrame(
         {
@@ -396,36 +429,43 @@ def _baci_trade_mix(api_url, year, regions, hs_chapter, source):
     return mix
 
 
-def get_steel_trade_mix(
+def get_trade_mix(
     api_url: str = DEFAULT_API,
+    commodity: str | None = None,
     year: int = 2024,
     regions=None,
     source: str | None = None,
 ) -> dict[str, dict[str, float]]:
-    """Foreign steel (HS ch.72) sourcing shares per destination, for `update_trade_mix`.
+    """Foreign sourcing shares per destination for one commodity, from BACI.
 
-    Pooled mode (steel is pooled like electricity)::
+    Resolves the commodity's HS6 prefixes from the nxbase graph materialisation
+    (`_COMMODITY_HS`) and returns ``{destination: {origin: share}}`` (foreign
+    origins summing to 1, domestic omitted). Serves both paths:
 
-        pooled = db.meta.pooled_trade_map[STEEL_COMMODITY]
-        db.update_trade_mix(mix, items=pooled['supply'], commodities=pooled['need'],
-                            scenario=..., rescale=True)
+    - **pooled** (steel/aluminium): ``items=pooled['supply']``,
+      ``commodities=pooled['need']``;
+    - **Isard** (chemicals, N-fertiliser, non-metallic/non-ferrous):
+      ``items=[commodity]``, ``level='Commodity'``.
+
+    Either way `update_trade_mix(..., rescale=True)` preserves the base domestic
+    share and rewrites only the import sourcing.
     """
-    return _baci_trade_mix(api_url, year, regions, _BACI_TRADE_CHAPTER["steel"], source)
+    if commodity not in _COMMODITY_HS:
+        raise KeyError(
+            f"no HS mapping for {commodity!r}; add it to _COMMODITY_HS "
+            "(derive the prefixes from the nxbase HS22->CN26->NXS graph)"
+        )
+    return _baci_trade_mix(api_url, year, regions, _COMMODITY_HS[commodity], source)
 
 
-def get_aluminium_trade_mix(
-    api_url: str = DEFAULT_API,
-    year: int = 2024,
-    regions=None,
-    source: str | None = None,
-) -> dict[str, dict[str, float]]:
-    """Foreign aluminium (HS ch.76) sourcing shares per destination, for `update_trade_mix`.
+def get_steel_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None):
+    """Foreign steel (HS ch.72) sourcing shares — thin wrapper over get_trade_mix."""
+    return get_trade_mix(api_url, STEEL_COMMODITY, year, regions, source)
 
-    Aluminium is pooled but has **no** supply-route mix (no per-country primary/
-    secondary source like worldsteel): only the import origins are rewritten.
-    Same foreign-only convention as steel; maps to ALUMINIUM_COMMODITY.
-    """
-    return _baci_trade_mix(api_url, year, regions, _BACI_TRADE_CHAPTER["aluminium"], source)
+
+def get_aluminium_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None):
+    """Foreign aluminium (HS ch.76) sourcing shares — thin wrapper over get_trade_mix."""
+    return get_trade_mix(api_url, ALUMINIUM_COMMODITY, year, regions, source)
 
 
 def get_glass_recycled_share(
