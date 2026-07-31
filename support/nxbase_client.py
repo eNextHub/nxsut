@@ -351,73 +351,128 @@ _COMMODITY_HS: dict[str, tuple[str, ...]] = {
 
 _BACI_TRD_CACHE: dict = {}
 
+# UN M49 codes BACI's own country_codes leaves without an ISO2 (a regional
+# aggregate, or the "NA" it avoids writing for Namibia). Same fix as the nxbase
+# m49_to_iso2 transform.
+_M49_ISO2_FILE_OVERRIDES = {"490": "TW", "516": "NA"}
 
-def _fetch_baci_trd(api_url, year, source):
-    """Fetch (and cache) the full BACI TRD frame for a year.
 
-    One big pull reused across every commodity in a run: the CSV is ~1.4M rows,
-    so fetching it once per commodity would be prohibitive. Falls back to the
-    latest BACI vintage <= ``year`` when ``source`` is not pinned.
+def _baci_frame(api_url, year, source, baci_path):
+    """Normalised BACI frame (columns hs6, dest, origin, q), cached per run.
+
+    ONE big pull, reused across every commodity in a run. PRIMARY source is the
+    nxbase query API; if nxbase has no BACI (e.g. the public API, where BACI is
+    visibility=local), it FALLS BACK to the raw CEPII files at ``baci_path`` — the
+    download the user keeps locally, exactly like the EXIOBASE Hybrid flows and
+    the EMBER release. So the pipeline stays reproducible from the public open API
+    plus a local BACI file, without BACI ever being hosted. BACI has no public API
+    (CEPII ships files); UN Comtrade has one but returns un-harmonised data.
     """
-    key = (api_url, source, year)
+    key = (api_url, source, year, baci_path)
     if key in _BACI_TRD_CACHE:
         return _BACI_TRD_CACHE[key]
+    frame = _baci_frame_from_api(api_url, year, source)
+    if frame is None and baci_path:
+        frame = _baci_frame_from_file(baci_path, year)
+        if frame is not None:
+            print(f"[nxbase] BACI not on the nxbase API; using local files at {baci_path}")
+    if frame is None or frame.empty:
+        raise ValueError(
+            f"BACI unavailable for year<= {year}: not on nxbase ({api_url}) and no "
+            "local fallback (set 'baci' in paths.yml to your CEPII BACI folder)"
+        )
+    _BACI_TRD_CACHE[key] = frame
+    return frame
+
+
+def _baci_frame_from_api(api_url, year, source):
+    """Normalised BACI frame from the nxbase API, or None when nxbase has none."""
     if source is not None:
-        frame = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source})
+        raw = _get_csv(api_url, {"parameter": "Bilateral trade", "source": source})
     else:
-        frame = None  # BACI lags the build year: use the latest vintage <= year
+        raw = None  # BACI lags the build year: use the latest vintage <= year
         for y in range(year, year - 3, -1):
             cand = f"BACI HS22 bilateral trade quantities {y}"
             f = _get_csv(api_url, {"parameter": "Bilateral trade", "source": cand})
             if not f.empty:
-                frame, source = f, cand
+                raw = f
                 if y != year:
                     print(f"[nxbase] BACI {year} unavailable, using {y}")
                 break
-    if frame is None or frame.empty:
-        raise ValueError(f"no Bilateral trade rows for BACI (year <= {year})")
-    _BACI_TRD_CACHE[key] = (frame, source)
-    return frame, source
+    if raw is None or raw.empty:
+        return None
+    parts = raw["item_1"].map(split_item)  # c_<hs6>-<dest>-<period>
+    return pd.DataFrame({
+        "hs6": parts.str[0],
+        "dest": parts.str[1],
+        "origin": raw["item_2"].map(lambda s: split_item(s)[0]),  # s_<origin>
+        "q": raw["value"].astype(float),
+    })
 
 
-def _baci_trade_mix(api_url, year, regions, hs_prefixes, source):
-    """Foreign sourcing shares per destination for the given HS6 prefixes, from BACI.
+def _baci_frame_from_file(baci_path, year):
+    """Normalised BACI frame from the raw CEPII download (data + country_codes).
 
-    Queries the native BACI bilateral flows (`parameter=Bilateral trade`,
-    quantity in tonnes — nxbase stores the flows, the mix is derived here), keeps
-    the HS6 codes under ``hs_prefixes`` (chapters/headings that map to the target
-    commodity in the nxbase graph), maps exporter/importer ISO2 -> the table's
-    EXIOBASE regions (44 members kept, others RoW-aggregated via MARIO
-    membership), drops intra-region pairs (spurious "domestic" from RoW
-    aggregation), and returns ``{destination: {origin: share}}`` with each
-    destination's FOREIGN origins summing to 1 — the domestic diagonal is
-    deliberately omitted.
-
-    Passed to `update_trade_mix` WITHOUT a domestic share, the foreign shares are
-    rescaled onto the destination's current combined foreign share: the base
-    domestic fraction is preserved and only the import sourcing is rewritten
-    (BACI has cross-border flows only, no domestic use). Falls back to the latest
-    BACI vintage <= `year`.
+    Mirrors the nxbase baci_q recipe: M49->ISO2 from BACI's own country_codes
+    (with the 490 "Other Asia, nes"->TW / 516 Namibia->NA overrides), HS6
+    zero-padded, q>0. Uses the latest BACI_HS22_Y<yy> file <= ``year``. Unlike the
+    nxbase subset this file carries ALL chapters, so every commodity resolves.
     """
-    frame, source = _fetch_baci_trd(api_url, year, source)
-    parts = frame["item_1"].map(split_item)  # c_<hs6>-<dest>-<period>
-    mask = parts.str[0].str.startswith(tuple(hs_prefixes))
-    frame, parts = frame[mask], parts[mask]
-    if frame.empty:
+    import glob
+    import os
+
+    cc = glob.glob(os.path.join(baci_path, "country_codes_*.csv"))
+    if not cc:
+        raise FileNotFoundError(f"no country_codes_*.csv in {baci_path}")
+    codes = pd.read_csv(cc[0], dtype=str)
+    m49_iso2 = {
+        str(r["country_code"]).strip(): str(r.get("country_iso2") or "").strip()
+        for _, r in codes.iterrows()
+    }
+    m49_iso2 = {k: v for k, v in m49_iso2.items() if v and v != "NA"}
+    m49_iso2.update(_M49_ISO2_FILE_OVERRIDES)
+
+    data_file = None
+    for y in range(year, year - 3, -1):
+        hits = glob.glob(os.path.join(baci_path, f"BACI_HS22_Y{y}_*.csv"))
+        if hits:
+            data_file = hits[0]
+            if y != year:
+                print(f"[nxbase] local BACI {year} unavailable, using {y}")
+            break
+    if not data_file:
+        raise FileNotFoundError(f"no BACI_HS22_Y<= {year}_*.csv in {baci_path}")
+
+    raw = pd.read_csv(data_file, usecols=["i", "j", "k", "q"])
+    raw = raw[raw["q"] > 0]
+    return pd.DataFrame({
+        "hs6": raw["k"].map(lambda v: str(int(v)).zfill(6)),
+        "dest": raw["j"].astype(str).map(m49_iso2.get),
+        "origin": raw["i"].astype(str).map(m49_iso2.get),
+        "q": raw["q"].astype(float),
+    }).dropna(subset=["dest", "origin"])
+
+
+def _baci_trade_mix(api_url, year, regions, hs_prefixes, source, baci_path):
+    """Foreign sourcing shares per destination for the given HS6 prefixes.
+
+    Reads the normalised BACI frame (nxbase API, or the local CEPII file
+    fallback), keeps the HS6 codes under ``hs_prefixes`` (the chapters/headings
+    that map to the target commodity in the nxbase graph), maps exporter/importer
+    ISO2 -> the table's EXIOBASE regions (44 members kept, others RoW-aggregated),
+    drops intra-region pairs, and returns ``{destination: {origin: share}}`` with
+    each destination's FOREIGN origins summing to 1 (domestic diagonal omitted, so
+    update_trade_mix preserves the base domestic share and rewrites only imports).
+    """
+    frame = _baci_frame(api_url, year, source, baci_path)
+    df = frame[frame["hs6"].str.startswith(tuple(hs_prefixes))]
+    if df.empty:
         raise ValueError(
-            f"no BACI rows for HS prefixes {tuple(hs_prefixes)} in {source!r} "
-            "(widen the nxbase baci_q recipe to import them)"
+            f"no BACI rows for HS prefixes {tuple(hs_prefixes)} "
+            "(the nxbase subset / your local file has no such chapters)"
         )
-    df = pd.DataFrame(
-        {
-            "dest": parts.str[1],
-            "origin": frame["item_2"].map(lambda s: split_item(s)[0]),  # s_<origin>
-            "q": frame["value"].astype(float),
-        }
-    )
     region = _iso2_to_exiobase_region(pd.unique(pd.concat([df["dest"], df["origin"]])), regions)
-    df["dest_r"] = df["dest"].map(region)
-    df["origin_r"] = df["origin"].map(region)
+    df = df.assign(dest_r=df["dest"].map(region), origin_r=df["origin"].map(region))
     df = df.dropna(subset=["dest_r", "origin_r"])
     df = df[df["dest_r"] != df["origin_r"]]  # foreign only; domestic preserved by omission
     agg = df.groupby(["dest_r", "origin_r"])["q"].sum()
@@ -435,6 +490,7 @@ def get_trade_mix(
     year: int = 2024,
     regions=None,
     source: str | None = None,
+    baci_path: str | None = None,
 ) -> dict[str, dict[str, float]]:
     """Foreign sourcing shares per destination for one commodity, from BACI.
 
@@ -448,24 +504,25 @@ def get_trade_mix(
       ``items=[commodity]``, ``level='Commodity'``.
 
     Either way `update_trade_mix(..., rescale=True)` preserves the base domestic
-    share and rewrites only the import sourcing.
+    share and rewrites only the import sourcing. ``baci_path`` (the local CEPII
+    BACI folder) is the fallback when the nxbase API has no BACI.
     """
     if commodity not in _COMMODITY_HS:
         raise KeyError(
             f"no HS mapping for {commodity!r}; add it to _COMMODITY_HS "
             "(derive the prefixes from the nxbase HS22->CN26->NXS graph)"
         )
-    return _baci_trade_mix(api_url, year, regions, _COMMODITY_HS[commodity], source)
+    return _baci_trade_mix(api_url, year, regions, _COMMODITY_HS[commodity], source, baci_path)
 
 
-def get_steel_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None):
+def get_steel_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None, baci_path=None):
     """Foreign steel (HS ch.72) sourcing shares — thin wrapper over get_trade_mix."""
-    return get_trade_mix(api_url, STEEL_COMMODITY, year, regions, source)
+    return get_trade_mix(api_url, STEEL_COMMODITY, year, regions, source, baci_path)
 
 
-def get_aluminium_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None):
+def get_aluminium_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source=None, baci_path=None):
     """Foreign aluminium (HS ch.76) sourcing shares — thin wrapper over get_trade_mix."""
-    return get_trade_mix(api_url, ALUMINIUM_COMMODITY, year, regions, source)
+    return get_trade_mix(api_url, ALUMINIUM_COMMODITY, year, regions, source, baci_path)
 
 
 def get_glass_recycled_share(

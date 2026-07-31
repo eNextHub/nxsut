@@ -10,3 +10,4 @@ USER:
   ember: "/path/to/Ember/yearly_full_release_long_format.csv"   # EMBER yearly full release
   export: "/path/to/nxsut"                                      # where generated tables are written
   nxbase_api: "https://enextgen.it/nxbase-api"                  # nxbase public read-only API (anonymous; see README "Data access")
+  baci: "/path/to/BACI_HS22_V202601"                           # (optional) CEPII BACI folder (data + country_codes): trade-mix fallback when nxbase has no BACI
