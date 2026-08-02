@@ -46,33 +46,25 @@ from apply_movec_write import apply as _apply_c  # noqa: E402
 
 
 # The five split parents end up with zero output. Folding them away needs a
-# target with the SAME unit (MARIO refuses to aggregate across units), which
-# the monetary children now provide: each water/air parent folds into its own
-# passenger child, and the road/rail parents into the transport residual
-# category. Numerically a no-op — they are zero — so the target only has to
-# be same-unit and sensible.
+# target with the SAME unit — MARIO refuses to aggregate across units — and
+# now that every transport child is physical (pkm or tkm), the only monetary
+# transport commodity left is the residual category (63), so all five parents
+# fold there. Numerically a no-op: they are zero.
 EMPTY_PARENT_FOLD = {
     "Activity": {
-        "Other land transport":
-            "Supporting and auxiliary transport activities; "
-            "activities of travel agencies (63)",
-        "Transport via railways":
-            "Supporting and auxiliary transport activities; "
-            "activities of travel agencies (63)",
-        "Sea and coastal water transport": "Sea and coastal passenger transport",
-        "Inland water transport": "Inland water passenger transport",
-        "Air transport (62)": "Air passenger transport",
+        p: "Supporting and auxiliary transport activities; "
+           "activities of travel agencies (63)"
+        for p in ("Other land transport", "Transport via railways",
+                  "Sea and coastal water transport", "Inland water transport",
+                  "Air transport (62)")
     },
     "Commodity": {
-        "Other land transportation services":
-            "Supporting and auxiliary transport services; travel agency services (63)",
-        "Railway transportation services":
-            "Supporting and auxiliary transport services; travel agency services (63)",
-        "Sea and coastal water transportation services":
-            "Sea and coastal passenger transport services",
-        "Inland water transportation services":
-            "Inland water passenger transport services",
-        "Air transport services (62)": "Air passenger transport services",
+        p: "Supporting and auxiliary transport services; travel agency services (63)"
+        for p in ("Other land transportation services",
+                  "Railway transportation services",
+                  "Sea and coastal water transportation services",
+                  "Inland water transportation services",
+                  "Air transport services (62)")
     },
 }
 

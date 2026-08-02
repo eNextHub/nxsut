@@ -24,14 +24,29 @@ ROOT = Path(__file__).resolve().parent.parent
 GWP = {"Carbon dioxide, fossil (air - Emiss)": 1.0,
        "CH4 (air - Emiss)": 29.8,
        "N2O (air - Emiss)": 273.0}
-TRANSPORT_ACTS = [
-    "Road freight transport", "Road passenger transport",
-    "Rail passenger transport", "Rail freight transport",
-    "Private car transport, gasoline", "Private car transport, diesel",
-    "Private car transport, LPG", "Private car transport, natural gas",
-    "Private car transport, electric", "Private motorcycle transport",
-    "Own-account road freight transport",
-]
+# activity -> (output unit, plausibility band for the GHG footprint in
+# g/unit, taken from the transport LCA literature). The bands are the
+# acceptance test: a physical denomination that lands outside them is not
+# usable, whatever the statistics say.
+TRANSPORT_ACTS: dict[str, tuple[str, tuple[float, float]]] = {
+    "Road freight transport": ("tkm", (30, 250)),
+    "Own-account road freight transport": ("tkm", (30, 300)),
+    "Road passenger transport": ("pkm", (20, 150)),
+    "Rail passenger transport": ("pkm", (10, 150)),
+    "Rail freight transport": ("tkm", (5, 100)),
+    "Sea and coastal freight transport": ("tkm", (5, 100)),
+    "Sea and coastal passenger transport": ("pkm", (50, 800)),
+    "Inland water freight transport": ("tkm", (10, 120)),
+    "Inland water passenger transport": ("pkm", (50, 800)),
+    "Air freight transport": ("tkm", (300, 2500)),
+    "Air passenger transport": ("pkm", (60, 400)),
+    "Private car transport, gasoline": ("pkm", (80, 250)),
+    "Private car transport, diesel": ("pkm", (80, 250)),
+    "Private car transport, LPG": ("pkm", (60, 250)),
+    "Private car transport, natural gas": ("pkm", (40, 200)),
+    "Private car transport, electric": ("pkm", (0, 200)),
+    "Private motorcycle transport": ("pkm", (40, 200)),
+}
 
 
 def main() -> None:
@@ -59,21 +74,34 @@ def main() -> None:
     print(f"  pooled commodities: {len(pooled)} {pooled[:6]}", flush=True)
     print(f"  route/steel activities: {len(routes)}", flush=True)
 
-    print("\n--- footprint GHG AR6 [g/unit] ---", flush=True)
+    print("\n--- footprint GHG AR6 [g/unit] + banda di plausibilita' ---", flush=True)
     db.calc_ghg(profile="exiobase_hybrid")
     f = db.f
     X = db.X.iloc[:, 0]
-    for a in TRANSPORT_ACTS:
+    lvl0 = db.X.index.get_level_values(0)
+    lvl2 = db.X.index.get_level_values(2)
+    fails = []
+    for a, (unit, (lo, hi)) in TRANSPORT_ACTS.items():
         if a not in acts:
             continue
-        vals = []
-        for reg in ("IT", "DE", "PL"):
+        vals, world = [], []
+        for reg in ("IT", "DE", "FR", "PL", "US", "CN"):
             key = (reg, "Activity", a)
             try:
-                vals.append(f"{reg}={float(f.loc['GHG AR6 GWP-100', key]):7.1f}")
+                v = float(f.loc["GHG AR6 GWP-100", key])
+                x = float(X[(lvl0 == reg) & (lvl2 == a)].sum())
+                if x > 0:
+                    world.append((v, x))
+                vals.append(f"{reg}={v:6.0f}")
             except Exception:
-                vals.append(f"{reg}=n/a")
-        print(f"  {a[:42]:44} {'  '.join(vals)}", flush=True)
+                vals.append(f"{reg}=  n/a")
+        wavg = sum(v * x for v, x in world) / sum(x for _, x in world) if world else 0.0
+        ok = lo <= wavg <= hi
+        if not ok:
+            fails.append((a, round(wavg, 1), (lo, hi)))
+        print(f"  {'OK ' if ok else 'FUORI'} {a[:38]:40} media pesata {wavg:7.1f} "
+              f"g/{unit:4} [{lo}-{hi}]   {' '.join(vals)}", flush=True)
+    print(f"\nfuori banda: {fails if fails else 'nessuno'}", flush=True)
 
     print("\n--- ancora elettrica (regressione vs v3.0) ---", flush=True)
     for name in ("Electricity need", "Electricity"):
@@ -89,7 +117,6 @@ def main() -> None:
             break
 
     print("\n--- output trasporto (vs statistiche) ---", flush=True)
-    lvl2 = db.X.index.get_level_values(2)
     for a in TRANSPORT_ACTS:
         if a in acts:
             print(f"  {a[:42]:44} X mondo = {float(X[lvl2 == a].sum()):>14,.0f}", flush=True)
