@@ -80,7 +80,11 @@ VOLUMES = {
     ("road_pipe", "ROAD.PAX"): [
         ("Eurostat road passenger performance (pkm)",
          "Road passenger transport - buses, coaches and trolleys"),
-        ("International Transport Forum", "Road passenger transport - buses and coaches"),
+        # ITF names this exactly like Eurostat does; the old label
+        # ("... buses and coaches") matched nothing, so the fallback never
+        # fired and France kept Eurostat's 51 Mpkm coverage fragment
+        ("International Transport Forum",
+         "Road passenger transport - buses, coaches and trolleys"),
     ],
     ("rail", "TRN.P"): [
         ("Eurostat rail passenger transport (pkm)", "Rail passenger transport"),
@@ -112,6 +116,9 @@ PAX_TONNE = 0.1
 # collection, so Eurostat, ITF and the national offices all publish nothing.
 NO_DATA_CHILDREN = {"IWW.PAX"}
 # NXTR v0 recipe constants for the liquid-fuel bottom-up shares.
+# how far apart two sources for the same national total may be before the
+# smaller one is read as a coverage hole rather than a measurement difference
+COVERAGE_FACTOR = 5.0
 INT_HGV, INT_BUS = 2.7e-4, 2.5e-4       # t/vkm
 LOAD_DEFAULT, OCC_BUS = 10.0, 15.0      # tkm/vkm, pkm/vkm
 
@@ -212,15 +219,38 @@ def main() -> None:
     for iso2, q in air_pkm.items():
         if iso2 in EXIOBASE_REGIONS:
             volume[(iso2, "air", "AIR.PAX")] = (q, "WB pax x ICAO stage length")
+    swapped: list[tuple] = []
     for (block, child), specs in VOLUMES.items():
         for iso2 in EXIOBASE_REGIONS:
+            cands = []
             for src, act in specs:
                 q = by_src.get((src, act, iso2, "Y11"), 0.0)
                 if q > 0:
                     label = "ESTAT" if "Eurostat" in src else "ITF"
                     note = "" if "hire" in act or "total" not in act else " (total: hire n/a)"
-                    volume[(iso2, block, child)] = (q, label + note)
-                    break
+                    cands.append((q, label + note))
+            if not cands:
+                continue
+            q, prov = cands[0]                        # source priority
+            # Coverage arbitration. Two sources measuring the same national
+            # total can differ by a few per cent (rounding, vintage), never by
+            # a factor: a total that is many times SHORT is a reporting hole —
+            # a country publishing one vehicle category instead of all — while
+            # no statistical office over-reports a total fivefold. So when a
+            # later source is much larger, it wins, and the swap is declared.
+            # France's bus/coach pkm is the case that forced this: Eurostat
+            # publishes 51 Mpkm for 2011, ITF 54.702 (and the two agree
+            # exactly for Germany and Spain).
+            wide = max(cands, key=lambda t: t[0])
+            if wide[0] > q * COVERAGE_FACTOR:
+                swapped.append((iso2, child, round(q, 1), round(wide[0], 1), prov, wide[1]))
+                q, prov = wide[0], wide[1] + " (buco di copertura nella prima fonte)"
+            volume[(iso2, block, child)] = (q, prov)
+    if swapped:
+        print(f"volumi sostituiti per copertura ({len(swapped)}):", flush=True)
+        for iso2, child, small, big, p_small, p_big in swapped:
+            print(f"    {iso2} {child:9} {p_small} {small:,.1f} -> {p_big} {big:,.1f}",
+                  flush=True)
 
     # per-country observed HGV load factors (leg 1), default otherwise
     load: dict[str, float] = {}
