@@ -77,16 +77,26 @@ def fetch_api(params: dict) -> list[dict]:
 
 def main() -> None:
     # --- tech shares from the NXTR master mkt sheet (Y13 proxy) ---
+    # A country-year is valid only if the CORE techs (CAR.G + CAR.D) are
+    # reported: ES/GR Y13 carry only the ELC row (coverage hole) and would
+    # normalise to a silent 100% electric. First valid year Y13->Y24 wins;
+    # no valid year -> median.
     mkt = pd.read_excel(HERE / "data" / "nxtr_master.xlsx", sheet_name="mkt")
-    y13 = mkt[mkt["period"] == "Y13"]
-    shares_obs: dict[str, dict[str, float]] = defaultdict(dict)
-    for _, r in y13.iterrows():
-        shares_obs[r["site"]][r["tech"]] = float(r["value"])
-    medians = {t: statistics.median([s[t] for s in shares_obs.values() if t in s])
+    by_site_period: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
+    for _, r in mkt.iterrows():
+        by_site_period[(r["site"], r["period"])][r["tech"]] = float(r["value"])
+    shares_obs: dict[str, dict[str, float]] = {}
+    for site in sorted({s for s, _ in by_site_period}):
+        for per in [f"Y{y:02d}" for y in range(13, 25)]:
+            sh = by_site_period.get((site, per), {})
+            if sh.get("CAR.G", 0) > 0 and sh.get("CAR.D", 0) > 0:
+                shares_obs[site] = sh
+                break
+    medians = {t: statistics.median([s.get(t, 0.0) for s in shares_obs.values()])
                for t in CAR_TECHS}
     norm = sum(medians.values())
     medians = {t: v / norm for t, v in medians.items()}
-    print(f"share parco: {len(shares_obs)} paesi osservati (Y13); "
+    print(f"share parco: {len(shares_obs)} paesi con anno core-valido; "
           f"mediana: { {t: round(v, 3) for t, v in medians.items()} }")
 
     # --- FULFILL 2011 intensities per country + medians ---

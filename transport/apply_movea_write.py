@@ -139,7 +139,8 @@ def main() -> None:
     u, s, v, e = db.u, db.s, db.v, db.e
     hh_cols = {}
     for region in regions:
-        cands = [c for c in Y.columns if c[0] == region and "households" in str(c[2])]
+        cands = [c for c in Y.columns if c[0] == region
+                 and str(c[2]) == "Final consumption expenditure by households"]
         assert len(cands) == 1, f"household column ambigua per {region}: {cands}"
         hh_cols[region] = cands[0]
 
@@ -175,7 +176,7 @@ def main() -> None:
             g = next(r for r in car_rows if r["tech"] == "CAR.G")
             gas_avail = float(y_col[carrier_cells("GASO")].clip(lower=0).sum())
             denom = float(g["share"]) * float(g["intensity"])
-            vkm_tot = gas_avail / denom if denom > 0 else 0.0
+            vkm_tot = gas_avail / (denom * 1e6) if denom > 0 else 0.0
             synth = True
 
         # demands per tech, then per-carrier cap
@@ -183,10 +184,10 @@ def main() -> None:
         vkm: dict[str, float] = {}
         for r in car_rows:
             vkm[r["tech"]] = vkm_tot * float(r["share"])
-            demand[r["tech"]] = vkm[r["tech"]] * float(r["intensity"])
+            demand[r["tech"]] = vkm[r["tech"]] * 1e6 * float(r["intensity"])
         vkm["MOTO"] = (float(moto["pkm_obs"]) / float(moto["occupancy"])
                        if float(moto["pkm_obs"]) > 0 else 0.0)
-        demand["MOTO"] = vkm["MOTO"] * float(moto["intensity"])
+        demand["MOTO"] = vkm["MOTO"] * 1e6 * float(moto["intensity"])
 
         by_carrier: dict[str, list[str]] = defaultdict(list)
         for r in rows:
@@ -205,7 +206,7 @@ def main() -> None:
             occ = float(r["occupancy"])
             vkm_eff = vkm[t] * scale.get(t, 0.0)
             pkm_out[t] = vkm_eff * occ
-            moved = vkm_eff * float(r["intensity"])
+            moved = vkm_eff * 1e6 * float(r["intensity"])
             cells = carrier_cells(r["carrier"])
             pos = y_col[cells].clip(lower=0)
             tot = float(pos.sum())
@@ -215,12 +216,20 @@ def main() -> None:
                 y_col[cells] = y_col[cells] - flows
                 col[cells] = flows / pkm_out[t] if pkm_out[t] > 0 else 0.0
             u_cols[(region, "Activity", TECH_ACT[t])] = col
+
+        # s = SUPPLY SHARES per commodity (multi-supplier: MARIO computes
+        # Xa = s x Xc — a flat 1 would hand every tech the full regional
+        # output; the X-vs-Q check caught exactly that)
+        pkm_tot_region = sum(pkm_out.values())
+        for r in rows:
+            t = r["tech"]
             one_hot = pd.Series(0.0, index=db.S.columns)
-            one_hot[(region, "Commodity", COMMODITY)] = 1.0
+            if pkm_tot_region > 0:
+                one_hot[(region, "Commodity", COMMODITY)] = pkm_out[t] / pkm_tot_region
             s_rows[(region, "Activity", TECH_ACT[t])] = one_hot
 
         y_updates[hh] = y_col
-        com_y[region] = sum(pkm_out.values())
+        com_y[region] = pkm_tot_region
         gaso_avail = float(Y[hh][carrier_cells("GASO")].clip(lower=0).sum())
         gaso_moved = gaso_avail - float(y_col[carrier_cells("GASO")].clip(lower=0).sum())
         diag.append(dict(region=region, synth=synth,
@@ -262,7 +271,8 @@ def main() -> None:
 
     X2 = db.X
     for t, act in TECH_ACT.items():
-        xt = float(X2.loc[(slice(None), "Activity", act), :].to_numpy().sum())
+        mask = X2.index.get_level_values(2) == act
+        xt = float(X2.iloc[:, 0][mask].sum())
         print(f"{t}: X globale = {xt:,.0f} Mpkm", flush=True)
     it = [d for d in diag if d["region"] == "IT"][0]
     print(f"IT: pkm privato = {it['pkm_tot']:,.0f} Mpkm, copertura benzina = "
