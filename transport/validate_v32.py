@@ -90,6 +90,22 @@ def main() -> None:
         for k, v in worst.items():
             print(f"      {k[0]} {str(k[2])[:46]:48} {v:,.0f}", flush=True)
 
+    # Annihilation detector. MARIO's zero-output protection writes
+    # zero_output_epsilon (1e-30) as an output; when it reaches a label that
+    # has live members, a real sector is wiped out while everyone keeps
+    # buying from it. The fingerprint is unmistakable — an output that is not
+    # zero but ~1e-30 — and it is worth screening for beyond the fold,
+    # because any aggregation whose group mixes empty and live members can
+    # produce it (aggregate_ee's Solar group, for one, is solar PV plus solar
+    # thermal, and thermal is zero in most countries).
+    eps = Xall[(Xall.abs() > 0) & (Xall.abs() < 1e-20)]
+    if len(eps):
+        items = sorted({str(k[2]) for k in eps.index})
+        print(f"  ATTENZIONE output a scala epsilon (settore annientato?): "
+              f"{len(eps)} celle su {len(items)} item -> {items[:6]}", flush=True)
+    else:
+        print("  OK  nessun output a scala epsilon (1e-30)", flush=True)
+
     print("\n--- footprint GHG AR6 [g/unit] + banda di plausibilita' ---", flush=True)
     db.calc_ghg(profile="exiobase_hybrid")
     f = db.f
