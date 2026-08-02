@@ -38,22 +38,31 @@ ROAD_ACTS = [
     "Private car transport, diesel", "Private car transport, LPG",
     "Private car transport, natural gas", "Private motorcycle transport",
 ]
-# SIEC products that make up road motor fuel, and their table counterparts
-FUELS = {"Motor Gasoline": "Motor gasoline", "Gas/Diesel Oil": "Gas oil/diesel oil",
-         "Biogasoline": "Biogasoline", "Biodiesels": "Biodiesel"}
-COUNTRIES = ("IT", "DE", "FR", "ES", "PL", "US")
+# Liquid motor fuel only, on both sides. LPG and CNG road use exists but is
+# a couple of per cent and its table counterpart is a distributed-gas
+# commodity that also serves heating, so it would compare two different
+# things; electricity likewise. SIEC names carry their code.
+TABLE_FUELS = ["Motor Gasoline", "Gas/Diesel Oil", "Biogasoline", "Biodiesels"]
+SIEC_FUELS = ["4652 Motor Gasoline", "4670 Gas Oil/ Diesel Oil",
+              "5210 Biogasoline", "5220 Biodiesel"]   # never the "Of which:" rows
+UNSD_SOURCE = "UNSD Energy Statistics — fuel use by sector 2021-2023"
+COUNTRIES = ("IT", "DE", "FR", "ES", "PL", "US", "CN", "JP")
 
 
-def unsd_road_fuel(api: str, year: int) -> pd.DataFrame:
-    """Observed road fuel (t) per country, UNSD transaction 1221."""
-    q = urllib.parse.urlencode({"parameter": "Use", "source": "UNSD.USE",
-                                "limit": "400000"})
-    raw = urllib.request.urlopen(f"{api}/data.csv?{q}", timeout=600).read().decode()  # noqa: S310
+def unsd_road_fuel(api: str, year: int) -> pd.Series:
+    """Observed road fuel (t) per country: UNSD/IRES transaction 1221."""
+    q = urllib.parse.urlencode({"source": UNSD_SOURCE,
+                                "activity": "Consumption by road", "limit": "400000"})
+    raw = urllib.request.urlopen(f"{api}/data.csv?{q}", timeout=900).read().decode()  # noqa: S310
     df = pd.read_csv(io.StringIO(raw))
-    df = df[(df["i2_name"].astype(str).str.contains("Road", case=False, na=False))
-            & (df["i2_attr_2_name"] == year)
-            & (df["i1_name"].isin(FUELS))]
-    return df.groupby("i2_attr_1_name")["value"].sum()
+    df = df[df["i1_name"].isin(SIEC_FUELS)].copy()
+    # item_2 is 'a_1221-<site>-<period>' — the attribute *names* are extended
+    # ("Italy"), so the codes come from the item string
+    parts = df["item_2"].astype(str).str.split("-")
+    df["site"] = parts.str[1]
+    df["period"] = parts.str[2]
+    df = df[df["period"] == f"Y{year % 100:02d}"]
+    return df.groupby("site")["value"].sum()
 
 
 def main() -> None:
@@ -69,7 +78,7 @@ def main() -> None:
     db = mario.parse_from_txt(os.path.join(paths["export"], version, str(year), "flows"),
                               table="SUT", mode="flows")
     U = db.U
-    fuels = [f for f in FUELS if f in set(U.index.get_level_values(2))]
+    fuels = [f for f in TABLE_FUELS if f in set(U.index.get_level_values(2))]
     acts = [a for a in ROAD_ACTS if a in set(U.columns.get_level_values(2))]
     print(f"combustibili trovati: {fuels}\nattivita' stradali: {len(acts)}/{len(ROAD_ACTS)}",
           flush=True)
@@ -84,10 +93,17 @@ def main() -> None:
         tab = float(rows.to_numpy().sum()) / 1e6
         o = float(obs.get(c, float("nan"))) / 1e6
         ratio = tab / o if o else float("nan")
-        flag = "OK " if 0.6 <= ratio <= 1.15 else "!! "
+        flag = "OK " if 0.5 <= ratio <= 1.2 else "!! "
         print(f"{flag}{c:4}{tab:>13,.1f}{o:>17,.1f}{ratio:>11.2f}", flush=True)
-    print("\natteso: rapporto <= 1 (la tavola non deve superare l'osservato) e non "
-          "troppo sotto (sarebbe carburante stradale rimasto nelle colonne industriali)",
+    print("\nLettura. Il test e' di PERIMETRO, non di livello: la tavola porta i "
+          "volumi fisici dell'anno base EXIOBASE (2011) — il '2023' riguarda i mix "
+          "elettrici e di trade — mentre l'osservato e' 2021-23, quindi un divario "
+          "di vintage e' atteso (crescita fuori UE, calo in UE).", flush=True)
+    print("Quel che conta: il rapporto deve stare nello stesso ordine di grandezza "
+          "e NON superare di molto 1. Un rapporto molto sotto 0,5 vorrebbe dire "
+          "carburante stradale rimasto nelle colonne industriali, cioe' Move C non "
+          "ha estratto abbastanza; molto sopra 1,2 vorrebbe dire che ha preso anche "
+          "combustibile che 1221 esclude (calore di processo, macchine off-road).",
           flush=True)
 
 
