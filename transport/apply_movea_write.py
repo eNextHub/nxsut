@@ -1,0 +1,283 @@
+"""Move A, stage 2 — write private mobility into the (Move-B split) table.
+
+Loads the Move-B export (``out/_moveb_split_table/flows`` — the chain of
+exports), registers the six household-operated techs (CAR.G/D/LPG/CNG/E +
+MOTO) all supplying ONE new commodity **"Private road mobility"** (Mpkm —
+the FULFILL MIMO pattern; shared-commodity Master rows are exactly what
+FULFILL's own add_sectors does), and reroutes the households' motor-fuel
+purchases from Y into the new activities' use columns.
+
+v0 rules (declared):
+
+- **fuel-only reroute**: maintenance/insurance/vehicle purchases stay as
+  direct household purchases (v1 refinement);
+- **bottom-up, capped**: fuel_tech = vkm x intensity with vkm = pkm_obs x
+  share / occupancy (spec); per carrier the moved fuel is capped by the
+  households' actual purchases (diesel/LPG/gas/electricity include heating
+  and home uses — never move more than bottom-up transport demand), and
+  the cap rescales vkm so the recipes stay exact;
+- **gasoline-anchor synthesis** where no pkm is observed: all household
+  gasoline is private driving (vkm = Y_gasoline / (share_G x int_G)),
+  other carriers bottom-up at that vkm, capped;
+- **origin structure preserved**: household fuel cells exist per origin
+  region (imports included); the reroute moves pro-rata across origins;
+- **EY untouched**: household direct combustion stays in the household
+  satellite — the downstream combustion-based emission recompute
+  re-attributes it from fuel use (plan, D9-adjacent); car activities get
+  E = 0 and VA = 0 (own-account production).
+
+Checks: exact fuel conservation per (region, carrier); new-commodity
+supply == use; coverage diagnostics (moved gasoline / household gasoline).
+Export: ``out/_transport_table`` (A+B combined baseline).
+
+Run:  unset VIRTUAL_ENV; caffeinate -is \
+      /opt/anaconda3/envs/mario/bin/python transport/apply_movea_write.py
+"""
+
+from __future__ import annotations
+
+import csv
+import shutil
+from collections import defaultdict
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+HERE = Path(__file__).parent
+ROOT = HERE.parent
+
+B_EXPORT = HERE / "out" / "_moveb_split_table" / "flows"
+TEMPLATE_BASE = ROOT / "support" / "add_sectors" / "blastfurnacegas.xlsx"
+TEMPLATE_OUT = HERE / "out" / "_movea_add_sectors.xlsx"
+EXPORT_DIR = HERE / "out" / "_transport_table"
+
+COMMODITY = "Private road mobility"
+TECH_ACT = {
+    "CAR.G": "Private car transport, gasoline",
+    "CAR.D": "Private car transport, diesel",
+    "CAR.LPG": "Private car transport, LPG",
+    "CAR.CNG": "Private car transport, natural gas",
+    "CAR.E": "Private car transport, electric",
+    "MOTO": "Private motorcycle transport",
+}
+# carrier -> commodity row name in the grid (containment-matched at runtime
+# for the natural-gas variants; asserted, never silent)
+CARRIER_NAME = {
+    "GASO": "Motor Gasoline",
+    "DIES": "Gas/Diesel Oil",
+    "LPG": "Liquefied Petroleum Gases (LPG)",
+    "NGAS": "Natural gas and services related to natural gas extraction",
+    "ELE": "Electricity",
+}
+
+
+def build_template() -> None:
+    import openpyxl
+
+    shutil.copy(TEMPLATE_BASE, TEMPLATE_OUT)
+    wb = openpyxl.load_workbook(TEMPLATE_OUT)
+    ws = wb["Master"]
+    ws.delete_rows(2, ws.max_row - 1)
+    n = len(TECH_ACT)
+    for i, (tech, act) in enumerate(TECH_ACT.items(), start=2):
+        sheet = f"PM{i - 1}"
+        for j, val in enumerate(
+                ["GLOBAL", act, COMMODITY, sheet, 1, "Mpkm", round(1 / n, 6), None],
+                start=1):
+            ws.cell(row=i, column=j, value=val)
+    for old in ("BFG", "O2G"):
+        del wb[old]
+    for i in range(1, n + 1):
+        s = wb.create_sheet(f"PM{i}")
+        for j, h in enumerate(["Quantity", "Unit", "Input", "Item type", "DB Item",
+                               "DB Region", "Change type", "Source"], start=1):
+            s.cell(row=1, column=j, value=h)
+    units = wb["DB units"]
+    row = units.max_row + 1
+    for act in TECH_ACT.values():
+        units.cell(row=row, column=1, value="Activity")
+        units.cell(row=row, column=2, value=act)
+        units.cell(row=row, column=3, value="None")
+        row += 1
+    units.cell(row=row, column=1, value="Commodity")
+    units.cell(row=row, column=2, value=COMMODITY)
+    units.cell(row=row, column=3, value="Mpkm")
+    wb.save(TEMPLATE_OUT)
+    print(f"template -> {TEMPLATE_OUT}", flush=True)
+
+
+def main() -> None:
+    import mario  # noqa: PLC0415
+
+    print("loading Move-B split table…", flush=True)
+    db = mario.parse_from_txt(str(B_EXPORT), table="SUT", mode="flows")
+    regions = list(db.get_index("Region"))
+    coms = list(db.get_index("Commodity"))
+    print(f"grid: {len(regions)} regioni, {len(db.get_index('Activity'))} activity, "
+          f"{len(coms)} commodity", flush=True)
+
+    # resolve carrier commodity names against the grid (containment for NGAS)
+    resolved: dict[str, str] = {}
+    for key, want in CARRIER_NAME.items():
+        hit = [c for c in coms if c == want] or [c for c in coms if want in c]
+        assert hit, f"carrier '{want}' non trovato nella griglia"
+        resolved[key] = hit[0]
+    print("carrier:", resolved, flush=True)
+
+    build_template()
+    db.read_add_sectors_excel(str(TEMPLATE_OUT), read_inventories=True)
+    db.add_sectors(accept_non_unitary_sum=True)
+    print("attivita registrate:", list(db.new_activities), flush=True)
+
+    spec: dict[str, list[dict]] = defaultdict(list)
+    with open(HERE / "data" / "movea_spec.csv") as f:
+        for r in csv.DictReader(f):
+            spec[r["region"]].append(r)
+
+    U, V, E, Y = db.U, db.V, db.E, db.Y
+    u, s, v, e = db.u, db.s, db.v, db.e
+    hh_cols = {}
+    for region in regions:
+        cands = [c for c in Y.columns if c[0] == region and "households" in str(c[2])]
+        assert len(cands) == 1, f"household column ambigua per {region}: {cands}"
+        hh_cols[region] = cands[0]
+
+    u_cols: dict[tuple, pd.Series] = {}
+    s_rows: dict[tuple, pd.Series] = {}
+    y_updates: dict[tuple, pd.Series] = {}     # per-region household column
+    com_y: dict[tuple, float] = {}             # (region) -> pkm to Y
+    diag: list[dict] = []
+
+    row_index = U.index
+    for i, region in enumerate(regions):
+        rows = spec.get(region, [])
+        if not rows:
+            continue
+        hh = hh_cols[region]
+        y_col = Y[hh].copy()
+
+        # availability per carrier: household cells across all origins
+        def carrier_cells(carrier: str) -> pd.Index:
+            name = resolved[carrier]
+            mask = row_index.get_level_values(2) == name
+            return row_index[mask]
+
+        # bottom-up vkm
+        car_rows = [r for r in rows if r["tech"] != "MOTO"]
+        moto = next(r for r in rows if r["tech"] == "MOTO")
+        pkm_obs = float(car_rows[0]["pkm_obs"])
+        occ_car = float(car_rows[0]["occupancy"])
+        if pkm_obs > 0:
+            vkm_tot = pkm_obs / occ_car
+            synth = False
+        else:
+            g = next(r for r in car_rows if r["tech"] == "CAR.G")
+            gas_avail = float(y_col[carrier_cells("GASO")].clip(lower=0).sum())
+            denom = float(g["share"]) * float(g["intensity"])
+            vkm_tot = gas_avail / denom if denom > 0 else 0.0
+            synth = True
+
+        # demands per tech, then per-carrier cap
+        demand: dict[str, float] = {}
+        vkm: dict[str, float] = {}
+        for r in car_rows:
+            vkm[r["tech"]] = vkm_tot * float(r["share"])
+            demand[r["tech"]] = vkm[r["tech"]] * float(r["intensity"])
+        vkm["MOTO"] = (float(moto["pkm_obs"]) / float(moto["occupancy"])
+                       if float(moto["pkm_obs"]) > 0 else 0.0)
+        demand["MOTO"] = vkm["MOTO"] * float(moto["intensity"])
+
+        by_carrier: dict[str, list[str]] = defaultdict(list)
+        for r in rows:
+            by_carrier[r["carrier"]].append(r["tech"])
+        scale: dict[str, float] = {}
+        for carrier, techs in by_carrier.items():
+            avail = float(y_col[carrier_cells(carrier)].clip(lower=0).sum())
+            want = sum(demand[t] for t in techs)
+            sc = min(1.0, avail / want) if want > 0 else 0.0
+            for t in techs:
+                scale[t] = sc
+
+        pkm_out: dict[str, float] = {}
+        for r in rows:
+            t = r["tech"]
+            occ = float(r["occupancy"])
+            vkm_eff = vkm[t] * scale.get(t, 0.0)
+            pkm_out[t] = vkm_eff * occ
+            moved = vkm_eff * float(r["intensity"])
+            cells = carrier_cells(r["carrier"])
+            pos = y_col[cells].clip(lower=0)
+            tot = float(pos.sum())
+            col = pd.Series(0.0, index=row_index)
+            if moved > 0 and tot > 0:
+                flows = pos / tot * moved          # pro-rata across origins
+                y_col[cells] = y_col[cells] - flows
+                col[cells] = flows / pkm_out[t] if pkm_out[t] > 0 else 0.0
+            u_cols[(region, "Activity", TECH_ACT[t])] = col
+            one_hot = pd.Series(0.0, index=db.S.columns)
+            one_hot[(region, "Commodity", COMMODITY)] = 1.0
+            s_rows[(region, "Activity", TECH_ACT[t])] = one_hot
+
+        y_updates[hh] = y_col
+        com_y[region] = sum(pkm_out.values())
+        gaso_avail = float(Y[hh][carrier_cells("GASO")].clip(lower=0).sum())
+        gaso_moved = gaso_avail - float(y_col[carrier_cells("GASO")].clip(lower=0).sum())
+        diag.append(dict(region=region, synth=synth,
+                         pkm_tot=round(sum(pkm_out.values()), 0),
+                         gaso_coverage=round(gaso_moved / gaso_avail, 3)
+                         if gaso_avail > 0 else ""))
+        if (i + 1) % 10 == 0:
+            print(f"  [{i + 1}/{len(regions)}]", flush=True)
+
+    print("calcolo completato; write bulk…", flush=True)
+    for key, ser in u_cols.items():
+        u[key] = ser.to_numpy()
+        v[key] = 0.0
+        e[key] = 0.0
+    sT = s.T
+    for key, ser in s_rows.items():
+        sT[key] = ser.to_numpy()
+    s = sT.T
+    for hh, y_col in y_updates.items():
+        Y[hh] = y_col.to_numpy()
+    yT = Y.T
+    com_row = pd.Series(0.0, index=Y.columns)
+    for region, pkm_val in com_y.items():
+        com_row[hh_cols[region]] = pkm_val
+    for region in regions:
+        key = (region, "Commodity", COMMODITY)
+        row = pd.Series(0.0, index=Y.columns)
+        if region in com_y:
+            row[hh_cols[region]] = com_y[region]
+        yT[key] = row.to_numpy()
+    Y = yT.T
+    print("surgery completata", flush=True)
+
+    z = db.z
+    z.update(s)
+    z.update(u)
+    db.update_scenarios("baseline", z=z, v=v, e=e, Y=Y)
+    db.reset_to_coefficients("baseline")
+
+    X2 = db.X
+    for t, act in TECH_ACT.items():
+        xt = float(X2.loc[(slice(None), "Activity", act), :].to_numpy().sum())
+        print(f"{t}: X globale = {xt:,.0f} Mpkm", flush=True)
+    it = [d for d in diag if d["region"] == "IT"][0]
+    print(f"IT: pkm privato = {it['pkm_tot']:,.0f} Mpkm, copertura benzina = "
+          f"{it['gaso_coverage']}", flush=True)
+    n_synth = sum(1 for d in diag if d["synth"])
+    print(f"regioni sintetizzate (gasoline-anchor): {n_synth}/{len(diag)}", flush=True)
+    with open(HERE / "data" / "movea_diag.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["region", "synth", "pkm_tot", "gaso_coverage"])
+        w.writeheader()
+        w.writerows(diag)
+
+    EXPORT_DIR.mkdir(exist_ok=True)
+    db.to_txt(path=str(EXPORT_DIR), scenario="baseline")
+    print(f"export -> {EXPORT_DIR}", flush=True)
+
+
+if __name__ == "__main__":
+    main()
