@@ -140,8 +140,14 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
     e_new_cols: dict[tuple, pd.Series] = {}
     s_new_rows: dict[tuple, pd.Series] = {}
     diesel_row_updates: dict[tuple, np.ndarray] = {}   # U rows (per origin)
+    # the diesel ROW write (below) rewrites whole rows and would otherwise
+    # erase what the own-account COLUMN write put there — the fuel would be
+    # removed from the sectors and never land anywhere (emissions without
+    # fuel). Carry the own-account cells with the row and re-apply them.
+    own_fuel_cells: dict[tuple, dict[tuple, float]] = defaultdict(dict)
     e_cell_updates: dict[tuple, float] = {}            # (CO2, sector col) -> new coeff
     com_rows: dict[tuple, pd.Series] = {}              # new commodity use row
+    own_x: dict[tuple, float] = {}                     # activity -> Mtkm output
     gap_reg: list[tuple[str, float]] = []
 
     # activity columns eligible per region (exclude transport family etc.)
@@ -225,6 +231,7 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
                 pos = U.columns.get_loc(c)
                 diesel_row_updates[key][pos] -= amt
                 new_col[key] += amt
+                own_fuel_cells[key][act_key] = own_fuel_cells[key].get(act_key, 0.0) + amt
             # direct CO2 moves with the fuel (capped by the cell satellite)
             dco2 = val * EF_DIES
             xs = float(x_series.get(c, 0.0))
@@ -234,6 +241,7 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
                 e_cell_updates[(CO2_ROW, c)] = (eav - dmove) / xs
             e_col[CO2_ROW] += dmove
         xq = own_eff if own_eff > 0 else 1e-9
+        own_x[act_key] = own_eff
         u_new_cols[act_key] = new_col / xq
         e_new_cols[act_key] = e_col / xq
         one_hot = pd.Series(0.0, index=db.S.columns)
@@ -271,11 +279,20 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
         v[key] = 0.0
         e[key] = e_new_cols[key].to_numpy()
     uT = u.T
+    x_users = x_series.reindex(U.columns).to_numpy(dtype=float)
+    col_pos = {c: U.columns.get_loc(c) for c in {k for cells in own_fuel_cells.values()
+                                                 for k in cells}}
+    moved_back = 0.0
     for key, arr in diesel_row_updates.items():
-        x_users = x_series.reindex(U.columns).to_numpy(dtype=float)
         with np.errstate(divide="ignore", invalid="ignore"):
             coeff = np.where(x_users > 0, arr / x_users, 0.0)
+        for act_key, amt in own_fuel_cells.get(key, {}).items():
+            xq = own_x.get(act_key, 0.0)
+            coeff[col_pos[act_key]] = amt / xq if xq > 0 else 0.0
+            moved_back += amt
         uT[key] = coeff
+    print(f"conservazione fuel: {moved_back:,.0f} t di diesel riassegnati alla "
+          f"colonna own-account (attesi = estratti)", flush=True)
     for key, ser in com_rows.items():
         uT[key] = ser.to_numpy()
     u = uT.T
