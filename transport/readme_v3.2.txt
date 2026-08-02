@@ -3,7 +3,7 @@ Version: v3.2
 Authors: LR, NG
 Date: 2026 Aug
 Build: transport service layer + UNSD-first supply mixes
-Coverage: year 2023. 48 EXIOBASE Hybrid regions. 201 activities, 205
+Coverage: year 2023. 48 EXIOBASE Hybrid regions. 207 activities, 211
 commodities (v3.1: 190 / 199). GHG satellite accounts.
 
 
@@ -43,7 +43,7 @@ a model. After v3.2 the two perimeters coincide: all road fuel sits in
 transport-family columns, and the industry columns keep process, heating and
 off-road fuel only - which is exactly what the UNSD industry rows contain.
 
-NEW ACTIVITIES (11)                      NEW COMMODITIES (6)
+NEW ACTIVITIES (17)                      NEW COMMODITIES (12)
   Road freight transport                   Road freight transport services  [Mtkm]
   Road passenger transport                 Road passenger transport services [Mpkm]
   Rail freight transport                   Rail freight transport services  [Mtkm]
@@ -53,8 +53,24 @@ NEW ACTIVITIES (11)                      NEW COMMODITIES (6)
   Private car transport, LPG
   Private car transport, natural gas
   Private car transport, electric
-  Private motorcycle transport
-  Own-account road freight transport
+  Private motorcycle transport             Sea and coastal freight
+  Own-account road freight transport         transport services         [Mtkm]
+  Sea and coastal freight transport        Sea and coastal passenger
+  Sea and coastal passenger transport        transport services         [Meuro]
+  Inland water freight transport           Inland water freight
+  Inland water passenger transport           transport services         [Mtkm]
+  Air freight transport                    Inland water passenger
+  Air passenger transport                    transport services         [Meuro]
+                                           Air freight transport
+                                             services                   [Meuro]
+                                           Air passenger transport
+                                             services                   [Meuro]
+
+World outputs of the physical children (2023): road freight 13,377 Gtkm,
+own-account road freight 2,164 Gtkm, road passenger 2,737 Gpkm, rail
+passenger 3,286 Gpkm, rail freight 7,256 Gtkm, sea and coastal freight
+5,579 Gtkm, inland-waterway freight 3,420 Gtkm, private mobility 16,032
+Gpkm.
 
 The parents "Other land transport" and "Transport via railways" (and their
 commodities) remain in the grid with zero output - folding them away is
@@ -204,7 +220,24 @@ Re-denomination happens only where an honest physical denominator exists:
   - passenger air and passenger water transport: no open source publishes
     passenger-km for them (only passengers carried), so those children keep
     MEUR;
+  - AIR FREIGHT, on measurement. The World Bank tonne-km count belly cargo
+    flown by PASSENGER airlines, while the SBS freight class is dedicated
+    cargo carriers only. The perimeters do not match and the implied prices
+    say so - DE 1.25, IT 0.14, US 0.07 EUR/tkm, a three-order spread where a
+    coherent measure would cluster - so the air block splits in MEUR only,
+    which is what its monetary key supports. Re-denominating it needs an
+    airline-level tonne-km series that separates dedicated freighters, or a
+    revenue split that reassigns belly-cargo revenue;
   - everything outside transport is untouched.
+
+  Rule of thumb applied throughout: the OBSERVED VOLUME ALWAYS WINS. When a
+  child's implied price is far from its own median, that is almost always the
+  monetary side misbehaving (SBS coverage, transit traffic, a class that also
+  does other things) - substituting the volume would replace a good
+  observation with a value derived from the suspect one. Such cases are
+  flagged for the radar (39 of 208 child-country cells) and left alone. A
+  volume is synthesised only where none is observed, so that each commodity
+  keeps one unit worldwide.
 
 
 KNOWN LIMITATIONS (v0 of the layer)
