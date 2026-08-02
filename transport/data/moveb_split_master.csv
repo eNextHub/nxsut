@@ -1,0 +1,66 @@
+country,block,child,share,tier,provenance
+KR,road_pipe,ROAD.FRT,0.5739,2-SDBS,"OECD SDBS ISIC4 TUTT 2011, shares within block; missing children filled with SBS-median"
+KR,road_pipe,ROAD.PAX,0.4261,2-SDBS,"OECD SDBS ISIC4 TUTT 2011, shares within block; missing children filled with SBS-median"
+KR,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (no SDBS/volume cell)
+US,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,"tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: BEA GDP-by-industry gross output (482/484/485/486, native split)"
+US,road_pipe,PIPE,0.0,5-median,"SBS Y11 EU-median share (volume not reported to ITF — never a silent zero); WARNING pipeline-heavy economy, EU-median ~0 is certainly low — upgrade cell first"
+US,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+US,rail,TRN.F,0.9744,4-price-x-volume,"tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: BEA GDP-by-industry gross output (482/484/485/486, native split)"
+US,rail,TRN.P,0.0256,4-price-x-volume,"tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: BEA GDP-by-industry gross output (482/484/485/486, native split)"
+CN,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: NBS yearbook transport revenue by mode
+CN,road_pipe,PIPE,0.0,5-median,"SBS Y11 EU-median share (volume not reported to ITF — never a silent zero); WARNING pipeline-heavy economy, EU-median ~0 is certainly low — upgrade cell first"
+CN,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+CN,rail,TRN.F,0.6002,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: NBS yearbook transport revenue by mode
+CN,rail,TRN.P,0.3998,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: NBS yearbook transport revenue by mode
+JP,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: MLIT annual transport survey
+JP,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+JP,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+JP,rail,TRN.F,0.0242,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: MLIT annual transport survey
+JP,rail,TRN.P,0.9758,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes. upgrade: MLIT annual transport survey
+KR,rail,TRN.F,0.0721,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+KR,rail,TRN.P,0.9279,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+IN,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+IN,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+IN,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+IN,rail,TRN.F,0.238,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+IN,rail,TRN.P,0.762,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AU,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AU,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AU,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AU,rail,TRN.F,0.8967,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AU,rail,TRN.P,0.1033,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+CA,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+CA,road_pipe,PIPE,0.0,5-median,"SBS Y11 EU-median share (volume not reported to ITF — never a silent zero); WARNING pipeline-heavy economy, EU-median ~0 is certainly low — upgrade cell first"
+CA,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+CA,rail,TRN.F,0.9918,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+CA,rail,TRN.P,0.0082,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MX,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MX,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+MX,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+MX,rail,TRN.F,0.9777,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MX,rail,TRN.P,0.0223,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+GE,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+GE,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+GE,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+GE,rail,TRN.F,0.8223,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+GE,rail,TRN.P,0.1777,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AM,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AM,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AM,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AM,rail,TRN.F,0.8908,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AM,rail,TRN.P,0.1092,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AZ,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AZ,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AZ,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+AZ,rail,TRN.F,0.8534,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+AZ,rail,TRN.P,0.1466,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MD,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MD,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+MD,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+MD,rail,TRN.F,0.6174,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+MD,rail,TRN.P,0.3826,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+UA,road_pipe,ROAD.FRT,0.8016,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+UA,road_pipe,PIPE,0.0,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+UA,road_pipe,ROAD.PAX,0.1984,5-median,SBS Y11 EU-median share (volume not reported to ITF — never a silent zero)
+UA,rail,TRN.F,0.7024,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.
+UA,rail,TRN.P,0.2976,4-price-x-volume,tier 4: EU-median in-band implicit price (diagnostic a) x ITF Y11 volumes.

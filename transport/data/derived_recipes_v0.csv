@@ -1,0 +1,1078 @@
+tech,country,year,coef,value,unit,provenance
+AIR.DOM,AE,Y21,fuel_envelope,15831.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AE,Y22,fuel_envelope,16537.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AE,Y23,fuel_envelope,17948.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AF,Y21,fuel_envelope,1618.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AF,Y22,fuel_envelope,2928.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AF,Y23,fuel_envelope,1173.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AL,Y21,intensity_liquid,3.4828,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AL,Y22,intensity_liquid,4.422,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AL,Y23,intensity_liquid,4.4606,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AM,Y21,intensity_electricity,0.272,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AM,Y22,intensity_electricity,0.2561,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AM,Y23,intensity_electricity,0.336,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,AO,Y21,fuel_envelope,2484.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AO,Y22,fuel_envelope,1764.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AO,Y23,fuel_envelope,183.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AR,Y21,fuel_envelope,9004.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AR,Y22,fuel_envelope,18026.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AR,Y23,fuel_envelope,22491.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AS,Y21,fuel_envelope,132.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AS,Y22,fuel_envelope,132.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,AS,Y23,fuel_envelope,132.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AT,Y21,intensity_electricity,0.2216,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AT,Y21,intensity_liquid,0.0416,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AT,Y21,intensity_liquid,0.3421,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AT,Y21,intensity_total,1.1006,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AT,Y21,fuel_envelope,612.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AT,Y22,intensity_electricity,0.1911,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AT,Y22,intensity_liquid,0.0358,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AT,Y22,intensity_liquid,0.8111,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AT,Y22,intensity_total,0.553,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AT,Y22,fuel_envelope,698.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AT,Y23,intensity_electricity,0.1891,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AT,Y23,intensity_liquid,0.0331,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AT,Y23,intensity_liquid,0.8656,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AT,Y23,intensity_total,0.1522,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AT,Y23,fuel_envelope,712.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AU,Y21,intensity_electricity,0.0271,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AU,Y21,intensity_liquid,0.1115,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AU,Y21,intensity_liquid,0.2968,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,AU,Y21,fuel_envelope,65856.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AU,Y22,intensity_electricity,0.0264,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AU,Y22,intensity_liquid,0.109,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,AU,Y22,fuel_envelope,84289.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AU,Y23,intensity_electricity,0.0267,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AU,Y23,intensity_liquid,0.1072,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,AU,Y23,fuel_envelope,129901.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AZ,Y21,intensity_electricity,0.1435,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AZ,Y21,intensity_liquid,0.015,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AZ,Y21,intensity_liquid,0.3997,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AZ,Y21,intensity_total,0.005,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AZ,Y21,fuel_envelope,4219.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AZ,Y22,intensity_electricity,0.1439,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AZ,Y22,intensity_liquid,0.0661,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AZ,Y22,intensity_liquid,0.3521,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AZ,Y22,intensity_total,0.0028,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AZ,Y22,fuel_envelope,6733.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,AZ,Y23,intensity_electricity,0.1437,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,AZ,Y23,intensity_liquid,0.0079,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,AZ,Y23,intensity_liquid,0.3704,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,AZ,Y23,intensity_total,0.005,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,AZ,Y23,fuel_envelope,8352.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BA,Y21,intensity_electricity,0.165,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BA,Y22,intensity_electricity,0.177,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BA,Y23,intensity_electricity,0.175,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,BD,Y21,fuel_envelope,896.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BD,Y22,fuel_envelope,882.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BD,Y23,fuel_envelope,1940.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BE,Y21,intensity_electricity,0.7661,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BE,Y21,intensity_liquid,0.1425,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BE,Y21,intensity_liquid,0.7671,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,BE,Y21,fuel_envelope,79.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BE,Y22,intensity_electricity,0.5354,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BE,Y22,intensity_liquid,0.0968,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BE,Y22,intensity_liquid,0.8359,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,BE,Y22,fuel_envelope,88.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BE,Y23,intensity_electricity,0.5052,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BE,Y23,intensity_liquid,0.0898,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BE,Y23,intensity_liquid,0.8994,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,BE,Y23,fuel_envelope,88.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BG,Y21,intensity_electricity,0.2452,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BG,Y21,intensity_liquid,0.0751,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BG,Y21,intensity_liquid,0.0057,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,BG,Y21,intensity_total,4.6721,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,BG,Y21,fuel_envelope,206.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BG,Y22,intensity_electricity,0.2098,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BG,Y22,intensity_liquid,0.0651,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BG,Y22,intensity_liquid,0.0141,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,BG,Y22,intensity_total,4.5155,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,BG,Y22,fuel_envelope,333.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,BG,Y23,intensity_electricity,0.2169,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,BG,Y23,intensity_liquid,0.0665,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,BG,Y23,intensity_liquid,0.0139,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,BG,Y23,intensity_total,5.5926,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,BG,Y23,fuel_envelope,241.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BH,Y21,fuel_envelope,1719.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BH,Y22,fuel_envelope,1675.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BH,Y23,fuel_envelope,1940.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BJ,Y21,fuel_envelope,0.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BJ,Y22,fuel_envelope,6.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BJ,Y23,fuel_envelope,6.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BN,Y22,fuel_envelope,142.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BN,Y23,fuel_envelope,132.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BO,Y21,fuel_envelope,3647.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BO,Y22,fuel_envelope,4053.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BO,Y23,fuel_envelope,4435.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BR,Y21,fuel_envelope,106678.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BR,Y22,fuel_envelope,132576.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BR,Y23,fuel_envelope,139542.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BS,Y21,fuel_envelope,817.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BS,Y22,fuel_envelope,1180.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BS,Y23,fuel_envelope,1237.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BW,Y21,fuel_envelope,31.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BW,Y22,fuel_envelope,25.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BW,Y23,fuel_envelope,42.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BY,Y21,fuel_envelope,661.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BY,Y22,fuel_envelope,617.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BY,Y23,fuel_envelope,617.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BZ,Y21,fuel_envelope,168.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BZ,Y22,fuel_envelope,175.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,BZ,Y23,fuel_envelope,189.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CA,Y21,intensity_liquid,0.202,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,CA,Y21,intensity_total,0.6386,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CA,Y21,fuel_envelope,72057.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CA,Y22,intensity_liquid,0.2074,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,CA,Y22,intensity_total,0.6977,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CA,Y22,fuel_envelope,100417.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CA,Y23,intensity_liquid,0.1996,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,CA,Y23,intensity_total,0.6422,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CA,Y23,fuel_envelope,110177.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CD,Y23,fuel_envelope,44.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CF,Y21,fuel_envelope,519.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CF,Y22,fuel_envelope,571.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CF,Y23,fuel_envelope,594.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CG,Y21,fuel_envelope,412.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CG,Y22,fuel_envelope,554.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CG,Y23,fuel_envelope,597.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CH,Y21,intensity_electricity,0.401,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CH,Y21,intensity_liquid,0.0151,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CH,Y21,intensity_liquid,39.6822,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CH,Y21,intensity_total,1.5759,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CH,Y21,fuel_envelope,1453.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CH,Y22,intensity_electricity,0.3409,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CH,Y22,intensity_liquid,0.0127,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CH,Y22,intensity_liquid,48.4394,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CH,Y22,intensity_total,4.0913,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CH,Y22,fuel_envelope,1882.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CH,Y23,intensity_electricity,0.3181,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CH,Y23,intensity_liquid,0.0118,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CH,Y23,intensity_liquid,42.101,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CH,Y23,intensity_total,1.7942,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CH,Y23,fuel_envelope,1578.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CI,Y21,fuel_envelope,551.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CI,Y22,fuel_envelope,470.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CI,Y23,fuel_envelope,375.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CK,Y21,fuel_envelope,81.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CK,Y22,fuel_envelope,83.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CK,Y23,fuel_envelope,88.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CL,Y21,intensity_electricity,0.3749,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CL,Y21,intensity_liquid,0.3978,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,CL,Y21,fuel_envelope,15216.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CL,Y22,intensity_electricity,0.3703,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CL,Y22,intensity_liquid,0.4165,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,CL,Y22,fuel_envelope,20987.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CL,Y23,intensity_electricity,0.4538,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CL,Y23,intensity_liquid,0.4147,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,CL,Y23,fuel_envelope,23324.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CM,Y21,fuel_envelope,30.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CM,Y22,fuel_envelope,28.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CM,Y23,fuel_envelope,13.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CN,Y21,intensity_electricity,0.0933,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CN,Y21,intensity_liquid,0.0309,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CN,Y21,intensity_liquid,0.1168,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CN,Y21,intensity_total,0.0555,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CN,Y21,fuel_envelope,1485935.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CN,Y22,intensity_electricity,0.0962,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CN,Y22,intensity_liquid,0.0335,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CN,Y22,intensity_liquid,0.1122,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CN,Y22,intensity_total,0.0526,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CN,Y22,fuel_envelope,845665.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CN,Y23,intensity_electricity,0.0912,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CN,Y23,intensity_liquid,0.0295,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CN,Y23,intensity_liquid,0.1045,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CN,Y23,intensity_total,0.0437,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CN,Y23,fuel_envelope,1529069.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CO,Y21,fuel_envelope,16709.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CO,Y22,fuel_envelope,27106.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CO,Y23,fuel_envelope,21873.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CR,Y21,fuel_envelope,227.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CR,Y22,fuel_envelope,316.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CR,Y23,fuel_envelope,475.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CV,Y21,fuel_envelope,112.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CV,Y22,fuel_envelope,181.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CV,Y23,fuel_envelope,485.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CY,Y21,fuel_envelope,66.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CY,Y22,fuel_envelope,129.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,CY,Y23,fuel_envelope,116.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CZ,Y21,intensity_electricity,0.2437,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CZ,Y21,intensity_liquid,0.1338,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CZ,Y21,intensity_liquid,7.7776,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CZ,Y21,intensity_total,0.6151,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CZ,Y21,fuel_envelope,176.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CZ,Y22,intensity_electricity,0.2244,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CZ,Y22,intensity_liquid,0.1296,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CZ,Y22,intensity_liquid,6.3103,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CZ,Y22,intensity_total,0.3227,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CZ,Y22,fuel_envelope,176.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,CZ,Y23,intensity_electricity,0.2314,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,CZ,Y23,intensity_liquid,0.1247,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,CZ,Y23,intensity_liquid,9.4433,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,CZ,Y23,intensity_total,0.0967,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,CZ,Y23,fuel_envelope,176.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,DE,Y21,intensity_electricity,0.2082,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,DE,Y21,intensity_liquid,0.0877,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,DE,Y21,intensity_liquid,0.3195,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,DE,Y21,intensity_total,1.1299,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,DE,Y21,fuel_envelope,10672.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,DE,Y22,intensity_electricity,0.1755,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,DE,Y22,intensity_liquid,0.0474,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,DE,Y22,intensity_liquid,0.2242,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,DE,Y22,intensity_total,1.7754,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,DE,Y22,fuel_envelope,14508.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,DE,Y23,intensity_electricity,0.1756,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,DE,Y23,intensity_liquid,0.0509,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,DE,Y23,intensity_liquid,0.2393,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,DE,Y23,intensity_total,1.4605,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,DE,Y23,fuel_envelope,15699.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DK,Y21,fuel_envelope,749.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DK,Y22,fuel_envelope,1035.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DK,Y23,fuel_envelope,1039.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DO,Y21,fuel_envelope,56.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DO,Y22,fuel_envelope,64.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DO,Y23,fuel_envelope,53.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DZ,Y21,fuel_envelope,3263.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DZ,Y22,fuel_envelope,5115.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,DZ,Y23,fuel_envelope,3650.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EC,Y21,fuel_envelope,2483.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EC,Y22,fuel_envelope,4418.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EC,Y23,fuel_envelope,5424.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,EE,Y21,intensity_electricity,0.0195,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,EE,Y21,intensity_liquid,0.2468,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,EE,Y21,fuel_envelope,80.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,EE,Y22,intensity_electricity,0.0269,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,EE,Y22,intensity_liquid,0.322,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,EE,Y22,fuel_envelope,69.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,EE,Y23,intensity_electricity,0.0713,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,EE,Y23,intensity_liquid,0.5012,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,EE,Y23,fuel_envelope,79.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EG,Y21,fuel_envelope,27651.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EG,Y22,fuel_envelope,26392.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,EG,Y23,fuel_envelope,30296.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ER,Y21,fuel_envelope,50.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ER,Y22,fuel_envelope,126.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ER,Y23,fuel_envelope,144.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,ES,Y21,intensity_electricity,0.4085,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,ES,Y21,intensity_liquid,0.0849,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,ES,Y21,intensity_liquid,0.8512,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,ES,Y21,intensity_total,0.4664,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,ES,Y21,fuel_envelope,69452.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,ES,Y22,intensity_electricity,0.3024,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,ES,Y22,intensity_liquid,0.0578,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,ES,Y22,intensity_liquid,0.9607,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,ES,Y22,intensity_total,0.595,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,ES,Y22,fuel_envelope,104665.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,ES,Y23,intensity_electricity,0.2715,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,ES,Y23,intensity_liquid,0.0448,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,ES,Y23,intensity_liquid,0.7868,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,ES,Y23,intensity_total,0.4714,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,ES,Y23,fuel_envelope,110561.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ET,Y21,fuel_envelope,305.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ET,Y22,fuel_envelope,440.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ET,Y23,fuel_envelope,600.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FI,Y21,intensity_electricity,0.1822,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FI,Y21,intensity_liquid,0.0724,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FI,Y21,intensity_liquid,2.2276,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,FI,Y21,fuel_envelope,1058.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FI,Y22,intensity_electricity,0.1854,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FI,Y22,intensity_liquid,0.0609,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FI,Y22,intensity_liquid,1.8486,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,FI,Y22,fuel_envelope,1852.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FI,Y23,intensity_electricity,0.1843,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FI,Y23,intensity_liquid,0.0592,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FI,Y23,intensity_liquid,1.8901,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,FI,Y23,fuel_envelope,1852.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FJ,Y21,fuel_envelope,563.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FJ,Y22,fuel_envelope,232.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FJ,Y23,fuel_envelope,1357.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FM,Y21,fuel_envelope,43.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FM,Y22,fuel_envelope,44.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,FM,Y23,fuel_envelope,44.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FR,Y21,intensity_electricity,0.2387,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FR,Y21,intensity_liquid,0.0432,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FR,Y21,intensity_liquid,2.8003,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,FR,Y21,intensity_total,0.2198,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,FR,Y21,fuel_envelope,50912.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FR,Y22,intensity_electricity,0.2029,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FR,Y22,intensity_liquid,0.0357,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FR,Y22,intensity_liquid,3.3375,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,FR,Y22,intensity_total,0.2198,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,FR,Y22,fuel_envelope,67010.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,FR,Y23,intensity_electricity,0.2275,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,FR,Y23,intensity_liquid,0.0337,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,FR,Y23,intensity_liquid,3.7057,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,FR,Y23,intensity_total,0.2472,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,FR,Y23,fuel_envelope,60120.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GA,Y21,fuel_envelope,25.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GA,Y22,fuel_envelope,101.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GA,Y23,fuel_envelope,63.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GB,Y21,intensity_electricity,0.3574,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GB,Y21,intensity_liquid,0.456,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,GB,Y21,intensity_liquid,1.1356,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,GB,Y21,fuel_envelope,14905.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GB,Y22,intensity_electricity,0.2516,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GB,Y22,intensity_liquid,0.3425,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,GB,Y22,intensity_liquid,1.2488,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,GB,Y22,fuel_envelope,29458.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GB,Y23,intensity_electricity,0.2248,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GB,Y23,intensity_liquid,0.3059,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,GB,Y23,intensity_liquid,1.297,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,GB,Y23,fuel_envelope,34177.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GE,Y21,intensity_electricity,0.1999,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GE,Y21,intensity_liquid,0.0221,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GE,Y21,fuel_envelope,26.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GE,Y22,intensity_electricity,0.1589,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GE,Y22,intensity_liquid,0.0116,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GE,Y22,fuel_envelope,21.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GE,Y23,intensity_electricity,0.1542,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GE,Y23,intensity_liquid,0.0176,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GE,Y23,fuel_envelope,41.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GH,Y21,fuel_envelope,538.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GH,Y22,fuel_envelope,816.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GH,Y23,fuel_envelope,686.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GL,Y21,fuel_envelope,301.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GL,Y22,fuel_envelope,481.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GL,Y23,fuel_envelope,511.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GQ,Y21,fuel_envelope,123.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GQ,Y22,fuel_envelope,154.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GQ,Y23,fuel_envelope,105.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GR,Y21,intensity_electricity,0.9696,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GR,Y21,intensity_liquid,0.4341,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GR,Y21,fuel_envelope,6412.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GR,Y22,intensity_electricity,0.6499,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GR,Y22,intensity_liquid,0.2631,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GR,Y22,fuel_envelope,9753.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,GR,Y23,intensity_electricity,0.946,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,GR,Y23,intensity_liquid,0.2625,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,GR,Y23,fuel_envelope,11980.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GY,Y21,fuel_envelope,273.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GY,Y22,fuel_envelope,327.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,GY,Y23,fuel_envelope,1034.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HK,Y21,fuel_envelope,224.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HK,Y22,fuel_envelope,401.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HK,Y23,fuel_envelope,449.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HN,Y21,fuel_envelope,2179.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HN,Y22,fuel_envelope,2813.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,HN,Y23,fuel_envelope,3115.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,HR,Y21,intensity_electricity,0.2319,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HR,Y21,intensity_liquid,0.1657,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HR,Y21,intensity_liquid,1.9207,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HR,Y21,intensity_total,0.0637,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,HR,Y21,fuel_envelope,291.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,HR,Y22,intensity_electricity,0.2006,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HR,Y22,intensity_liquid,0.1455,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HR,Y22,intensity_liquid,2.7149,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HR,Y22,intensity_total,0.055,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,HR,Y22,fuel_envelope,344.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,HR,Y23,intensity_electricity,0.1999,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HR,Y23,intensity_liquid,0.1213,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HR,Y23,intensity_liquid,3.1925,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HR,Y23,intensity_total,0.055,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,HR,Y23,fuel_envelope,401.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,HU,Y21,intensity_electricity,0.2469,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HU,Y21,intensity_liquid,0.0846,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HU,Y21,intensity_liquid,0.0689,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HU,Y21,intensity_total,0.2534,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+TRN.P+TRN.F,HU,Y22,intensity_electricity,0.2207,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HU,Y22,intensity_liquid,0.0763,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HU,Y22,intensity_liquid,0.114,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HU,Y22,intensity_total,0.2197,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+TRN.P+TRN.F,HU,Y23,intensity_electricity,0.196,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,HU,Y23,intensity_liquid,0.068,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,HU,Y23,intensity_liquid,0.098,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,HU,Y23,intensity_total,0.1673,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,ID,Y21,fuel_envelope,68712.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ID,Y22,fuel_envelope,100665.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ID,Y23,fuel_envelope,115123.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IE,Y21,intensity_electricity,0.1883,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IE,Y21,intensity_liquid,1.5169,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IE,Y21,fuel_envelope,274.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IE,Y22,intensity_electricity,0.0961,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IE,Y22,intensity_liquid,0.8716,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IE,Y22,fuel_envelope,299.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IE,Y23,intensity_electricity,0.0808,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IE,Y23,intensity_liquid,0.7233,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IE,Y23,fuel_envelope,318.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IL,Y21,intensity_liquid,0.8362,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IL,Y21,fuel_envelope,584.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IL,Y22,intensity_liquid,0.6177,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IL,Y22,fuel_envelope,994.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IL,Y23,intensity_liquid,0.5685,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,IL,Y23,fuel_envelope,1027.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IN,Y21,fuel_envelope,143762.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IN,Y22,fuel_envelope,189540.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IN,Y23,fuel_envelope,193127.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IQ,Y21,fuel_envelope,262.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IQ,Y22,fuel_envelope,328.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IQ,Y23,fuel_envelope,264.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IR,Y21,fuel_envelope,29792.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IR,Y22,fuel_envelope,28562.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IR,Y23,fuel_envelope,23393.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+BARGE+SHIP.DOM,IS,Y21,intensity_liquid,6.5491,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,IS,Y21,fuel_envelope,279.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+BARGE+SHIP.DOM,IS,Y22,intensity_liquid,17.3878,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,IS,Y22,fuel_envelope,327.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,IS,Y23,fuel_envelope,305.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IT,Y21,intensity_electricity,0.3592,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IT,Y21,intensity_liquid,0.031,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,IT,Y21,intensity_liquid,0.4232,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,IT,Y21,intensity_total,1.9111,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,IT,Y21,fuel_envelope,20045.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IT,Y22,intensity_electricity,0.2834,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IT,Y22,intensity_liquid,0.0068,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,IT,Y22,intensity_liquid,0.5074,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,IT,Y22,intensity_total,1.8366,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,IT,Y22,fuel_envelope,34930.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,IT,Y23,intensity_electricity,0.2871,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,IT,Y23,intensity_liquid,0.0065,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,IT,Y23,intensity_liquid,0.5153,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,IT,Y23,intensity_total,1.5706,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,IT,Y23,fuel_envelope,43346.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JM,Y21,fuel_envelope,183.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JM,Y22,fuel_envelope,439.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JM,Y23,fuel_envelope,140.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JO,Y21,fuel_envelope,7100.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JO,Y22,fuel_envelope,10495.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,JO,Y23,fuel_envelope,13494.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,JP,Y21,intensity_electricity,0.1893,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,JP,Y21,intensity_liquid,0.0201,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,JP,Y21,intensity_liquid,0.7744,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,JP,Y21,fuel_envelope,94959.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,JP,Y22,intensity_electricity,0.1572,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,JP,Y22,intensity_liquid,0.0167,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,JP,Y22,intensity_liquid,0.7814,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,JP,Y22,fuel_envelope,134367.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,JP,Y23,intensity_electricity,0.1417,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,JP,Y23,intensity_liquid,0.015,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,JP,Y23,intensity_liquid,0.7786,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,JP,Y23,fuel_envelope,141589.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KE,Y21,fuel_envelope,1172.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KE,Y22,fuel_envelope,2059.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KE,Y23,fuel_envelope,1365.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KG,Y21,fuel_envelope,661.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KG,Y22,fuel_envelope,661.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KG,Y23,fuel_envelope,308.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KH,Y21,fuel_envelope,53.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KH,Y22,fuel_envelope,183.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KH,Y23,fuel_envelope,328.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KI,Y21,fuel_envelope,34.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KI,Y22,fuel_envelope,35.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KI,Y23,fuel_envelope,35.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KM,Y21,fuel_envelope,238.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KM,Y22,fuel_envelope,264.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KM,Y23,fuel_envelope,286.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,KR,Y21,intensity_electricity,0.1399,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,KR,Y21,intensity_liquid,0.0389,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,KR,Y21,intensity_liquid,0.5571,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,KR,Y21,fuel_envelope,67182.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,KR,Y22,intensity_electricity,0.1226,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,KR,Y22,intensity_liquid,0.0285,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,KR,Y22,intensity_liquid,0.1544,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,KR,Y22,fuel_envelope,66266.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,KR,Y23,intensity_electricity,0.1128,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,KR,Y23,intensity_liquid,0.0233,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,KR,Y23,intensity_liquid,0.1572,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,KR,Y23,fuel_envelope,35487.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KY,Y21,fuel_envelope,17.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KY,Y22,fuel_envelope,60.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KY,Y23,fuel_envelope,82.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KZ,Y21,fuel_envelope,6695.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KZ,Y22,fuel_envelope,13371.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,KZ,Y23,fuel_envelope,15854.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LA,Y21,fuel_envelope,44.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LA,Y22,fuel_envelope,25.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LA,Y23,fuel_envelope,44.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LC,Y21,fuel_envelope,92.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LC,Y22,fuel_envelope,97.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LC,Y23,fuel_envelope,101.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LK,Y21,fuel_envelope,1152.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LK,Y22,fuel_envelope,48.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LK,Y23,fuel_envelope,412.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LR,Y21,fuel_envelope,198.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LR,Y22,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LR,Y23,fuel_envelope,229.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LT,Y21,intensity_electricity,0.0029,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LT,Y21,intensity_liquid,0.1544,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LT,Y21,intensity_liquid,41.925,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,LT,Y21,intensity_total,7.9698,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,LT,Y21,fuel_envelope,13.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LT,Y22,intensity_electricity,0.0059,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LT,Y22,intensity_liquid,0.1581,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LT,Y22,intensity_liquid,12.1182,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,LT,Y22,intensity_total,9.0856,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,LT,Y22,fuel_envelope,8.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LT,Y23,intensity_electricity,0.0071,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LT,Y23,intensity_liquid,0.1854,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LT,Y23,intensity_liquid,8.2061,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,LT,Y23,intensity_total,10.4599,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,LT,Y23,fuel_envelope,44.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LU,Y21,intensity_electricity,1.0848,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LU,Y21,intensity_liquid,0.3059,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LU,Y21,intensity_liquid,0.0176,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+TRN.P+TRN.F,LU,Y22,intensity_electricity,0.9289,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LU,Y22,intensity_liquid,0.2112,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LU,Y22,intensity_liquid,0.0232,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+TRN.P+TRN.F,LU,Y23,intensity_electricity,0.7675,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LU,Y23,intensity_liquid,0.1798,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,LU,Y23,intensity_liquid,0.0326,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+TRN.P+TRN.F,LV,Y21,intensity_electricity,0.0305,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LV,Y21,intensity_liquid,0.1393,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,LV,Y21,intensity_total,0.0559,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,LV,Y21,fuel_envelope,11.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LV,Y22,intensity_electricity,0.0293,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LV,Y22,intensity_liquid,0.1277,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,LV,Y22,intensity_total,0.0781,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,LV,Y22,fuel_envelope,51.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,LV,Y23,intensity_electricity,0.039,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,LV,Y23,intensity_liquid,0.1633,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,LV,Y23,fuel_envelope,30.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LY,Y21,fuel_envelope,275.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LY,Y22,fuel_envelope,156.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,LY,Y23,fuel_envelope,344.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MA,Y21,fuel_envelope,689.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MA,Y22,fuel_envelope,1157.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MA,Y23,fuel_envelope,1460.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,MD,Y21,intensity_liquid,0.2813,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,MD,Y21,intensity_liquid,12.7976,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+TRN.P+TRN.F,MD,Y22,intensity_liquid,0.1746,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MD,Y23,intensity_liquid,0.2398,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,MG,Y21,fuel_envelope,134.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MG,Y22,fuel_envelope,307.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MG,Y23,fuel_envelope,321.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,MK,Y21,intensity_electricity,0.1232,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MK,Y21,intensity_liquid,0.1512,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MK,Y22,intensity_electricity,0.1309,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MK,Y22,intensity_liquid,0.1429,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MK,Y23,intensity_liquid,0.266,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,MM,Y21,fuel_envelope,5232.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MM,Y22,fuel_envelope,4144.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MM,Y23,fuel_envelope,3688.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MN,Y21,fuel_envelope,88.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MN,Y22,fuel_envelope,396.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MN,Y23,fuel_envelope,593.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MR,Y21,fuel_envelope,705.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MR,Y22,fuel_envelope,793.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MR,Y23,fuel_envelope,793.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MT,Y21,fuel_envelope,29.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MT,Y22,fuel_envelope,29.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MT,Y23,fuel_envelope,35.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MU,Y21,fuel_envelope,1380.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MU,Y22,fuel_envelope,5322.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MU,Y23,fuel_envelope,4057.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MV,Y21,fuel_envelope,661.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MV,Y22,fuel_envelope,1054.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MV,Y23,fuel_envelope,1129.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MW,Y21,fuel_envelope,4.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MW,Y22,fuel_envelope,4.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MW,Y23,fuel_envelope,44.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,MX,Y21,intensity_electricity,0.0613,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MX,Y21,intensity_liquid,0.162,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,MX,Y21,intensity_liquid,1.0386,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,MX,Y21,fuel_envelope,59232.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,MX,Y22,intensity_electricity,0.0669,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MX,Y22,intensity_liquid,0.271,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,MX,Y22,intensity_liquid,1.5388,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,MX,Y22,fuel_envelope,81072.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,MX,Y23,intensity_electricity,0.0639,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,MX,Y23,intensity_liquid,0.2562,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,MX,Y23,fuel_envelope,87289.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MY,Y21,fuel_envelope,8547.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MY,Y22,fuel_envelope,25874.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MY,Y23,fuel_envelope,27326.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MZ,Y21,fuel_envelope,926.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MZ,Y22,fuel_envelope,1479.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,MZ,Y23,fuel_envelope,1411.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NA,Y21,fuel_envelope,79.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NA,Y22,fuel_envelope,107.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NA,Y23,fuel_envelope,111.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NC,Y21,fuel_envelope,199.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NC,Y22,fuel_envelope,234.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NC,Y23,fuel_envelope,259.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NE,Y21,fuel_envelope,264.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NE,Y22,fuel_envelope,326.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NE,Y23,fuel_envelope,364.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NG,Y21,fuel_envelope,1880.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NG,Y22,fuel_envelope,8539.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NG,Y23,fuel_envelope,9454.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NI,Y23,fuel_envelope,3.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NL,Y21,intensity_electricity,0.3235,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NL,Y21,intensity_liquid,0.0461,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NL,Y21,intensity_liquid,0.2462,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NL,Y21,fuel_envelope,327.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NL,Y22,intensity_electricity,0.2518,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NL,Y22,intensity_liquid,0.0365,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NL,Y22,intensity_liquid,0.2728,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NL,Y22,fuel_envelope,401.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NL,Y23,intensity_electricity,0.2348,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NL,Y23,intensity_liquid,0.0388,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NL,Y23,intensity_liquid,0.3082,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NL,Y23,fuel_envelope,354.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NO,Y21,intensity_electricity,0.4166,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NO,Y21,intensity_liquid,0.0997,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NO,Y21,intensity_liquid,2.6043,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NO,Y21,fuel_envelope,11277.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NO,Y22,intensity_electricity,0.3669,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NO,Y22,intensity_liquid,0.0983,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NO,Y22,intensity_liquid,2.9383,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NO,Y22,fuel_envelope,14777.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NO,Y23,intensity_electricity,0.344,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,NO,Y23,intensity_liquid,0.1042,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,NO,Y23,intensity_liquid,2.7579,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,NO,Y23,fuel_envelope,14835.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NP,Y21,fuel_envelope,901.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NP,Y22,fuel_envelope,1015.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,NP,Y23,fuel_envelope,1120.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NZ,Y21,intensity_electricity,0.0435,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,NZ,Y21,fuel_envelope,11135.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NZ,Y22,intensity_electricity,0.0434,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,NZ,Y22,fuel_envelope,13950.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,NZ,Y23,intensity_electricity,0.0475,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,NZ,Y23,fuel_envelope,14724.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,OM,Y21,fuel_envelope,704.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,OM,Y22,fuel_envelope,1346.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,OM,Y23,fuel_envelope,1953.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PA,Y21,fuel_envelope,409.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PA,Y22,fuel_envelope,820.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PA,Y23,fuel_envelope,1212.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PE,Y21,fuel_envelope,8532.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PE,Y22,fuel_envelope,11619.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PE,Y23,fuel_envelope,12816.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PF,Y21,fuel_envelope,612.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PF,Y22,fuel_envelope,670.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PF,Y23,fuel_envelope,875.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PG,Y21,fuel_envelope,3135.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PG,Y22,fuel_envelope,2927.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PG,Y23,fuel_envelope,3880.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PH,Y21,fuel_envelope,8537.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PH,Y22,fuel_envelope,15152.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PH,Y23,fuel_envelope,16317.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PK,Y21,fuel_envelope,10798.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PK,Y22,fuel_envelope,12363.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PK,Y23,fuel_envelope,2688.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PL,Y21,intensity_electricity,0.1649,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PL,Y21,intensity_liquid,0.0537,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,PL,Y21,intensity_liquid,0.0952,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,PL,Y21,intensity_total,0.6581,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PL,Y21,fuel_envelope,1118.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PL,Y22,intensity_electricity,0.1439,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PL,Y22,intensity_liquid,0.0411,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,PL,Y22,intensity_liquid,0.1054,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,PL,Y22,intensity_total,0.056,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PL,Y22,fuel_envelope,1139.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PL,Y23,intensity_electricity,0.1377,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PL,Y23,intensity_liquid,0.0399,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,PL,Y23,intensity_liquid,0.115,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,PL,Y23,intensity_total,0.1904,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PL,Y23,fuel_envelope,1505.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PT,Y21,intensity_electricity,0.2934,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PT,Y21,intensity_liquid,0.0668,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,PT,Y21,intensity_total,0.0578,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PT,Y21,fuel_envelope,4862.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PT,Y22,intensity_electricity,0.2298,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PT,Y22,intensity_liquid,0.0447,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,PT,Y22,intensity_total,0.0485,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PT,Y22,fuel_envelope,5942.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,PT,Y23,intensity_electricity,0.2471,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,PT,Y23,intensity_liquid,0.0517,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+PIPE.T,PT,Y23,intensity_total,0.0688,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,PT,Y23,fuel_envelope,6855.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PY,Y21,fuel_envelope,193.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PY,Y22,fuel_envelope,243.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,PY,Y23,fuel_envelope,259.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RO,Y21,fuel_envelope,1739.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RO,Y22,fuel_envelope,2639.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RO,Y23,fuel_envelope,1455.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,RS,Y21,intensity_electricity,0.4438,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,RS,Y21,intensity_liquid,0.1621,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,RS,Y21,intensity_liquid,0.1603,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,RS,Y21,intensity_total,0.1941,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+TRN.P+TRN.F,RS,Y22,intensity_electricity,0.4365,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,RS,Y22,intensity_liquid,0.1403,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,RS,Y22,intensity_liquid,0.1677,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,RS,Y22,intensity_total,0.1559,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+TRN.P+TRN.F,RS,Y23,intensity_electricity,0.535,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,RS,Y23,intensity_liquid,0.1497,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,RS,Y23,intensity_liquid,0.1306,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,RS,Y23,intensity_total,0.1539,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,RU,Y21,fuel_envelope,298183.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RU,Y22,fuel_envelope,266957.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RU,Y23,fuel_envelope,246795.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RW,Y21,fuel_envelope,976.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RW,Y22,fuel_envelope,1015.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,RW,Y23,fuel_envelope,1156.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SA,Y21,fuel_envelope,31796.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SA,Y22,fuel_envelope,33530.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SA,Y23,fuel_envelope,30774.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SC,Y21,fuel_envelope,264.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SC,Y22,fuel_envelope,282.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SC,Y23,fuel_envelope,282.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,SE,Y21,intensity_electricity,0.2927,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SE,Y21,intensity_liquid,0.0154,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,SE,Y21,intensity_liquid,0.5411,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,SE,Y21,fuel_envelope,2949.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,SE,Y22,intensity_electricity,0.2657,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SE,Y22,intensity_liquid,0.0148,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,SE,Y22,intensity_liquid,0.7275,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,SE,Y22,fuel_envelope,4483.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,SE,Y23,intensity_electricity,0.264,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SE,Y23,intensity_liquid,0.014,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,SE,Y23,intensity_liquid,0.6792,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,SE,Y23,fuel_envelope,4116.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,SI,Y21,intensity_electricity,0.1484,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SI,Y21,intensity_liquid,0.0514,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SI,Y22,intensity_electricity,0.1511,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SI,Y22,intensity_liquid,0.05,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SI,Y23,intensity_electricity,0.1517,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SI,Y23,intensity_liquid,0.0517,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SK,Y21,intensity_electricity,0.1578,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SK,Y22,intensity_electricity,0.1553,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,SK,Y23,intensity_electricity,0.1662,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,SN,Y21,fuel_envelope,184.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SN,Y22,fuel_envelope,498.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SN,Y23,fuel_envelope,96.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SO,Y21,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SO,Y22,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SO,Y23,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SR,Y21,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SR,Y22,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SR,Y23,fuel_envelope,220.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SS,Y21,fuel_envelope,3779.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SS,Y22,fuel_envelope,6504.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SS,Y23,fuel_envelope,6659.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SY,Y21,fuel_envelope,78.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SY,Y22,fuel_envelope,99.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,SY,Y23,fuel_envelope,106.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TD,Y21,fuel_envelope,471.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TD,Y22,fuel_envelope,432.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TD,Y23,fuel_envelope,485.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TG,Y21,fuel_envelope,26.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TG,Y22,fuel_envelope,28.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TH,Y21,fuel_envelope,18854.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TH,Y22,fuel_envelope,38101.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TH,Y23,fuel_envelope,46421.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TM,Y21,fuel_envelope,638.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TM,Y22,fuel_envelope,210.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TM,Y23,fuel_envelope,173.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TN,Y21,fuel_envelope,85.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TN,Y22,fuel_envelope,142.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TN,Y23,fuel_envelope,164.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,TR,Y21,intensity_electricity,0.1722,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,TR,Y21,intensity_liquid,0.1611,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,TR,Y21,intensity_liquid,0.7284,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,TR,Y21,intensity_total,0.1882,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,TR,Y21,fuel_envelope,39487.4,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,TR,Y22,intensity_electricity,0.1524,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,TR,Y22,intensity_liquid,0.1743,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,TR,Y22,intensity_liquid,0.6983,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,TR,Y22,intensity_total,0.1943,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,TR,Y22,fuel_envelope,47147.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,TR,Y23,intensity_electricity,0.1658,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,TR,Y23,intensity_liquid,0.1267,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,TR,Y23,intensity_liquid,0.6027,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,TR,Y23,intensity_total,0.4882,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+AIR.DOM,TR,Y23,fuel_envelope,54945.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TT,Y21,fuel_envelope,1700.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TT,Y22,fuel_envelope,1543.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TT,Y23,fuel_envelope,1543.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TW,Y21,fuel_envelope,2348.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TW,Y22,fuel_envelope,3364.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TW,Y23,fuel_envelope,3446.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TZ,Y21,fuel_envelope,1040.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TZ,Y22,fuel_envelope,917.9,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,TZ,Y23,fuel_envelope,838.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,UA,Y21,intensity_electricity,0.0884,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,UA,Y21,intensity_liquid,0.0051,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,UA,Y21,intensity_liquid,0.0558,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+PIPE.T,UA,Y21,intensity_total,6.4801,MJ/tkm,derived: UNSD.USE 1226 / ITF pipeline tkm
+TRN.P+TRN.F,US,Y21,intensity_electricity,0.0089,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,US,Y21,intensity_liquid,0.2174,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+BARGE+SHIP.DOM,US,Y21,intensity_liquid,0.4708,MJ/tkm,derived: UNSD.USE 1224 / (ITF iww+coastal tkm)
+AIR.DOM,US,Y21,fuel_envelope,1944800.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,US,Y22,intensity_electricity,0.0116,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,US,Y22,intensity_liquid,0.2212,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,US,Y22,fuel_envelope,2213755.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+TRN.P+TRN.F,US,Y23,intensity_electricity,0.0124,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+TRN.P+TRN.F,US,Y23,intensity_liquid,0.2182,MJ/traffic-unit,derived: UNSD.USE 1222 / (ITF rail pkm+tkm)
+AIR.DOM,US,Y23,fuel_envelope,2363343.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UY,Y21,fuel_envelope,119.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UY,Y22,fuel_envelope,119.1,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UY,Y23,fuel_envelope,97.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UZ,Y21,fuel_envelope,277.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UZ,Y22,fuel_envelope,532.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,UZ,Y23,fuel_envelope,573.3,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VE,Y21,fuel_envelope,2284.8,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VE,Y22,fuel_envelope,9273.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VE,Y23,fuel_envelope,9925.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VN,Y21,fuel_envelope,21048.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VN,Y22,fuel_envelope,48377.7,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,VN,Y23,fuel_envelope,51597.0,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZA,Y21,fuel_envelope,15038.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZA,Y22,fuel_envelope,17891.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZA,Y23,fuel_envelope,20873.6,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZW,Y21,fuel_envelope,97.5,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZW,Y22,fuel_envelope,282.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+AIR.DOM,ZW,Y23,fuel_envelope,282.2,TJ,observed: UNSD.USE 1223 (intensity = literature default in v0)
+HGV,AT,Y21,load_factor_hire,11.218,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y21,load_factor_own,7.706,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y21,load_factor_total,9.821,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y22,load_factor_hire,11.24,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y22,load_factor_own,7.789,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y22,load_factor_total,9.857,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y23,load_factor_hire,10.804,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y23,load_factor_own,7.618,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,AT,Y23,load_factor_total,9.479,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y21,load_factor_hire,13.484,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y21,load_factor_own,9.321,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y21,load_factor_total,12.448,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y22,load_factor_hire,12.606,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y22,load_factor_own,8.161,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y22,load_factor_total,11.442,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y23,load_factor_hire,11.961,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y23,load_factor_own,8.001,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BE,Y23,load_factor_total,10.956,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y21,load_factor_hire,14.106,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y21,load_factor_own,8.087,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y21,load_factor_total,12.751,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y22,load_factor_hire,14.283,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y22,load_factor_own,8.755,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y22,load_factor_total,13.228,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y23,load_factor_hire,14.194,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y23,load_factor_own,8.458,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,BG,Y23,load_factor_total,12.95,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y21,load_factor_hire,7.275,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y21,load_factor_own,5.605,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y21,load_factor_total,6.687,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y22,load_factor_hire,7.625,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y22,load_factor_own,5.435,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y22,load_factor_total,6.85,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y23,load_factor_hire,7.174,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y23,load_factor_own,5.026,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CH,Y23,load_factor_total,6.412,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y21,load_factor_hire,9.511,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y21,load_factor_own,4.391,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y21,load_factor_total,6.412,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y22,load_factor_hire,9.714,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y22,load_factor_own,4.263,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y22,load_factor_total,6.285,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y23,load_factor_hire,10.276,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y23,load_factor_own,4.692,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CY,Y23,load_factor_total,6.866,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y21,load_factor_hire,10.402,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y21,load_factor_own,5.722,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y21,load_factor_total,9.397,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y22,load_factor_hire,10.784,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y22,load_factor_own,6.311,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y22,load_factor_total,9.866,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y23,load_factor_hire,10.323,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y23,load_factor_own,5.494,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,CZ,Y23,load_factor_total,9.389,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y21,load_factor_hire,10.972,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y21,load_factor_own,7.273,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y21,load_factor_total,10.329,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y22,load_factor_hire,10.997,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y22,load_factor_own,7.233,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y22,load_factor_total,10.36,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y23,load_factor_hire,10.818,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y23,load_factor_own,7.191,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DE,Y23,load_factor_total,10.202,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y21,load_factor_hire,10.656,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y21,load_factor_own,8.004,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y21,load_factor_total,10.235,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y22,load_factor_hire,10.676,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y22,load_factor_own,7.561,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y22,load_factor_total,10.142,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y23,load_factor_hire,11.755,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y23,load_factor_own,8.356,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,DK,Y23,load_factor_total,11.176,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y21,load_factor_hire,14.211,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y21,load_factor_own,5.929,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y21,load_factor_total,13.326,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y22,load_factor_hire,13.129,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y22,load_factor_own,7.449,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y22,load_factor_total,12.371,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y23,load_factor_hire,13.86,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y23,load_factor_own,7.432,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,EE,Y23,load_factor_total,13.025,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y21,load_factor_hire,13.347,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y21,load_factor_own,4.856,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y21,load_factor_total,12.499,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y22,load_factor_hire,13.153,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y22,load_factor_own,4.813,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y22,load_factor_total,12.359,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y23,load_factor_hire,13.084,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y23,load_factor_own,4.834,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ES,Y23,load_factor_total,12.287,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y21,load_factor_hire,17.573,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y21,load_factor_own,3.831,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y21,load_factor_total,15.088,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y22,load_factor_hire,17.841,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y22,load_factor_own,4.736,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y22,load_factor_total,15.457,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y23,load_factor_hire,17.567,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y23,load_factor_own,4.67,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FI,Y23,load_factor_total,15.508,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y21,load_factor_hire,10.98,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y21,load_factor_own,6.636,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y21,load_factor_total,10.179,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y22,load_factor_hire,10.987,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y22,load_factor_own,6.813,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y22,load_factor_total,10.228,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y23,load_factor_hire,10.861,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y23,load_factor_own,6.521,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,FR,Y23,load_factor_total,10.091,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y21,load_factor_hire,12.396,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y21,load_factor_own,5.635,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y21,load_factor_total,9.424,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y22,load_factor_hire,12.512,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y22,load_factor_own,5.755,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y22,load_factor_total,9.563,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y23,load_factor_hire,12.098,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y23,load_factor_own,5.375,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,GR,Y23,load_factor_total,9.658,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y21,load_factor_hire,12.278,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y21,load_factor_own,7.071,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y21,load_factor_total,11.08,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y22,load_factor_hire,12.437,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y22,load_factor_own,7.256,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y22,load_factor_total,11.178,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y23,load_factor_hire,12.321,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y23,load_factor_own,7.183,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HR,Y23,load_factor_total,11.142,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y21,load_factor_hire,12.489,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y21,load_factor_own,6.614,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y21,load_factor_total,11.219,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y22,load_factor_hire,12.627,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y22,load_factor_own,6.283,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y22,load_factor_total,11.398,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y23,load_factor_hire,12.077,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y23,load_factor_own,6.601,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,HU,Y23,load_factor_total,10.968,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y21,load_factor_hire,9.805,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y21,load_factor_own,4.559,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y21,load_factor_total,7.45,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y22,load_factor_hire,9.316,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y22,load_factor_own,4.169,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y22,load_factor_total,6.95,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y23,load_factor_hire,9.31,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y23,load_factor_own,4.255,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IE,Y23,load_factor_total,6.991,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y21,load_factor_hire,17.14,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y21,load_factor_own,10.267,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y21,load_factor_total,16.612,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y22,load_factor_hire,16.872,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y22,load_factor_own,10.105,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y22,load_factor_total,16.381,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y23,load_factor_hire,16.314,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y23,load_factor_own,10.187,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,IT,Y23,load_factor_total,15.859,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y21,load_factor_hire,14.224,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y21,load_factor_own,8.264,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y21,load_factor_total,13.994,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y22,load_factor_hire,14.322,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y22,load_factor_own,8.827,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y22,load_factor_total,14.121,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y23,load_factor_hire,15.054,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y23,load_factor_own,8.704,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LT,Y23,load_factor_total,14.812,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y21,load_factor_hire,12.811,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y21,load_factor_own,9.896,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y21,load_factor_total,11.355,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y22,load_factor_hire,13.385,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y22,load_factor_own,10.641,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y22,load_factor_total,11.976,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y23,load_factor_hire,13.163,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y23,load_factor_own,10.69,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LU,Y23,load_factor_total,11.884,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y21,load_factor_hire,11.995,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y21,load_factor_own,7.522,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y21,load_factor_total,11.609,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y22,load_factor_hire,12.462,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y22,load_factor_own,8.279,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y22,load_factor_total,12.1,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y23,load_factor_hire,12.291,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y23,load_factor_own,8.016,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,LV,Y23,load_factor_total,11.831,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y21,load_factor_hire,8.8,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y21,load_factor_own,13.6,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y21,load_factor_total,11.2,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y22,load_factor_hire,8.0,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y22,load_factor_own,14.4,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y22,load_factor_total,11.2,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y23,load_factor_hire,6.333,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y23,load_factor_own,21.25,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,ME,Y23,load_factor_total,12.2,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,MK,Y21,load_factor_hire,6.824,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,MK,Y21,load_factor_own,14.8,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,MK,Y21,load_factor_total,12.776,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y21,load_factor_hire,9.65,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y21,load_factor_own,6.395,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y21,load_factor_total,9.05,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y22,load_factor_hire,9.73,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y22,load_factor_own,6.355,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y22,load_factor_total,9.079,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y23,load_factor_hire,9.656,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y23,load_factor_own,6.399,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NL,Y23,load_factor_total,9.049,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y21,load_factor_hire,15.125,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y21,load_factor_own,9.206,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y21,load_factor_total,13.819,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y22,load_factor_hire,13.35,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y22,load_factor_own,8.48,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y22,load_factor_total,12.325,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y23,load_factor_hire,10.883,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y23,load_factor_own,9.105,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,NO,Y23,load_factor_total,10.562,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y21,load_factor_hire,12.823,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y21,load_factor_own,6.992,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y21,load_factor_total,11.851,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y22,load_factor_hire,12.816,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y22,load_factor_own,7.282,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y22,load_factor_total,11.919,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y23,load_factor_hire,12.713,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y23,load_factor_own,6.938,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PL,Y23,load_factor_total,11.813,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y21,load_factor_hire,14.15,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y21,load_factor_own,6.432,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y21,load_factor_total,12.554,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y22,load_factor_hire,13.777,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y22,load_factor_own,5.517,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y22,load_factor_total,12.624,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y23,load_factor_hire,13.467,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y23,load_factor_own,5.8,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,PT,Y23,load_factor_total,12.146,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y21,load_factor_hire,15.013,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y21,load_factor_own,14.17,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y21,load_factor_total,14.839,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y22,load_factor_hire,14.711,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y22,load_factor_own,14.334,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y22,load_factor_total,14.629,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y23,load_factor_hire,14.517,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y23,load_factor_own,14.127,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,RO,Y23,load_factor_total,14.436,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y21,load_factor_hire,14.792,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y21,load_factor_own,8.525,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y21,load_factor_total,14.162,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y22,load_factor_hire,14.032,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y22,load_factor_own,8.469,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y22,load_factor_total,13.483,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y23,load_factor_hire,13.502,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y23,load_factor_own,7.315,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SE,Y23,load_factor_total,12.91,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y21,load_factor_hire,13.782,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y21,load_factor_own,8.628,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y21,load_factor_total,13.267,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y22,load_factor_hire,13.42,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y22,load_factor_own,8.059,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y22,load_factor_total,12.895,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y23,load_factor_hire,13.006,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y23,load_factor_own,8.227,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SI,Y23,load_factor_total,12.518,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y21,load_factor_hire,9.518,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y21,load_factor_own,2.632,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y21,load_factor_total,8.303,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y22,load_factor_hire,8.993,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y22,load_factor_own,2.382,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y22,load_factor_total,7.966,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y23,load_factor_hire,8.511,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y23,load_factor_own,2.425,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM
+HGV,SK,Y23,load_factor_total,7.375,tkm/vkm,observed: Eurostat road_go_ta_tott MIO_TKM/MIO_VKM

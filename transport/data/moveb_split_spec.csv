@@ -1,0 +1,687 @@
+region,block,row_class,child,share,tier,provenance
+AT,road_pipe,other,ROAD.FRT,0.6659,1-SBS,ESTAT.SBSH49 Y11 observed shares
+AT,road_pipe,other,ROAD.PAX,0.2761,1-SBS,ESTAT.SBSH49 Y11 observed shares
+AT,road_pipe,other,PIPE,0.058,1-SBS,ESTAT.SBSH49 Y11 observed shares
+AT,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+AT,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+AT,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+AT,road_pipe,Q,ROAD.FRT,21364.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+AT,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+AT,rail,other,TRN.P,0.2557,1-SBS,ESTAT.SBSH49 Y11 observed shares
+AT,rail,other,TRN.F,0.7443,1-SBS,ESTAT.SBSH49 Y11 observed shares
+AT,rail,fuel_liquid,TRN.P,0.3463,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+AT,rail,fuel_liquid,TRN.F,0.6537,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+AT,rail,Q,TRN.P,10778.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+AT,rail,Q,TRN.F,20345.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+BE,road_pipe,other,ROAD.FRT,0.9135,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BE,road_pipe,other,ROAD.PAX,0.0812,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BE,road_pipe,other,PIPE,0.0053,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BE,road_pipe,fuel_liquid,ROAD.FRT,0.7035,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+BE,road_pipe,fuel_liquid,ROAD.PAX,0.2965,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+BE,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+BE,road_pipe,Q,ROAD.FRT,25878.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+BE,road_pipe,Q,ROAD.PAX,17669.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+BE,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+BE,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+BE,rail,fuel_liquid,TRN.P,0.6143,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+BE,rail,fuel_liquid,TRN.F,0.3857,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+BE,rail,Q,TRN.P,10669.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+BE,rail,Q,TRN.F,6698.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+BG,road_pipe,other,ROAD.FRT,0.8434,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BG,road_pipe,other,ROAD.PAX,0.1566,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BG,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+BG,road_pipe,fuel_liquid,ROAD.FRT,0.7545,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+BG,road_pipe,fuel_liquid,ROAD.PAX,0.2455,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+BG,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+BG,road_pipe,Q,ROAD.FRT,17988.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+BG,road_pipe,Q,ROAD.PAX,9480.6,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+BG,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+BG,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+BG,rail,fuel_liquid,TRN.P,0.3849,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+BG,rail,fuel_liquid,TRN.F,0.6151,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+BG,rail,Q,TRN.P,2059.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+BG,rail,Q,TRN.F,3291.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+CY,road_pipe,other,ROAD.FRT,0.5613,1-SBS,ESTAT.SBSH49 Y11 observed shares
+CY,road_pipe,other,ROAD.PAX,0.4387,1-SBS,ESTAT.SBSH49 Y11 observed shares
+CY,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+CY,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CY,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CY,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+CY,road_pipe,Q,ROAD.FRT,505.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+CY,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CY,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+CY,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+CY,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+CY,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+CY,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+CY,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+CZ,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+CZ,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+CZ,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+CZ,road_pipe,fuel_liquid,ROAD.FRT,0.8452,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CZ,road_pipe,fuel_liquid,ROAD.PAX,0.1548,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CZ,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+CZ,road_pipe,Q,ROAD.FRT,49910.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+CZ,road_pipe,Q,ROAD.PAX,14814.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+CZ,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+CZ,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+CZ,rail,fuel_liquid,TRN.P,0.3178,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CZ,rail,fuel_liquid,TRN.F,0.6822,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CZ,rail,Q,TRN.P,6669.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+CZ,rail,Q,TRN.F,14316.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+DE,road_pipe,other,ROAD.FRT,0.6215,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DE,road_pipe,other,ROAD.PAX,0.3193,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DE,road_pipe,other,PIPE,0.0592,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DE,road_pipe,fuel_liquid,ROAD.FRT,0.8515,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+DE,road_pipe,fuel_liquid,ROAD.PAX,0.1485,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+DE,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+DE,road_pipe,Q,ROAD.FRT,275894.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+DE,road_pipe,Q,ROAD.PAX,77957.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+DE,rail,other,TRN.P,0.6435,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DE,rail,other,TRN.F,0.3565,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DE,rail,fuel_liquid,TRN.P,0.4408,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+DE,rail,fuel_liquid,TRN.F,0.5592,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+DE,rail,Q,TRN.P,89316.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+DE,rail,Q,TRN.F,113317.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+DK,road_pipe,other,ROAD.FRT,0.6774,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DK,road_pipe,other,ROAD.PAX,0.3226,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DK,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+DK,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+DK,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+DK,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+DK,road_pipe,Q,ROAD.FRT,14158.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+DK,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+DK,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+DK,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+DK,rail,fuel_liquid,TRN.P,0.7165,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+DK,rail,fuel_liquid,TRN.F,0.2835,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+DK,rail,Q,TRN.P,6605.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+DK,rail,Q,TRN.F,2614.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+EE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+EE,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+EE,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+EE,road_pipe,fuel_liquid,ROAD.FRT,0.8404,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+EE,road_pipe,fuel_liquid,ROAD.PAX,0.1596,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+EE,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+EE,road_pipe,Q,ROAD.FRT,5607.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+EE,road_pipe,Q,ROAD.PAX,1725.4,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+EE,rail,other,TRN.P,0.0764,1-SBS,ESTAT.SBSH49 Y11 observed shares
+EE,rail,other,TRN.F,0.9236,1-SBS,ESTAT.SBSH49 Y11 observed shares
+EE,rail,fuel_liquid,TRN.P,0.0373,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+EE,rail,fuel_liquid,TRN.F,0.9627,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+EE,rail,Q,TRN.P,243.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+EE,rail,Q,TRN.F,6271.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+ES,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+ES,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+ES,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+ES,road_pipe,fuel_liquid,ROAD.FRT,0.8507,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+ES,road_pipe,fuel_liquid,ROAD.PAX,0.1493,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+ES,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+ES,road_pipe,Q,ROAD.FRT,196087.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+ES,road_pipe,Q,ROAD.PAX,55742.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+ES,rail,other,TRN.P,0.9919,1-SBS,ESTAT.SBSH49 Y11 observed shares
+ES,rail,other,TRN.F,0.0081,1-SBS,ESTAT.SBSH49 Y11 observed shares
+ES,rail,fuel_liquid,TRN.P,0.705,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+ES,rail,fuel_liquid,TRN.F,0.295,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+ES,rail,Q,TRN.P,22931.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+ES,rail,Q,TRN.F,9593.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+FI,road_pipe,other,ROAD.FRT,0.7599,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FI,road_pipe,other,ROAD.PAX,0.2401,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FI,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FI,road_pipe,fuel_liquid,ROAD.FRT,0.8426,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+FI,road_pipe,fuel_liquid,ROAD.PAX,0.1574,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+FI,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+FI,road_pipe,Q,ROAD.FRT,24908.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+FI,road_pipe,Q,ROAD.PAX,7540.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+FI,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+FI,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+FI,rail,fuel_liquid,TRN.P,0.2924,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+FI,rail,fuel_liquid,TRN.F,0.7076,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+FI,rail,Q,TRN.P,3882.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+FI,rail,Q,TRN.F,9395.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+FR,road_pipe,other,ROAD.FRT,0.6899,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FR,road_pipe,other,ROAD.PAX,0.2747,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FR,road_pipe,other,PIPE,0.0354,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FR,road_pipe,fuel_liquid,ROAD.FRT,0.9998,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+FR,road_pipe,fuel_liquid,ROAD.PAX,0.0002,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+FR,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+FR,road_pipe,Q,ROAD.FRT,152487.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+FR,road_pipe,Q,ROAD.PAX,51.096,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+FR,rail,other,TRN.P,0.9811,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FR,rail,other,TRN.F,0.0189,1-SBS,ESTAT.SBSH49 Y11 observed shares
+FR,rail,fuel_liquid,TRN.P,0.7553,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+FR,rail,fuel_liquid,TRN.F,0.2447,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+FR,rail,Q,TRN.P,105596.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+FR,rail,Q,TRN.F,34202.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+GR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+GR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+GR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+GR,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+GR,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+GR,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+GR,road_pipe,Q,ROAD.FRT,13421.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+GR,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+GR,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+GR,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+GR,rail,fuel_liquid,TRN.P,0.7313,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+GR,rail,fuel_liquid,TRN.F,0.2687,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+GR,rail,Q,TRN.P,958.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+GR,rail,Q,TRN.F,352.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+HR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+HR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+HR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+HR,road_pipe,fuel_liquid,ROAD.FRT,0.779,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+HR,road_pipe,fuel_liquid,ROAD.PAX,0.221,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+HR,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+HR,road_pipe,Q,ROAD.FRT,6842.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+HR,road_pipe,Q,ROAD.PAX,3145.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+HR,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+HR,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+HR,rail,fuel_liquid,TRN.P,0.3741,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+HR,rail,fuel_liquid,TRN.F,0.6259,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+HR,rail,Q,TRN.P,1457.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+HR,rail,Q,TRN.F,2438.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+HU,road_pipe,other,ROAD.FRT,0.7969,1-SBS,ESTAT.SBSH49 Y11 observed shares
+HU,road_pipe,other,ROAD.PAX,0.2031,1-SBS,ESTAT.SBSH49 Y11 observed shares
+HU,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+HU,road_pipe,fuel_liquid,ROAD.FRT,0.7518,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+HU,road_pipe,fuel_liquid,ROAD.PAX,0.2482,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+HU,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+HU,road_pipe,Q,ROAD.FRT,30762.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+HU,road_pipe,Q,ROAD.PAX,16456.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+HU,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+HU,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+HU,rail,fuel_liquid,TRN.P,0.4599,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+HU,rail,fuel_liquid,TRN.F,0.5401,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+HU,rail,Q,TRN.P,7763.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+HU,rail,Q,TRN.F,9118.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+IE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+IE,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+IE,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+IE,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IE,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IE,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+IE,road_pipe,Q,ROAD.FRT,7696.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+IE,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IE,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+IE,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+IE,rail,fuel_liquid,TRN.P,0.9398,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IE,rail,fuel_liquid,TRN.F,0.0602,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IE,rail,Q,TRN.P,1638.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+IE,rail,Q,TRN.F,105.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+IT,road_pipe,other,ROAD.FRT,0.7734,1-SBS,ESTAT.SBSH49 Y11 observed shares
+IT,road_pipe,other,ROAD.PAX,0.1844,1-SBS,ESTAT.SBSH49 Y11 observed shares
+IT,road_pipe,other,PIPE,0.0422,1-SBS,ESTAT.SBSH49 Y11 observed shares
+IT,road_pipe,fuel_liquid,ROAD.FRT,0.6588,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IT,road_pipe,fuel_liquid,ROAD.PAX,0.3412,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IT,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+IT,road_pipe,Q,ROAD.FRT,129075.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+IT,road_pipe,Q,ROAD.PAX,108319.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+IT,rail,other,TRN.P,0.9392,1-SBS,ESTAT.SBSH49 Y11 observed shares
+IT,rail,other,TRN.F,0.0608,1-SBS,ESTAT.SBSH49 Y11 observed shares
+IT,rail,fuel_liquid,TRN.P,0.703,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IT,rail,fuel_liquid,TRN.F,0.297,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IT,rail,Q,TRN.P,46845.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+IT,rail,Q,TRN.F,19787.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+LT,road_pipe,other,ROAD.FRT,0.9101,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LT,road_pipe,other,ROAD.PAX,0.0899,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LT,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LT,road_pipe,fuel_liquid,ROAD.FRT,0.9229,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LT,road_pipe,fuel_liquid,ROAD.PAX,0.0771,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LT,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+LT,road_pipe,Q,ROAD.FRT,20307.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+LT,road_pipe,Q,ROAD.PAX,2748.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+LT,rail,other,TRN.P,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LT,rail,other,TRN.F,1.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LT,rail,fuel_liquid,TRN.P,0.0175,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LT,rail,fuel_liquid,TRN.F,0.9825,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LT,rail,Q,TRN.P,269.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+LT,rail,Q,TRN.F,15088.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+LU,road_pipe,other,ROAD.FRT,0.8609,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LU,road_pipe,other,ROAD.PAX,0.1391,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LU,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LU,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LU,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LU,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+LU,road_pipe,Q,ROAD.FRT,7712.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+LU,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LU,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+LU,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+LU,rail,fuel_liquid,TRN.P,0.5638,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LU,rail,fuel_liquid,TRN.F,0.4362,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LU,rail,Q,TRN.P,349.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+LU,rail,Q,TRN.F,270.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+LV,road_pipe,other,ROAD.FRT,0.8804,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LV,road_pipe,other,ROAD.PAX,0.1196,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LV,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+LV,road_pipe,fuel_liquid,ROAD.FRT,0.8651,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LV,road_pipe,fuel_liquid,ROAD.PAX,0.1349,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+LV,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+LV,road_pipe,Q,ROAD.FRT,11167.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+LV,road_pipe,Q,ROAD.PAX,2820.09,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+LV,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+LV,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+LV,rail,fuel_liquid,TRN.P,0.0331,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LV,rail,fuel_liquid,TRN.F,0.9669,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+LV,rail,Q,TRN.P,733.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+LV,rail,Q,TRN.F,21410.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+MT,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+MT,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+MT,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+MT,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+MT,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+MT,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+MT,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+MT,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+MT,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+MT,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+MT,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+MT,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+MT,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+MT,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+NL,road_pipe,other,ROAD.FRT,0.8978,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NL,road_pipe,other,ROAD.PAX,0.085,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NL,road_pipe,other,PIPE,0.0171,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NL,road_pipe,fuel_liquid,ROAD.FRT,0.9475,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+NL,road_pipe,fuel_liquid,ROAD.PAX,0.0525,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+NL,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+NL,road_pipe,Q,ROAD.FRT,65762.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+NL,road_pipe,Q,ROAD.PAX,5900.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+NL,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+NL,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+NL,rail,fuel_liquid,TRN.P,0.7212,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+NL,rail,fuel_liquid,TRN.F,0.2788,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+NL,rail,Q,TRN.P,16500.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+NL,rail,Q,TRN.F,6378.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+PL,road_pipe,other,ROAD.FRT,0.8145,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PL,road_pipe,other,ROAD.PAX,0.1513,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PL,road_pipe,other,PIPE,0.0341,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PL,road_pipe,fuel_liquid,ROAD.FRT,0.878,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+PL,road_pipe,fuel_liquid,ROAD.PAX,0.122,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+PL,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+PL,road_pipe,Q,ROAD.FRT,178269.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+PL,road_pipe,Q,ROAD.PAX,40126.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+PL,rail,other,TRN.P,0.2216,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PL,rail,other,TRN.F,0.7784,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PL,rail,fuel_liquid,TRN.P,0.247,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+PL,rail,fuel_liquid,TRN.F,0.753,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+PL,rail,Q,TRN.P,17633.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+PL,rail,Q,TRN.F,53746.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+PT,road_pipe,other,ROAD.FRT,0.8073,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PT,road_pipe,other,ROAD.PAX,0.1927,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PT,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+PT,road_pipe,fuel_liquid,ROAD.FRT,0.9163,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+PT,road_pipe,fuel_liquid,ROAD.PAX,0.0837,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+PT,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+PT,road_pipe,Q,ROAD.FRT,31771.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+PT,road_pipe,Q,ROAD.PAX,4700.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+PT,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+PT,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+PT,rail,fuel_liquid,TRN.P,0.646,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+PT,rail,fuel_liquid,TRN.F,0.354,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+PT,rail,Q,TRN.P,4237.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+PT,rail,Q,TRN.F,2322.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+RO,road_pipe,other,ROAD.FRT,0.7782,1-SBS,ESTAT.SBSH49 Y11 observed shares
+RO,road_pipe,other,ROAD.PAX,0.1619,1-SBS,ESTAT.SBSH49 Y11 observed shares
+RO,road_pipe,other,PIPE,0.0599,1-SBS,ESTAT.SBSH49 Y11 observed shares
+RO,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+RO,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+RO,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+RO,road_pipe,Q,ROAD.FRT,18271.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+RO,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+RO,rail,other,TRN.P,0.2272,1-SBS,ESTAT.SBSH49 Y11 observed shares
+RO,rail,other,TRN.F,0.7728,1-SBS,ESTAT.SBSH49 Y11 observed shares
+RO,rail,fuel_liquid,TRN.P,0.2559,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+RO,rail,fuel_liquid,TRN.F,0.7441,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+RO,rail,Q,TRN.P,5063.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+RO,rail,Q,TRN.F,14719.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+SE,road_pipe,other,ROAD.FRT,0.5903,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SE,road_pipe,other,ROAD.PAX,0.4097,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SE,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SE,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SE,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SE,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+SE,road_pipe,Q,ROAD.FRT,33465.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+SE,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SE,rail,other,TRN.P,0.5503,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SE,rail,other,TRN.F,0.4497,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SE,rail,fuel_liquid,TRN.P,0.3323,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SE,rail,fuel_liquid,TRN.F,0.6677,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SE,rail,Q,TRN.P,11379.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+SE,rail,Q,TRN.F,22864.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+SI,road_pipe,other,ROAD.FRT,0.9081,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SI,road_pipe,other,ROAD.PAX,0.0919,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SI,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SI,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SI,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SI,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+SI,road_pipe,Q,ROAD.FRT,15054.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+SI,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SI,rail,other,TRN.P,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SI,rail,other,TRN.F,1.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SI,rail,fuel_liquid,TRN.P,0.1551,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SI,rail,fuel_liquid,TRN.F,0.8449,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SI,rail,Q,TRN.P,689.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+SI,rail,Q,TRN.F,3752.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+SK,road_pipe,other,ROAD.FRT,0.8607,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SK,road_pipe,other,ROAD.PAX,0.1393,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SK,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
+SK,road_pipe,fuel_liquid,ROAD.FRT,0.8938,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SK,road_pipe,fuel_liquid,ROAD.PAX,0.1062,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+SK,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+SK,road_pipe,Q,ROAD.FRT,28140.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+SK,road_pipe,Q,ROAD.PAX,5418.9,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+SK,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+SK,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+SK,rail,fuel_liquid,TRN.P,0.234,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SK,rail,fuel_liquid,TRN.F,0.766,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+SK,rail,Q,TRN.P,2431.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+SK,rail,Q,TRN.F,7960.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+GB,road_pipe,other,ROAD.FRT,0.6035,1-SBS,ESTAT.SBSH49 Y11 observed shares
+GB,road_pipe,other,ROAD.PAX,0.3818,1-SBS,ESTAT.SBSH49 Y11 observed shares
+GB,road_pipe,other,PIPE,0.0146,1-SBS,ESTAT.SBSH49 Y11 observed shares
+GB,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+GB,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+GB,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+GB,road_pipe,Q,ROAD.FRT,92823.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+GB,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+GB,rail,other,TRN.P,0.9063,1-SBS,ESTAT.SBSH49 Y11 observed shares
+GB,rail,other,TRN.F,0.0937,1-SBS,ESTAT.SBSH49 Y11 observed shares
+GB,rail,fuel_liquid,TRN.P,0.736,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+GB,rail,fuel_liquid,TRN.F,0.264,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+GB,rail,Q,TRN.P,58462.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+GB,rail,Q,TRN.F,20973.8235,observed,"ITF Y11, Mtkm; child re-denominates to it"
+NO,road_pipe,other,ROAD.FRT,0.6351,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NO,road_pipe,other,ROAD.PAX,0.3241,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NO,road_pipe,other,PIPE,0.0409,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NO,road_pipe,fuel_liquid,ROAD.FRT,0.8351,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+NO,road_pipe,fuel_liquid,ROAD.PAX,0.1649,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+NO,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+NO,road_pipe,Q,ROAD.FRT,14841.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+NO,road_pipe,Q,ROAD.PAX,4748.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+NO,rail,other,TRN.P,0.7163,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NO,rail,other,TRN.F,0.2837,1-SBS,ESTAT.SBSH49 Y11 observed shares
+NO,rail,fuel_liquid,TRN.P,0.4626,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+NO,rail,fuel_liquid,TRN.F,0.5374,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+NO,rail,Q,TRN.P,3076.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+NO,rail,Q,TRN.F,3574.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+CH,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+CH,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+CH,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+CH,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CH,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CH,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+CH,road_pipe,Q,ROAD.FRT,9867.0,observed,"ESTAT Y11, Mtkm; child re-denominates to it"
+CH,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CH,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+CH,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+CH,rail,fuel_liquid,TRN.P,0.6271,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CH,rail,fuel_liquid,TRN.F,0.3729,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CH,rail,Q,TRN.P,19387.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+CH,rail,Q,TRN.F,11526.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+TR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+TR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+TR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+TR,road_pipe,fuel_liquid,ROAD.FRT,0.7753,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+TR,road_pipe,fuel_liquid,ROAD.PAX,0.2247,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+TR,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+TR,road_pipe,Q,ROAD.FRT,203072.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+TR,road_pipe,Q,ROAD.PAX,95334.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+TR,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+TR,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+TR,rail,fuel_liquid,TRN.P,0.2552,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+TR,rail,fuel_liquid,TRN.F,0.7448,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+TR,rail,Q,TRN.P,4002.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
+TR,rail,Q,TRN.F,11677.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+RU,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+RU,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+RU,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+RU,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+RU,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+RU,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+RU,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+RU,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+RU,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+RU,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+RU,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+RU,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+RU,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+RU,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+CN,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CN,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CN,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CN,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CN,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CN,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+CN,road_pipe,Q,ROAD.FRT,5137474.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+CN,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CN,rail,other,TRN.P,0.3998,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CN,rail,other,TRN.F,0.6002,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CN,rail,fuel_liquid,TRN.P,0.246,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CN,rail,fuel_liquid,TRN.F,0.754,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CN,rail,Q,TRN.P,961229.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+CN,rail,Q,TRN.F,2946579.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+US,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+US,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+US,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+US,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+US,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+US,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+US,road_pipe,Q,ROAD.FRT,2379954.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+US,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+US,rail,other,TRN.P,0.0256,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+US,rail,other,TRN.F,0.9744,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+US,rail,fuel_liquid,TRN.P,0.0127,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+US,rail,fuel_liquid,TRN.F,0.9873,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+US,rail,Q,TRN.P,32579.5102,observed,"ITF Y11, Mpkm; child re-denominates to it"
+US,rail,Q,TRN.F,2532647.547,observed,"ITF Y11, Mtkm; child re-denominates to it"
+JP,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+JP,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+JP,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+JP,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+JP,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+JP,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+JP,road_pipe,Q,ROAD.FRT,246400.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+JP,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+JP,rail,other,TRN.P,0.9758,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+JP,rail,other,TRN.F,0.0242,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+JP,rail,fuel_liquid,TRN.P,0.9518,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+JP,rail,fuel_liquid,TRN.F,0.0482,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+JP,rail,Q,TRN.P,395067.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+JP,rail,Q,TRN.F,19998.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+IN,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+IN,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+IN,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+IN,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IN,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+IN,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+IN,road_pipe,Q,ROAD.FRT,1407800.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+IN,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IN,rail,other,TRN.P,0.762,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+IN,rail,other,TRN.F,0.238,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+IN,rail,fuel_liquid,TRN.P,0.6105,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IN,rail,fuel_liquid,TRN.F,0.3895,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+IN,rail,Q,TRN.P,1046522.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+IN,rail,Q,TRN.F,667607.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+CA,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CA,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CA,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CA,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CA,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+CA,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+CA,road_pipe,Q,ROAD.FRT,224325.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+CA,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CA,rail,other,TRN.P,0.0082,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CA,rail,other,TRN.F,0.9918,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+CA,rail,fuel_liquid,TRN.P,0.004,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CA,rail,fuel_liquid,TRN.F,0.996,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+CA,rail,Q,TRN.P,1404.3896,observed,"ITF Y11, Mpkm; child re-denominates to it"
+CA,rail,Q,TRN.F,347824.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+KR,road_pipe,other,ROAD.FRT,0.5739,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
+KR,road_pipe,other,ROAD.PAX,0.4261,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
+KR,road_pipe,other,PIPE,0.0,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
+KR,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+KR,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+KR,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+KR,road_pipe,Q,ROAD.FRT,104476.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+KR,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+KR,rail,other,TRN.P,0.9279,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+KR,rail,other,TRN.F,0.0721,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+KR,rail,fuel_liquid,TRN.P,0.8631,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+KR,rail,fuel_liquid,TRN.F,0.1369,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+KR,rail,Q,TRN.P,63044.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+KR,rail,Q,TRN.F,9997.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+BR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+BR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+BR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+BR,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+BR,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+BR,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+BR,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+BR,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+BR,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+BR,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+BR,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+BR,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+BR,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+BR,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+MX,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+MX,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+MX,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+MX,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+MX,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+MX,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+MX,road_pipe,Q,ROAD.FRT,226900.0,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+MX,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+MX,rail,other,TRN.P,0.0223,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+MX,rail,other,TRN.F,0.9777,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+MX,rail,fuel_liquid,TRN.P,0.0111,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+MX,rail,fuel_liquid,TRN.F,0.9889,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+MX,rail,Q,TRN.P,891.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
+MX,rail,Q,TRN.F,79728.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
+AU,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+AU,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+AU,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+AU,road_pipe,fuel_liquid,ROAD.FRT,1.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+AU,road_pipe,fuel_liquid,ROAD.PAX,0.0,4-bottom-up,vkm x NXTR intensity (liquid fuels; PIPE=0)
+AU,road_pipe,fuel_liquid,PIPE,0.0,4-bottom-up,pipelines pump with electricity/gas
+AU,road_pipe,Q,ROAD.FRT,191590.1168,observed,"ITF (total: hire n/a) Y11, Mtkm; child re-denominates to it"
+AU,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+AU,rail,other,TRN.P,0.1033,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+AU,rail,other,TRN.F,0.8967,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
+AU,rail,fuel_liquid,TRN.P,0.0534,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+AU,rail,fuel_liquid,TRN.F,0.9466,4-bottom-up,"traffic units (same per-tu intensity, leg-1 v0)"
+AU,rail,Q,TRN.P,14770.5858,observed,"ITF Y11, Mpkm; child re-denominates to it"
+AU,rail,Q,TRN.F,261830.5833,observed,"ITF Y11, Mtkm; child re-denominates to it"
+ID,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+ID,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+ID,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+ID,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ID,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ID,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ID,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+ID,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ID,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+ID,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+ID,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ID,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ID,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+ID,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+ZA,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+ZA,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+ZA,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+ZA,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ZA,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ZA,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ZA,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+ZA,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ZA,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+ZA,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+ZA,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ZA,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+ZA,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+ZA,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+TW,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+TW,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+TW,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+TW,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+TW,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+TW,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+TW,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+TW,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+TW,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+TW,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+TW,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+TW,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+TW,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+TW,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+WA,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+WA,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+WA,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+WA,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WA,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WA,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WA,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+WA,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+WA,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+WA,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+WA,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WA,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WA,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+WA,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+WE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+WE,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+WE,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+WE,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WE,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WE,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WE,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+WE,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+WE,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+WE,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+WE,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WE,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WE,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+WE,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+WF,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+WF,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+WF,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+WF,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WF,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WF,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WF,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+WF,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+WF,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+WF,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+WF,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WF,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WF,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+WF,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+WL,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+WL,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+WL,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+WL,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WL,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WL,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WL,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+WL,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+WL,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+WL,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+WL,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WL,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WL,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+WL,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
+WM,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
+WM,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
+WM,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
+WM,road_pipe,fuel_liquid,ROAD.FRT,0.8016,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WM,road_pipe,fuel_liquid,ROAD.PAX,0.1984,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WM,road_pipe,fuel_liquid,PIPE,0.0,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WM,road_pipe,Q,ROAD.FRT,0.0,none,no observed volume: child stays MEUR (declared)
+WM,road_pipe,Q,ROAD.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+WM,rail,other,TRN.P,0.5503,5-median,SBS Y11 median shares (RoW / no data)
+WM,rail,other,TRN.F,0.4497,5-median,SBS Y11 median shares (RoW / no data)
+WM,rail,fuel_liquid,TRN.P,0.5503,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WM,rail,fuel_liquid,TRN.F,0.4497,5-fallback,no volumes: fuel follows the 'other' shares (declared)
+WM,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
+WM,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
