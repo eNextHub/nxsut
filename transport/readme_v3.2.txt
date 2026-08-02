@@ -3,8 +3,10 @@ Version: v3.2
 Authors: LR, NG
 Date: 2026 Aug
 Build: transport service layer + UNSD-first supply mixes
-Coverage: year 2023. 48 EXIOBASE Hybrid regions. 207 activities, 211
-commodities (v3.1: 190 / 199). GHG satellite accounts.
+Coverage: year 2023. 48 EXIOBASE Hybrid regions. 202 activities, 206
+commodities (v3.1: 190 / 199 — the layer adds 17 activities and 12
+commodities and folds away the 5 emptied parents of each). GHG satellite
+accounts.
 
 
 WHAT v3.2 ADDS TO v3.1
@@ -75,11 +77,14 @@ passenger 3,286 Gpkm, rail freight 7,256 Gtkm, sea and coastal freight
 5,579 Gtkm, inland-waterway freight 3,420 Gtkm, private mobility 16,032
 Gpkm.
 
-The parents "Other land transport" and "Transport via railways" (and their
-commodities) remain in the grid with zero output - folding them away is
-blocked by MARIO's unit check (MEUR parent vs Mtkm child) and is cosmetic.
-"Transport via pipelines" was already a separate sector in EXIOBASE and is
-untouched; it stays monetary (see "what stayed monetary").
+The five split parents (road, rail, sea, inland water, air) end up with zero
+output and are FOLDED AWAY at the end of the layer, into targets with the same
+unit: each water/air parent into its own passenger child, the road and rail
+parents into the transport residual category (63). The fold checks that the
+outputs really are zero before touching anything, so it is a numerical no-op;
+it exists only so the grid carries no empty rows. "Transport via pipelines"
+was already a separate sector in EXIOBASE and is untouched; it stays monetary
+(see "what stayed monetary").
 
 Move B - splitting the commercial transport sectors
 ---------------------------------------------------
