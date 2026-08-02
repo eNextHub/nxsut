@@ -1,0 +1,21 @@
+objective:
+    - >-
+      Minimize( sum(absol(mult(W, U_f - u0_f @ diag(x))))
+      + sum(absol(mult(Wy_f, Y_f - Y0_f)))
+      + sum(absol(mult(Wy_nf, Y_nf - Y0_nf)))
+      + sum(absol(mult(Wv, V - mult(v0, x)))) )
+expressions:
+    - 's_f @ x + IM_f == U_f @ i_a + Y_f + EXP_f'
+    - 's_nf @ x + IM_nf == u0_nf @ x + Y_nf + EXP_nf'
+    - 'IM_f == mult(im_sh_f, U_f @ i_a + Y_f)'
+    - 'IM_nf == mult(im_sh_nf, u0_nf @ x + Y_nf)'
+    - 'mult(M_f, U_f @ B) <= mult(M_f, F_obs) * (1 + eps_f)'
+    - 'mult(M_f, U_f @ B) >= mult(M_f, F_obs) * (1 - eps_f)'
+    - 'mult(m_x, x) <= mult(m_x, x_obs) * (1 + eps_x)'
+    - 'mult(m_x, x) >= mult(m_x, x_obs) * (1 - eps_x)'
+    - 'mult(m_y_f, Y_f) <= mult(m_y_f, Y_obs_f) * (1 + eps_y)'
+    - 'mult(m_y_f, Y_f) >= mult(m_y_f, Y_obs_f) * (1 - eps_y)'
+    - 'tran(G) @ V <= mult(VA_tgt, 1 + eps_g)'
+    - 'tran(G) @ V >= mult(VA_tgt, 1 - eps_g)'
+    - 'sum(V) <= GDP * (1 + eps_g)'
+    - 'sum(V) >= GDP * (1 - eps_g)'

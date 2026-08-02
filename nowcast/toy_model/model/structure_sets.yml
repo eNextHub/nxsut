@@ -1,0 +1,22 @@
+regions:
+    description: NXS regions (toy = IT)
+    split_problem: true
+years:
+    description: target years (toy = 2023)
+    split_problem: true
+activities:
+    description: NXS activities (toy = steel, power, services)
+commodities:
+    description: NXS products
+    filters:
+        role: [fuel, nonfuel]
+fuels:
+    description: energy carriers (ordered copy of commodities role=fuel)
+buckets:
+    description: IRES consuming-sector buckets
+va_groups:
+    description: aggregated VA target groups
+scalars:
+    description: tolerances and objective weights
+    filters:
+        kind: [eps_f, eps_x, eps_y, eps_g, w_u, w_y, w_v]

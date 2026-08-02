@@ -17,6 +17,7 @@ the checkout, then point `api_url` at `http://127.0.0.1:8000`.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
@@ -124,6 +125,137 @@ def get_ember_snapshot(
         .reset_index()
     )
     return grid
+
+
+_UNSD_GEN_SOURCE = "UNSD Energy Statistics — electricity & heat production 2021-2023"
+
+# UNSD -> EMBER-family mapping (same declared mapping as the step-0 selector,
+# nowcast/step0_electricity_source_selector.py). Non-thermal families from the
+# plant-type source totals (015*/016* on SIEC 7000, main + autoproducer);
+# thermal families from the by-fuel view (01<fuel> on SIEC 7000T). Pumped
+# hydro (PH, an "of which" memo) is subtracted from Hydro — EMBER excludes
+# pumped-storage output. Renewables/nuclear conventions never enter (observed
+# generation, not primary equivalents).
+_UNSD_PLANT_FAMILY = {
+    "N": "Nuclear", "HY": "Hydro", "S": "Solar", "W": "Wind",
+    "G": "Other Renewables", "T": "Other Renewables",
+    "O": "Other Fossil", "H": "Other Fossil",
+}
+_UNSD_PUMPED = "PH"
+_UNSD_FUEL_FAMILY = {
+    "CL": "Coal", "CP": "Coal", "LB": "Coal",
+    "NG": "Gas",
+    "CR": "Other Fossil", "RF": "Other Fossil", "DL": "Other Fossil",
+    "PP": "Other Fossil", "OS": "Other Fossil", "PT": "Other Fossil",
+    "MG": "Other Fossil", "NRW": "Other Fossil",
+    "BI": "Bioenergy", "SBF": "Bioenergy", "LBF": "Bioenergy",
+    "BS": "Bioenergy", "RW": "Bioenergy",
+}
+_EMBER_LABELS = ["Bioenergy", "Coal", "Gas", "Hydro", "Nuclear",
+                 "Other Fossil", "Other Renewables", "Solar", "Wind"]
+
+
+def get_unsd_generation_snapshot(
+    api_url: str = DEFAULT_API,
+    source: str = _UNSD_GEN_SOURCE,
+) -> pd.DataFrame:
+    """UNSD electricity generation in MARIO's reduced EMBER format.
+
+    Queries `/data.csv?parameter=Supply&source=UNSD.GEN...` and maps the
+    plant-type + by-fuel views onto the 9 EMBER family labels, so the frame
+    is drop-in for `update_supply_mix` (ISO3, Year, Variable, Value TWh).
+    """
+    frame = _get_csv(api_url, {"parameter": "Supply", "source": source, "sort": "id"})
+    if frame.empty:
+        raise ValueError(f"no Supply rows for source {source!r}")
+
+    com = frame["item_1"].str[2:]                       # c_<SIEC>
+    parts = frame["item_2"].map(split_item)             # [tx, iso2, Yxx]
+    tx, iso2 = parts.str[0], parts.str[1]
+    year = parts.str[2].str[1:].astype(int) + _CENTURY
+    twh = frame["value"].astype(float) / 1e3            # GWh -> TWh
+
+    producer = tx.str[:3]
+    suffix = tx.str[3:]
+    fam = pd.Series(pd.NA, index=frame.index, dtype="object")
+    sign = pd.Series(1.0, index=frame.index)
+
+    plant = (com == "7000") & producer.isin(("015", "016"))
+    fam[plant] = suffix[plant].map(_UNSD_PLANT_FAMILY)
+    pumped = plant & (suffix == _UNSD_PUMPED)
+    fam[pumped], sign[pumped] = "Hydro", -1.0
+    byfuel = com == "7000T"
+    fam[byfuel] = tx[byfuel].str[2:].map(_UNSD_FUEL_FAMILY)
+
+    keep = fam.notna()
+    out = (
+        pd.DataFrame({"ISO3": _iso2_to_iso3(iso2[keep]), "Year": year[keep],
+                      "Variable": fam[keep], "Value": (twh * sign)[keep]})
+        .dropna(subset=["ISO3"])
+        .groupby(["ISO3", "Year", "Variable"], as_index=False)["Value"].sum()
+    )
+    negative = out["Value"] < 0
+    if negative.any():                                   # PH memo > HY total: misreport
+        print(f"nxbase_client: clipped {int(negative.sum())} negative family rows")
+        out.loc[negative, "Value"] = 0.0
+
+    grid = (
+        out.pivot_table(index=["ISO3", "Year"], columns="Variable", values="Value")
+        .reindex(columns=_EMBER_LABELS)
+        .fillna(0.0)
+        .stack()
+        .rename("Value")
+        .reset_index()
+    )
+    return grid
+
+
+def get_supply_mix_snapshot(
+    api_url: str = DEFAULT_API,
+    years: tuple[int, ...] = (2021, 2022, 2023),
+    selection_path: str | Path | None = None,
+) -> pd.DataFrame:
+    """Blended generation snapshot: UNSD-first, EMBER fallback (step 0).
+
+    Per country, uses the UNSD.GEN family frame when the arbitrated step-0
+    selection says so (``nowcast/step0_efficiency.csv``: selector TVD +
+    implied-efficiency arbitration) and the country reports the requested
+    year; every other (country, year) keeps the EMBER rows. Same 4-column
+    shape as :func:`get_ember_snapshot` — drop-in for `update_supply_mix`.
+    """
+    selection_path = Path(selection_path) if selection_path else (
+        Path(__file__).resolve().parent.parent / "nowcast" / "data" / "step0_efficiency.csv"
+    )
+    sel = pd.read_csv(selection_path)
+    latest = sel.sort_values("year").groupby("site").tail(1)
+    unsd_iso2 = latest.loc[
+        latest["arbitrated_decision"].str.startswith("UNSD", na=False), "site"
+    ]
+    unsd_iso3 = set(_iso2_to_iso3(unsd_iso2).dropna())
+
+    ember = get_ember_snapshot(api_url)
+    ember = ember[ember["Year"].isin(years)]
+    unsd = get_unsd_generation_snapshot(api_url)
+    unsd = unsd[unsd["Year"].isin(years)]
+
+    # empty-safe masks: a year outside UNSD coverage (2024+) must degrade to
+    # pure EMBER for every country, selected or not.
+    take_unsd = unsd["ISO3"].isin(unsd_iso3)
+    taken = set(map(tuple, unsd.loc[take_unsd, ["ISO3", "Year"]].values))
+    take_ember = pd.Series(
+        [(i, y) not in taken for i, y in zip(ember["ISO3"], ember["Year"])],
+        index=ember.index,
+    )
+
+    blended = pd.concat(
+        [unsd.loc[take_unsd], ember.loc[take_ember]], ignore_index=True
+    ).sort_values(["ISO3", "Year", "Variable"], ignore_index=True)
+
+    n_unsd = len(taken)
+    n_ember = ember.loc[take_ember, ["ISO3", "Year"]].drop_duplicates().shape[0]
+    print(f"nxbase_client: blended supply mix — {n_unsd} (country, year) from "
+          f"UNSD.GEN, {n_ember} from EMBER (selection: {selection_path.name})")
+    return blended
 
 
 def get_trade_matrix(

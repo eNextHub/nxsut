@@ -1,0 +1,237 @@
+# ---- endogenous ----
+x:
+    description: activity output
+    type: endogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        x:
+            nonneg: true
+            activities: {dim: rows}
+U_fuel:
+    description: energy-carrier use flows
+    type: endogenous
+    coordinates: [regions, years, fuels, activities]
+    variables_info:
+        U_f:
+            nonneg: true
+            fuels: {dim: rows}
+            activities: {dim: cols}
+Y:
+    description: final demand by product
+    type: endogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y_f:
+            nonneg: true
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        Y_nf:
+            nonneg: true
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+V:
+    description: value added by activity
+    type: endogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        V:
+            activities: {dim: rows}
+IM:
+    description: imports by product
+    type: endogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        IM_f:
+            nonneg: true
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        IM_nf:
+            nonneg: true
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+# ---- exogenous: priors (shared across years) ----
+s_prior:
+    description: supply coefficients
+    type: exogenous
+    coordinates: [regions, commodities, activities]
+    variables_info:
+        s_f:
+            commodities: {dim: rows, filters: {role: [fuel]}}
+            activities: {dim: cols}
+        s_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+            activities: {dim: cols}
+u0_nonfuel:
+    description: frozen non-carrier technology
+    type: exogenous
+    coordinates: [regions, commodities, activities]
+    variables_info:
+        u0_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+            activities: {dim: cols}
+u0_fuel:
+    description: prior energy-carrier coefficients
+    type: exogenous
+    coordinates: [regions, fuels, activities]
+    variables_info:
+        u0_f:
+            fuels: {dim: rows}
+            activities: {dim: cols}
+W_fuel:
+    description: relative L1 weights (1/max(prior flow, floor))
+    type: exogenous
+    coordinates: [regions, fuels, activities]
+    variables_info:
+        W:
+            fuels: {dim: rows}
+            activities: {dim: cols}
+W_y:
+    description: relative L1 weights on final demand (1/max(prior, floor))
+    type: exogenous
+    coordinates: [regions, commodities]
+    variables_info:
+        Wy_f:
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        Wy_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+W_v:
+    description: relative L1 weights on value added (1/max(prior VA, floor))
+    type: exogenous
+    coordinates: [regions, activities]
+    variables_info:
+        Wv:
+            activities: {dim: rows}
+v0:
+    description: prior VA coefficients
+    type: exogenous
+    coordinates: [regions, activities]
+    variables_info:
+        v0:
+            activities: {dim: rows}
+im_sh:
+    description: import shares from the trade update
+    type: exogenous
+    coordinates: [regions, commodities]
+    variables_info:
+        im_sh_f:
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        im_sh_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+# ---- exogenous: observations (per year) ----
+F_obs:
+    description: balance carrier use per bucket
+    type: exogenous
+    coordinates: [regions, years, fuels, buckets]
+    variables_info:
+        F_obs:
+            blank_fill: 0
+            fuels: {dim: rows}
+            buckets: {dim: cols}
+M_fuel:
+    description: 0/1 observation mask of F_obs (separate table - masks and
+        values must not share a table, they would read the same cells)
+    type: exogenous
+    coordinates: [regions, years, fuels, buckets]
+    variables_info:
+        M_f:
+            blank_fill: 0
+            fuels: {dim: rows}
+            buckets: {dim: cols}
+x_obs:
+    description: output anchors
+    type: exogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        x_obs:
+            blank_fill: 0
+            activities: {dim: rows}
+M_x:
+    description: 0/1 observation mask of x_obs (separate table)
+    type: exogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        m_x:
+            blank_fill: 0
+            activities: {dim: rows}
+Y_obs:
+    description: final-demand anchors (carrier side)
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y_obs_f:
+            blank_fill: 0
+            commodities: {dim: rows, filters: {role: [fuel]}}
+M_y:
+    description: 0/1 observation mask of Y_obs (separate table)
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        m_y_f:
+            blank_fill: 0
+            commodities: {dim: rows, filters: {role: [fuel]}}
+Y_prior:
+    description: nowcast prior for free Y
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y0_f:
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        Y0_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+EXP:
+    description: exports (BACI-observed goods, prior-scaled services)
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        EXP_f:
+            commodities: {dim: rows, filters: {role: [fuel]}}
+        EXP_nf:
+            commodities: {dim: rows, filters: {role: [nonfuel]}}
+VA_tgt:
+    description: VA targets by group
+    type: exogenous
+    coordinates: [regions, years, va_groups]
+    variables_info:
+        VA_tgt:
+            va_groups: {dim: rows}
+GDP:
+    description: GDP per country-year
+    type: exogenous
+    coordinates: [regions, years]
+    variables_info:
+        GDP:
+# ---- exogenous: concordances ----
+B_ires:
+    description: activity -> IRES bucket incidence
+    type: exogenous
+    coordinates: [activities, buckets]
+    variables_info:
+        B:
+            activities: {dim: rows}
+            buckets: {dim: cols}
+G_va:
+    description: activity -> VA group incidence
+    type: exogenous
+    coordinates: [activities, va_groups]
+    variables_info:
+        G:
+            activities: {dim: rows}
+            va_groups: {dim: cols}
+# ---- scalars & constants ----
+tol:
+    description: tolerances and weights
+    type: exogenous
+    coordinates: [scalars]
+    variables_info:
+        eps_f:
+            scalars: {dim: rows, filters: {kind: [eps_f]}}
+        eps_x:
+            scalars: {dim: rows, filters: {kind: [eps_x]}}
+        eps_y:
+            scalars: {dim: rows, filters: {kind: [eps_y]}}
+        eps_g:
+            scalars: {dim: rows, filters: {kind: [eps_g]}}
+i_a:
+    description: activity sum vector
+    type: constant
+    coordinates: [activities]
+    variables_info:
+        i_a:
+            value: sum_vector
+            activities: {dim: rows}
