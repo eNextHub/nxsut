@@ -45,6 +45,70 @@ from apply_movec_write import ACT as OWN_ACT  # noqa: E402
 from apply_movec_write import apply as _apply_c  # noqa: E402
 
 
+# The five split parents end up with zero output. Folding them away needs a
+# target with the SAME unit (MARIO refuses to aggregate across units), which
+# the monetary children now provide: each water/air parent folds into its own
+# passenger child, and the road/rail parents into the transport residual
+# category. Numerically a no-op — they are zero — so the target only has to
+# be same-unit and sensible.
+EMPTY_PARENT_FOLD = {
+    "Activity": {
+        "Other land transport":
+            "Supporting and auxiliary transport activities; "
+            "activities of travel agencies (63)",
+        "Transport via railways":
+            "Supporting and auxiliary transport activities; "
+            "activities of travel agencies (63)",
+        "Sea and coastal water transport": "Sea and coastal passenger transport",
+        "Inland water transport": "Inland water passenger transport",
+        "Air transport (62)": "Air passenger transport",
+    },
+    "Commodity": {
+        "Other land transportation services":
+            "Supporting and auxiliary transport services; travel agency services (63)",
+        "Railway transportation services":
+            "Supporting and auxiliary transport services; travel agency services (63)",
+        "Sea and coastal water transportation services":
+            "Sea and coastal passenger transport services",
+        "Inland water transportation services":
+            "Inland water passenger transport services",
+        "Air transport services (62)": "Air passenger transport services",
+    },
+}
+
+
+def fold_empty_parents(db) -> None:
+    """Aggregate the zero-output split parents into same-unit targets."""
+    import openpyxl  # noqa: PLC0415
+
+    x = db.X.iloc[:, 0]
+    lvl2 = db.X.index.get_level_values(2)
+    left = {name: float(x[lvl2 == name].sum())
+            for names in EMPTY_PARENT_FOLD.values() for name in names}
+    hot = {n: v for n, v in left.items() if abs(v) > 1e-6}
+    if hot:
+        print(f"fold saltato: parent non vuoti {hot}", flush=True)
+        return
+
+    wb = openpyxl.Workbook()
+    wb.remove(wb.active)
+    for sheet in ("Activity", "Commodity", "Factor of production",
+                  "Satellite account", "Consumption category", "Region"):
+        ws = wb.create_sheet(sheet)
+        ws.cell(row=1, column=2, value="Aggregation")
+        for i, item in enumerate(db.get_index(sheet), start=2):
+            ws.cell(row=i, column=1, value=item)
+            target = EMPTY_PARENT_FOLD.get(sheet, {}).get(item)
+            if target:
+                ws.cell(row=i, column=2, value=target)
+    path = HERE / "out" / "_fold_empty_parents.xlsx"
+    path.parent.mkdir(exist_ok=True)
+    wb.save(path)
+    db.aggregate(str(path), ignore_nan=True)
+    print(f"parent vuoti aggregati: {len(left)} item rimossi dalla griglia",
+          flush=True)
+
+
 def apply_transport_layer(db, validate: bool = False):
     """Apply Moves B, A and C in place; returns the db.
 
@@ -58,6 +122,8 @@ def apply_transport_layer(db, validate: bool = False):
     _apply_a(db, validate=validate)
     print("=== transport layer: Move C (own-account freight) ===", flush=True)
     _apply_c(db, write=True, validate=validate)
+    print("=== transport layer: fold dei parent vuoti ===", flush=True)
+    fold_empty_parents(db)
     print("=== transport layer: done ===", flush=True)
     return db
 
