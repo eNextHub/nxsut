@@ -220,7 +220,7 @@ def main() -> None:
                     for c, v in sh.items():
                         emit(region, block, "fuel_liquid", c, v, "5-fallback",
                              "no volumes: fuel follows the 'other' shares (declared)")
-            else:
+            elif block == "rail":
                 p = volume.get((region, "rail", "TRN.P"), (0.0, ""))[0]
                 fq = volume.get((region, "rail", "TRN.F"), (0.0, ""))[0]
                 if p > 0 or fq > 0:
@@ -232,6 +232,13 @@ def main() -> None:
                     for c, v in sh.items():
                         emit(region, block, "fuel_liquid", c, v, "5-fallback",
                              "no volumes: fuel follows the 'other' shares (declared)")
+            else:
+                # water and air: no per-child vkm bottom-up exists (ships and
+                # aircraft have no vkm statistics), so fuel follows the money —
+                # declared v0 rule for these blocks.
+                for c, v in sh.items():
+                    emit(region, block, "fuel_liquid", c, v, "5-money",
+                         "water/air: fuel follows the monetary shares (declared v0)")
 
             # -- Q re-denomination targets --
             for c in children:

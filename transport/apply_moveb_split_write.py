@@ -73,7 +73,13 @@ CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
     "air": ["AIR.FRT", "AIR.PAX"],
 }
 # no open pkm exists for these: they keep the monetary denomination
-MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX"}
+MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX",
+                     # air freight too: the World Bank tonne-km count
+                     # belly cargo flown by PASSENGER airlines, whose
+                     # revenue sits in the passenger class — the two
+                     # perimeters do not match (measured: implied price
+                     # DE 1.25 vs IT 0.14 vs US 0.07 EUR/tkm)
+                     "AIR.FRT"}
 FUEL_NAMES = [
     "Motor Gasoline", "Gas/Diesel Oil", "Liquefied Petroleum Gases (LPG)",
     "Biogasoline", "Biodiesels", "Other Liquid Biofuels", "Kerosene",
@@ -184,6 +190,7 @@ def apply(db) -> None:
     # whole block per call under pandas-3 CoW (~hours); this path is ~two
     # big copies per matrix.
     synth = 0
+    implausible: list[tuple] = []
     u_cols: dict[tuple, np.ndarray] = {}
     v_cols: dict[tuple, np.ndarray] = {}
     e_cols: dict[tuple, np.ndarray] = {}
@@ -224,6 +231,16 @@ def apply(db) -> None:
                     Q[c] = m_child
                     continue
                 q = q_spec.get(c, 0.0)
+                if q > 0 and c in prices and m_child > 0:
+                    # plausibility gate: an observed Q whose implied price is
+                    # wildly off its own child's median means the volume and
+                    # the turnover cover different things (IT inland waterways:
+                    # 0.48 vs a ~0.02 EUR/tkm median). Synthesise instead —
+                    # the commodity must keep one unit worldwide.
+                    price = m_child / q
+                    if not (prices[c] / 4 <= price <= prices[c] * 4):
+                        q = 0.0
+                        implausible.append((region, c, round(price, 4)))
                 if q <= 0:
                     if m_child > 0 and c not in prices:
                         # no observed Q and no median price to synthesise from:
@@ -288,7 +305,9 @@ def apply(db) -> None:
             u_rows[(region, "Commodity", p_com)] = pd.Series(0.0, index=u_row.index)
             y_rows[(region, "Commodity", p_com)] = np.zeros(len(y_row))
 
-    print(f"calcolo completato (Q sintetizzate: {synth}); write bulk…", flush=True)
+    print(f"calcolo completato (Q sintetizzate: {synth}, di cui "
+          f"{len(implausible)} per prezzo implausibile: {implausible[:6]}); "
+          f"write bulk…", flush=True)
 
     # columns: natural axis, single-shot per matrix
     for key, arr in u_cols.items():

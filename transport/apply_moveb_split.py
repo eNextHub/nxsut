@@ -60,7 +60,13 @@ CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
 }
 # children with no open pkm anywhere (only "passengers carried"): they keep
 # the monetary denomination, as PIPE does — declared, never synthesised.
-MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX"}
+MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX",
+                     # air freight too: the World Bank tonne-km count
+                     # belly cargo flown by PASSENGER airlines, whose
+                     # revenue sits in the passenger class — the two
+                     # perimeters do not match (measured: implied price
+                     # DE 1.25 vs IT 0.14 vs US 0.07 EUR/tkm)
+                     "AIR.FRT"}
 # liquid-fuel commodity names in the hybrid grid (matched against the index;
 # what is actually found is printed — no silent assumptions).
 FUEL_NAMES = [
