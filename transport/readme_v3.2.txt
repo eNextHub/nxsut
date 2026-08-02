@@ -78,13 +78,26 @@ passenger 3,286 Gpkm, rail freight 7,256 Gtkm, sea and coastal freight
 Gpkm.
 
 The five split parents (road, rail, sea, inland water, air) end up with zero
-output and are FOLDED AWAY at the end of the layer, into targets with the same
-unit: each water/air parent into its own passenger child, the road and rail
-parents into the transport residual category (63). The fold checks that the
-outputs really are zero before touching anything, so it is a numerical no-op;
-it exists only so the grid carries no empty rows. "Transport via pipelines"
-was already a separate sector in EXIOBASE and is untouched; it stays monetary
-(see "what stayed monetary").
+output. Four of them are FOLDED AWAY at the end of the layer into the fifth
+("Other land transport" / "Other land transportation services"), which stays
+in the grid as a single empty pair instead of five. The fold checks the
+outputs really are zero before touching anything, so it is a numerical no-op.
+
+The target is deliberately one of the empty parents and NOT a live sector.
+MARIO carries zero-output items through an aggregation by stamping their
+output with zero_output_epsilon (1e-30) so their coefficients survive, then
+maps those labels through the aggregation and stamps the resulting label too.
+Folding an empty item into a live one therefore drives the live sector's
+output to 1e-30 as well. An earlier build folded the parents into the
+transport residual category (63): sector 63 was annihilated in all 48
+regions while every industry kept buying from it, the table lost its balance,
+and the Leontief inverse started returning negative outputs across ~1500
+activities — with negative GHG footprints for most transport sectors. The
+pipeline now refuses any fold whose group is not entirely empty, and verifies
+afterwards that no output outside the fold groups moved.
+
+"Transport via pipelines" was already a separate sector in EXIOBASE and is
+untouched; it stays monetary (see "what stayed monetary").
 
 Move B - splitting the commercial transport sectors
 ---------------------------------------------------
@@ -270,10 +283,28 @@ KNOWN LIMITATIONS (v0 of the layer)
      reports them jointly); separating them is a job for the nowcast, which
      closes against the observed gasoline and diesel totals.
   6. International aviation and shipping perimeters differ between the
-     economic sectors (which include international legs) and the observed
-     inland volumes (territory-based); this is why their passenger children
-     stay monetary and their freight children are checked against the
-     implicit-price band before re-denomination.
+     economic sectors (which include international legs) and the
+     territory-based inland volumes. Air is denominated on CARRIER-based
+     volumes (ICAO/World Bank: the operator's country of registration), which
+     is the perimeter EXIOBASE's air sector actually has - its jet fuel input
+     is ~7.7x domestic aviation and ~1.07x domestic plus international
+     bunkers. Sea and inland waterway keep territory-based volumes, so their
+     implied prices are the least comparable of the set.
+  7. The implicit price each re-denomination produces (child turnover over
+     observed volume) is reported per country and checked against the
+     cross-country median, but a value outside the band does NOT override the
+     observation: the volume always wins, because it is the measured
+     quantity. 56 of ~270 country-children are flagged; the extremes are
+     small sectors where the monetary side covers more than the volume
+     statistic does (Cyprus and Belgium sea passenger, Swiss inland
+     waterways, Irish rail freight). Read the per-country footprint of those
+     cells with the flag in hand.
+     One class IS corrected, because it is a reporting hole rather than a
+     difference: when two sources publish the same national total and one is
+     more than fivefold smaller, the larger wins and the swap is declared.
+     Exactly one cell qualifies (France bus/coach passenger-km: Eurostat
+     publishes 51 Mpkm for 2011, ITF 54.702, and the two agree exactly for
+     Germany and Spain).
 
 
 DATA SOURCES (all governed in nxbase, all open)
