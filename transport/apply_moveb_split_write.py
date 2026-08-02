@@ -133,15 +133,8 @@ def build_template(regions: list[str]) -> None:
     print(f"template register-only -> {TEMPLATE_OUT}", flush=True)
 
 
-def main() -> None:
-    pfile = ROOT / ("paths_personal.yml" if (ROOT / "paths_personal.yml").exists()
-                    else "paths.yml")
-    paths = yaml.safe_load(open(pfile))["USER"]
-    import mario  # noqa: PLC0415
-
-    print("loading base table…", flush=True)
-    db = mario.parse_from_txt(paths["raw"], table="SUT", mode="flows")
-    db.aggregate(str(ROOT / "support" / "aggregate_ee.xlsx"), ignore_nan=True)
+def apply(db) -> None:
+    """Move B on an already-loaded db, in place — the pipeline entry point."""
     regions = list(db.get_index("Region"))
 
     build_template(regions)
@@ -304,6 +297,18 @@ def main() -> None:
     it_frt = float(X2.loc[("IT", "Activity", CHILD_DEF["ROAD.FRT"][0]), :].to_numpy().sum())
     print(f"IT ROAD.FRT output = {it_frt:,.1f} Mtkm (atteso ~ Q osservato)", flush=True)
 
+
+def main() -> None:
+    """Standalone dev run: load the base table, apply Move B, export."""
+    pfile = ROOT / ("paths_personal.yml" if (ROOT / "paths_personal.yml").exists()
+                    else "paths.yml")
+    paths = yaml.safe_load(open(pfile))["USER"]
+    import mario  # noqa: PLC0415
+
+    print("loading base table…", flush=True)
+    db = mario.parse_from_txt(paths["raw"], table="SUT", mode="flows")
+    db.aggregate(str(ROOT / "support" / "aggregate_ee.xlsx"), ignore_nan=True)
+    apply(db)
     EXPORT_DIR.mkdir(exist_ok=True)
     db.to_txt(path=str(EXPORT_DIR), scenario="baseline")
     print(f"export -> {EXPORT_DIR}", flush=True)

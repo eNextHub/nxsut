@@ -111,12 +111,9 @@ def build_template() -> None:
     wb.save(TEMPLATE_OUT)
 
 
-def main() -> None:
-    write = "--write" in sys.argv
-    import mario  # noqa: PLC0415
-
-    print(f"loading table ({'WRITE' if write else 'DRY-RUN'})…", flush=True)
-    db = mario.parse_from_txt(str(TABLE), table="SUT", mode="flows")
+def apply(db, write: bool = True, validate: bool = True) -> None:
+    """Move C on an already-loaded db, in place (``write=False`` = dry-run;
+    ``validate`` runs the in-run footprint check)."""
     regions = list(db.get_index("Region"))
     rules = load_propensity()
 
@@ -300,6 +297,8 @@ def main() -> None:
     mask = X2.index.get_level_values(2) == ACT
     print(f"own-account: X globale = {float(X2.iloc[:, 0][mask].sum()):,.0f} Mtkm", flush=True)
     try:
+        if not validate:
+            raise RuntimeError("validazione footprint off (pipeline)")
         db.calc_ghg(profile="exiobase_hybrid")
         f = db.f
         for reg in ("IT", "DE", "PL"):
@@ -312,8 +311,18 @@ def main() -> None:
     except Exception as ex:
         print(f"WARN validazione footprint: {ex}", flush=True)
 
-    db.to_txt(path=str(HERE / "out" / "_transport_table"), scenario="baseline")
-    print("export aggiornato -> out/_transport_table", flush=True)
+
+def main() -> None:
+    """Standalone dev run: load the A+B table, apply Move C, export."""
+    import mario  # noqa: PLC0415
+
+    write = "--write" in sys.argv
+    print(f"loading table ({'WRITE' if write else 'DRY-RUN'})…", flush=True)
+    db = mario.parse_from_txt(str(TABLE), table="SUT", mode="flows")
+    apply(db, write=write)
+    if write:
+        db.to_txt(path=str(HERE / "out" / "_transport_table"), scenario="baseline")
+        print("export aggiornato -> out/_transport_table", flush=True)
 
 
 if __name__ == "__main__":

@@ -52,6 +52,10 @@ TEMPLATE_BASE = ROOT / "support" / "add_sectors" / "blastfurnacegas.xlsx"
 TEMPLATE_OUT = HERE / "out" / "_movea_add_sectors.xlsx"
 EXPORT_DIR = HERE / "out" / "_transport_table"
 
+class SkipValidation(Exception):
+    """Internal sentinel: the in-run footprint check is off."""
+
+
 COMMODITY = "Private road mobility"
 TECH_ACT = {
     "CAR.G": "Private car transport, gasoline",
@@ -112,11 +116,10 @@ def build_template() -> None:
     print(f"template -> {TEMPLATE_OUT}", flush=True)
 
 
-def main() -> None:
-    import mario  # noqa: PLC0415
-
-    print("loading Move-B split table…", flush=True)
-    db = mario.parse_from_txt(str(B_EXPORT), table="SUT", mode="flows")
+def apply(db, validate: bool = True) -> None:
+    """Move A on an already-loaded db, in place. ``validate`` runs the
+    in-run footprint check (skip it in the pipeline: calc_ghg belongs
+    downstream, after every move)."""
     regions = list(db.get_index("Region"))
     coms = list(db.get_index("Commodity"))
     print(f"grid: {len(regions)} regioni, {len(db.get_index('Activity'))} activity, "
@@ -358,6 +361,8 @@ def main() -> None:
 
     # --- footprint validation: GHG AR6 total + direct-CO2 share per unit ---
     try:
+        if not validate:
+            raise SkipValidation
         db.calc_ghg(profile="exiobase_hybrid")
         f = db.f
         X3, E3 = db.X, db.E
@@ -379,9 +384,19 @@ def main() -> None:
                 except Exception:
                     vals.append(f"{reg}=n/a")
             print(f"  {key:9} {'   '.join(vals)}", flush=True)
+    except SkipValidation:
+        print("validazione footprint: saltata (pipeline)", flush=True)
     except Exception as ex:
         print(f"WARN: validazione footprint saltata ({ex})", flush=True)
 
+
+def main() -> None:
+    """Standalone dev run: load the Move-B table, apply Move A, export."""
+    import mario  # noqa: PLC0415
+
+    print("loading Move-B split table…", flush=True)
+    db = mario.parse_from_txt(str(B_EXPORT), table="SUT", mode="flows")
+    apply(db)
     EXPORT_DIR.mkdir(exist_ok=True)
     db.to_txt(path=str(EXPORT_DIR), scenario="baseline")
     print(f"export -> {EXPORT_DIR}", flush=True)
