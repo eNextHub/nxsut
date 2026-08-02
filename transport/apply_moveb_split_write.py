@@ -225,7 +225,14 @@ def apply(db) -> None:
                     continue
                 q = q_spec.get(c, 0.0)
                 if q <= 0:
-                    q = m_child / prices[c] if (m_child > 0 and c in prices) else 0.0
+                    if m_child > 0 and c not in prices:
+                        # no observed Q and no median price to synthesise from:
+                        # the dry-run has not been re-run for this child. Refuse
+                        # rather than scale a physical unit by a monetary value.
+                        raise SystemExit(
+                            f"{c}: nessun prezzo mediano (rilancia il dry-run "
+                            f"apply_moveb_split.py prima del write)")
+                    q = m_child / prices[c] if m_child > 0 else 0.0
                     synth += 1
                 Q[c] = q
 
