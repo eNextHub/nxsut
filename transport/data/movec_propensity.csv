@@ -1,0 +1,68 @@
+weight,pattern,rationale
+1.0,Retail trade,trade/distribution: fleet-dominated diesel (GT04/GT18 distribution)
+1.0,Wholesale trade,trade/distribution: fleet-dominated diesel (GT04/GT18 distribution)
+1.0,"Sale, maintenance, repair of motor",trade/distribution: fleet-dominated diesel (GT04/GT18 distribution)
+1.0,Retail sale of automotive fuel,trade/distribution: fleet-dominated diesel (GT04/GT18 distribution)
+0.8,Processing of,food industry: GT04 own 17.7% + distribution fleets
+0.8,Production of meat,food industry: GT04 own 17.7% + distribution fleets
+0.8,Manufacture of beverages,food industry: GT04 own 17.7% + distribution fleets
+0.8,Manufacture of fish products,food industry: GT04 own 17.7% + distribution fleets
+0.8,Manufacture of tobacco,food industry: GT04 own 17.7% + distribution fleets
+0.8,Sugar refining,food industry: GT04 own 17.7% + distribution fleets
+0.8,Processed rice,food industry: GT04 own 17.7% + distribution fleets
+0.7,Incineration of waste,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Landfill of waste,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Recycling of,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Re-processing of,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Biogasification of,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Composting of,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Waste water treatment,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.7,Manure treatment,"waste/recycling: GT14 own 28%, collection fleets (plant use dampens)"
+0.6,Construction,"construction: GT09 own 18.8%, dampened for off-road equipment"
+0.5,Manufacture of bricks,construction materials: GT09
+0.5,Manufacture of cement,construction materials: GT09
+0.5,Manufacture of ceramic goods,construction materials: GT09
+0.5,Manufacture of glass,construction materials: GT09
+0.4,Manufacture of wood,light manufacturing: GT05/GT06/GT13
+0.4,Paper,light manufacturing: GT05/GT06/GT13
+0.4,Pulp,light manufacturing: GT05/GT06/GT13
+0.4,Publishing,light manufacturing: GT05/GT06/GT13
+0.4,Manufacture of furniture,light manufacturing: GT05/GT06/GT13
+0.4,Manufacture of textiles,light manufacturing: GT05/GT06/GT13
+0.4,Manufacture of wearing apparel,light manufacturing: GT05/GT06/GT13
+0.4,Tanning and dressing,light manufacturing: GT05/GT06/GT13
+0.3,Manufacture of machinery,equipment manufacturing + horeca supply: GT11
+0.3,Manufacture of fabricated metal,equipment manufacturing + horeca supply: GT11
+0.3,Manufacture of electrical machinery,equipment manufacturing + horeca supply: GT11
+0.3,Manufacture of office machinery,equipment manufacturing + horeca supply: GT11
+0.3,Manufacture of radio,equipment manufacturing + horeca supply: GT11
+0.3,Manufacture of medical,equipment manufacturing + horeca supply: GT11
+0.3,Hotels and restaurants,equipment manufacturing + horeca supply: GT11
+0.2,Cultivation of,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,farming,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Raw milk,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Wool,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Meat animals,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Animal products,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Forestry,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.2,Fishing,agriculture: GT01 own 17.6% but tractor diesel dominates -> dampened
+0.0,Manufacture of basic iron,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Aluminium production,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Copper production,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,"Lead, zinc and tin production","heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Precious metals production,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Other non-ferrous metal production,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Casting of metals,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Chemicals nec,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,"Plastics, basic","heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,N-fertiliser,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,P- and other fertiliser,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Petroleum Refinery,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Manufacture of coke oven products,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Manufacture of rubber,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Manufacture of other non-metallic mineral,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Manufacture of motor vehicles,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.0,Manufacture of other transport equipment,"heavy/process industry OUT of the pool: bulk diesel cells are feedstock/process (PL Chemicals 2.4 Mt), never fleet"
+0.1,Mining of,mining: GT03 own 26% of road tkm BUT haul-truck diesel is off-road
+0.1,Quarrying of,mining: GT03 own 26% of road tkm BUT haul-truck diesel is off-road
+0.1,Extraction,mining: GT03 own 26% of road tkm BUT haul-truck diesel is off-road
