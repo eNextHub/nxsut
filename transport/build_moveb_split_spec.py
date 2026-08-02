@@ -97,7 +97,20 @@ VOLUMES = {
                           "Inland waterways freight transport")],
     ("air", "AIR.FRT"): [("World Bank air freight (tonne-km)",
                           "H.51.21 Freight air transport")],
+    ("sea", "SEA.PAX"): [("Eurostat maritime passenger transport (pkm)",
+                          "H.50.10 Sea and coastal passenger water transport")],
+    # AIR.PAX is derived (see air_passenger_pkm) — passengers carried x the
+    # observed average stage length — so it is not a plain source lookup.
 }
+# ICAO reference year for the stage length (first year of the SDG series)
+ICAO_REF = "Y17"
+# ICAO's own conversion when no operator factor is available: one passenger
+# (with baggage) counts as 100 kg of payload — so 1 Mpkm = 0.1 Mtkm.
+PAX_TONNE = 0.1
+# no observation of inland-waterway passenger transport exists anywhere:
+# Regulation (EC) 1365/2006 Art. 2(4) excludes passenger vessels from
+# collection, so Eurostat, ITF and the national offices all publish nothing.
+NO_DATA_CHILDREN = {"IWW.PAX"}
 # NXTR v0 recipe constants for the liquid-fuel bottom-up shares.
 INT_HGV, INT_BUS = 2.7e-4, 2.5e-4       # t/vkm
 LOAD_DEFAULT, OCC_BUS = 10.0, 15.0      # tkm/vkm, pkm/vkm
@@ -107,6 +120,43 @@ def fetch_api(params: dict) -> list[dict]:
     url = f"{API}/data.csv?{urllib.parse.urlencode(params)}"
     with urllib.request.urlopen(url, timeout=300) as r:  # noqa: S310
         return list(csv.DictReader(io.StringIO(r.read().decode())))
+
+
+def air_passenger_pkm(fetch) -> dict[str, float]:
+    """Air passenger-km per region for the base year, in Mpkm.
+
+    ICAO publishes passenger-km only from 2017 (UN SDG 9.1.2); the World
+    Bank publishes passengers carried, same ICAO origin, back to 1990. The
+    base-year figure is therefore
+        pkm(Y11) = passengers(Y11) x [pkm(Y17) / passengers(Y17)]
+    i.e. the observed passengers scaled by the observed average stage
+    length — a ratio of two measurements, not an assumed constant. Both
+    series are carrier-based, which is the perimeter of the EXIOBASE air
+    sector (its jet fuel is ~7.7x domestic aviation).
+    """
+    pax: dict[tuple[str, str], float] = {}
+    for r in fetch({"parameter": "Total output",
+                    "source": "World Bank air passengers carried",
+                    "limit": "100000"}):
+        parts = r["item_1"].split("-")
+        if len(parts) == 4:
+            pax[(parts[2], parts[3])] = float(r["value"])
+    pkm_ref: dict[str, float] = {}
+    for r in fetch({"parameter": "Total output",
+                    "source": "ICAO air passenger-km 2017-2024", "limit": "100000"}):
+        parts = r["item_1"].split("-")
+        if len(parts) == 4 and parts[3] == ICAO_REF:
+            pkm_ref[parts[2]] = float(r["value"])
+    out: dict[str, float] = {}
+    for region, pkm17 in pkm_ref.items():
+        p17 = pax.get((region, ICAO_REF), 0.0)
+        p11 = pax.get((region, "Y11"), 0.0)
+        if p17 > 0 and p11 > 0:
+            stage_km = pkm17 / p17
+            out[region] = p11 * stage_km / 1e6          # -> Mpkm
+    print(f"air pkm derivate: {len(out)} regioni "
+          f"(stage length mediana {sorted(pkm_ref[r] / pax[(r, ICAO_REF)] for r in out)[len(out) // 2]:.0f} km)")
+    return out
 
 
 def main() -> None:
@@ -147,6 +197,8 @@ def main() -> None:
             master[(r["country"], r["block"], r["child"])] = (
                 float(r["share"]), r["tier"], r["provenance"])
 
+    air_pkm = air_passenger_pkm(fetch_api)
+
     # --- volumes (Y11) for Q and fuel shares ---
     volume: dict[tuple[str, str, str], tuple[float, str]] = {}
     by_src: dict[tuple[str, str, str, str], float] = defaultdict(float)
@@ -157,6 +209,9 @@ def main() -> None:
             parts = r["item_1"].split("-")
             if len(parts) == 4 and parts[3] == "Y11":
                 by_src[(src, r["i1_name"], parts[2], parts[3])] += float(r["value"])
+    for iso2, q in air_pkm.items():
+        if iso2 in EXIOBASE_REGIONS:
+            volume[(iso2, "air", "AIR.PAX")] = (q, "WB pax x ICAO stage length")
     for (block, child), specs in VOLUMES.items():
         for iso2 in EXIOBASE_REGIONS:
             for src, act in specs:
@@ -198,6 +253,24 @@ def main() -> None:
             else:
                 sh = shares5[block]
                 tier, prov = "5-median", "SBS Y11 median shares (RoW / no data)"
+            if block == "air":
+                # AIR is the one block where the monetary key must ALSO be
+                # physical. Belly cargo is freight work flown on passenger
+                # aircraft, and its revenue is booked by the passenger airline,
+                # so the SBS class boundary (dedicated freighters only) does not
+                # describe our children, which are defined by the WORK done.
+                # Splitting revenue and costs on the same tonne-km-equivalent
+                # basis as the fuel keeps the child coherent: ~a fifth of the
+                # revenue and ~a fifth of the fuel, against its own tonne-km.
+                w_pax = volume.get((region, "air", "AIR.PAX"), (0.0, ""))[0] * PAX_TONNE
+                w_frt = volume.get((region, "air", "AIR.FRT"), (0.0, ""))[0]
+                if w_pax + w_frt > 0:
+                    tot_w = w_pax + w_frt
+                    sh = {"AIR.PAX": w_pax / tot_w, "AIR.FRT": w_frt / tot_w}
+                    tier = "4-tonne-km-equivalent"
+                    prov = ("air split on revenue tonne-km (passengers at 100 kg, "
+                            "ICAO convention): the SBS class covers dedicated "
+                            "freighters only, our children cover the work")
             for c, v in sh.items():
                 emit(region, block, "other", c, v, tier, prov)
             tier_count[f"{block}:{tier.split('-')[0]}"] += 1
@@ -233,12 +306,35 @@ def main() -> None:
                         emit(region, block, "fuel_liquid", c, v, "5-fallback",
                              "no volumes: fuel follows the 'other' shares (declared)")
             else:
-                # water and air: no per-child vkm bottom-up exists (ships and
-                # aircraft have no vkm statistics), so fuel follows the money —
-                # declared v0 rule for these blocks.
-                for c, v in sh.items():
-                    emit(region, block, "fuel_liquid", c, v, "5-money",
-                         "water/air: fuel follows the monetary shares (declared v0)")
+                # Water and air: fuel follows PHYSICAL WORK, not revenue. Ships
+                # and aircraft have no vehicle-km statistics, but passenger and
+                # freight work share one vehicle, and the aviation and freight
+                # accounting standards (ICAO DATA+, IATA RP 1726, EN 16258,
+                # GLEC) allocate that fuel on a mass basis: a passenger counts
+                # as 100 kg including baggage, so 1 Mpkm = 0.1 Mtkm-equivalent.
+                # Splitting by revenue instead would give ferries and airlines'
+                # passenger side most of the fuel — passenger revenue per unit
+                # of physical work is an order of magnitude higher than
+                # freight's — and produce absurd emission intensities.
+                pax_c = next((c for c in children if c.endswith("PAX")), None)
+                frt_c = next((c for c in children if c.endswith("FRT")), None)
+                w_pax = volume.get((region, block, pax_c), (0.0, ""))[0] * PAX_TONNE
+                w_frt = volume.get((region, block, frt_c), (0.0, ""))[0]
+                if w_pax + w_frt > 0:
+                    tot_w = w_pax + w_frt
+                    emit(region, block, "fuel_liquid", pax_c, w_pax / tot_w,
+                         "4-tonne-km-equivalent",
+                         "fuel follows physical work: passengers at 100 kg "
+                         "(ICAO/GLEC mass allocation), freight at its tonnes")
+                    emit(region, block, "fuel_liquid", frt_c, w_frt / tot_w,
+                         "4-tonne-km-equivalent",
+                         "fuel follows physical work: passengers at 100 kg "
+                         "(ICAO/GLEC mass allocation), freight at its tonnes")
+                else:
+                    for c, v in sh.items():
+                        emit(region, block, "fuel_liquid", c, v, "5-money",
+                             "no physical work observed for either child: fuel "
+                             "falls back to the monetary shares (declared)")
 
             # -- Q re-denomination targets --
             for c in children:

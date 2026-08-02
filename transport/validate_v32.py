@@ -74,6 +74,21 @@ def main() -> None:
     print(f"  pooled commodities: {len(pooled)} {pooled[:6]}", flush=True)
     print(f"  route/steel activities: {len(routes)}", flush=True)
 
+    # Structural gate, before any footprint: a negative output means the
+    # Leontief inverse has negative entries, which makes every footprint
+    # downstream meaningless (and silently plausible-looking for the regions
+    # that stay positive). The base table carries ~40 of these; anything far
+    # above that is a pipeline defect, not inherited noise.
+    print("\n--- tenuta strutturale ---", flush=True)
+    Xall = db.X.iloc[:, 0]
+    nneg = int((Xall < 0).sum())
+    print(f"  {'OK ' if nneg <= 120 else 'ROTTO'} output negativi: {nneg} / {len(Xall)} "
+          f"(base EXIOBASE ~40; U min {db.U.values.min():.3g})", flush=True)
+    if nneg > 120:
+        worst = Xall[Xall < 0].sort_values().head(5)
+        for k, v in worst.items():
+            print(f"      {k[0]} {str(k[2])[:46]:48} {v:,.0f}", flush=True)
+
     print("\n--- footprint GHG AR6 [g/unit] + banda di plausibilita' ---", flush=True)
     db.calc_ghg(profile="exiobase_hybrid")
     f = db.f

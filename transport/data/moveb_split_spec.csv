@@ -15,22 +15,22 @@ AT,rail,Q,TRN.P,10778.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 AT,rail,Q,TRN.F,20345.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 AT,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 AT,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-AT,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-AT,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+AT,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+AT,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 AT,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 AT,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 AT,iww,other,IWW.FRT,0.6817,1-SBS,ESTAT.SBSH49 Y11 observed shares
 AT,iww,other,IWW.PAX,0.3183,1-SBS,ESTAT.SBSH49 Y11 observed shares
-AT,iww,fuel_liquid,IWW.FRT,0.6817,5-money,water/air: fuel follows the monetary shares (declared v0)
-AT,iww,fuel_liquid,IWW.PAX,0.3183,5-money,water/air: fuel follows the monetary shares (declared v0)
+AT,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+AT,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 AT,iww,Q,IWW.FRT,2123.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 AT,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-AT,air,other,AIR.FRT,0.0029,1-SBS,ESTAT.SBSH49 Y11 observed shares
-AT,air,other,AIR.PAX,0.9971,1-SBS,ESTAT.SBSH49 Y11 observed shares
-AT,air,fuel_liquid,AIR.FRT,0.0029,5-money,water/air: fuel follows the monetary shares (declared v0)
-AT,air,fuel_liquid,AIR.PAX,0.9971,5-money,water/air: fuel follows the monetary shares (declared v0)
+AT,air,other,AIR.PAX,0.8455,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+AT,air,other,AIR.FRT,0.1545,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+AT,air,fuel_liquid,AIR.PAX,0.8455,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+AT,air,fuel_liquid,AIR.FRT,0.1545,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 AT,air,Q,AIR.FRT,383.371,observed,"ITF Y11, Mpkm; child re-denominates to it"
-AT,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+AT,air,Q,AIR.PAX,20980.2901,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 BE,road_pipe,other,ROAD.FRT,0.9135,1-SBS,ESTAT.SBSH49 Y11 observed shares
 BE,road_pipe,other,ROAD.PAX,0.0812,1-SBS,ESTAT.SBSH49 Y11 observed shares
 BE,road_pipe,other,PIPE,0.0053,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -47,22 +47,22 @@ BE,rail,Q,TRN.P,10669.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 BE,rail,Q,TRN.F,6698.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 BE,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 BE,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-BE,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-BE,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+BE,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BE,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BE,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-BE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+BE,sea,Q,SEA.PAX,53.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 BE,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 BE,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-BE,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-BE,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+BE,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BE,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BE,iww,Q,IWW.FRT,9251.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 BE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-BE,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-BE,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-BE,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-BE,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+BE,air,other,AIR.PAX,0.5687,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BE,air,other,AIR.FRT,0.4313,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BE,air,fuel_liquid,AIR.PAX,0.5687,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BE,air,fuel_liquid,AIR.FRT,0.4313,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BE,air,Q,AIR.FRT,1241.293,observed,"ITF Y11, Mpkm; child re-denominates to it"
-BE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+BE,air,Q,AIR.PAX,16369.1845,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 BG,road_pipe,other,ROAD.FRT,0.8434,1-SBS,ESTAT.SBSH49 Y11 observed shares
 BG,road_pipe,other,ROAD.PAX,0.1566,1-SBS,ESTAT.SBSH49 Y11 observed shares
 BG,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -79,22 +79,22 @@ BG,rail,Q,TRN.P,2059.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 BG,rail,Q,TRN.F,3291.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 BG,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 BG,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-BG,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-BG,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+BG,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+BG,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 BG,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 BG,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 BG,iww,other,IWW.FRT,1.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
 BG,iww,other,IWW.PAX,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
-BG,iww,fuel_liquid,IWW.FRT,1.0,5-money,water/air: fuel follows the monetary shares (declared v0)
-BG,iww,fuel_liquid,IWW.PAX,0.0,5-money,water/air: fuel follows the monetary shares (declared v0)
+BG,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BG,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BG,iww,Q,IWW.FRT,1422.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 BG,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-BG,air,other,AIR.FRT,0.0904,1-SBS,ESTAT.SBSH49 Y11 observed shares
-BG,air,other,AIR.PAX,0.9096,1-SBS,ESTAT.SBSH49 Y11 observed shares
-BG,air,fuel_liquid,AIR.FRT,0.0904,5-money,water/air: fuel follows the monetary shares (declared v0)
-BG,air,fuel_liquid,AIR.PAX,0.9096,5-money,water/air: fuel follows the monetary shares (declared v0)
+BG,air,other,AIR.PAX,0.9846,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BG,air,other,AIR.FRT,0.0154,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BG,air,fuel_liquid,AIR.PAX,0.9846,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BG,air,fuel_liquid,AIR.FRT,0.0154,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BG,air,Q,AIR.FRT,2.2986,observed,"ITF Y11, Mpkm; child re-denominates to it"
-BG,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+BG,air,Q,AIR.PAX,1467.6808,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 CY,road_pipe,other,ROAD.FRT,0.5613,1-SBS,ESTAT.SBSH49 Y11 observed shares
 CY,road_pipe,other,ROAD.PAX,0.4387,1-SBS,ESTAT.SBSH49 Y11 observed shares
 CY,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -111,22 +111,22 @@ CY,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 CY,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 CY,sea,other,SEA.FRT,0.0623,1-SBS,ESTAT.SBSH49 Y11 observed shares
 CY,sea,other,SEA.PAX,0.9377,1-SBS,ESTAT.SBSH49 Y11 observed shares
-CY,sea,fuel_liquid,SEA.FRT,0.0623,5-money,water/air: fuel follows the monetary shares (declared v0)
-CY,sea,fuel_liquid,SEA.PAX,0.9377,5-money,water/air: fuel follows the monetary shares (declared v0)
+CY,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CY,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CY,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-CY,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CY,sea,Q,SEA.PAX,1.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 CY,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 CY,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-CY,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-CY,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+CY,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+CY,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 CY,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 CY,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-CY,air,other,AIR.FRT,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
-CY,air,other,AIR.PAX,1.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
-CY,air,fuel_liquid,AIR.FRT,0.0,5-money,water/air: fuel follows the monetary shares (declared v0)
-CY,air,fuel_liquid,AIR.PAX,1.0,5-money,water/air: fuel follows the monetary shares (declared v0)
+CY,air,other,AIR.PAX,0.9017,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CY,air,other,AIR.FRT,0.0983,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CY,air,fuel_liquid,AIR.PAX,0.9017,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CY,air,fuel_liquid,AIR.FRT,0.0983,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CY,air,Q,AIR.FRT,16.9749,observed,"ITF Y11, Mpkm; child re-denominates to it"
-CY,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CY,air,Q,AIR.PAX,1556.4347,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 CZ,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 CZ,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 CZ,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -143,22 +143,22 @@ CZ,rail,Q,TRN.P,6669.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 CZ,rail,Q,TRN.F,14316.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 CZ,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 CZ,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-CZ,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-CZ,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+CZ,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+CZ,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 CZ,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 CZ,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 CZ,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 CZ,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-CZ,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-CZ,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+CZ,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CZ,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CZ,iww,Q,IWW.FRT,42.2633,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CZ,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-CZ,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-CZ,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-CZ,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-CZ,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+CZ,air,other,AIR.PAX,0.9796,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CZ,air,other,AIR.FRT,0.0204,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CZ,air,fuel_liquid,AIR.PAX,0.9796,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CZ,air,fuel_liquid,AIR.FRT,0.0204,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CZ,air,Q,AIR.FRT,16.721,observed,"ITF Y11, Mpkm; child re-denominates to it"
-CZ,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CZ,air,Q,AIR.PAX,8032.1524,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 DE,road_pipe,other,ROAD.FRT,0.6215,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DE,road_pipe,other,ROAD.PAX,0.3193,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DE,road_pipe,other,PIPE,0.0592,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -175,22 +175,22 @@ DE,rail,Q,TRN.P,89316.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 DE,rail,Q,TRN.F,113317.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 DE,sea,other,SEA.FRT,0.9663,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DE,sea,other,SEA.PAX,0.0337,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DE,sea,fuel_liquid,SEA.FRT,0.9663,5-money,water/air: fuel follows the monetary shares (declared v0)
-DE,sea,fuel_liquid,SEA.PAX,0.0337,5-money,water/air: fuel follows the monetary shares (declared v0)
+DE,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+DE,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 DE,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-DE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+DE,sea,Q,SEA.PAX,744.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 DE,iww,other,IWW.FRT,0.8358,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DE,iww,other,IWW.PAX,0.1642,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DE,iww,fuel_liquid,IWW.FRT,0.8358,5-money,water/air: fuel follows the monetary shares (declared v0)
-DE,iww,fuel_liquid,IWW.PAX,0.1642,5-money,water/air: fuel follows the monetary shares (declared v0)
+DE,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+DE,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 DE,iww,Q,IWW.FRT,55027.1576,observed,"ITF Y11, Mpkm; child re-denominates to it"
 DE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-DE,air,other,AIR.FRT,0.2487,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DE,air,other,AIR.PAX,0.7513,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DE,air,fuel_liquid,AIR.FRT,0.2487,5-money,water/air: fuel follows the monetary shares (declared v0)
-DE,air,fuel_liquid,AIR.PAX,0.7513,5-money,water/air: fuel follows the monetary shares (declared v0)
+DE,air,other,AIR.PAX,0.7509,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+DE,air,other,AIR.FRT,0.2491,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+DE,air,fuel_liquid,AIR.PAX,0.7509,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+DE,air,fuel_liquid,AIR.FRT,0.2491,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 DE,air,Q,AIR.FRT,7716.7619,observed,"ITF Y11, Mpkm; child re-denominates to it"
-DE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+DE,air,Q,AIR.PAX,232559.3474,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 DK,road_pipe,other,ROAD.FRT,0.6774,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DK,road_pipe,other,ROAD.PAX,0.3226,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DK,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -207,20 +207,20 @@ DK,rail,Q,TRN.P,6605.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 DK,rail,Q,TRN.F,2614.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 DK,sea,other,SEA.FRT,0.9391,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DK,sea,other,SEA.PAX,0.0609,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DK,sea,fuel_liquid,SEA.FRT,0.9391,5-money,water/air: fuel follows the monetary shares (declared v0)
-DK,sea,fuel_liquid,SEA.PAX,0.0609,5-money,water/air: fuel follows the monetary shares (declared v0)
+DK,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+DK,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 DK,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-DK,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+DK,sea,Q,SEA.PAX,1498.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 DK,iww,other,IWW.FRT,0.1315,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DK,iww,other,IWW.PAX,0.8685,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DK,iww,fuel_liquid,IWW.FRT,0.1315,5-money,water/air: fuel follows the monetary shares (declared v0)
-DK,iww,fuel_liquid,IWW.PAX,0.8685,5-money,water/air: fuel follows the monetary shares (declared v0)
+DK,iww,fuel_liquid,IWW.FRT,0.1315,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+DK,iww,fuel_liquid,IWW.PAX,0.8685,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 DK,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 DK,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 DK,air,other,AIR.FRT,0.11,1-SBS,ESTAT.SBSH49 Y11 observed shares
 DK,air,other,AIR.PAX,0.89,1-SBS,ESTAT.SBSH49 Y11 observed shares
-DK,air,fuel_liquid,AIR.FRT,0.11,5-money,water/air: fuel follows the monetary shares (declared v0)
-DK,air,fuel_liquid,AIR.PAX,0.89,5-money,water/air: fuel follows the monetary shares (declared v0)
+DK,air,fuel_liquid,AIR.FRT,0.11,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+DK,air,fuel_liquid,AIR.PAX,0.89,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 DK,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 DK,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 EE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -239,22 +239,22 @@ EE,rail,Q,TRN.P,243.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 EE,rail,Q,TRN.F,6271.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 EE,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 EE,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-EE,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-EE,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+EE,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+EE,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 EE,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-EE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+EE,sea,Q,SEA.PAX,592.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 EE,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 EE,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-EE,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-EE,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+EE,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+EE,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 EE,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 EE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-EE,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-EE,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-EE,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-EE,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+EE,air,other,AIR.PAX,0.796,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+EE,air,other,AIR.FRT,0.204,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+EE,air,fuel_liquid,AIR.PAX,0.796,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+EE,air,fuel_liquid,AIR.FRT,0.204,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 EE,air,Q,AIR.FRT,4.871,observed,"ITF Y11, Mpkm; child re-denominates to it"
-EE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+EE,air,Q,AIR.PAX,190.013,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 ES,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 ES,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 ES,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -271,22 +271,22 @@ ES,rail,Q,TRN.P,22931.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 ES,rail,Q,TRN.F,9593.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 ES,sea,other,SEA.FRT,0.7236,1-SBS,ESTAT.SBSH49 Y11 observed shares
 ES,sea,other,SEA.PAX,0.2764,1-SBS,ESTAT.SBSH49 Y11 observed shares
-ES,sea,fuel_liquid,SEA.FRT,0.7236,5-money,water/air: fuel follows the monetary shares (declared v0)
-ES,sea,fuel_liquid,SEA.PAX,0.2764,5-money,water/air: fuel follows the monetary shares (declared v0)
+ES,sea,fuel_liquid,SEA.PAX,0.0051,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+ES,sea,fuel_liquid,SEA.FRT,0.9949,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 ES,sea,Q,SEA.FRT,42811.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-ES,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ES,sea,Q,SEA.PAX,2188.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 ES,iww,other,IWW.FRT,0.0995,1-SBS,ESTAT.SBSH49 Y11 observed shares
 ES,iww,other,IWW.PAX,0.9005,1-SBS,ESTAT.SBSH49 Y11 observed shares
-ES,iww,fuel_liquid,IWW.FRT,0.0995,5-money,water/air: fuel follows the monetary shares (declared v0)
-ES,iww,fuel_liquid,IWW.PAX,0.9005,5-money,water/air: fuel follows the monetary shares (declared v0)
+ES,iww,fuel_liquid,IWW.FRT,0.0995,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+ES,iww,fuel_liquid,IWW.PAX,0.9005,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 ES,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 ES,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-ES,air,other,AIR.FRT,0.0192,1-SBS,ESTAT.SBSH49 Y11 observed shares
-ES,air,other,AIR.PAX,0.9808,1-SBS,ESTAT.SBSH49 Y11 observed shares
-ES,air,fuel_liquid,AIR.FRT,0.0192,5-money,water/air: fuel follows the monetary shares (declared v0)
-ES,air,fuel_liquid,AIR.PAX,0.9808,5-money,water/air: fuel follows the monetary shares (declared v0)
+ES,air,other,AIR.PAX,0.8698,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ES,air,other,AIR.FRT,0.1302,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ES,air,fuel_liquid,AIR.PAX,0.8698,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+ES,air,fuel_liquid,AIR.FRT,0.1302,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 ES,air,Q,AIR.FRT,1313.2932,observed,"ITF Y11, Mpkm; child re-denominates to it"
-ES,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ES,air,Q,AIR.PAX,87704.5087,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 FI,road_pipe,other,ROAD.FRT,0.7599,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FI,road_pipe,other,ROAD.PAX,0.2401,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FI,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -303,22 +303,22 @@ FI,rail,Q,TRN.P,3882.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 FI,rail,Q,TRN.F,9395.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 FI,sea,other,SEA.FRT,0.5943,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FI,sea,other,SEA.PAX,0.4057,1-SBS,ESTAT.SBSH49 Y11 observed shares
-FI,sea,fuel_liquid,SEA.FRT,0.5943,5-money,water/air: fuel follows the monetary shares (declared v0)
-FI,sea,fuel_liquid,SEA.PAX,0.4057,5-money,water/air: fuel follows the monetary shares (declared v0)
+FI,sea,fuel_liquid,SEA.PAX,0.0531,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FI,sea,fuel_liquid,SEA.FRT,0.9469,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FI,sea,Q,SEA.FRT,3966.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-FI,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+FI,sea,Q,SEA.PAX,2223.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 FI,iww,other,IWW.FRT,0.3022,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FI,iww,other,IWW.PAX,0.6978,1-SBS,ESTAT.SBSH49 Y11 observed shares
-FI,iww,fuel_liquid,IWW.FRT,0.3022,5-money,water/air: fuel follows the monetary shares (declared v0)
-FI,iww,fuel_liquid,IWW.PAX,0.6978,5-money,water/air: fuel follows the monetary shares (declared v0)
+FI,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FI,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FI,iww,Q,IWW.FRT,90.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 FI,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-FI,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-FI,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-FI,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-FI,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+FI,air,other,AIR.PAX,0.7657,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+FI,air,other,AIR.FRT,0.2343,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+FI,air,fuel_liquid,AIR.PAX,0.7657,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FI,air,fuel_liquid,AIR.FRT,0.2343,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FI,air,Q,AIR.FRT,740.0853,observed,"ITF Y11, Mpkm; child re-denominates to it"
-FI,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+FI,air,Q,AIR.PAX,24180.9512,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 FR,road_pipe,other,ROAD.FRT,0.6899,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FR,road_pipe,other,ROAD.PAX,0.2747,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FR,road_pipe,other,PIPE,0.0354,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -335,22 +335,22 @@ FR,rail,Q,TRN.P,105596.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 FR,rail,Q,TRN.F,34202.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 FR,sea,other,SEA.FRT,0.9032,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FR,sea,other,SEA.PAX,0.0968,1-SBS,ESTAT.SBSH49 Y11 observed shares
-FR,sea,fuel_liquid,SEA.FRT,0.9032,5-money,water/air: fuel follows the monetary shares (declared v0)
-FR,sea,fuel_liquid,SEA.PAX,0.0968,5-money,water/air: fuel follows the monetary shares (declared v0)
+FR,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FR,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FR,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-FR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+FR,sea,Q,SEA.PAX,3913.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 FR,iww,other,IWW.FRT,0.583,1-SBS,ESTAT.SBSH49 Y11 observed shares
 FR,iww,other,IWW.PAX,0.417,1-SBS,ESTAT.SBSH49 Y11 observed shares
-FR,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-FR,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+FR,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FR,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FR,iww,Q,IWW.FRT,8926.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 FR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-FR,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-FR,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-FR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-FR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+FR,air,other,AIR.PAX,0.7815,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+FR,air,other,AIR.FRT,0.2185,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+FR,air,fuel_liquid,AIR.PAX,0.7815,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+FR,air,fuel_liquid,AIR.FRT,0.2185,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 FR,air,Q,AIR.FRT,5068.7623,observed,"ITF Y11, Mpkm; child re-denominates to it"
-FR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+FR,air,Q,AIR.PAX,181244.5746,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 GR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 GR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 GR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -367,22 +367,22 @@ GR,rail,Q,TRN.P,958.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 GR,rail,Q,TRN.F,352.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 GR,sea,other,SEA.FRT,0.2082,1-SBS,ESTAT.SBSH49 Y11 observed shares
 GR,sea,other,SEA.PAX,0.7918,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GR,sea,fuel_liquid,SEA.FRT,0.2082,5-money,water/air: fuel follows the monetary shares (declared v0)
-GR,sea,fuel_liquid,SEA.PAX,0.7918,5-money,water/air: fuel follows the monetary shares (declared v0)
+GR,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+GR,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 GR,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-GR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+GR,sea,Q,SEA.PAX,3165.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 GR,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 GR,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-GR,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-GR,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+GR,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+GR,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 GR,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 GR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-GR,air,other,AIR.FRT,0.0223,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GR,air,other,AIR.PAX,0.9777,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-GR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+GR,air,other,AIR.PAX,0.9955,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+GR,air,other,AIR.FRT,0.0045,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+GR,air,fuel_liquid,AIR.PAX,0.9955,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+GR,air,fuel_liquid,AIR.FRT,0.0045,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 GR,air,Q,AIR.FRT,4.1857,observed,"ITF Y11, Mpkm; child re-denominates to it"
-GR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+GR,air,Q,AIR.PAX,9234.0483,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 HR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 HR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 HR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -399,22 +399,22 @@ HR,rail,Q,TRN.P,1457.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 HR,rail,Q,TRN.F,2438.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 HR,sea,other,SEA.FRT,0.64,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HR,sea,other,SEA.PAX,0.36,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HR,sea,fuel_liquid,SEA.FRT,0.64,5-money,water/air: fuel follows the monetary shares (declared v0)
-HR,sea,fuel_liquid,SEA.PAX,0.36,5-money,water/air: fuel follows the monetary shares (declared v0)
+HR,sea,fuel_liquid,SEA.PAX,0.3923,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+HR,sea,fuel_liquid,SEA.FRT,0.6077,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 HR,sea,Q,SEA.FRT,217.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-HR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+HR,sea,Q,SEA.PAX,1401.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 HR,iww,other,IWW.FRT,0.9677,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HR,iww,other,IWW.PAX,0.0323,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HR,iww,fuel_liquid,IWW.FRT,0.9677,5-money,water/air: fuel follows the monetary shares (declared v0)
-HR,iww,fuel_liquid,IWW.PAX,0.0323,5-money,water/air: fuel follows the monetary shares (declared v0)
+HR,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+HR,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 HR,iww,Q,IWW.FRT,692.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 HR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-HR,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-HR,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-HR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-HR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+HR,air,other,AIR.PAX,0.9875,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+HR,air,other,AIR.FRT,0.0125,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+HR,air,fuel_liquid,AIR.PAX,0.9875,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+HR,air,fuel_liquid,AIR.FRT,0.0125,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 HR,air,Q,AIR.FRT,1.6747,observed,"ITF Y11, Mpkm; child re-denominates to it"
-HR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+HR,air,Q,AIR.PAX,1326.1636,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 HU,road_pipe,other,ROAD.FRT,0.7969,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HU,road_pipe,other,ROAD.PAX,0.2031,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HU,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -431,22 +431,22 @@ HU,rail,Q,TRN.P,7763.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 HU,rail,Q,TRN.F,9118.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 HU,sea,other,SEA.FRT,0.5,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HU,sea,other,SEA.PAX,0.5,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HU,sea,fuel_liquid,SEA.FRT,0.5,5-money,water/air: fuel follows the monetary shares (declared v0)
-HU,sea,fuel_liquid,SEA.PAX,0.5,5-money,water/air: fuel follows the monetary shares (declared v0)
+HU,sea,fuel_liquid,SEA.FRT,0.5,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+HU,sea,fuel_liquid,SEA.PAX,0.5,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 HU,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 HU,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 HU,iww,other,IWW.FRT,0.7734,1-SBS,ESTAT.SBSH49 Y11 observed shares
 HU,iww,other,IWW.PAX,0.2266,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HU,iww,fuel_liquid,IWW.FRT,0.7734,5-money,water/air: fuel follows the monetary shares (declared v0)
-HU,iww,fuel_liquid,IWW.PAX,0.2266,5-money,water/air: fuel follows the monetary shares (declared v0)
+HU,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+HU,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 HU,iww,Q,IWW.FRT,1840.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 HU,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-HU,air,other,AIR.FRT,0.0581,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HU,air,other,AIR.PAX,0.9419,1-SBS,ESTAT.SBSH49 Y11 observed shares
-HU,air,fuel_liquid,AIR.FRT,0.0581,5-money,water/air: fuel follows the monetary shares (declared v0)
-HU,air,fuel_liquid,AIR.PAX,0.9419,5-money,water/air: fuel follows the monetary shares (declared v0)
+HU,air,other,AIR.PAX,0.997,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+HU,air,other,AIR.FRT,0.003,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+HU,air,fuel_liquid,AIR.PAX,0.997,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+HU,air,fuel_liquid,AIR.FRT,0.003,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 HU,air,Q,AIR.FRT,5.8529,observed,"ITF Y11, Mpkm; child re-denominates to it"
-HU,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+HU,air,Q,AIR.PAX,19568.5631,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 IE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 IE,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 IE,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -463,22 +463,22 @@ IE,rail,Q,TRN.P,1638.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 IE,rail,Q,TRN.F,105.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 IE,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 IE,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-IE,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-IE,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+IE,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IE,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IE,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-IE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IE,sea,Q,SEA.PAX,187.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 IE,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 IE,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-IE,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-IE,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+IE,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+IE,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 IE,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 IE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-IE,air,other,AIR.FRT,0.0125,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IE,air,other,AIR.PAX,0.9875,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IE,air,fuel_liquid,AIR.FRT,0.0125,5-money,water/air: fuel follows the monetary shares (declared v0)
-IE,air,fuel_liquid,AIR.PAX,0.9875,5-money,water/air: fuel follows the monetary shares (declared v0)
+IE,air,other,AIR.PAX,0.9898,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IE,air,other,AIR.FRT,0.0102,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IE,air,fuel_liquid,AIR.PAX,0.9898,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IE,air,fuel_liquid,AIR.FRT,0.0102,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IE,air,Q,AIR.FRT,123.4521,observed,"ITF Y11, Mpkm; child re-denominates to it"
-IE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IE,air,Q,AIR.PAX,119591.5788,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 IT,road_pipe,other,ROAD.FRT,0.7734,1-SBS,ESTAT.SBSH49 Y11 observed shares
 IT,road_pipe,other,ROAD.PAX,0.1844,1-SBS,ESTAT.SBSH49 Y11 observed shares
 IT,road_pipe,other,PIPE,0.0422,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -495,22 +495,22 @@ IT,rail,Q,TRN.P,46845.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 IT,rail,Q,TRN.F,19787.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 IT,sea,other,SEA.FRT,0.5372,1-SBS,ESTAT.SBSH49 Y11 observed shares
 IT,sea,other,SEA.PAX,0.4628,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IT,sea,fuel_liquid,SEA.FRT,0.5372,5-money,water/air: fuel follows the monetary shares (declared v0)
-IT,sea,fuel_liquid,SEA.PAX,0.4628,5-money,water/air: fuel follows the monetary shares (declared v0)
+IT,sea,fuel_liquid,SEA.PAX,0.0073,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IT,sea,fuel_liquid,SEA.FRT,0.9927,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IT,sea,Q,SEA.FRT,53708.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-IT,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IT,sea,Q,SEA.PAX,3953.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 IT,iww,other,IWW.FRT,0.2653,1-SBS,ESTAT.SBSH49 Y11 observed shares
 IT,iww,other,IWW.PAX,0.7347,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IT,iww,fuel_liquid,IWW.FRT,0.2653,5-money,water/air: fuel follows the monetary shares (declared v0)
-IT,iww,fuel_liquid,IWW.PAX,0.7347,5-money,water/air: fuel follows the monetary shares (declared v0)
+IT,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IT,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IT,iww,Q,IWW.FRT,144.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 IT,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-IT,air,other,AIR.FRT,0.0127,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IT,air,other,AIR.PAX,0.9873,1-SBS,ESTAT.SBSH49 Y11 observed shares
-IT,air,fuel_liquid,AIR.FRT,0.0127,5-money,water/air: fuel follows the monetary shares (declared v0)
-IT,air,fuel_liquid,AIR.PAX,0.9873,5-money,water/air: fuel follows the monetary shares (declared v0)
+IT,air,other,AIR.PAX,0.8837,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IT,air,other,AIR.FRT,0.1163,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IT,air,fuel_liquid,AIR.PAX,0.8837,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IT,air,fuel_liquid,AIR.FRT,0.1163,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IT,air,Q,AIR.FRT,760.2684,observed,"ITF Y11, Mpkm; child re-denominates to it"
-IT,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IT,air,Q,AIR.PAX,57754.0173,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 LT,road_pipe,other,ROAD.FRT,0.9101,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LT,road_pipe,other,ROAD.PAX,0.0899,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LT,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -527,22 +527,22 @@ LT,rail,Q,TRN.P,269.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 LT,rail,Q,TRN.F,15088.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 LT,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 LT,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-LT,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-LT,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+LT,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LT,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LT,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-LT,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LT,sea,Q,SEA.PAX,25.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 LT,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 LT,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-LT,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-LT,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+LT,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LT,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LT,iww,Q,IWW.FRT,4.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 LT,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-LT,air,other,AIR.FRT,0.061,1-SBS,ESTAT.SBSH49 Y11 observed shares
-LT,air,other,AIR.PAX,0.939,1-SBS,ESTAT.SBSH49 Y11 observed shares
-LT,air,fuel_liquid,AIR.FRT,0.061,5-money,water/air: fuel follows the monetary shares (declared v0)
-LT,air,fuel_liquid,AIR.PAX,0.939,5-money,water/air: fuel follows the monetary shares (declared v0)
+LT,air,other,AIR.PAX,0.8536,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LT,air,other,AIR.FRT,0.1464,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LT,air,fuel_liquid,AIR.PAX,0.8536,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LT,air,fuel_liquid,AIR.FRT,0.1464,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LT,air,Q,AIR.FRT,2.291,observed,"ITF Y11, Mpkm; child re-denominates to it"
-LT,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LT,air,Q,AIR.PAX,133.5553,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 LU,road_pipe,other,ROAD.FRT,0.8609,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LU,road_pipe,other,ROAD.PAX,0.1391,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LU,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -559,22 +559,22 @@ LU,rail,Q,TRN.P,349.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 LU,rail,Q,TRN.F,270.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 LU,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 LU,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-LU,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-LU,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+LU,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+LU,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 LU,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 LU,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 LU,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 LU,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-LU,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-LU,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+LU,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LU,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LU,iww,Q,IWW.FRT,305.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 LU,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-LU,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-LU,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-LU,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-LU,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+LU,air,other,AIR.PAX,0.0198,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LU,air,other,AIR.FRT,0.9802,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LU,air,fuel_liquid,AIR.PAX,0.0198,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LU,air,fuel_liquid,AIR.FRT,0.9802,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LU,air,Q,AIR.FRT,4653.873,observed,"ITF Y11, Mpkm; child re-denominates to it"
-LU,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LU,air,Q,AIR.PAX,939.2389,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 LV,road_pipe,other,ROAD.FRT,0.8804,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LV,road_pipe,other,ROAD.PAX,0.1196,1-SBS,ESTAT.SBSH49 Y11 observed shares
 LV,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -591,22 +591,22 @@ LV,rail,Q,TRN.P,733.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 LV,rail,Q,TRN.F,21410.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 LV,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 LV,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-LV,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-LV,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+LV,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LV,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LV,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-LV,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LV,sea,Q,SEA.PAX,170.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 LV,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 LV,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-LV,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-LV,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+LV,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+LV,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 LV,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 LV,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-LV,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-LV,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-LV,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-LV,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+LV,air,other,AIR.PAX,0.9849,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LV,air,other,AIR.FRT,0.0151,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+LV,air,fuel_liquid,AIR.PAX,0.9849,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+LV,air,fuel_liquid,AIR.FRT,0.0151,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 LV,air,Q,AIR.FRT,5.3135,observed,"ITF Y11, Mpkm; child re-denominates to it"
-LV,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+LV,air,Q,AIR.PAX,3461.0092,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 MT,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 MT,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 MT,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -623,22 +623,22 @@ MT,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 MT,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 MT,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 MT,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-MT,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-MT,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+MT,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+MT,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 MT,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-MT,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+MT,sea,Q,SEA.PAX,22.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 MT,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 MT,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-MT,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-MT,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+MT,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+MT,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 MT,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 MT,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-MT,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-MT,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-MT,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-MT,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+MT,air,other,AIR.PAX,0.9743,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+MT,air,other,AIR.FRT,0.0257,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+MT,air,fuel_liquid,AIR.PAX,0.9743,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+MT,air,fuel_liquid,AIR.FRT,0.0257,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 MT,air,Q,AIR.FRT,6.352,observed,"ITF Y11, Mpkm; child re-denominates to it"
-MT,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+MT,air,Q,AIR.PAX,2406.5888,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 NL,road_pipe,other,ROAD.FRT,0.8978,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NL,road_pipe,other,ROAD.PAX,0.085,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NL,road_pipe,other,PIPE,0.0171,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -655,22 +655,22 @@ NL,rail,Q,TRN.P,16500.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 NL,rail,Q,TRN.F,6378.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 NL,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 NL,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-NL,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-NL,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+NL,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+NL,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 NL,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-NL,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+NL,sea,Q,SEA.PAX,314.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 NL,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 NL,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-NL,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-NL,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+NL,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+NL,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 NL,iww,Q,IWW.FRT,47303.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 NL,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-NL,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-NL,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-NL,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-NL,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+NL,air,other,AIR.PAX,0.5738,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+NL,air,other,AIR.FRT,0.4262,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+NL,air,fuel_liquid,AIR.PAX,0.5738,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+NL,air,fuel_liquid,AIR.FRT,0.4262,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 NL,air,Q,AIR.FRT,6347.2532,observed,"ITF Y11, Mpkm; child re-denominates to it"
-NL,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+NL,air,Q,AIR.PAX,85444.1495,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 PL,road_pipe,other,ROAD.FRT,0.8145,1-SBS,ESTAT.SBSH49 Y11 observed shares
 PL,road_pipe,other,ROAD.PAX,0.1513,1-SBS,ESTAT.SBSH49 Y11 observed shares
 PL,road_pipe,other,PIPE,0.0341,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -687,22 +687,22 @@ PL,rail,Q,TRN.P,17633.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 PL,rail,Q,TRN.F,53746.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 PL,sea,other,SEA.FRT,0.6903,1-SBS,ESTAT.SBSH49 Y11 observed shares
 PL,sea,other,SEA.PAX,0.3097,1-SBS,ESTAT.SBSH49 Y11 observed shares
-PL,sea,fuel_liquid,SEA.FRT,0.6903,5-money,water/air: fuel follows the monetary shares (declared v0)
-PL,sea,fuel_liquid,SEA.PAX,0.3097,5-money,water/air: fuel follows the monetary shares (declared v0)
+PL,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+PL,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 PL,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-PL,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+PL,sea,Q,SEA.PAX,189.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 PL,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 PL,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-PL,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-PL,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+PL,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+PL,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 PL,iww,Q,IWW.FRT,909.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 PL,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-PL,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-PL,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-PL,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-PL,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+PL,air,other,AIR.PAX,0.9486,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+PL,air,other,AIR.FRT,0.0514,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+PL,air,fuel_liquid,AIR.PAX,0.9486,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+PL,air,fuel_liquid,AIR.FRT,0.0514,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 PL,air,Q,AIR.FRT,39.418,observed,"ITF Y11, Mpkm; child re-denominates to it"
-PL,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+PL,air,Q,AIR.PAX,7274.1945,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 PT,road_pipe,other,ROAD.FRT,0.8073,1-SBS,ESTAT.SBSH49 Y11 observed shares
 PT,road_pipe,other,ROAD.PAX,0.1927,1-SBS,ESTAT.SBSH49 Y11 observed shares
 PT,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -719,22 +719,22 @@ PT,rail,Q,TRN.P,4237.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 PT,rail,Q,TRN.F,2322.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 PT,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 PT,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-PT,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-PT,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+PT,sea,fuel_liquid,SEA.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+PT,sea,fuel_liquid,SEA.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 PT,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-PT,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+PT,sea,Q,SEA.PAX,63.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 PT,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 PT,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-PT,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-PT,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+PT,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+PT,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 PT,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 PT,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-PT,air,other,AIR.FRT,0.0071,1-SBS,ESTAT.SBSH49 Y11 observed shares
-PT,air,other,AIR.PAX,0.9929,1-SBS,ESTAT.SBSH49 Y11 observed shares
-PT,air,fuel_liquid,AIR.FRT,0.0071,5-money,water/air: fuel follows the monetary shares (declared v0)
-PT,air,fuel_liquid,AIR.PAX,0.9929,5-money,water/air: fuel follows the monetary shares (declared v0)
+PT,air,other,AIR.PAX,0.8794,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+PT,air,other,AIR.FRT,0.1206,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+PT,air,fuel_liquid,AIR.PAX,0.8794,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+PT,air,fuel_liquid,AIR.FRT,0.1206,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 PT,air,Q,AIR.FRT,355.8494,observed,"ITF Y11, Mpkm; child re-denominates to it"
-PT,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+PT,air,Q,AIR.PAX,25959.735,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 RO,road_pipe,other,ROAD.FRT,0.7782,1-SBS,ESTAT.SBSH49 Y11 observed shares
 RO,road_pipe,other,ROAD.PAX,0.1619,1-SBS,ESTAT.SBSH49 Y11 observed shares
 RO,road_pipe,other,PIPE,0.0599,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -751,22 +751,22 @@ RO,rail,Q,TRN.P,5063.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 RO,rail,Q,TRN.F,14719.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 RO,sea,other,SEA.FRT,0.9975,1-SBS,ESTAT.SBSH49 Y11 observed shares
 RO,sea,other,SEA.PAX,0.0025,1-SBS,ESTAT.SBSH49 Y11 observed shares
-RO,sea,fuel_liquid,SEA.FRT,0.9975,5-money,water/air: fuel follows the monetary shares (declared v0)
-RO,sea,fuel_liquid,SEA.PAX,0.0025,5-money,water/air: fuel follows the monetary shares (declared v0)
+RO,sea,fuel_liquid,SEA.FRT,0.9975,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+RO,sea,fuel_liquid,SEA.PAX,0.0025,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 RO,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 RO,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 RO,iww,other,IWW.FRT,0.9668,1-SBS,ESTAT.SBSH49 Y11 observed shares
 RO,iww,other,IWW.PAX,0.0332,1-SBS,ESTAT.SBSH49 Y11 observed shares
-RO,iww,fuel_liquid,IWW.FRT,0.9668,5-money,water/air: fuel follows the monetary shares (declared v0)
-RO,iww,fuel_liquid,IWW.PAX,0.0332,5-money,water/air: fuel follows the monetary shares (declared v0)
+RO,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+RO,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 RO,iww,Q,IWW.FRT,11409.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 RO,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-RO,air,other,AIR.FRT,0.0481,1-SBS,ESTAT.SBSH49 Y11 observed shares
-RO,air,other,AIR.PAX,0.9519,1-SBS,ESTAT.SBSH49 Y11 observed shares
-RO,air,fuel_liquid,AIR.FRT,0.0481,5-money,water/air: fuel follows the monetary shares (declared v0)
-RO,air,fuel_liquid,AIR.PAX,0.9519,5-money,water/air: fuel follows the monetary shares (declared v0)
+RO,air,other,AIR.PAX,0.9874,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+RO,air,other,AIR.FRT,0.0126,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+RO,air,fuel_liquid,AIR.PAX,0.9874,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+RO,air,fuel_liquid,AIR.FRT,0.0126,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 RO,air,Q,AIR.FRT,6.0952,observed,"ITF Y11, Mpkm; child re-denominates to it"
-RO,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+RO,air,Q,AIR.PAX,4777.7987,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 SE,road_pipe,other,ROAD.FRT,0.5903,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SE,road_pipe,other,ROAD.PAX,0.4097,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SE,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -783,22 +783,22 @@ SE,rail,Q,TRN.P,11379.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 SE,rail,Q,TRN.F,22864.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 SE,sea,other,SEA.FRT,0.6066,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SE,sea,other,SEA.PAX,0.3934,1-SBS,ESTAT.SBSH49 Y11 observed shares
-SE,sea,fuel_liquid,SEA.FRT,0.6066,5-money,water/air: fuel follows the monetary shares (declared v0)
-SE,sea,fuel_liquid,SEA.PAX,0.3934,5-money,water/air: fuel follows the monetary shares (declared v0)
+SE,sea,fuel_liquid,SEA.PAX,0.0293,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+SE,sea,fuel_liquid,SEA.FRT,0.9707,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 SE,sea,Q,SEA.FRT,7794.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-SE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SE,sea,Q,SEA.PAX,2356.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 SE,iww,other,IWW.FRT,0.139,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SE,iww,other,IWW.PAX,0.861,1-SBS,ESTAT.SBSH49 Y11 observed shares
-SE,iww,fuel_liquid,IWW.FRT,0.139,5-money,water/air: fuel follows the monetary shares (declared v0)
-SE,iww,fuel_liquid,IWW.PAX,0.861,5-money,water/air: fuel follows the monetary shares (declared v0)
+SE,iww,fuel_liquid,IWW.FRT,0.139,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+SE,iww,fuel_liquid,IWW.PAX,0.861,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 SE,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 SE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-SE,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-SE,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-SE,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-SE,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+SE,air,other,AIR.PAX,0.6913,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SE,air,other,AIR.FRT,0.3087,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SE,air,fuel_liquid,AIR.PAX,0.6913,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+SE,air,fuel_liquid,AIR.FRT,0.3087,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 SE,air,Q,AIR.FRT,495.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-SE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SE,air,Q,AIR.PAX,11085.9583,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 SI,road_pipe,other,ROAD.FRT,0.9081,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SI,road_pipe,other,ROAD.PAX,0.0919,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SI,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -815,22 +815,22 @@ SI,rail,Q,TRN.P,689.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 SI,rail,Q,TRN.F,3752.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 SI,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 SI,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-SI,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-SI,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+SI,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+SI,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 SI,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 SI,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 SI,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 SI,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-SI,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-SI,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+SI,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+SI,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 SI,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 SI,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-SI,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-SI,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-SI,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-SI,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+SI,air,other,AIR.PAX,0.9786,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SI,air,other,AIR.FRT,0.0214,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SI,air,fuel_liquid,AIR.PAX,0.9786,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+SI,air,fuel_liquid,AIR.FRT,0.0214,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 SI,air,Q,AIR.FRT,1.606,observed,"ITF Y11, Mpkm; child re-denominates to it"
-SI,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SI,air,Q,AIR.PAX,732.7486,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 SK,road_pipe,other,ROAD.FRT,0.8607,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SK,road_pipe,other,ROAD.PAX,0.1393,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SK,road_pipe,other,PIPE,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -847,22 +847,22 @@ SK,rail,Q,TRN.P,2431.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 SK,rail,Q,TRN.F,7960.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 SK,sea,other,SEA.FRT,1.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
 SK,sea,other,SEA.PAX,0.0,1-SBS,ESTAT.SBSH49 Y11 observed shares
-SK,sea,fuel_liquid,SEA.FRT,1.0,5-money,water/air: fuel follows the monetary shares (declared v0)
-SK,sea,fuel_liquid,SEA.PAX,0.0,5-money,water/air: fuel follows the monetary shares (declared v0)
+SK,sea,fuel_liquid,SEA.FRT,1.0,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+SK,sea,fuel_liquid,SEA.PAX,0.0,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 SK,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 SK,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 SK,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 SK,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-SK,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-SK,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+SK,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+SK,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 SK,iww,Q,IWW.FRT,931.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 SK,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-SK,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-SK,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-SK,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-SK,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+SK,air,other,AIR.PAX,1.0,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SK,air,other,AIR.FRT,0.0,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+SK,air,fuel_liquid,AIR.PAX,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+SK,air,fuel_liquid,AIR.FRT,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 SK,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
-SK,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+SK,air,Q,AIR.PAX,68.4283,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 GB,road_pipe,other,ROAD.FRT,0.6035,1-SBS,ESTAT.SBSH49 Y11 observed shares
 GB,road_pipe,other,ROAD.PAX,0.3818,1-SBS,ESTAT.SBSH49 Y11 observed shares
 GB,road_pipe,other,PIPE,0.0146,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -879,22 +879,22 @@ GB,rail,Q,TRN.P,58462.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 GB,rail,Q,TRN.F,20973.8235,observed,"ITF Y11, Mtkm; child re-denominates to it"
 GB,sea,other,SEA.FRT,0.6263,1-SBS,ESTAT.SBSH49 Y11 observed shares
 GB,sea,other,SEA.PAX,0.3737,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GB,sea,fuel_liquid,SEA.FRT,0.6263,5-money,water/air: fuel follows the monetary shares (declared v0)
-GB,sea,fuel_liquid,SEA.PAX,0.3737,5-money,water/air: fuel follows the monetary shares (declared v0)
+GB,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+GB,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 GB,sea,Q,SEA.FRT,42700.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 GB,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 GB,iww,other,IWW.FRT,0.4134,1-SBS,ESTAT.SBSH49 Y11 observed shares
 GB,iww,other,IWW.PAX,0.5866,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GB,iww,fuel_liquid,IWW.FRT,0.4134,5-money,water/air: fuel follows the monetary shares (declared v0)
-GB,iww,fuel_liquid,IWW.PAX,0.5866,5-money,water/air: fuel follows the monetary shares (declared v0)
+GB,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+GB,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 GB,iww,Q,IWW.FRT,143.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 GB,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-GB,air,other,AIR.FRT,0.0414,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GB,air,other,AIR.PAX,0.9586,1-SBS,ESTAT.SBSH49 Y11 observed shares
-GB,air,fuel_liquid,AIR.FRT,0.0414,5-money,water/air: fuel follows the monetary shares (declared v0)
-GB,air,fuel_liquid,AIR.PAX,0.9586,5-money,water/air: fuel follows the monetary shares (declared v0)
+GB,air,other,AIR.PAX,0.7917,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+GB,air,other,AIR.FRT,0.2083,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+GB,air,fuel_liquid,AIR.PAX,0.7917,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+GB,air,fuel_liquid,AIR.FRT,0.2083,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 GB,air,Q,AIR.FRT,6280.251,observed,"ITF Y11, Mpkm; child re-denominates to it"
-GB,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+GB,air,Q,AIR.PAX,238723.9855,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 NO,road_pipe,other,ROAD.FRT,0.6351,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NO,road_pipe,other,ROAD.PAX,0.3241,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NO,road_pipe,other,PIPE,0.0409,1-SBS,ESTAT.SBSH49 Y11 observed shares
@@ -911,20 +911,20 @@ NO,rail,Q,TRN.P,3076.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 NO,rail,Q,TRN.F,3574.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 NO,sea,other,SEA.FRT,0.9026,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NO,sea,other,SEA.PAX,0.0974,1-SBS,ESTAT.SBSH49 Y11 observed shares
-NO,sea,fuel_liquid,SEA.FRT,0.9026,5-money,water/air: fuel follows the monetary shares (declared v0)
-NO,sea,fuel_liquid,SEA.PAX,0.0974,5-money,water/air: fuel follows the monetary shares (declared v0)
+NO,sea,fuel_liquid,SEA.PAX,0.0029,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+NO,sea,fuel_liquid,SEA.FRT,0.9971,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 NO,sea,Q,SEA.FRT,22070.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-NO,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+NO,sea,Q,SEA.PAX,639.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 NO,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 NO,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-NO,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-NO,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+NO,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+NO,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 NO,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 NO,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 NO,air,other,AIR.FRT,0.0217,1-SBS,ESTAT.SBSH49 Y11 observed shares
 NO,air,other,AIR.PAX,0.9783,1-SBS,ESTAT.SBSH49 Y11 observed shares
-NO,air,fuel_liquid,AIR.FRT,0.0217,5-money,water/air: fuel follows the monetary shares (declared v0)
-NO,air,fuel_liquid,AIR.PAX,0.9783,5-money,water/air: fuel follows the monetary shares (declared v0)
+NO,air,fuel_liquid,AIR.FRT,0.0217,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+NO,air,fuel_liquid,AIR.PAX,0.9783,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 NO,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 NO,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 CH,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -943,22 +943,22 @@ CH,rail,Q,TRN.P,19387.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 CH,rail,Q,TRN.F,11526.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 CH,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 CH,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-CH,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-CH,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+CH,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+CH,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 CH,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 CH,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 CH,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 CH,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-CH,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-CH,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+CH,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CH,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CH,iww,Q,IWW.FRT,37.28,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CH,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-CH,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-CH,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-CH,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-CH,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+CH,air,other,AIR.PAX,0.7889,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CH,air,other,AIR.FRT,0.2111,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CH,air,fuel_liquid,AIR.PAX,0.7889,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CH,air,fuel_liquid,AIR.FRT,0.2111,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CH,air,Q,AIR.FRT,1354.5908,observed,"ITF Y11, Mpkm; child re-denominates to it"
-CH,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CH,air,Q,AIR.PAX,50635.5312,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 TR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 TR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 TR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -975,22 +975,22 @@ TR,rail,Q,TRN.P,4002.0,observed,"ESTAT Y11, Mpkm; child re-denominates to it"
 TR,rail,Q,TRN.F,11677.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 TR,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 TR,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-TR,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-TR,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+TR,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+TR,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 TR,sea,Q,SEA.FRT,15411.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 TR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 TR,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 TR,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-TR,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-TR,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+TR,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+TR,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 TR,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 TR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-TR,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-TR,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-TR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-TR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+TR,air,other,AIR.PAX,0.8548,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+TR,air,other,AIR.FRT,0.1452,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+TR,air,fuel_liquid,AIR.PAX,0.8548,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+TR,air,fuel_liquid,AIR.FRT,0.1452,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 TR,air,Q,AIR.FRT,1544.2663,observed,"ITF Y11, Mpkm; child re-denominates to it"
-TR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+TR,air,Q,AIR.PAX,90919.8762,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 RU,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 RU,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 RU,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -1007,22 +1007,22 @@ RU,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 RU,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 RU,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 RU,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-RU,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-RU,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+RU,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+RU,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 RU,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 RU,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 RU,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 RU,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-RU,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-RU,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+RU,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+RU,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 RU,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 RU,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-RU,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-RU,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-RU,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-RU,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+RU,air,other,AIR.PAX,0.7487,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+RU,air,other,AIR.FRT,0.2513,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+RU,air,fuel_liquid,AIR.PAX,0.7487,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+RU,air,fuel_liquid,AIR.FRT,0.2513,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 RU,air,Q,AIR.FRT,3900.12,observed,"ITF Y11, Mpkm; child re-denominates to it"
-RU,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+RU,air,Q,AIR.PAX,116192.0849,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 CN,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 CN,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 CN,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1039,22 +1039,22 @@ CN,rail,Q,TRN.P,961229.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CN,rail,Q,TRN.F,2946579.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 CN,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 CN,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-CN,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-CN,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+CN,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CN,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CN,sea,Q,SEA.FRT,4935500.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CN,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 CN,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 CN,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-CN,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-CN,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+CN,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CN,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CN,iww,Q,IWW.FRT,2606884.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CN,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-CN,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-CN,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-CN,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-CN,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+CN,air,other,AIR.PAX,0.7503,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CN,air,other,AIR.FRT,0.2497,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CN,air,fuel_liquid,AIR.PAX,0.7503,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CN,air,fuel_liquid,AIR.FRT,0.2497,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CN,air,Q,AIR.FRT,16764.869,observed,"ITF Y11, Mpkm; child re-denominates to it"
-CN,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CN,air,Q,AIR.PAX,503735.4648,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 US,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 US,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 US,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1071,22 +1071,22 @@ US,rail,Q,TRN.P,32579.5102,observed,"ITF Y11, Mpkm; child re-denominates to it"
 US,rail,Q,TRN.F,2532647.547,observed,"ITF Y11, Mtkm; child re-denominates to it"
 US,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 US,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-US,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-US,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+US,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+US,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 US,sea,Q,SEA.FRT,263104.5314,observed,"ITF Y11, Mpkm; child re-denominates to it"
 US,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 US,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 US,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-US,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-US,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+US,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+US,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 US,iww,Q,IWW.FRT,499009.0485,observed,"ITF Y11, Mpkm; child re-denominates to it"
 US,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-US,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-US,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-US,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-US,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+US,air,other,AIR.PAX,0.7712,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+US,air,other,AIR.FRT,0.2288,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+US,air,fuel_liquid,AIR.PAX,0.7712,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+US,air,fuel_liquid,AIR.FRT,0.2288,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 US,air,Q,AIR.FRT,39621.9135,observed,"ITF Y11, Mpkm; child re-denominates to it"
-US,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+US,air,Q,AIR.PAX,1335254.9467,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 JP,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 JP,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 JP,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1103,22 +1103,22 @@ JP,rail,Q,TRN.P,395067.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 JP,rail,Q,TRN.F,19998.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 JP,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 JP,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-JP,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-JP,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+JP,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+JP,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 JP,sea,Q,SEA.FRT,174900.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 JP,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 JP,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 JP,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-JP,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-JP,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+JP,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+JP,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 JP,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 JP,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-JP,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-JP,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-JP,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-JP,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+JP,air,other,AIR.PAX,0.6795,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+JP,air,other,AIR.FRT,0.3205,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+JP,air,fuel_liquid,AIR.PAX,0.6795,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+JP,air,fuel_liquid,AIR.FRT,0.3205,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 JP,air,Q,AIR.FRT,6545.945,observed,"ITF Y11, Mpkm; child re-denominates to it"
-JP,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+JP,air,Q,AIR.PAX,138807.4918,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 IN,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 IN,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 IN,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1135,22 +1135,22 @@ IN,rail,Q,TRN.P,1046522.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 IN,rail,Q,TRN.F,667607.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 IN,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 IN,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-IN,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-IN,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+IN,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+IN,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 IN,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 IN,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 IN,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 IN,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-IN,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-IN,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+IN,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IN,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IN,iww,Q,IWW.FRT,3800.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 IN,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-IN,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-IN,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-IN,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-IN,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+IN,air,other,AIR.PAX,0.8555,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IN,air,other,AIR.FRT,0.1445,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+IN,air,fuel_liquid,AIR.PAX,0.8555,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+IN,air,fuel_liquid,AIR.FRT,0.1445,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 IN,air,Q,AIR.FRT,1702.7027,observed,"ITF Y11, Mpkm; child re-denominates to it"
-IN,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+IN,air,Q,AIR.PAX,100784.1699,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 CA,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 CA,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 CA,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1167,22 +1167,22 @@ CA,rail,Q,TRN.P,1404.3896,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CA,rail,Q,TRN.F,347824.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 CA,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 CA,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-CA,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-CA,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+CA,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CA,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CA,sea,Q,SEA.FRT,31735.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CA,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 CA,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 CA,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-CA,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-CA,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+CA,iww,fuel_liquid,IWW.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CA,iww,fuel_liquid,IWW.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CA,iww,Q,IWW.FRT,25000.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 CA,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-CA,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-CA,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-CA,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-CA,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+CA,air,other,AIR.PAX,0.8878,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CA,air,other,AIR.FRT,0.1122,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+CA,air,fuel_liquid,AIR.PAX,0.8878,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+CA,air,fuel_liquid,AIR.FRT,0.1122,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 CA,air,Q,AIR.FRT,1980.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
-CA,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+CA,air,Q,AIR.PAX,156715.0064,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 KR,road_pipe,other,ROAD.FRT,0.5739,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
 KR,road_pipe,other,ROAD.PAX,0.4261,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
 KR,road_pipe,other,PIPE,0.0,2-SDBS,moveb_split_master.csv (see per-cell tiers there)
@@ -1199,22 +1199,22 @@ KR,rail,Q,TRN.P,63044.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 KR,rail,Q,TRN.F,9997.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 KR,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 KR,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-KR,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-KR,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+KR,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+KR,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 KR,sea,Q,SEA.FRT,27220.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 KR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 KR,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 KR,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-KR,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-KR,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+KR,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+KR,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 KR,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 KR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-KR,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-KR,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-KR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-KR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+KR,air,other,AIR.PAX,0.3902,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+KR,air,other,AIR.FRT,0.6098,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+KR,air,fuel_liquid,AIR.PAX,0.3902,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+KR,air,fuel_liquid,AIR.FRT,0.6098,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 KR,air,Q,AIR.FRT,12381.6339,observed,"ITF Y11, Mpkm; child re-denominates to it"
-KR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+KR,air,Q,AIR.PAX,79238.2942,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 BR,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 BR,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 BR,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -1231,22 +1231,22 @@ BR,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 BR,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 BR,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 BR,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-BR,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-BR,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+BR,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+BR,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 BR,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 BR,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 BR,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 BR,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-BR,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-BR,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+BR,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+BR,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 BR,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 BR,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-BR,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-BR,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-BR,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-BR,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+BR,air,other,AIR.PAX,0.8966,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BR,air,other,AIR.FRT,0.1034,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+BR,air,fuel_liquid,AIR.PAX,0.8966,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+BR,air,fuel_liquid,AIR.FRT,0.1034,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 BR,air,Q,AIR.FRT,1294.4954,observed,"ITF Y11, Mpkm; child re-denominates to it"
-BR,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+BR,air,Q,AIR.PAX,112196.3144,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 MX,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 MX,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 MX,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1263,22 +1263,22 @@ MX,rail,Q,TRN.P,891.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 MX,rail,Q,TRN.F,79728.0,observed,"ITF Y11, Mtkm; child re-denominates to it"
 MX,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 MX,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-MX,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-MX,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+MX,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+MX,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 MX,sea,Q,SEA.FRT,21847.8988,observed,"ITF Y11, Mpkm; child re-denominates to it"
 MX,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 MX,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 MX,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-MX,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-MX,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+MX,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+MX,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 MX,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 MX,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-MX,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-MX,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-MX,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-MX,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+MX,air,other,AIR.PAX,0.8533,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+MX,air,other,AIR.FRT,0.1467,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+MX,air,fuel_liquid,AIR.PAX,0.8533,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+MX,air,fuel_liquid,AIR.FRT,0.1467,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 MX,air,Q,AIR.FRT,774.6035,observed,"ITF Y11, Mpkm; child re-denominates to it"
-MX,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+MX,air,Q,AIR.PAX,45070.6365,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 AU,road_pipe,other,ROAD.FRT,0.8016,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 AU,road_pipe,other,ROAD.PAX,0.1984,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
 AU,road_pipe,other,PIPE,0.0,4-price-x-volume,moveb_split_master.csv (see per-cell tiers there)
@@ -1295,22 +1295,22 @@ AU,rail,Q,TRN.P,14770.5858,observed,"ITF Y11, Mpkm; child re-denominates to it"
 AU,rail,Q,TRN.F,261830.5833,observed,"ITF Y11, Mtkm; child re-denominates to it"
 AU,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 AU,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-AU,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-AU,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+AU,sea,fuel_liquid,SEA.PAX,0.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+AU,sea,fuel_liquid,SEA.FRT,1.0,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 AU,sea,Q,SEA.FRT,113357.0,observed,"ITF Y11, Mpkm; child re-denominates to it"
 AU,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 AU,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 AU,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-AU,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-AU,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+AU,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+AU,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 AU,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 AU,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-AU,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-AU,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-AU,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-AU,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+AU,air,other,AIR.PAX,0.823,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+AU,air,other,AIR.FRT,0.177,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+AU,air,fuel_liquid,AIR.PAX,0.823,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+AU,air,fuel_liquid,AIR.FRT,0.177,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 AU,air,Q,AIR.FRT,2846.5988,observed,"ITF Y11, Mpkm; child re-denominates to it"
-AU,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+AU,air,Q,AIR.PAX,132333.5969,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 ID,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 ID,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 ID,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -1327,22 +1327,22 @@ ID,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 ID,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 ID,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 ID,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-ID,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-ID,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+ID,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+ID,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 ID,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 ID,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 ID,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 ID,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-ID,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-ID,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+ID,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+ID,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 ID,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 ID,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-ID,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-ID,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-ID,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-ID,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+ID,air,other,AIR.PAX,0.9062,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ID,air,other,AIR.FRT,0.0938,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ID,air,fuel_liquid,AIR.PAX,0.9062,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+ID,air,fuel_liquid,AIR.FRT,0.0938,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 ID,air,Q,AIR.FRT,754.2979,observed,"ITF Y11, Mpkm; child re-denominates to it"
-ID,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ID,air,Q,AIR.PAX,72860.4715,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 ZA,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 ZA,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 ZA,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -1359,22 +1359,22 @@ ZA,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 ZA,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 ZA,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 ZA,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-ZA,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-ZA,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+ZA,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+ZA,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 ZA,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 ZA,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 ZA,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 ZA,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-ZA,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-ZA,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+ZA,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+ZA,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 ZA,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 ZA,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
-ZA,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
-ZA,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-ZA,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-ZA,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+ZA,air,other,AIR.PAX,0.7091,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ZA,air,other,AIR.FRT,0.2909,4-tonne-km-equivalent,"air split on revenue tonne-km (passengers at 100 kg, ICAO convention): the SBS class covers dedicated freighters only, our children cover the work"
+ZA,air,fuel_liquid,AIR.PAX,0.7091,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
+ZA,air,fuel_liquid,AIR.FRT,0.2909,4-tonne-km-equivalent,"fuel follows physical work: passengers at 100 kg (ICAO/GLEC mass allocation), freight at its tonnes"
 ZA,air,Q,AIR.FRT,1072.9148,observed,"ITF Y11, Mpkm; child re-denominates to it"
-ZA,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
+ZA,air,Q,AIR.PAX,26148.2063,observed,"WB pax x ICAO stage length Y11, Mpkm; child re-denominates to it"
 TW,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
 TW,road_pipe,other,ROAD.PAX,0.1984,5-median,SBS Y11 median shares (RoW / no data)
 TW,road_pipe,other,PIPE,0.0,5-median,SBS Y11 median shares (RoW / no data)
@@ -1391,20 +1391,20 @@ TW,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 TW,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 TW,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 TW,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-TW,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-TW,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+TW,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+TW,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 TW,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 TW,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 TW,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 TW,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-TW,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-TW,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+TW,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+TW,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 TW,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 TW,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 TW,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 TW,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-TW,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-TW,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+TW,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+TW,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 TW,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 TW,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WA,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -1423,20 +1423,20 @@ WA,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 WA,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 WA,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 WA,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-WA,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-WA,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+WA,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WA,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WA,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WA,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WA,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 WA,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-WA,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-WA,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+WA,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WA,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WA,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WA,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WA,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 WA,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-WA,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-WA,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+WA,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WA,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WA,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WA,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WE,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -1455,20 +1455,20 @@ WE,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 WE,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 WE,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 WE,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-WE,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-WE,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+WE,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WE,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WE,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WE,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WE,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 WE,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-WE,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-WE,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+WE,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WE,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WE,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WE,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WE,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 WE,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-WE,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-WE,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+WE,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WE,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WE,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WE,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WF,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -1487,20 +1487,20 @@ WF,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 WF,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 WF,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 WF,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-WF,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-WF,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+WF,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WF,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WF,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WF,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WF,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 WF,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-WF,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-WF,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+WF,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WF,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WF,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WF,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WF,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 WF,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-WF,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-WF,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+WF,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WF,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WF,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WF,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WL,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -1519,20 +1519,20 @@ WL,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 WL,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 WL,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 WL,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-WL,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-WL,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+WL,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WL,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WL,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WL,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WL,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 WL,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-WL,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-WL,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+WL,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WL,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WL,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WL,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WL,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 WL,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-WL,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-WL,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+WL,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WL,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WL,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WL,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WM,road_pipe,other,ROAD.FRT,0.8016,5-median,SBS Y11 median shares (RoW / no data)
@@ -1551,19 +1551,19 @@ WM,rail,Q,TRN.P,0.0,none,no observed volume: child stays MEUR (declared)
 WM,rail,Q,TRN.F,0.0,none,no observed volume: child stays MEUR (declared)
 WM,sea,other,SEA.FRT,0.6651,5-median,SBS Y11 median shares (RoW / no data)
 WM,sea,other,SEA.PAX,0.3349,5-median,SBS Y11 median shares (RoW / no data)
-WM,sea,fuel_liquid,SEA.FRT,0.6651,5-money,water/air: fuel follows the monetary shares (declared v0)
-WM,sea,fuel_liquid,SEA.PAX,0.3349,5-money,water/air: fuel follows the monetary shares (declared v0)
+WM,sea,fuel_liquid,SEA.FRT,0.6651,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WM,sea,fuel_liquid,SEA.PAX,0.3349,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WM,sea,Q,SEA.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WM,sea,Q,SEA.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WM,iww,other,IWW.FRT,0.583,5-median,SBS Y11 median shares (RoW / no data)
 WM,iww,other,IWW.PAX,0.417,5-median,SBS Y11 median shares (RoW / no data)
-WM,iww,fuel_liquid,IWW.FRT,0.583,5-money,water/air: fuel follows the monetary shares (declared v0)
-WM,iww,fuel_liquid,IWW.PAX,0.417,5-money,water/air: fuel follows the monetary shares (declared v0)
+WM,iww,fuel_liquid,IWW.FRT,0.583,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WM,iww,fuel_liquid,IWW.PAX,0.417,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WM,iww,Q,IWW.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WM,iww,Q,IWW.PAX,0.0,none,no observed volume: child stays MEUR (declared)
 WM,air,other,AIR.FRT,0.0223,5-median,SBS Y11 median shares (RoW / no data)
 WM,air,other,AIR.PAX,0.9777,5-median,SBS Y11 median shares (RoW / no data)
-WM,air,fuel_liquid,AIR.FRT,0.0223,5-money,water/air: fuel follows the monetary shares (declared v0)
-WM,air,fuel_liquid,AIR.PAX,0.9777,5-money,water/air: fuel follows the monetary shares (declared v0)
+WM,air,fuel_liquid,AIR.FRT,0.0223,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
+WM,air,fuel_liquid,AIR.PAX,0.9777,5-money,no physical work observed for either child: fuel falls back to the monetary shares (declared)
 WM,air,Q,AIR.FRT,0.0,none,no observed volume: child stays MEUR (declared)
 WM,air,Q,AIR.PAX,0.0,none,no observed volume: child stays MEUR (declared)

@@ -82,6 +82,13 @@ def fold_empty_parents(db) -> None:
         print(f"fold saltato: parent non vuoti {hot}", flush=True)
         return
 
+    # EVERY item must name its target, itself included. Leaving the
+    # untouched ones blank does not mean "keep as is": the fold target then
+    # appears in the map only as the destination of the emptied parents, so
+    # the group MARIO builds under that name contains the zero-output
+    # parents alone and REPLACES the real sector. Sector 63 is bought by
+    # every industry, so annihilating it unbalances the whole table and the
+    # Leontief inverse starts returning negative outputs table-wide.
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     for sheet in ("Activity", "Commodity", "Factor of production",
@@ -90,15 +97,26 @@ def fold_empty_parents(db) -> None:
         ws.cell(row=1, column=2, value="Aggregation")
         for i, item in enumerate(db.get_index(sheet), start=2):
             ws.cell(row=i, column=1, value=item)
-            target = EMPTY_PARENT_FOLD.get(sheet, {}).get(item)
-            if target:
-                ws.cell(row=i, column=2, value=target)
+            ws.cell(row=i, column=2,
+                    value=EMPTY_PARENT_FOLD.get(sheet, {}).get(item, item))
     path = HERE / "out" / "_fold_empty_parents.xlsx"
     path.parent.mkdir(exist_ok=True)
     wb.save(path)
+    before = {t: float(x[lvl2 == t].sum())
+              for t in set(EMPTY_PARENT_FOLD["Activity"].values())
+              | set(EMPTY_PARENT_FOLD["Commodity"].values())}
     db.aggregate(str(path), ignore_nan=True)
-    print(f"parent vuoti aggregati: {len(left)} item rimossi dalla griglia",
-          flush=True)
+    x2 = db.X.iloc[:, 0]
+    l2 = db.X.index.get_level_values(2)
+    for t, was in before.items():
+        now = float(x2[l2 == t].sum())
+        if was > 0 and abs(now - was) / was > 1e-6:
+            raise SystemExit(
+                f"fold: l'output del bersaglio '{t}' e' cambiato "
+                f"({was:,.0f} -> {now:,.0f}): la mappa di aggregazione non lo "
+                f"preserva, la tavola sarebbe sbilanciata")
+    print(f"parent vuoti aggregati: {len(left)} item rimossi dalla griglia; "
+          f"output dei bersagli preservato", flush=True)
 
 
 def apply_transport_layer(db, validate: bool = False):

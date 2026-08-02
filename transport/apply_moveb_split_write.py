@@ -58,28 +58,28 @@ CHILD_DEF = {
     "SEA.FRT": ("Sea and coastal freight transport",
                 "Sea and coastal freight transport services", "Mtkm", "SEF"),
     "SEA.PAX": ("Sea and coastal passenger transport",
-                "Sea and coastal passenger transport services", "Meuro", "SEP"),
+                "Sea and coastal passenger transport services", "Mpkm", "SEP"),
     "IWW.FRT": ("Inland water freight transport",
                 "Inland water freight transport services", "Mtkm", "IWF"),
     "IWW.PAX": ("Inland water passenger transport",
-                "Inland water passenger transport services", "Meuro", "IWP"),
+                "Inland water passenger transport services", "Mpkm", "IWP"),
     "AIR.FRT": ("Air freight transport", "Air freight transport services",
-                "Meuro", "AIF"),
+                "Mtkm", "AIF"),
     "AIR.PAX": ("Air passenger transport", "Air passenger transport services",
-                "Meuro", "AIP"),
+                "Mpkm", "AIP"),
 }
 CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
     "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
     "air": ["AIR.FRT", "AIR.PAX"],
 }
 # no open pkm exists for these: they keep the monetary denomination
-MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX",
-                     # air freight too: the World Bank tonne-km count
-                     # belly cargo flown by PASSENGER airlines, whose
-                     # revenue sits in the passenger class — the two
-                     # perimeters do not match (measured: implied price
-                     # DE 1.25 vs IT 0.14 vs US 0.07 EUR/tkm)
-                     "AIR.FRT"}
+# every transport child is now physical: air passenger-km derive
+# from ICAO, sea passenger-km come from Eurostat, and inland
+# waterway passengers — which no statistical system collects, by
+# the explicit exclusion in Regulation (EC) 1365/2006 — are scaled
+# with the sea passenger price (declared proxy, tiny sector).
+MONETARY_CHILDREN: set[str] = set()
+PRICE_PROXY = {"IWW.PAX": "SEA.PAX"}
 FUEL_NAMES = [
     "Motor Gasoline", "Gas/Diesel Oil", "Liquefied Petroleum Gases (LPG)",
     "Biogasoline", "Biodiesels", "Other Liquid Biofuels", "Kerosene",
@@ -198,8 +198,17 @@ def apply(db) -> None:
     y_rows: dict[tuple, np.ndarray] = {}
     s_rows: dict[tuple, pd.Series] = {}
 
+    dropped_flow = 0.0        # use by consumers with non-positive output
+    # Pass 1 — block arithmetic (monetary totals, physical outputs, shares)
+    # for EVERY region first. A child's use row lands on parent activity
+    # columns of other blocks AND other regions (Greek shipping is bought by
+    # the German sea transport sector); those columns are about to be zeroed,
+    # so each flow has to be re-pointed at the children that replace that
+    # parent, which means knowing their Q up front. Without this the whole
+    # transport-buys-transport block evaporates at rebuild.
+    blocks: dict[tuple, dict] = {}
     for i, region in enumerate(regions):
-        print(f"  [{i + 1}/{len(regions)}] {region}", flush=True)
+        print(f"  [{i + 1}/{len(regions)}] {region} (calcolo)", flush=True)
         for block, (p_act, p_com) in PARENTS.items():
             children = CHILDREN[block]
             sh_other = spec[(region, block, "other")]
@@ -243,6 +252,9 @@ def apply(db) -> None:
                     if not (prices[c] / 4 <= price <= prices[c] * 4):
                         implausible.append((region, c, round(price, 4)))
                 if q <= 0:
+                    proxy = PRICE_PROXY.get(c)
+                    if c not in prices and proxy in prices:
+                        prices[c] = prices[proxy]
                     if m_child > 0 and c not in prices:
                         # no observed Q and no median price to synthesise from:
                         # the dry-run has not been re-run for this child. Refuse
@@ -253,62 +265,121 @@ def apply(db) -> None:
                     q = m_child / prices[c] if m_child > 0 else 0.0
                     synth += 1
                 Q[c] = q
+            blocks[(region, block)] = dict(
+                region=region, p_act=p_act, p_com=p_com, children=children, M=M, Q=Q,
+                sh_other=sh_other, sh_fuel=sh_fuel, self_val=self_val,
+                u_col=u_col, v_col=v_col, e_col=e_col, fuel_mask=fuel_mask,
+                u_row=u_row, y_row=y_row, users=users,
+                self_col_key=self_col_key, self_row_key=self_row_key)
 
-            pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
-            frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
-            users2 = users.drop(self_col_key)          # self allocated apart
-            neg = users2.clip(upper=0.0).to_numpy()
-            pos = users2.clip(lower=0.0).to_numpy()
-            is_final = np.array(
-                [(lvl[1] != "Activity" and any(k in str(lvl[2]) for k in
-                  ("households", "non-profit", "government")))
-                 for lvl in users2.index], dtype=bool)
-            rule = np.zeros((len(children), len(users2)))
-            rule[children.index(pax), is_final] = pos[is_final]
-            rule[children.index(frt), ~is_final] = pos[~is_final]
-            shares_vec = np.array([sh_other.get(c, 0.0) for c in children])
-            seed = 0.9 * rule + 0.1 * np.outer(shares_vec, pos)
-            closed = ipf(seed, shares_vec * pos.sum(), pos) + np.outer(shares_vec, neg)
-            # monetary row total per child = sh x (M - self) + sh x self = sh x M
+    # parent activity column -> the children that replace it, with the
+    # monetary share and the physical output to divide by
+    replace: dict[tuple, list[tuple[tuple, float, float]]] = {
+        (b["region"], "Activity", b["p_act"]): [
+            ((b["region"], "Activity", CHILD_DEF[c][0]),
+             b["sh_other"].get(c, 0.0), b["Q"][c])
+            for c in b["children"] if b["Q"].get(c, 0.0) > 0
+        ]
+        for b in blocks.values()
+    }
+    # the re-pointing as flat arrays: flow at src_pos moves to dst_pos scaled
+    # by w = monetary share / physical output of the receiving child
+    col_index = U.columns
+    src_pos, dst_pos, w_arr = [], [], []
+    for pkey, targets in replace.items():
+        for ckey, sh, q in targets:
+            src_pos.append(col_index.get_loc(pkey))
+            dst_pos.append(col_index.get_loc(ckey))
+            w_arr.append(sh / q)
+    src_pos = np.array(src_pos, dtype=int)
+    dst_pos = np.array(dst_pos, dtype=int)
+    w_arr = np.array(w_arr, dtype=float)
+    is_parent = np.zeros(len(col_index), dtype=bool)
+    is_parent[np.unique(src_pos)] = True
+    xu_all = x_series.reindex(col_index).to_numpy(dtype=float)
+    # a coefficient is flow / output: with output <= 0 there is no honest one,
+    # and dividing anyway flips its sign — a negative entry in A voids the
+    # non-negativity of the Leontief inverse, so the negative outputs spread
+    # table-wide. Those cells are dropped and reported, never divided.
+    ok_mask = (~is_parent) & (xu_all > 0)
+    bad_mask = (~is_parent) & ~(xu_all > 0)
+    inv_x = np.zeros(len(col_index))
+    inv_x[ok_mask] = 1.0 / xu_all[ok_mask]
 
-            n_u = len(u_row) - 1                      # users2 U-part length
-            u2_index = users2.index[:n_u]
-            for k, c in enumerate(children):
-                act, com, _, _ = CHILD_DEF[c]
-                m_child = sh_other.get(c, 0.0) * M
-                xq = Q[c] if Q[c] > 0 else max(m_child, 1e-9)
-                col = u_col * sh_other.get(c, 0.0)
-                col[fuel_mask] = u_col[fuel_mask] * sh_fuel.get(c, 0.0)
-                col[self_row_key] = 0.0               # self handled on the row side
-                u_cols[(region, "Activity", act)] = (col / xq).to_numpy()
-                v_cols[(region, "Activity", act)] = (v_col * sh_other.get(c, 0.0) / xq).to_numpy()
-                e_cols[(region, "Activity", act)] = (e_col * sh_fuel.get(c, 0.0) / xq).to_numpy()
-                one_hot = pd.Series(0.0, index=S.columns)
-                one_hot[(region, "Commodity", com)] = 1.0
-                s_rows[(region, "Activity", act)] = one_hot
-                # physical scale: child's own monetary total, not M
-                scale = (Q[c] / m_child) if m_child > 0 else 0.0
-                phys = closed[k] * scale
-                u_flows = pd.Series(0.0, index=u_row.index)
-                u_flows[u2_index] = phys[:n_u]
-                x_users = x_series.reindex(u_flows.index)
-                coeff = (u_flows / x_users.replace(0, np.nan)).fillna(0.0)
-                # self diagonal: coeff = physical self flow / X_child = self_val / M
-                coeff[(region, "Activity", act)] = self_val / M if M > 0 else 0.0
-                u_rows[(region, "Commodity", com)] = coeff
-                y_rows[(region, "Commodity", com)] = phys[n_u:]
+    # Pass 2 — surgery
+    for j, ((region, block), B) in enumerate(blocks.items()):
+        if j % len(PARENTS) == 0:
+            print(f"  [{j // len(PARENTS) + 1}/{len(regions)}] {region} (chirurgia)",
+                  flush=True)
+        p_act, p_com = B["p_act"], B["p_com"]
+        children, M, Q = B["children"], B["M"], B["Q"]
+        sh_other, sh_fuel = B["sh_other"], B["sh_fuel"]
+        u_col, v_col, e_col = B["u_col"], B["v_col"], B["e_col"]
+        fuel_mask, u_row, y_row = B["fuel_mask"], B["u_row"], B["y_row"]
+        users, self_val = B["users"], B["self_val"]
+        self_col_key, self_row_key = B["self_col_key"], B["self_row_key"]
 
-            zero_col = np.zeros(len(u_col))
-            u_cols[(region, "Activity", p_act)] = zero_col
-            v_cols[(region, "Activity", p_act)] = np.zeros(len(v_col))
-            e_cols[(region, "Activity", p_act)] = np.zeros(len(e_col))
-            s_rows[(region, "Activity", p_act)] = pd.Series(0.0, index=S.columns)
-            u_rows[(region, "Commodity", p_com)] = pd.Series(0.0, index=u_row.index)
-            y_rows[(region, "Commodity", p_com)] = np.zeros(len(y_row))
+        pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
+        frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
+        users2 = users.drop(self_col_key)          # self allocated apart
+        neg = users2.clip(upper=0.0).to_numpy()
+        pos = users2.clip(lower=0.0).to_numpy()
+        is_final = np.array(
+            [(lvl[1] != "Activity" and any(k in str(lvl[2]) for k in
+              ("households", "non-profit", "government")))
+             for lvl in users2.index], dtype=bool)
+        rule = np.zeros((len(children), len(users2)))
+        rule[children.index(pax), is_final] = pos[is_final]
+        rule[children.index(frt), ~is_final] = pos[~is_final]
+        shares_vec = np.array([sh_other.get(c, 0.0) for c in children])
+        seed = 0.9 * rule + 0.1 * np.outer(shares_vec, pos)
+        closed = ipf(seed, shares_vec * pos.sum(), pos) + np.outer(shares_vec, neg)
+        # monetary row total per child = sh x (M - self) + sh x self = sh x M
+
+        n_u = len(u_row) - 1                      # users2 U-part length
+        u2_index = users2.index[:n_u]
+        for k, c in enumerate(children):
+            act, com, _, _ = CHILD_DEF[c]
+            m_child = sh_other.get(c, 0.0) * M
+            xq = Q[c] if Q[c] > 0 else max(m_child, 1e-9)
+            col = u_col * sh_other.get(c, 0.0)
+            col[fuel_mask] = u_col[fuel_mask] * sh_fuel.get(c, 0.0)
+            col[self_row_key] = 0.0               # self handled on the row side
+            u_cols[(region, "Activity", act)] = (col / xq).to_numpy()
+            v_cols[(region, "Activity", act)] = (v_col * sh_other.get(c, 0.0) / xq).to_numpy()
+            e_cols[(region, "Activity", act)] = (e_col * sh_fuel.get(c, 0.0) / xq).to_numpy()
+            one_hot = pd.Series(0.0, index=S.columns)
+            one_hot[(region, "Commodity", com)] = 1.0
+            s_rows[(region, "Activity", act)] = one_hot
+            # physical scale: child's own monetary total, not M
+            scale = (Q[c] / m_child) if m_child > 0 else 0.0
+            phys = closed[k] * scale
+            u_flows = pd.Series(0.0, index=u_row.index)
+            u_flows[u2_index] = phys[:n_u]
+            fl = u_flows.to_numpy(dtype=float)
+            dropped_flow += float(np.abs(fl[bad_mask]).sum())
+            cf = fl * inv_x
+            np.add.at(cf, dst_pos, fl[src_pos] * w_arr)
+            # self diagonal: physical self flow / X_child = self_val / M. The
+            # own parent column was held out of the IPF, so it contributes
+            # nothing above and there is no double count here.
+            cf[col_index.get_loc((region, "Activity", act))] += (
+                self_val / M if M > 0 else 0.0)
+            u_rows[(region, "Commodity", com)] = pd.Series(cf, index=u_row.index)
+            y_rows[(region, "Commodity", com)] = phys[n_u:]
+
+        zero_col = np.zeros(len(u_col))
+        u_cols[(region, "Activity", p_act)] = zero_col
+        v_cols[(region, "Activity", p_act)] = np.zeros(len(v_col))
+        e_cols[(region, "Activity", p_act)] = np.zeros(len(e_col))
+        s_rows[(region, "Activity", p_act)] = pd.Series(0.0, index=S.columns)
+        u_rows[(region, "Commodity", p_com)] = pd.Series(0.0, index=u_row.index)
+        y_rows[(region, "Commodity", p_com)] = np.zeros(len(y_row))
 
     print(f"calcolo completato (Q sintetizzate: {synth}; prezzi impliciti "
           f"fuori banda, solo segnalati: {len(implausible)} "
-          f"{implausible[:5]}); write bulk…", flush=True)
+          f"{implausible[:5]}; flusso scartato su consumatori con output<=0: "
+          f"{dropped_flow:,.1f}); write bulk…", flush=True)
 
     # columns: natural axis, single-shot per matrix
     for key, arr in u_cols.items():
