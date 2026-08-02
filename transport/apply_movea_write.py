@@ -41,7 +41,6 @@ import shutil
 from collections import defaultdict
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).parent
@@ -143,7 +142,7 @@ def apply(db, validate: bool = True) -> None:
         for r in csv.DictReader(f):
             spec[r["region"]].append(r)
 
-    U, V, E, Y = db.U, db.V, db.E, db.Y
+    U, E, Y = db.U, db.E, db.Y
     EY = db.EY
     u, s, v, e = db.u, db.s, db.v, db.e
     co2_rows = [i for i in E.index if str(i) == "Carbon dioxide, fossil (air - Emiss)"]
@@ -331,33 +330,15 @@ def apply(db, validate: bool = True) -> None:
         w.writeheader()
         w.writerows(diag)
 
-    # --- fold the empty parents into a child (numeric no-op) ---
-    try:
-        import openpyxl
-        FOLD = {"Activity": {"Other land transport": "Road freight transport",
-                             "Transport via railways": "Rail passenger transport"},
-                "Commodity": {"Other land transportation services":
-                              "Road freight transport services",
-                              "Railway transportation services":
-                              "Rail passenger transport services"}}
-        wb = openpyxl.Workbook()
-        wb.remove(wb.active)
-        for sheet in ["Activity", "Commodity", "Factor of production",
-                      "Satellite account", "Consumption category", "Region"]:
-            ws = wb.create_sheet(sheet)
-            ws.cell(row=1, column=2, value="Aggregation")
-            items = list(db.get_index(sheet))
-            for i, item in enumerate(items, start=2):
-                ws.cell(row=i, column=1, value=item)
-                m = FOLD.get(sheet, {}).get(item)
-                if m:
-                    ws.cell(row=i, column=2, value=m)
-        fold_path = HERE / "out" / "_movea_fold.xlsx"
-        wb.save(fold_path)
-        db.aggregate(str(fold_path), ignore_nan=True)
-        print("parent vuoti aggregati nei figli (no-op numerico)", flush=True)
-    except Exception as ex:
-        print(f"WARN: fold parent saltato ({ex})", flush=True)
+    # The emptied parents are folded once, at the end of the layer, by
+    # transport.pipeline.fold_empty_parents. An earlier version folded them
+    # here into the LIVE children ("Other land transport" -> "Road freight
+    # transport"): that is the pattern that annihilates the target, because
+    # MARIO stamps zero_output_epsilon on the aggregated label whenever any
+    # member is a zero-output item. It never fired — MARIO refused the
+    # aggregation on unit grounds (MEUR parent, Mtkm child) and the exception
+    # was swallowed into a WARN — but it would have destroyed road freight
+    # and rail passenger the day the units lined up. Removed deliberately.
 
     # --- footprint validation: GHG AR6 total + direct-CO2 share per unit ---
     try:

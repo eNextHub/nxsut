@@ -3,10 +3,10 @@ Version: v3.2
 Authors: LR, NG
 Date: 2026 Aug
 Build: transport service layer + UNSD-first supply mixes
-Coverage: year 2023. 48 EXIOBASE Hybrid regions. 202 activities, 206
+Coverage: year 2023. 48 EXIOBASE Hybrid regions. 203 activities, 207
 commodities (v3.1: 190 / 199 — the layer adds 17 activities and 12
-commodities and folds away the 5 emptied parents of each). GHG satellite
-accounts.
+commodities and folds 4 of the 5 emptied parents of each into the fifth).
+GHG satellite accounts.
 
 
 WHAT v3.2 ADDS TO v3.1
@@ -233,32 +233,52 @@ country-years come from UNSD.
 WHAT STAYED MONETARY, AND WHY
 =============================
 
-Re-denomination happens only where an honest physical denominator exists:
+Every transport child produced by the split is now PHYSICAL. One sector is
+not, and it is not one the split created:
 
-  - pipeline transport: the sector's turnover covers gas and oil transport
-    while the observed tonne-km cover only part of the network - the implicit
-    price lands far out of band, so the sector keeps MEUR;
-  - passenger air and passenger water transport: no open source publishes
-    passenger-km for them (only passengers carried), so those children keep
-    MEUR;
-  - AIR FREIGHT, on measurement. The World Bank tonne-km count belly cargo
-    flown by PASSENGER airlines, while the SBS freight class is dedicated
-    cargo carriers only. The perimeters do not match and the implied prices
-    say so - DE 1.25, IT 0.14, US 0.07 EUR/tkm, a three-order spread where a
-    coherent measure would cluster - so the air block splits in MEUR only,
-    which is what its monetary key supports. Re-denominating it needs an
-    airline-level tonne-km series that separates dedicated freighters, or a
-    revenue split that reassigns belly-cargo revenue;
+  - TRANSPORT VIA PIPELINES keeps MEUR. It was already its own sector in
+    EXIOBASE and the split leaves it alone. Its turnover covers gas and oil
+    transport while the observed tonne-km cover part of the network only, so
+    the implied price lands 10-20x above anything comparable - there is no
+    honest denominator to move to;
   - everything outside transport is untouched.
+
+The three that used to stay monetary were closed by finding the right
+measurement rather than by assuming one:
+
+  - AIR, both children, on CARRIER-based volumes. The earlier reading (that
+    World Bank tonne-km count belly cargo of passenger airlines while the SBS
+    class is dedicated freighters, so the perimeters cannot match) had the
+    perimeter question the wrong way round: EXIOBASE's air sector is itself
+    carrier-based and flies international legs - its jet fuel input is ~7.7x
+    domestic aviation and ~1.07x domestic plus international bunkers. Against
+    the carrier perimeter the implied prices converge instead of scattering
+    (air freight IT 1.27 / DE 1.25 EUR/tkm; air passenger IT 0.127 / DE 0.125
+    EUR/pkm), which is the evidence the re-denomination is sound. Passenger-km
+    come from ICAO's revenue passenger-km (free as UN SDG indicator 9.1.2)
+    and, for base years the SDG series does not reach, from World Bank
+    passengers carried x the observed ICAO average stage length - a ratio of
+    two measured quantities, not an assumed constant. The freight/passenger
+    key inside the block is REVENUE TONNE-KM: one passenger with baggage
+    counts as 100 kg of payload, the standard ICAO/IATA/EN 16258/GLEC
+    convention;
+  - SEA AND COASTAL PASSENGER on Eurostat maritime passenger-km;
+  - INLAND WATERWAY PASSENGER has no observation anywhere and never will:
+    Regulation (EC) 1365/2006 Art. 2(4) explicitly excludes passenger vessels
+    from collection, so Eurostat, ITF and the national offices publish
+    nothing. Its volume is synthesised at the SEA passenger price - a declared
+    proxy on a very small sector - so that the commodity keeps one unit
+    worldwide.
 
   Rule of thumb applied throughout: the OBSERVED VOLUME ALWAYS WINS. When a
   child's implied price is far from its own median, that is almost always the
   monetary side misbehaving (SBS coverage, transit traffic, a class that also
   does other things) - substituting the volume would replace a good
   observation with a value derived from the suspect one. Such cases are
-  flagged for the radar (39 of 208 child-country cells) and left alone. A
-  volume is synthesised only where none is observed, so that each commodity
-  keeps one unit worldwide.
+  flagged for the radar (56 of ~270 child-country cells) and left alone. The
+  single exception is a coverage hole visible by cross-source comparison
+  (see limitation 7). A volume is synthesised only where none is observed, so
+  that each commodity keeps one unit worldwide.
 
 
 KNOWN LIMITATIONS (v0 of the layer)
