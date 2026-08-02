@@ -43,28 +43,31 @@ a model. After v3.2 the two perimeters coincide: all road fuel sits in
 transport-family columns, and the industry columns keep process, heating and
 off-road fuel only - which is exactly what the UNSD industry rows contain.
 
-NEW ACTIVITIES (17)                      NEW COMMODITIES (12)
-  Road freight transport                   Road freight transport services  [Mtkm]
-  Road passenger transport                 Road passenger transport services [Mpkm]
-  Rail freight transport                   Rail freight transport services  [Mtkm]
-  Rail passenger transport                 Rail passenger transport services [Mpkm]
-  Private car transport, gasoline          Private road mobility            [Mpkm]
-  Private car transport, diesel            Own-account road transport       [Mtkm]
-  Private car transport, LPG
-  Private car transport, natural gas
-  Private car transport, electric
-  Private motorcycle transport             Sea and coastal freight
-  Own-account road freight transport         transport services         [Mtkm]
-  Sea and coastal freight transport        Sea and coastal passenger
-  Sea and coastal passenger transport        transport services         [Meuro]
-  Inland water freight transport           Inland water freight
-  Inland water passenger transport           transport services         [Mtkm]
-  Air freight transport                    Inland water passenger
-  Air passenger transport                    transport services         [Meuro]
-                                           Air freight transport
-                                             services                   [Meuro]
-                                           Air passenger transport
-                                             services                   [Meuro]
+NEW ACTIVITIES (17)
+  Road freight transport                    Private car transport, gasoline
+  Road passenger transport                  Private car transport, diesel
+  Rail freight transport                    Private car transport, LPG
+  Rail passenger transport                  Private car transport, natural gas
+  Sea and coastal freight transport         Private car transport, electric
+  Sea and coastal passenger transport       Private motorcycle transport
+  Inland water freight transport            Own-account road freight transport
+  Inland water passenger transport
+  Air freight transport
+  Air passenger transport
+
+NEW COMMODITIES (12), with their units
+  Road freight transport services                            Mtkm
+  Road passenger transport services                          Mpkm
+  Rail freight transport services                            Mtkm
+  Rail passenger transport services                          Mpkm
+  Sea and coastal freight transport services                 Mtkm
+  Inland water freight transport services                    Mtkm
+  Own-account road transport                                 Mtkm
+  Private road mobility                                      Mpkm
+  Sea and coastal passenger transport services               Meuro
+  Inland water passenger transport services                  Meuro
+  Air freight transport services                             Meuro
+  Air passenger transport services                           Meuro
 
 World outputs of the physical children (2023): road freight 13,377 Gtkm,
 own-account road freight 2,164 Gtkm, road passenger 2,737 Gpkm, rail
