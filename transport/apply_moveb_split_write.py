@@ -64,7 +64,7 @@ CHILD_DEF = {
     "IWW.PAX": ("Inland water passenger transport",
                 "Inland water passenger transport services", "Meuro", "IWP"),
     "AIR.FRT": ("Air freight transport", "Air freight transport services",
-                "Mtkm", "AIF"),
+                "Meuro", "AIF"),
     "AIR.PAX": ("Air passenger transport", "Air passenger transport services",
                 "Meuro", "AIP"),
 }
@@ -232,14 +232,15 @@ def apply(db) -> None:
                     continue
                 q = q_spec.get(c, 0.0)
                 if q > 0 and c in prices and m_child > 0:
-                    # plausibility gate: an observed Q whose implied price is
-                    # wildly off its own child's median means the volume and
-                    # the turnover cover different things (IT inland waterways:
-                    # 0.48 vs a ~0.02 EUR/tkm median). Synthesise instead —
-                    # the commodity must keep one unit worldwide.
+                    # The observed volume ALWAYS wins: the physical output must
+                    # match the statistics. A wildly off implied price is
+                    # (almost always) the MONETARY side misbehaving — SBS
+                    # coverage, transit, a sector that also does other things —
+                    # so substituting Q with M / median price would replace a
+                    # good observation with a value derived from the suspect
+                    # one. Flag it for the radar instead.
                     price = m_child / q
                     if not (prices[c] / 4 <= price <= prices[c] * 4):
-                        q = 0.0
                         implausible.append((region, c, round(price, 4)))
                 if q <= 0:
                     if m_child > 0 and c not in prices:
@@ -305,9 +306,9 @@ def apply(db) -> None:
             u_rows[(region, "Commodity", p_com)] = pd.Series(0.0, index=u_row.index)
             y_rows[(region, "Commodity", p_com)] = np.zeros(len(y_row))
 
-    print(f"calcolo completato (Q sintetizzate: {synth}, di cui "
-          f"{len(implausible)} per prezzo implausibile: {implausible[:6]}); "
-          f"write bulk…", flush=True)
+    print(f"calcolo completato (Q sintetizzate: {synth}; prezzi impliciti "
+          f"fuori banda, solo segnalati: {len(implausible)} "
+          f"{implausible[:5]}); write bulk…", flush=True)
 
     # columns: natural axis, single-shot per matrix
     for key, arr in u_cols.items():
