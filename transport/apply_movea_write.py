@@ -61,6 +61,11 @@ TECH_ACT = {
     "CAR.E": "Private car transport, electric",
     "MOTO": "Private motorcycle transport",
 }
+# IPCC combustion EFs, tCO2 per t fuel (declared v0: CO2 only — CH4/N2O are
+# ~1-2% of road CO2e; ELE has no tailpipe). Used to re-attribute household
+# driving combustion from EY to the car activities (exact conservation).
+EF_CO2 = {"GASO": 3.07, "DIES": 3.17, "LPG": 3.02, "NGAS": 2.75, "ELE": 0.0}
+
 # carrier -> commodity row name in the grid (containment-matched at runtime
 # for the natural-gas variants; asserted, never silent)
 CARRIER_NAME = {
@@ -136,7 +141,11 @@ def main() -> None:
             spec[r["region"]].append(r)
 
     U, V, E, Y = db.U, db.V, db.E, db.Y
+    EY = db.EY
     u, s, v, e = db.u, db.s, db.v, db.e
+    co2_rows = [i for i in E.index if str(i) == "Carbon dioxide, fossil (air - Emiss)"]
+    assert len(co2_rows) == 1, f"riga CO2 ambigua: {co2_rows}"
+    CO2_ROW = co2_rows[0]
     hh_cols = {}
     for region in regions:
         cands = [c for c in Y.columns if c[0] == region
@@ -147,6 +156,10 @@ def main() -> None:
     u_cols: dict[tuple, pd.Series] = {}
     s_rows: dict[tuple, pd.Series] = {}
     y_updates: dict[tuple, pd.Series] = {}     # per-region household column
+    e_sat_cols: dict[tuple, pd.Series] = {}    # per-tech satellite column (CO2)
+    ey_updates: dict[tuple, pd.Series] = {}    # per-region household EY column
+    ey_shortfall: list[str] = []
+    max_conserv_err = [0.0]
     com_y: dict[tuple, float] = {}             # (region) -> pkm to Y
     diag: list[dict] = []
 
@@ -157,6 +170,7 @@ def main() -> None:
             continue
         hh = hh_cols[region]
         y_col = Y[hh].copy()
+        moved_fuel: dict[str, tuple[float, str]] = {}
 
         # availability per carrier: household cells across all origins
         def carrier_cells(carrier: str) -> pd.Index:
@@ -211,11 +225,35 @@ def main() -> None:
             pos = y_col[cells].clip(lower=0)
             tot = float(pos.sum())
             col = pd.Series(0.0, index=row_index)
+            moved_actual = 0.0
             if moved > 0 and tot > 0:
                 flows = pos / tot * moved          # pro-rata across origins
                 y_col[cells] = y_col[cells] - flows
                 col[cells] = flows / pkm_out[t] if pkm_out[t] > 0 else 0.0
+                moved_actual = float(flows.sum())
+            moved_fuel[t] = (moved_actual, r["carrier"])
             u_cols[(region, "Activity", TECH_ACT[t])] = col
+
+        # EY -> E re-attribution: household driving combustion moves to the
+        # car activities (IPCC EFs, CO2 only), capped by the EY availability
+        # so nothing goes negative and conservation is exact by construction.
+        co2_direct = {t: mv * EF_CO2[carr] for t, (mv, carr) in moved_fuel.items()}
+        tot_dir = sum(co2_direct.values())
+        avail = float(EY.loc[CO2_ROW, hh])
+        move_tot = min(tot_dir, max(avail, 0.0))
+        fscale = move_tot / tot_dir if tot_dir > 0 else 0.0
+        if fscale < 0.999:
+            ey_shortfall.append(region)
+        for t in co2_direct:
+            vec = pd.Series(0.0, index=E.index)
+            if pkm_out.get(t, 0.0) > 0:
+                vec[CO2_ROW] = co2_direct[t] * fscale / pkm_out[t]
+            e_sat_cols[(region, "Activity", TECH_ACT[t])] = vec
+        ey_new = EY[hh].copy()
+        ey_new[CO2_ROW] = ey_new[CO2_ROW] - move_tot
+        ey_updates[hh] = ey_new
+        conserv = abs(sum(co2_direct[t] * fscale for t in co2_direct) - move_tot)
+        max_conserv_err[0] = max(max_conserv_err[0], conserv)
 
         # s = SUPPLY SHARES per commodity (multi-supplier: MARIO computes
         # Xa = s x Xc — a flat 1 would hand every tech the full regional
@@ -243,7 +281,10 @@ def main() -> None:
     for key, ser in u_cols.items():
         u[key] = ser.to_numpy()
         v[key] = 0.0
-        e[key] = 0.0
+        sat = e_sat_cols.get(key)
+        e[key] = sat.to_numpy() if sat is not None else 0.0
+    for hh, vec in ey_updates.items():
+        EY[hh] = vec.to_numpy()
     sT = s.T
     for key, ser in s_rows.items():
         sT[key] = ser.to_numpy()
@@ -266,7 +307,7 @@ def main() -> None:
     z = db.z
     z.update(s)
     z.update(u)
-    db.update_scenarios("baseline", z=z, v=v, e=e, Y=Y)
+    db.update_scenarios("baseline", z=z, v=v, e=e, Y=Y, EY=EY)
     db.reset_to_coefficients("baseline")
 
     X2 = db.X
@@ -277,12 +318,69 @@ def main() -> None:
     it = [d for d in diag if d["region"] == "IT"][0]
     print(f"IT: pkm privato = {it['pkm_tot']:,.0f} Mpkm, copertura benzina = "
           f"{it['gaso_coverage']}", flush=True)
+    print(f"riattribuzione EY->E: err conservazione max = {max_conserv_err[0]:.3e} t; "
+          f"regioni con EY insufficiente: {len(ey_shortfall)} {ey_shortfall[:6]}",
+          flush=True)
     n_synth = sum(1 for d in diag if d["synth"])
     print(f"regioni sintetizzate (gasoline-anchor): {n_synth}/{len(diag)}", flush=True)
     with open(HERE / "data" / "movea_diag.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["region", "synth", "pkm_tot", "gaso_coverage"])
         w.writeheader()
         w.writerows(diag)
+
+    # --- fold the empty parents into a child (numeric no-op) ---
+    try:
+        import openpyxl
+        FOLD = {"Activity": {"Other land transport": "Road freight transport",
+                             "Transport via railways": "Rail passenger transport"},
+                "Commodity": {"Other land transportation services":
+                              "Road freight transport services",
+                              "Railway transportation services":
+                              "Rail passenger transport services"}}
+        wb = openpyxl.Workbook()
+        wb.remove(wb.active)
+        for sheet in ["Activity", "Commodity", "Factor of production",
+                      "Satellite account", "Consumption category", "Region"]:
+            ws = wb.create_sheet(sheet)
+            ws.cell(row=1, column=2, value="Aggregation")
+            items = list(db.get_index(sheet))
+            for i, item in enumerate(items, start=2):
+                ws.cell(row=i, column=1, value=item)
+                m = FOLD.get(sheet, {}).get(item)
+                if m:
+                    ws.cell(row=i, column=2, value=m)
+        fold_path = HERE / "out" / "_movea_fold.xlsx"
+        wb.save(fold_path)
+        db.aggregate(str(fold_path), ignore_nan=True)
+        print("parent vuoti aggregati nei figli (no-op numerico)", flush=True)
+    except Exception as ex:
+        print(f"WARN: fold parent saltato ({ex})", flush=True)
+
+    # --- footprint validation: GHG AR6 total + direct-CO2 share per unit ---
+    try:
+        db.calc_ghg(profile="exiobase_hybrid")
+        f = db.f
+        X3, E3 = db.X, db.E
+        acts = dict(TECH_ACT)
+        acts.update({"ROAD.FRT": "Road freight transport",
+                     "ROAD.PAX": "Road passenger transport",
+                     "TRN.P": "Rail passenger transport",
+                     "TRN.F": "Rail freight transport"})
+        print("\nfootprint GHG AR6 [g/unit] (dir = CO2 diretta) - IT/DE/PL:", flush=True)
+        for key, act in acts.items():
+            vals = []
+            for reg in ("IT", "DE", "PL"):
+                colk = (reg, "Activity", act)
+                try:
+                    tot = float(f.loc["GHG AR6 GWP-100", colk])
+                    x = float(X3.loc[colk].iloc[0])
+                    dirc = float(E3.loc[CO2_ROW, colk]) / x if x > 0 else 0.0
+                    vals.append(f"{reg}={tot:7.1f} (dir {dirc:6.1f})")
+                except Exception:
+                    vals.append(f"{reg}=n/a")
+            print(f"  {key:9} {'   '.join(vals)}", flush=True)
+    except Exception as ex:
+        print(f"WARN: validazione footprint saltata ({ex})", flush=True)
 
     EXPORT_DIR.mkdir(exist_ok=True)
     db.to_txt(path=str(EXPORT_DIR), scenario="baseline")
