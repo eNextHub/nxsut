@@ -45,23 +45,31 @@ from apply_movec_write import ACT as OWN_ACT  # noqa: E402
 from apply_movec_write import apply as _apply_c  # noqa: E402
 
 
-# The five split parents end up with zero output. Folding them away needs a
-# target with the SAME unit — MARIO refuses to aggregate across units — and
-# now that every transport child is physical (pkm or tkm), the only monetary
-# transport commodity left is the residual category (63), so all five parents
-# fold there. Numerically a no-op: they are zero.
+# The five split parents end up with zero output; folding collapses them
+# into ONE empty pair instead of five.
+#
+# The target must be one of the empty parents themselves, NOT a live sector
+# such as the residual category (63). MARIO protects zero-output items
+# through an aggregation by stamping their output with
+# ``zero_output_epsilon`` (1e-30) so their coefficients survive; it then maps
+# those labels THROUGH the aggregation and stamps the resulting label too
+# (``_aggregate_sut_split_flows``). Folding an empty item into a live one
+# therefore forces the live sector's output to 1e-30 as well — sector 63 is
+# bought by every industry, so annihilating it unbalanced the table and the
+# Leontief inverse started returning negative outputs table-wide (~1500
+# activities, footprints negative). Keeping the group entirely empty makes
+# the stamp a no-op, which is what it is meant to be.
+_FOLD_ACT = "Other land transport"
+_FOLD_COM = "Other land transportation services"
 EMPTY_PARENT_FOLD = {
     "Activity": {
-        p: "Supporting and auxiliary transport activities; "
-           "activities of travel agencies (63)"
-        for p in ("Other land transport", "Transport via railways",
-                  "Sea and coastal water transport", "Inland water transport",
-                  "Air transport (62)")
+        p: _FOLD_ACT
+        for p in ("Transport via railways", "Sea and coastal water transport",
+                  "Inland water transport", "Air transport (62)")
     },
     "Commodity": {
-        p: "Supporting and auxiliary transport services; travel agency services (63)"
-        for p in ("Other land transportation services",
-                  "Railway transportation services",
+        p: _FOLD_COM
+        for p in ("Railway transportation services",
                   "Sea and coastal water transportation services",
                   "Inland water transportation services",
                   "Air transport services (62)")
@@ -75,20 +83,16 @@ def fold_empty_parents(db) -> None:
 
     x = db.X.iloc[:, 0]
     lvl2 = db.X.index.get_level_values(2)
-    left = {name: float(x[lvl2 == name].sum())
-            for names in EMPTY_PARENT_FOLD.values() for name in names}
-    hot = {n: v for n, v in left.items() if abs(v) > 1e-6}
+    # every member of every fold group must be empty, TARGETS INCLUDED (see
+    # the note on EMPTY_PARENT_FOLD: a live target would be annihilated)
+    members = {name for m in EMPTY_PARENT_FOLD.values()
+               for name in list(m) + list(m.values())}
+    left = {name: float(x[lvl2 == name].sum()) for name in members}
+    hot = {n: round(v, 3) for n, v in left.items() if abs(v) > 1e-6}
     if hot:
-        print(f"fold saltato: parent non vuoti {hot}", flush=True)
+        print(f"fold saltato: item non vuoti nei gruppi {hot}", flush=True)
         return
 
-    # EVERY item must name its target, itself included. Leaving the
-    # untouched ones blank does not mean "keep as is": the fold target then
-    # appears in the map only as the destination of the emptied parents, so
-    # the group MARIO builds under that name contains the zero-output
-    # parents alone and REPLACES the real sector. Sector 63 is bought by
-    # every industry, so annihilating it unbalances the whole table and the
-    # Leontief inverse starts returning negative outputs table-wide.
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     for sheet in ("Activity", "Commodity", "Factor of production",
@@ -102,21 +106,25 @@ def fold_empty_parents(db) -> None:
     path = HERE / "out" / "_fold_empty_parents.xlsx"
     path.parent.mkdir(exist_ok=True)
     wb.save(path)
-    before = {t: float(x[lvl2 == t].sum())
-              for t in set(EMPTY_PARENT_FOLD["Activity"].values())
-              | set(EMPTY_PARENT_FOLD["Commodity"].values())}
+    # nothing outside the fold groups may move: the aggregation is meant to
+    # be numerically a no-op, and MARIO's zero-output protection has already
+    # shown it can reach live labels through the mapping
+    before = x[~lvl2.isin(members)].copy()
     db.aggregate(str(path), ignore_nan=True)
     x2 = db.X.iloc[:, 0]
-    l2 = db.X.index.get_level_values(2)
-    for t, was in before.items():
-        now = float(x2[l2 == t].sum())
-        if was > 0 and abs(now - was) / was > 1e-6:
-            raise SystemExit(
-                f"fold: l'output del bersaglio '{t}' e' cambiato "
-                f"({was:,.0f} -> {now:,.0f}): la mappa di aggregazione non lo "
-                f"preserva, la tavola sarebbe sbilanciata")
-    print(f"parent vuoti aggregati: {len(left)} item rimossi dalla griglia; "
-          f"output dei bersagli preservato", flush=True)
+    after = x2.reindex(before.index)
+    delta = (after - before).abs()
+    scale = before.abs().clip(lower=1.0)
+    moved = (delta / scale) > 1e-6
+    if bool(moved.any()):
+        worst = (delta / scale)[moved].sort_values(ascending=False).head(5)
+        rows = [f"{k[0]} {str(k[2])[:40]}: {before[k]:,.4g} -> {after[k]:,.4g}"
+                for k in worst.index]
+        raise SystemExit("fold: l'aggregazione ha spostato output fuori dai "
+                         f"gruppi ({int(moved.sum())} item) — " + "; ".join(rows))
+    n = sum(len(m) for m in EMPTY_PARENT_FOLD.values())
+    print(f"parent vuoti aggregati: {n} item rimossi; nessun output "
+          f"fuori gruppo modificato", flush=True)
 
 
 def apply_transport_layer(db, validate: bool = False):

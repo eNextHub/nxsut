@@ -18,6 +18,7 @@ import os
 import sys
 from pathlib import Path
 
+import numpy as np
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -96,26 +97,38 @@ def main() -> None:
     lvl0 = db.X.index.get_level_values(0)
     lvl2 = db.X.index.get_level_values(2)
     fails = []
+    regions = list(db.get_index("Region"))
     for a, (unit, (lo, hi)) in TRANSPORT_ACTS.items():
         if a not in acts:
             continue
-        vals, world = [], []
-        for reg in ("IT", "DE", "FR", "PL", "US", "CN"):
-            key = (reg, "Activity", a)
+        # world average weighted by output, over EVERY producing region —
+        # a six-country sample hides exactly the regions that break
+        pairs = []
+        for reg in regions:
             try:
-                v = float(f.loc["GHG AR6 GWP-100", key])
-                x = float(X[(lvl0 == reg) & (lvl2 == a)].sum())
-                if x > 0:
-                    world.append((v, x))
-                vals.append(f"{reg}={v:6.0f}")
+                v = float(f.loc["GHG AR6 GWP-100", (reg, "Activity", a)])
             except Exception:
-                vals.append(f"{reg}=  n/a")
-        wavg = sum(v * x for v, x in world) / sum(x for _, x in world) if world else 0.0
+                continue
+            x = float(X[(lvl0 == reg) & (lvl2 == a)].sum())
+            if x > 0 and np.isfinite(v):
+                pairs.append((v, x))
+        if not pairs:
+            print(f"  ----- {a[:38]:40} nessuna regione produttrice", flush=True)
+            continue
+        tot = sum(x for _, x in pairs)
+        wavg = sum(v * x for v, x in pairs) / tot
+        vs = np.array(sorted(v for v, _ in pairs))
+        n_out = sum(1 for v, _ in pairs if not (lo <= v <= hi))
         ok = lo <= wavg <= hi
         if not ok:
             fails.append((a, round(wavg, 1), (lo, hi)))
-        print(f"  {'OK ' if ok else 'FUORI'} {a[:38]:40} media pesata {wavg:7.1f} "
-              f"g/{unit:4} [{lo}-{hi}]   {' '.join(vals)}", flush=True)
+        vals = " ".join(f"{r}={float(f.loc['GHG AR6 GWP-100', (r, 'Activity', a)]):5.0f}"
+                        for r in ("IT", "DE", "FR", "US", "CN")
+                        if (r, "Activity", a) in f.columns)
+        print(f"  {'OK ' if ok else 'FUORI'} {a[:36]:38} {wavg:8.1f} g/{unit:4} "
+              f"[{lo}-{hi}]  p10/p50/p90 {np.percentile(vs, 10):7.0f}/"
+              f"{np.percentile(vs, 50):7.0f}/{np.percentile(vs, 90):7.0f}  "
+              f"fuori {n_out}/{len(pairs)}  {vals}", flush=True)
     print(f"\nfuori banda: {fails if fails else 'nessuno'}", flush=True)
 
     print("\n--- ancora elettrica (regressione vs v3.0) ---", flush=True)
