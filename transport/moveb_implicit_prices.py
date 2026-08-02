@@ -37,7 +37,7 @@ from collections import defaultdict
 from pathlib import Path
 
 API = "http://127.0.0.1:8000"
-SBS_SOURCE = "Eurostat SBS land-transport turnover (H49)"
+SBS_SOURCE = "Eurostat SBS transport turnover (H49-H51)"
 
 # child -> (SBS NACE shorts summed, volume specs [(source, activity, unit)...
 #           first hit wins], unit label, plausibility band EUR/unit)

@@ -49,8 +49,18 @@ ROOT = HERE.parent
 PARENTS = {
     "road_pipe": ("Other land transport", "Other land transportation services"),
     "rail": ("Transport via railways", "Railway transportation services"),
+    "sea": ("Sea and coastal water transport",
+            "Sea and coastal water transportation services"),
+    "iww": ("Inland water transport", "Inland water transportation services"),
+    "air": ("Air transport (62)", "Air transport services (62)"),
 }
-CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"]}
+CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
+    "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+    "air": ["AIR.FRT", "AIR.PAX"],
+}
+# children with no open pkm anywhere (only "passengers carried"): they keep
+# the monetary denomination, as PIPE does — declared, never synthesised.
+MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX"}
 # liquid-fuel commodity names in the hybrid grid (matched against the index;
 # what is actually found is printed — no silent assumptions).
 FUEL_NAMES = [
@@ -163,8 +173,8 @@ def main() -> None:
                 [(lvl[1] != "Activity" and any(k in str(lvl[2]) for k in
                   ("households", "non-profit", "government")))
                  for lvl in users.index], dtype=bool)
-            pax = "ROAD.PAX" if block == "road_pipe" else "TRN.P"
-            frt = "ROAD.FRT" if block == "road_pipe" else "TRN.F"
+            pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
+            frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
             # negative cells (inventory changes etc.): split by the supply
             # shares OUTSIDE the IPF — deterministic, sign-preserving, and
             # the remaining row targets stay consistent by construction.

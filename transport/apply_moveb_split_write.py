@@ -44,6 +44,10 @@ ROOT = HERE.parent
 PARENTS = {
     "road_pipe": ("Other land transport", "Other land transportation services"),
     "rail": ("Transport via railways", "Railway transportation services"),
+    "sea": ("Sea and coastal water transport",
+            "Sea and coastal water transportation services"),
+    "iww": ("Inland water transport", "Inland water transportation services"),
+    "air": ("Air transport (62)", "Air transport services (62)"),
 }
 # child key -> (activity name, commodity name, unit, inventory sheet)
 CHILD_DEF = {
@@ -51,8 +55,25 @@ CHILD_DEF = {
     "ROAD.PAX": ("Road passenger transport", "Road passenger transport services", "Mpkm", "RPX"),
     "TRN.P": ("Rail passenger transport", "Rail passenger transport services", "Mpkm", "RLP"),
     "TRN.F": ("Rail freight transport", "Rail freight transport services", "Mtkm", "RLF"),
+    "SEA.FRT": ("Sea and coastal freight transport",
+                "Sea and coastal freight transport services", "Mtkm", "SEF"),
+    "SEA.PAX": ("Sea and coastal passenger transport",
+                "Sea and coastal passenger transport services", "Meuro", "SEP"),
+    "IWW.FRT": ("Inland water freight transport",
+                "Inland water freight transport services", "Mtkm", "IWF"),
+    "IWW.PAX": ("Inland water passenger transport",
+                "Inland water passenger transport services", "Meuro", "IWP"),
+    "AIR.FRT": ("Air freight transport", "Air freight transport services",
+                "Mtkm", "AIF"),
+    "AIR.PAX": ("Air passenger transport", "Air passenger transport services",
+                "Meuro", "AIP"),
 }
-CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"]}
+CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
+    "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+    "air": ["AIR.FRT", "AIR.PAX"],
+}
+# no open pkm exists for these: they keep the monetary denomination
+MONETARY_CHILDREN = {"SEA.PAX", "IWW.PAX", "AIR.PAX"}
 FUEL_NAMES = [
     "Motor Gasoline", "Gas/Diesel Oil", "Liquefied Petroleum Gases (LPG)",
     "Biogasoline", "Biodiesels", "Other Liquid Biofuels", "Kerosene",
@@ -199,14 +220,17 @@ def apply(db) -> None:
             Q: dict[str, float] = {}
             for c in children:
                 m_child = sh_other.get(c, 0.0) * M
+                if c in MONETARY_CHILDREN:      # identity: output stays MEUR
+                    Q[c] = m_child
+                    continue
                 q = q_spec.get(c, 0.0)
                 if q <= 0:
-                    q = m_child / prices[c] if m_child > 0 else 0.0
+                    q = m_child / prices[c] if (m_child > 0 and c in prices) else 0.0
                     synth += 1
                 Q[c] = q
 
-            pax = children[1] if block == "road_pipe" else "TRN.P"
-            frt = children[0] if block == "road_pipe" else "TRN.F"
+            pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
+            frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
             users2 = users.drop(self_col_key)          # self allocated apart
             neg = users2.clip(upper=0.0).to_numpy()
             pos = users2.clip(lower=0.0).to_numpy()

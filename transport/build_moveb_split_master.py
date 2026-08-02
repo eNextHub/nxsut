@@ -98,7 +98,7 @@ def main() -> None:
     # --- tier-5 vector: SBS-median shares per block (from the governed rows) ---
     sbs: dict[tuple[str, str, str], float] = defaultdict(float)  # (iso2, block, child)
     for r in fetch_api({"parameter": "Total output",
-                        "source": "Eurostat SBS land-transport turnover (H49)",
+                        "source": "Eurostat SBS transport turnover (H49-H51)",
                         "limit": "100000"}):
         parts = r["item_1"].split("-")           # a_<nace>-EXX-<iso2>-<Yxx>
         if len(parts) == 4 and parts[3] == "Y11" and parts[0][2:] in SBS_MAP:

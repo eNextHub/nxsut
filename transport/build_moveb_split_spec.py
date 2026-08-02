@@ -51,13 +51,22 @@ EXIOBASE_REGIONS = [
     "WA", "WE", "WF", "WL", "WM",
 ]
 
-BLOCKS = {"road_pipe": ["ROAD.FRT", "ROAD.PAX", "PIPE"], "rail": ["TRN.P", "TRN.F"]}
-CORE = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"]}
+BLOCKS = {"road_pipe": ["ROAD.FRT", "ROAD.PAX", "PIPE"], "rail": ["TRN.P", "TRN.F"],
+          "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+          "air": ["AIR.FRT", "AIR.PAX"]}
+# core = the children whose absence means "confidential", not "zero"
+CORE = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
+        "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+        "air": ["AIR.FRT", "AIR.PAX"]}
 SBS_MAP = {
     "H.49.41": ("road_pipe", "ROAD.FRT"), "H.49.42": ("road_pipe", "ROAD.FRT"),
     "H.49.31": ("road_pipe", "ROAD.PAX"), "H.49.33": ("road_pipe", "ROAD.PAX"),
     "H.49.39": ("road_pipe", "ROAD.PAX"), "H.49.50": ("road_pipe", "PIPE"),
     "H.49.1": ("rail", "TRN.P"), "H.49.20": ("rail", "TRN.F"),
+    # water and air (SBS Rev-2 classes == NACE 2.1 classes here)
+    "H.50.10": ("sea", "SEA.PAX"), "H.50.20": ("sea", "SEA.FRT"),
+    "H.50.30": ("iww", "IWW.PAX"), "H.50.40": ("iww", "IWW.FRT"),
+    "H.51.10": ("air", "AIR.PAX"), "H.51.21": ("air", "AIR.FRT"),
 }
 # volumes for Q and fuel shares: (source, activity) per (block, child); first
 # spec with data wins (plausibility rule from diagnostic a: ESTAT can have
@@ -78,6 +87,16 @@ VOLUMES = {
         ("International Transport Forum", "Rail passenger transport"),
     ],
     ("rail", "TRN.F"): [("International Transport Forum", "Rail freight transport")],
+    # water freight: ITF territory-based tkm (already governed and used by
+    # the NXTR recipes); air freight: World Bank carrier-based tonne-km.
+    # The passenger children of sea/inland/air have NO pkm anywhere open
+    # (only passengers carried) -> they stay monetary, as PIPE does.
+    ("sea", "SEA.FRT"): [("International Transport Forum",
+                          "Coastal shipping freight transport")],
+    ("iww", "IWW.FRT"): [("International Transport Forum",
+                          "Inland waterways freight transport")],
+    ("air", "AIR.FRT"): [("World Bank air freight (tonne-km)",
+                          "H.51.21 Freight air transport")],
 }
 # NXTR v0 recipe constants for the liquid-fuel bottom-up shares.
 INT_HGV, INT_BUS = 2.7e-4, 2.5e-4       # t/vkm
@@ -94,7 +113,7 @@ def main() -> None:
     # --- tier 1: SBS shares per country (Y11) ---
     sbs: dict[tuple[str, str, str], float] = defaultdict(float)
     for r in fetch_api({"parameter": "Total output",
-                        "source": "Eurostat SBS land-transport turnover (H49)",
+                        "source": "Eurostat SBS transport turnover (H49-H51)",
                         "limit": "100000"}):
         parts = r["item_1"].split("-")
         if len(parts) == 4 and parts[3] == "Y11" and parts[0][2:] in SBS_MAP:
