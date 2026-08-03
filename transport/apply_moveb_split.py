@@ -138,7 +138,7 @@ def main() -> None:
     print(f"fuel rows trovate ({len(fuels)}): {fuels}", flush=True)
 
     spec = load_spec()
-    U, V, E, S, Y = db.U, db.V, db.E, db.S, db.Y
+    U, V, E, Y = db.U, db.V, db.E, db.Y
 
     max_col_err = max_row_err = 0.0
     diag_rows: list[dict] = []
