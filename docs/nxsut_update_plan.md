@@ -103,6 +103,28 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 | UNSD flow `06`, FAO FBS | stock changes, food anchors (volumes) | ⬜ recipes |
 | EX3.10.2 VA (→2024), GTAP elec. prices | VA/GDP targets; price cross-check | ⬜ local sources |
 
+## Aggiornamento del layer dati (2026-08-03)
+
+Nuove source governate, tutte `open`, tutte con pull snapshot-first:
+
+| source | cosa dà | stato |
+|---|---|---|
+| `UNCTAD.FLEET` | portata della flotta per **proprietà effettiva** — la chiave di residenza marittima; primo uso del nuovo parametro `STK` | ✅ open |
+| `UNCTAD.SEABORNE` | tonnellate caricate per anno: porta il livello IMO all'anno costruito | ✅ open |
+| `IMO.GHG4` | lavoro marittimo mondiale 2018 (Fourth IMO GHG Study, tab. 71), unità nativa `Mtnm` | ✅ open |
+| `IPCCGL.EF` · `IPCCGL.NCV` | fattori di emissione da combustione e poteri calorifici IPCC 2006, 33 combustibili; primo uso del nuovo parametro `ncv` | ✅ open |
+
+Due estensioni del contratto dei parametri in nxbase, entrambe per colmare
+buchi reali e non casi particolari:
+
+- **`STK` (Stock)** — l'unico parametro che descrive uno *stato* e non un
+  flusso. Serve anche a capacità elettrica installata, parco veicoli, stock
+  edilizio; finora quelle fonti restavano registrate ma non importate;
+- **`ncv` (Net calorific value)** — energia per unità di commodity, stessa
+  forma di `prc`. È il fattore di conversione massa↔energia che la KB elenca
+  da sempre e che non aveva un posto: serve perché l'IPCC pubblica i fattori
+  di emissione **per unità di energia**, mentre la tavola è in tonnellate.
+
 ## Decision log (consolidated)
 
 **2026-07-31** — BACI governed native (`TRD`, `HS22`→CN26, ETALAB); pooling

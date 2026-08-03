@@ -595,3 +595,85 @@ Workaround in the pipeline (`transport/pipeline.py`): the fold target is one
 of the emptied parents, so every group is entirely empty and the stamp is
 the no-op it is meant to be; plus a pre-check on every group member and a
 post-check that no output outside the groups moved.
+
+---
+
+## Stato a fine layer (2026-08-03) — cosa è chiuso e cosa resta
+
+Il layer è costruito, validato e documentato nel readme della v3.2. Qui
+resta solo ciò che serve a chi riprende in mano il disegno.
+
+### La regola che ha tenuto insieme il tutto
+
+> Numeratore e denominatore devono descrivere la stessa popolazione. In una
+> tavola input-output le emissioni seguono la **residenza** — il carburante
+> che l'operatore residente compra, ovunque lo compri — quindi anche il
+> lavoro fisico al denominatore dev'essere quello dell'operatore residente,
+> ovunque lo svolga.
+
+Non è una regola sul mare: è la regola del layer. L'audit fonte per fonte:
+aereo coerente (ICAO/World Bank contano per paese di registrazione del
+vettore); strada coerente **e dimostrato** (la dimensione `tra_oper` di
+Eurostat `road_go` contiene cabotaggio e cross-trade, cioè lavoro svolto
+interamente all'estero, e la ricetta prende il `TOTAL`); ferro quasi
+(territoriale, ma i treni si scambiano al confine); **mare e vie interne
+no**. Le due che rompono sono esattamente quelle i cui operatori lavorano
+abitualmente fuori dal proprio territorio.
+
+### L'acqua porta un figlio solo
+
+Dividere merci da passeggeri richiede entrambi i lati misurati allo stesso
+modo, e per l'acqua non è possibile: l'unica osservazione per paese su base
+residenza (flotta UNCTAD × lavoro mondiale IMO) è **merci**, e nessuna fonte
+aperta pubblica i pkm degli operatori residenti di traghetti e crociere.
+Quindi mare e vie interne sono denominati **interi** in tonnellate-km
+equivalenti, passeggeri a 100 kg (convenzione ICAO/IATA/EN 16258/GLEC, la
+stessa già usata per il carburante aereo).
+
+Costo accettato: il marittimo passeggeri non è più una modalità a sé — ~0,5%
+della mobilità passeggeri mondiale, e la parte che non sapevamo misurare in
+modo coerente. Residuo dichiarato: il carburante del settore include
+traghetti e crociere, il cui lavoro non è al denominatore (~5% del bunker
+mondiale, perché un traghetto brucia molto più di una portarinfuse per unità
+di lavoro), quindi l'intensità marittima è un limite superiore di quel tanto.
+
+### Se un giorno servisse il marittimo passeggeri
+
+Non è irrecuperabile, ma richiede una fonte che oggi non c'è: pkm dei
+traghetti e delle crociere **per paese di residenza dell'operatore**. Le
+strade plausibili sono lo split per tipo di nave dello studio IMO
+(produttività × intensità × numero navi — modellazione su PDF, non
+estrazione) oppure un dato commerciale. Da riaprire solo con un caso d'uso.
+
+### Le vie navigabili interne
+
+Restano territoriali. Le chiatte attraversano i confini — quella olandese
+sul Reno tedesco è tkm tedeschi ma carburante olandese — quindi è lo stesso
+divario del mare a scala molto minore, senza fonte per chiuderlo. L'Italia è
+l'outlier visibile: il suo settore porta la laguna di Venezia contro 144
+Mtkm di navigazione padana.
+
+### Fattori di emissione e satellite (2026-08-03)
+
+Due cose fatte a valle del layer e che lo riguardano:
+
+- i **fattori di combustione** non sono più costanti nel codice. Move A e
+  Move C li leggono da nxbase (`IPCCGL.EF` × `IPCCGL.NCV`, entrambe tabelle
+  IPCC 2006 governate come pubblicate e moltiplicate dal consumer). La
+  benzina non cambia — 3,070, quella costante era giusta — mentre diesel,
+  GPL e gas naturale erano arrotondati e si spostano dell'1-2%;
+- il **satellite è ridotto a un verticale GHG**: 14 conti tenuti, 336
+  marcati `unused` in `aggregate_ee.xlsx`. Reversibile con
+  `transport/prune_satellite.py --restore`. Conseguenza da ricordare: la
+  tavola non può più dimostrare il bilancio di massa di Merciai, e le
+  footprint idriche, di suolo e materiali sono fuori per questa vintage.
+
+### Coda del layer, in ordine di valore
+
+1. **quote powertrain oltre l'auto privata** (bus e camion): richiede di
+   estendere `mkt` in nxbase ad accettare `Technology`, che oggi non fa;
+2. **load factor per paese** dell'own-account, oggi invariante;
+3. **CH₄ e N₂O** nella riattribuzione, oggi solo CO₂ (~1-2% del CO₂e
+   stradale);
+4. **pipeline**: unico settore trasporto ancora monetario, e resta tale
+   finché non esiste un tkm che descriva la rete e non una sua parte.

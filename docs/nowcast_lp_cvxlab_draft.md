@@ -423,6 +423,156 @@ def absol(expression):
 | candidate extra `x_obs` anchors (later) | **UNSD Industrial Commodity Statistics** (same UNdata SDMX family — physical production of ~600 industrial commodities) · **USGS** mineral/metal production (public domain) · **FAOSTAT** production (agri) · capacity sanity bounds (EMBER capacity: `x_power ≤ cap·8760·CF_max`) |
 | electricity prices (expenditure-side cross-check) | **GTAP** price file (the eNextGen electricity-footprint article dataset) — governable as a `visibility=local` source (GTAP licence is proprietary, never hosted); `scripts/gtap/` already exists in nxbase |
 
+## Fonti per i vincoli — cosa è reperibile, e cosa vincola davvero (2026-08-03)
+
+La tabella sopra dice da dove viene ogni numero *già previsto*. Questa dice
+cosa **si può aggiungere**, in ordine di rapporto valore/sforzo, perché il
+punto debole del nowcast non è la LP: è quanti vincoli osservati riusciamo a
+metterle sotto. Con pochi vincoli la soluzione è dominata dai prior e il
+"nowcast" è un riscalaggio con più passaggi.
+
+**Regola di ammissione**: una fonte entra se è **aperta**, ha una **API o un
+bulk stabile** (snapshot-first), e copre **più di una regione**. Le fonti a
+un solo paese vanno nel benchmark, non nei vincoli — altrimenti la soluzione
+si piega dove il dato c'è.
+
+### Già governate e utilizzabili subito
+
+| fonte | vincola | nota |
+|---|---|---|
+| `UNSD.USE` | `F_obs` — uso di combustibile per settore | 2021-23, 51.952 righe |
+| `UNSD.GEN` · `EMBER.GEN25` | `x_obs` elettrico | arbitrato dallo step 0 |
+| `BACI` | `EXP`, `im_sh` | full locale |
+| `ITF` · `ESTAT` trasporti | `x_obs` dei figli trasporto | pkm/tkm osservati |
+| `WSTEEL` | `x_obs` acciaio | `visibility=local` |
+| `IPCCGL.EF` · `IPCCGL.NCV` | non un vincolo: il **ricalcolo** delle emissioni a valle | |
+
+### Da governare, alto valore
+
+1. **UNSD Industrial Commodity Statistics** — produzione fisica di ~600
+   commodity industriali per paese e anno, **stessa famiglia SDMX** di
+   UNSD Energy, quindi lo script di pull esiste già nella forma giusta. È
+   il singolo intervento che aumenta di più il numero di `x_obs`: copre
+   cemento, vetro, carta, chimica di base, laterizi, fertilizzanti — cioè
+   proprio i settori che oggi non hanno alcuna ancora fisica. **Da fare per
+   primo.**
+2. **FAOSTAT** — produzione di colture e allevamento, uso del suolo,
+   fertilizzanti, foreste; e le **Food Balance Sheets** per il lato domanda
+   finale alimentare (`Y_obs`). API pubblica, CC BY 4.0, copertura mondiale
+   dal 1961. Il blocco agroalimentare è una fetta grossa delle righe fisiche
+   di EXIOBASE e oggi è interamente prior.
+3. **World Bank WDI** — PIL, PIL pro capite, popolazione, valore aggiunto per
+   macro-settore. Il pattern di pull è **già governato** (`WB.DFL`,
+   `WB.AIRFRT`), quindi è mezza giornata. Serve sia come vincolo su `VA_tgt`
+   aggregato sia come base del benchmark.
+4. **Eurostat `nrg_bal_c`** — gemello UE di UNSD.USE sulla stessa coppia
+   IRES/SIEC, qualità superiore e copertura settoriale più fine. CC BY 4.0.
+   Sorella naturale di una source già governata.
+
+### Da governare, valore medio
+
+5. **USGS Mineral Commodity Summaries** — produzione mondiale e per paese di
+   ~90 minerali e metalli, **pubblico dominio** (governo USA). Chiude i
+   settori estrattivi. Formato PDF/Excel, quindi estrazione come per l'IMO.
+6. **IAI** (alluminio) e **ICSG** (rame) — le cartelle esistono già
+   nell'archivio raw con il solo README, quindi il materiale è stato
+   individuato e mai tirato. Licenze da verificare prima di asserire.
+7. **UN National Accounts** (UNSD) — PIL per attività ISIC, aperto: dà `VA`
+   per settore con più dettaglio del WDI.
+
+### Valutate e scartate come vincolo
+
+- **IEA World Energy Balances** — copertura e qualità migliori di UNSD, ma
+  **a pagamento e non redistribuibile**: incompatibile con una catena che
+  deve restare riproducibile dall'API aperta.
+- **GTAP** — proprietaria; resta candidata come source `visibility=local`
+  per il cross-check dei prezzi, mai come vincolo pubblicabile.
+- Le fonti nazionali (ISTAT, BEA, NBS…) — preziose ma a un solo paese:
+  piegherebbero la soluzione verso chi ha il dato. Vanno nel benchmark.
+
+
+## Benchmark post-solve — KPI, riferimenti, e cosa possono davvero dire
+
+I vincoli dicono alla LP dove atterrare; il benchmark dice se il posto dove
+è atterrata somiglia al mondo. Sono due cose diverse e **non devono usare le
+stesse fonti**: un dato usato come vincolo non può poi validare sé stesso.
+
+Forma proposta: uno script sul modello di `transport/validate_v32.py` —
+gate strutturale prima, poi KPI contro bande dichiarate, con il *fuori
+banda* che è un risultato da leggere e non un errore da nascondere.
+
+### KPI 1 — PIL e PIL pro capite
+
+Riferimento: **World Bank WDI** (aperto). Attenzione a una trappola
+metodologica: il valore aggiunto della tavola è a **prezzi base**, il PIL
+pubblicato è a **prezzi di mercato**. La differenza sono le imposte al netto
+dei contributi sui prodotti, che nella tavola stanno in una riga di fattore
+di produzione a sé. Il confronto onesto è quindi o **GVA contro GVA**,
+oppure PIL contro somma-VA **più** quella riga. Confrontare direttamente PIL
+e somma-VA produce uno scarto sistematico del 10-15% che sembra un errore e
+non lo è.
+
+### KPI 2 — emissioni totali per regione e per settore
+
+Riferimento: **EDGAR** (JRC, CC BY 4.0, CO₂/CH₄/N₂O per paese e settore
+IPCC, serie lunga). Alternative complementari: **Global Carbon Budget**
+(CO₂ fossile per paese), **inventari nazionali UNFCCC** (autorevoli ma solo
+Annex I), **Climate TRACE** (aperto, recente, a livello di asset).
+
+Due aggiustamenti obbligatori, e il secondo l'abbiamo appena imparato sul
+trasporto marittimo:
+
+- **concordanza settoriale**: EDGAR classifica per settore IPCC, la tavola
+  per NACE/NXS. Serve un ponte, e alcune celle non hanno controparte netta
+  (i processi industriali IPCC 2 si spalmano su più attività NACE);
+- **territorio contro residenza**: EDGAR è **territoriale** e per convenzione
+  **esclude i bunker internazionali** dai totali nazionali; la nostra tavola
+  è per residenza e li include nel settore armatoriale. Per la Grecia sono
+  18,3 Mt di combustibile, cioè la differenza fra i due totali nazionali è
+  enorme. Il confronto va fatto o sul **totale mondiale** (dove le due
+  convenzioni coincidono) o riportando esplicitamente i bunker.
+
+Il totale mondiale è il primo test da fare, ed è quello che dà il segnale
+più pulito: nessuna concordanza, nessuna convenzione di perimetro.
+
+### KPI 3 — intensità carbonica dell'elettricità
+
+Riferimento: **EMBER CO2 intensity**, che è **già governata** in nxbase
+(`EMBER.CI25`) e non è usata come vincolo — quindi è un validatore
+indipendente pronto all'uso, per paese e per anno, in gCO₂/kWh. È il
+benchmark a costo zero e va messo per primo.
+
+### KPI 4 — footprint alimentari
+
+Riferimenti possibili, con caveat di licenza che conta:
+
+- **MATILDA** (matilda.food, Zenodo 10.5281/zenodo.21489158, v1 del
+  2026-07-22): database di impatti alimentari per gruppo socio-demografico,
+  Leiden/Oxford/WU, con articolo Nature Food 2026. **Licenza CC BY-NC-SA
+  4.0**: non commerciale e share-alike. Utilizzabile come **benchmark di
+  ricerca**; **non** incorporabile in un prodotto eNextGen né
+  ridistribuibile senza share-alike. Se lo usiamo, va governato con una
+  licenza nuova (`CCBYNCSA4`, che oggi non c'è nella tabella) e
+  `visibility` che rifletta il vincolo NC;
+- **BONSAI** — aperto per vocazione, ma è un database IO/LCA completo:
+  il confronto è più un *cross-model* che un benchmark contro
+  un'osservazione. Utile, diverso;
+- **Poore & Nemecek (2018)** — footprint per kg di prodotto alimentare,
+  meta-analisi molto citata, formato tabellare semplice. Il riferimento più
+  facile per un primo test.
+
+Nota di metodo: le footprint alimentari di letteratura sono quasi sempre
+**per kg di prodotto alla porta dell'azienda agricola o al consumo**, mentre
+la tavola dà la footprint per unità di output dell'attività. Il confronto
+richiede di dichiarare il confine — ed è la stessa classe di problema del
+denominatore multi-output già risolta per l'acciaio.
+
+### KPI 5 — intensità energetica
+
+Energia finale per unità di PIL, contro WDI/IEA. Debole come validatore
+(dipende da PIL e da energia, entrambi già vincolati), ma utile come segnale
+di deriva fra un anno e l'altro.
+
 ## Validated end-to-end on cvxlab (2026-08-01)
 
 The full structure was built and **solved** as a toy instance
