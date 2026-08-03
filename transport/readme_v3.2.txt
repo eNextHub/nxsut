@@ -478,6 +478,33 @@ KNOWN LIMITATIONS (v0 of the layer)
      using territorial traffic. It changes a major commodity's world total by
      more than an order of magnitude, so it is a decision to take explicitly
      rather than a patch to slip in.
+  9. VOLUME CONCEPTS, AUDITED. The rule the layer needs is that numerator and
+     denominator describe the same population: emissions in an IO table
+     follow RESIDENCE (the resident operator's fuel, bought anywhere), so the
+     physical work must be the resident operator's work, wherever performed.
+     Checked source by source:
+       air        carrier-based (ICAO, World Bank count by country of
+                  operator registration)                              COHERENT
+       road       Eurostat road_go is vehicle-registration based - its
+                  tra_oper dimension carries cabotage and cross-trade,
+                  i.e. work performed entirely abroad - and the recipe
+                  takes tra_oper = TOTAL                              COHERENT
+       rail       territorial, but trains are handed over at the border
+                  and operators work at home                       ~ COHERENT
+       sea, iww   territorial, operators work abroad                INCOHERENT
+     The two that break are exactly the two whose operators routinely work
+     outside their own territory. That is the rule seen from the other side.
+
+     One residual on road: ITF is NOT a single concept. Of 29 countries
+     comparable with Eurostat for 2011, 17 match to better than 0,5% (ITF
+     republishes the Eurostat figure) but seven diverge by 5% or more, almost
+     always downwards - Slovenia -87%, Netherlands -47%, Austria -40%,
+     Denmark -25%, Norway -11% - which is the territorial signature in
+     countries whose hauliers work abroad. The recipe takes Eurostat first,
+     so the ~30 European countries are on the carrier basis; the 23 countries
+     that only ITF covers (United States, China, Japan, India, Canada,
+     Australia, Korea, Mexico, Türkiye and others) sit on whichever concept
+     their national office reports, and the data cannot tell us which.
 
 
 DATA SOURCES (all governed in nxbase, all open)
