@@ -76,7 +76,7 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 | 0 | Prior | nxsut 3.1 table (BFG/OFG realloc, pooled ELE/steel/alu, Isard, ENTSO-E+BACI mixes) | ✅ |
 | 1a | Supply mixes & routes | electricity mix **UNSD-first, EMBER arbiter** (step 0 run: 173 UNSD / 32 EMBER); Ghezzi steel routes | ✅ (v3.2) |
 | 1b | Trade mixes | ENTSO-E (electricity), BACI (materials); extension to *all* tradable goods pending | ✅ / ⬜ ext. |
-| 1c | Autoproduction netting | off-diagonal electricity of non-energy sectors netted vs own use; anchors ↔ UNSD `015x/016x` split (LP draft **D9**) | 🔧 |
+| 1c | Autoproduction netting | **closed as a no-op (2026-08-03, verified on the table)**: no non-energy activity supplies electricity in v3.2 — EXIOBASE routes all generation through the power columns. D9 survives only as the anchor perimeter: power `x_obs` = **total** generation (main+auto ≡ the blend), never `015x`-only. No rebuild needed | ✅ no-op |
 | 1d | **Transport service layer** | Moves B (split commercial) + A (private mobility MIMO) + C (own-account externalised); NXTR.V0 recipes governed | ✅ (v3.2) |
 | 2 | **LP nowcast** (cvxlab) | per (region × year={2023}) grid; energy-carrier rows free, L1 relative weights, elastic bands, GDP/VA closure; world-balance audit | 🔧 toy-validated · reviewed vs v3.2 (D12–D18) |
 | 3 | Emission recompute | bottom-up fuel × **EF-by-fuel (IPCC 2006, governed like GWP)**; carbon mass balance on ~10 feedstock sectors | 🔧 |

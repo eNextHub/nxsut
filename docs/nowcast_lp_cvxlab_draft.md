@@ -712,6 +712,27 @@ the 2023 vintage, and only then bridge the LP. Piloting on the un-netted
 table would double-count exactly the autoproduction the anchors are being
 decomposed for (rooftop PV is *half* of Italian solar).
 
+> **D15 CLOSED AS A NO-OP — verified empirically (2026-08-03).** The
+> netting probe on the built v3.2 (`nowcast/data/netting_probe.csv`)
+> shows the premise of D9 does not hold on this table: the suppliers of
+> `Electricity` are **only** the nine power-family activities (96.7% of
+> world supply), `Steam and hot water supply` (3.3% — the CHP by-product
+> electricity D9 already exempted) and the waste-to-energy activities
+> (~0.5% — also exempt by design). **No manufacturing or service activity
+> supplies electricity**: the EXIOBASE hybrid construction routes all
+> generation, autoproduction included, through the power columns. There is
+> nothing to net and **no rebuild is needed** — the v3.2 export is the LP
+> prior as-is. What survives of D9 moves entirely to the **anchor
+> perimeter** (bridge-side): `x_obs` of the power families binds to
+> **total generation (main + autoproducers)** — which is exactly what
+> `get_supply_mix_snapshot` returns (EMBER totals ≡ UNSD `015x+016x`,
+> verified at step 0: IT Solar PV main+auto = 30.71 TWh ≡ EMBER) — never
+> to the `015x` main-only side. The `015x/016x` split stays as a
+> diagnostic, and "grid sales by non-energy sectors as an explicit
+> autoproducer activity" stays a future add_sectors option, not a v1 need.
+> World ELE supply in the prior reads 21,650 TWh — the 2011 volume, which
+> is precisely what the LP's level reconciliation is for.
+
 **D16 — The v3.2 grid needs its set rows in nxbase.** The `NXS3` namespace
 carries the 188 v3.0/3.1 activities: the layer's **15 activities + 10
 physical commodities are missing**, so today the `B_ires`/`G_va` walk
