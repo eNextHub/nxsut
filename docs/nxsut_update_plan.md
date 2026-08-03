@@ -89,8 +89,12 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 |---|---|---|
 | `EMBER.GEN25` | generation TWh by tech × country × year | ✅ open |
 | `ENTSOE.IMX.Y23-25` | electricity import mix (NET, A09) | ✅ public |
-| `BACI.Q.Y24` | bilateral trade, **full** (10 886 196 rows, all HS chapters) | ✅ local (+client file fallback) |
-| `UNSD.USE` | fuel use × IRES sector × country, 2021-23 (51 952 rows; SIEC/IRES native, NXB manufacturing bridges) | ✅ open |
+| `BACI.Q.Y23/Y24` | bilateral trade, **full** (11 229 391 + 10 886 196 rows, all HS chapters; Y23 = the EXP anchors of the target year) | ✅ local (+client file fallback) |
+| `UNSD.USE` | fuel use × IRES sector × country, 2021-23 (53 451 rows; SIEC/IRES native, NXB bridges, **incl. bunkers 051/052** — verified on the data: 051 marine, 052 aviation) | ✅ open |
+| `UNSD.CON` | household final consumption (IRES 1231, stationary), parameter CON (4 392 rows) — the residential Y anchor + the D14 stationary term | ✅ open (2026-08-03) |
+| `EX3102m.ixi.VA.Y21-24` | EXIOBASE 3.10.2 monetary value added by factor × industry (matrix V; Y23 = 35 235 rows, IT 2023 = 1.96 T€ ≡ GVA) — the VA_tgt panel, GDP closure same-source | ✅ local (2026-08-03; Y21/22/24 registered, import on demand) |
+| `USGS.MCS25` | USGS Mineral Commodity Summaries world production 2023 (89 series, 1 025 rows, public domain) — the industrial x_obs anchors; **replaces UNSD ICS** (open mart frozen at 2016) | ✅ open (2026-08-03) |
+| `NXS3` set rows for the v3.2 grid | 15 transport activities + 10 physical commodities + pooling twins/pools — B_ires can walk the graph | ✅ (2026-08-03) |
 | `UNSD.GEN` | generation by source/plant-type/producer (`01x/015x/016x` — CHP, waste, main/auto), 12 678 rows, parameter `SUP` | ✅ open (2026-08-01) |
 | `ECB.FX`, `WB.DFL` | FX + GDP deflators (VA-target temporal alignment) | ✅ public |
 | IPCC GWP AR4/5/6 | governed factors | ✅ |
@@ -100,8 +104,10 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 | `ESTAT.ROADPA/RAILPA/ROADGO` | EU quality layer: pkm by vehicle type, tkm by hire/own-account (4 922 rows; vkm & tonnes native in snapshot = load factors) | ✅ open (2026-08-01) |
 | `ESTAT.SBSH49` · `ESTAT.ROADGOODS` · `ESTAT.CARPARK` | Move-B monetary split key (SBS turnover, 2 283 rows) · own-account propensity by goods (snapshot) · car fleet by motor energy (snapshot) | ✅ open (2026-08-02) |
 | `NXTR.V0` | transport recipe inventory: 14 vehicle techs, intensities + service yields (1 155 rows) | ✅ open (2026-08-01) |
-| UNSD flow `06`, FAO FBS | stock changes, food anchors (volumes) | ⬜ recipes |
-| EX3.10.2 VA (→2024), GTAP elec. prices | VA/GDP targets; price cross-check | ⬜ local sources |
+| UNSD flow `06`, FAO FBS | stock changes (needs a stock-change parameter — tree design decision, proposal: child of `STK`), food anchors (volumes) | ⬜ recipes |
+| GTAP elec. prices | price cross-check | ⬜ local source |
+| WDI + EDGAR | benchmark KPIs (GDP/GVA; emissions by sector) — `EMBER.CI25` already governed for KPI 3 | ⬜ kits |
+| Eurostat `nrg_bal_c` | EU quality twin of UNSD.USE (same SIEC/IRES namespaces) | ⬜ kit |
 
 ## Aggiornamento del layer dati (2026-08-03)
 
