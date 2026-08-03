@@ -164,7 +164,7 @@ def fuel_shares(block: str, children: list[str], Q: dict[str, float],
     elif block == "rail":
         w = {c: Q.get(c, 0.0) for c in children}
     else:
-        w = {c: Q.get(c, 0.0) * (PAX_TONNE if c.endswith("PAX") or c == "TRN.P" else 1.0)
+        w = {c: Q.get(c, 0.0) * (PAX_TONNE if c.endswith("PAX") else 1.0)
              for c in children}
     tot = sum(w.values())
     if tot <= 0:
