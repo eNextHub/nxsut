@@ -346,7 +346,7 @@ GHG AR6 footprint, weighted by output over every producing region, against
 the literature band:
 
   Road freight transport                 51 g/tkm   [30-250]    OK
-  Own-account road freight              147 g/tkm   [30-300]    OK
+  Own-account road freight              148 g/tkm   [30-300]    OK
   Road passenger transport               35 g/pkm   [20-150]    OK
   Rail passenger transport               41 g/pkm   [10-150]    OK
   Rail freight transport                 24 g/tkm   [5-100]     OK
@@ -355,9 +355,9 @@ the literature band:
   Air freight transport                1583 g/tkm   [300-2500]  OK
   Air passenger transport               173 g/pkm   [60-400]    OK
   Private car, gasoline                 144 g/pkm   [80-250]    OK  (0/48 out)
-  Private car, diesel                   147 g/pkm   [80-250]    OK  (0/48 out)
-  Private car, LPG                      126 g/pkm   [60-250]    OK  (0/10 out)
-  Private car, natural gas               70 g/pkm   [40-200]    OK  (0/14 out)
+  Private car, diesel                   148 g/pkm   [80-250]    OK  (0/48 out)
+  Private car, LPG                      125 g/pkm   [60-250]    OK  (0/10 out)
+  Private car, natural gas               69 g/pkm   [40-200]    OK  (0/14 out)
   Private car, electric                  57 g/pkm   [0-200]     OK  (0/40 out)
   Private motorcycle                    105 g/pkm   [40-200]    OK  (0/9 out)
 
@@ -366,6 +366,41 @@ with the country spread from 2 to 27 and a median of 13, is where the
 published range for shipping sits. The same sector read 144 g/tkm while its
 tonne-km were territorial — the correction is the residence basis, not a
 calibration.
+
+EMISSION FACTORS AND THE SATELLITE
+==================================
+
+Combustion emission factors are no longer constants in the code. Move A and
+Move C read them from nxbase — IPCCGL.EF x IPCCGL.NCV, the two IPCC 2006
+tables governed as published and multiplied by the consumer, because the
+calorific value is also the mass-to-energy conversion factor and is needed
+on its own. Motor gasoline is unchanged at 3,070 tCO2/t, which is where the
+constant came from; the others were rounded, and moved: diesel 3,186 against
+3,17, LPG 2,985 against 3,02, natural gas 2,693 against 2,75.
+
+The effect on the table is exactly and only what those changes imply:
+diesel cars and own-account freight +0,4%, LPG cars -0,9%, natural gas cars
+-1,9%, gasoline and electric identical, everything else untouched.
+
+The satellite is reduced to a GHG VERTICAL: the seven Kyoto-basket species
+plus biogenic CO2, in both emission families, 14 accounts against the 350
+EXIOBASE hybrid ships. The other 336 are marked 'unused' in the aggregation
+map. Three of them were what the pipeline read and no code touched a non-GHG
+account; the nowcast does not need the rest either, since its balance
+constraint is conservation per commodity row and that lives in U/S/V/Y.
+
+The Emis_unreg_w twins are kept on purpose: they carry 86,9 Mt of fossil CO2
+— 0,29% of the total — that MARIO's hybrid GHG profile does not currently
+weigh. Dropping them would have settled that silently.
+
+What it gives up: the resource, waste, stock-addition and crop-residue
+blocks are what Merciai's mass balance closes against, so the table can no
+longer demonstrate that an activity conserves mass, and water, land and
+material footprints are off for this vintage. All of it is recoverable —
+the cut happens at build time, the base table is untouched, and
+transport/prune_satellite.py --restore brings everything back. The export
+goes from 1.128 to 1.089 MB: 3,5%, which was never the reason.
+
 
 Electricity anchor (regression against v3.0): Italy "Electricity need"
 92,7 tCO2eq/TJ = 334 gCO2eq/kWh, against ~358 in v3.0 — the shift the
