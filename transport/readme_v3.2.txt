@@ -265,9 +265,12 @@ measurement rather than by assuming one:
     perimeter question the wrong way round: EXIOBASE's air sector is itself
     carrier-based and flies international legs - its jet fuel input is ~7.7x
     domestic aviation and ~1.07x domestic plus international bunkers. Against
-    the carrier perimeter the implied prices converge instead of scattering
-    (air freight IT 1.27 / DE 1.25 EUR/tkm; air passenger IT 0.127 / DE 0.125
-    EUR/pkm), which is the evidence the re-denomination is sound. Passenger-km
+    the carrier perimeter the implied prices converge ACROSS COUNTRIES
+    instead of scattering (air freight IT 1.48 / DE 1.46 / FR 1.31 EUR/tkm),
+    which is the evidence the re-denomination is sound. Read that as a
+    cross-country statement only: the freight-to-passenger price ratio WITHIN
+    a country is imposed at 10:1 by the revenue tonne-km key, not observed
+    (see VALUATION below). Passenger-km
     come from ICAO's revenue passenger-km (free as UN SDG indicator 9.1.2)
     and, for base years the SDG series does not reach, from World Bank
     passengers carried x the observed ICAO average stage length - a ratio of
@@ -362,6 +365,56 @@ the NOWCAST's job, not this layer's: v3.2 fixes the STRUCTURE (who produces
 what, in which physical unit), the level calibration comes after.
 
 
+VALUATION: WHAT STAYS BASIC-PRICE, AND WHERE AN ASSUMPTION ENTERS
+=================================================================
+
+The table is at basic prices and stays there: nothing here revalues a
+monetary flow, and taxes less subsidies on products keep their own factor
+row. But re-denominating a service has two consequences on valuation that a
+reader has to know about.
+
+1. WHAT THE USE MATRIX NO LONGER SAYS. For a re-denominated commodity the
+   monetary value of each use flow is no longer readable: the cell reads
+   "so many tonne-km", not "so many Meuro". EXIOBASE hybrid already lives
+   with this for materials — steel is in tonnes — and MARIO handles the mix,
+   but it does mean the basic-to-purchaser reconciliation, deflation and any
+   price analysis can no longer be done ON the transport rows. Before v3.2
+   they could.
+
+   Worth knowing WHY transport rows are large in the first place: this table
+   has trade and transport margins REALLOCATED, so the transport of the
+   goods a sector buys shows up as that sector's own purchase of transport
+   services. That is why construction is the second largest buyer of sea
+   freight worldwide and public administration the fifth — not because
+   building sites charter ships, but because the margin on everything heavy
+   they buy is booked as transport.
+
+2. WHERE AN ASSUMPTION ON RELATIVE BASIC PRICES ENTERS: AIR, AND ONLY AIR.
+   The air block splits its REVENUE with the same revenue-tonne-km key that
+   splits its fuel, because the SBS class boundary (dedicated freighters)
+   does not describe children defined by the work done, belly cargo
+   included — and belly cargo revenue is booked by the passenger airline.
+   The arithmetic consequence, measured on the built table: the
+   freight-to-passenger implied price ratio is 9,998 (min 9,971, max 10,065
+   over 40 countries). That 10 is the 100 kg convention, imposed, not
+   observed. Air freight and air passenger in this table therefore carry
+   independent information about their relative physical WORK, and none
+   about their relative VALUE.
+   (The order of magnitude is not absurd — real air cargo rates run
+   1,5-3 EUR/tkm against passenger yields of 0,10-0,15 EUR/pkm — but
+   plausible is not observed.)
+
+   Road, rail and water keep the OBSERVED SBS revenue split, and their
+   freight-to-passenger price ratios scatter accordingly (0,02 to 12,7):
+   noisy, but information.
+
+3. OWN-ACCOUNT ACTIVITIES HAVE ZERO VALUE ADDED by construction — the
+   private car activities of Move A and the own-account road freight of
+   Move C. That is the standard convention for own-account production, but
+   it means those activities have no operating surplus and their implicit
+   price is pure cost.
+
+
 KNOWN LIMITATIONS (v0 of the layer)
 ===================================
 
@@ -417,8 +470,9 @@ KNOWN LIMITATIONS (v0 of the layer)
      countries — a country whose fleet works far from home (Greece) looks
      worse than one whose fleet is coastal. Air escaped this precisely
      because ICAO passenger-km and World Bank tonne-km are carrier-based and
-     so match the sector; the convergence of the air implied prices is the
-     evidence.
+     so match the sector; the CROSS-COUNTRY convergence of the air implied
+     prices is the evidence (not the freight-to-passenger ratio, which the
+     revenue tonne-km key imposes — see VALUATION).
      The v1 fix is the same move for sea: allocate world tonne-miles to
      countries by fleet ownership (UNCTAD merchant fleet, open) instead of
      using territorial traffic. It changes a major commodity's world total by
