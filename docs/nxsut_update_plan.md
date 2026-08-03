@@ -104,7 +104,9 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 | `ESTAT.ROADPA/RAILPA/ROADGO` | EU quality layer: pkm by vehicle type, tkm by hire/own-account (4 922 rows; vkm & tonnes native in snapshot = load factors) | ✅ open (2026-08-01) |
 | `ESTAT.SBSH49` · `ESTAT.ROADGOODS` · `ESTAT.CARPARK` | Move-B monetary split key (SBS turnover, 2 283 rows) · own-account propensity by goods (snapshot) · car fleet by motor energy (snapshot) | ✅ open (2026-08-02) |
 | `NXTR.V0` | transport recipe inventory: 14 vehicle techs, intensities + service yields (1 155 rows) | ✅ open (2026-08-01) |
-| UNSD flow `06`, FAO FBS | stock changes (needs a stock-change parameter — tree design decision, proposal: child of `STK`), food anchors (volumes) | ⬜ recipes |
+| `UNSD.STK` | stock changes (flow `06`) on the new **`STKC`** parameter (child of `STK`, free-signed, positive = build — verified on the 2022 EU gas storage fill), 4 607 rows — the energy inventory anchors | ✅ open (2026-08-03) |
+| `FAO.QCL` · `FAO.FBS.FOOD` · `FAO.FBS.STK` | FAOSTAT (CC BY 4.0, native `FAO` namespace, wave-1 scope): production x_obs (44 357 rows, to 2024), household food demand → `CON` (25 780), stock variation → `STKC` (15 017; same sign convention as UNSD 06, verified on the balance identity) | ✅ open (2026-08-03) |
+| `WB.GDP` | GDP current US$ through the `VA` grammar (flow `GDP` + activity `ecoTot` Total economy), 5 579 rows — benchmark KPI 1 only | ✅ open (2026-08-03) |
 | GTAP elec. prices | price cross-check | ⬜ local source |
 | WDI + EDGAR | benchmark KPIs (GDP/GVA; emissions by sector) — `EMBER.CI25` already governed for KPI 3 | ⬜ kits |
 | Eurostat `nrg_bal_c` | EU quality twin of UNSD.USE (same SIEC/IRES namespaces) | ⬜ kit |
