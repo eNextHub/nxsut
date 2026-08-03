@@ -338,6 +338,24 @@ KNOWN LIMITATIONS (v0 of the layer)
      Exactly one cell qualifies (France bus/coach passenger-km: Eurostat
      publishes 51 Mpkm for 2011, ITF 54.702, and the two agree exactly for
      Germany and Spain).
+  8. WATER TRANSPORT carries a perimeter gap that air does not, and it is the
+     weakest point of the layer. EXIOBASE's sea sector burns the national
+     fleet's bunkers, international legs included, while the only open
+     tonne-km series (ITF coastal shipping) counts territorial coastal
+     traffic. The table's world sea freight work is 6.521 Gtkm against
+     roughly 81.000 Gtkm of real seaborne work in 2011 (UNCTAD, ~44.000 bn
+     tonne-miles): the sector's intensity per tonne-km is therefore an upper
+     bound by about an order of magnitude, and it is NOT comparable across
+     countries — a country whose fleet works far from home (Greece) looks
+     worse than one whose fleet is coastal. Air escaped this precisely
+     because ICAO passenger-km and World Bank tonne-km are carrier-based and
+     so match the sector; the convergence of the air implied prices is the
+     evidence.
+     The v1 fix is the same move for sea: allocate world tonne-miles to
+     countries by fleet ownership (UNCTAD merchant fleet, open) instead of
+     using territorial traffic. It changes a major commodity's world total by
+     more than an order of magnitude, so it is a decision to take explicitly
+     rather than a patch to slip in.
 
 
 DATA SOURCES (all governed in nxbase, all open)
