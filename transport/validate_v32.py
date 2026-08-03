@@ -35,10 +35,11 @@ TRANSPORT_ACTS: dict[str, tuple[str, tuple[float, float]]] = {
     "Road passenger transport": ("pkm", (20, 150)),
     "Rail passenger transport": ("pkm", (10, 150)),
     "Rail freight transport": ("tkm", (5, 100)),
-    "Sea and coastal freight transport": ("tkm", (5, 100)),
-    "Sea and coastal passenger transport": ("pkm", (50, 800)),
-    "Inland water freight transport": ("tkm", (10, 120)),
-    "Inland water passenger transport": ("pkm", (50, 800)),
+    # Water carries one child each, in tonne-km-equivalent on the RESIDENCE
+    # basis (sea) — passengers folded in at 100 kg, ICAO/GLEC convention.
+    # Shipping is the least carbon-intensive mode there is per unit of work.
+    "Sea and coastal transport": ("tkm", (3, 50)),
+    "Inland waterway transport": ("tkm", (10, 120)),
     "Air freight transport": ("tkm", (300, 2500)),
     "Air passenger transport": ("pkm", (60, 400)),
     "Private car transport, gasoline": ("pkm", (80, 250)),

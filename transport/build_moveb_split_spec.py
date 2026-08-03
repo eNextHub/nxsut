@@ -51,12 +51,23 @@ EXIOBASE_REGIONS = [
     "WA", "WE", "WF", "WL", "WM",
 ]
 
+# Water carries ONE child, not two. Splitting freight from passenger needs
+# both sides measured the same way, and for water they cannot be: the fuel
+# and the revenue of a shipping sector belong to the resident fleet wherever
+# it sails, and the only per-country work observation on that basis (UNCTAD
+# fleet x IMO world transport work) is cargo. No open source publishes the
+# passenger-km of a country's resident ferry and cruise operators. Rather
+# than split with one side on a different perimeter, water is denominated
+# whole in tonne-km-equivalent, folding passengers in at 100 kg each — the
+# ICAO/IATA/EN 16258/GLEC convention already used for the air block's fuel.
+# Cost: sea passenger transport stops being a mode of its own, ~0,5% of world
+# passenger mobility that we could not measure coherently anyway.
 BLOCKS = {"road_pipe": ["ROAD.FRT", "ROAD.PAX", "PIPE"], "rail": ["TRN.P", "TRN.F"],
-          "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+          "sea": ["SEA"], "iww": ["IWW"],
           "air": ["AIR.FRT", "AIR.PAX"]}
 # core = the children whose absence means "confidential", not "zero"
 CORE = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
-        "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+        "sea": ["SEA"], "iww": ["IWW"],
         "air": ["AIR.FRT", "AIR.PAX"]}
 SBS_MAP = {
     "H.49.41": ("road_pipe", "ROAD.FRT"), "H.49.42": ("road_pipe", "ROAD.FRT"),
@@ -64,8 +75,8 @@ SBS_MAP = {
     "H.49.39": ("road_pipe", "ROAD.PAX"), "H.49.50": ("road_pipe", "PIPE"),
     "H.49.1": ("rail", "TRN.P"), "H.49.20": ("rail", "TRN.F"),
     # water and air (SBS Rev-2 classes == NACE 2.1 classes here)
-    "H.50.10": ("sea", "SEA.PAX"), "H.50.20": ("sea", "SEA.FRT"),
-    "H.50.30": ("iww", "IWW.PAX"), "H.50.40": ("iww", "IWW.FRT"),
+    "H.50.10": ("sea", "SEA"), "H.50.20": ("sea", "SEA"),
+    "H.50.30": ("iww", "IWW"), "H.50.40": ("iww", "IWW"),
     "H.51.10": ("air", "AIR.PAX"), "H.51.21": ("air", "AIR.FRT"),
 }
 # volumes for Q and fuel shares: (source, activity) per (block, child); first
@@ -91,30 +102,24 @@ VOLUMES = {
         ("International Transport Forum", "Rail passenger transport"),
     ],
     ("rail", "TRN.F"): [("International Transport Forum", "Rail freight transport")],
-    # water freight: ITF territory-based tkm (already governed and used by
-    # the NXTR recipes); air freight: World Bank carrier-based tonne-km.
-    # The passenger children of sea/inland/air have NO pkm anywhere open
-    # (only passengers carried) -> they stay monetary, as PIPE does.
-    ("sea", "SEA.FRT"): [("International Transport Forum",
-                          "Coastal shipping freight transport")],
-    ("iww", "IWW.FRT"): [("International Transport Forum",
-                          "Inland waterways freight transport")],
+    # Inland waterways: ITF territorial tonne-km. Barges do cross borders —
+    # a Dutch barge working the German Rhine is German tonne-km but Dutch
+    # fuel — so this is the same perimeter gap the sea block has, at a much
+    # smaller scale and with no residence-based source to close it. Declared.
+    ("iww", "IWW"): [("International Transport Forum",
+                      "Inland waterways freight transport")],
     ("air", "AIR.FRT"): [("World Bank air freight (tonne-km)",
                           "H.51.21 Freight air transport")],
-    ("sea", "SEA.PAX"): [("Eurostat maritime passenger transport (pkm)",
-                          "H.50.10 Sea and coastal passenger water transport")],
-    # AIR.PAX is derived (see air_passenger_pkm) — passengers carried x the
-    # observed average stage length — so it is not a plain source lookup.
+    # SEA and AIR.PAX are derived, not plain lookups: see
+    # sea_transport_work (residence basis) and air_passenger_pkm.
 }
 # ICAO reference year for the stage length (first year of the SDG series)
 ICAO_REF = "Y17"
 # ICAO's own conversion when no operator factor is available: one passenger
 # (with baggage) counts as 100 kg of payload — so 1 Mpkm = 0.1 Mtkm.
 PAX_TONNE = 0.1
-# no observation of inland-waterway passenger transport exists anywhere:
-# Regulation (EC) 1365/2006 Art. 2(4) excludes passenger vessels from
-# collection, so Eurostat, ITF and the national offices all publish nothing.
-NO_DATA_CHILDREN = {"IWW.PAX"}
+# base year of the table, the IMO study's base year, and the nautical mile
+BASE_PERIOD, IMO_REF, NM_KM = "Y11", "Y18", 1.852
 # NXTR v0 recipe constants for the liquid-fuel bottom-up shares.
 # how far apart two sources for the same national total may be before the
 # smaller one is read as a coverage hole rather than a measurement difference
@@ -166,6 +171,59 @@ def air_passenger_pkm(fetch) -> dict[str, float]:
     return out
 
 
+def sea_transport_work(fetch) -> dict[str, float]:
+    """Maritime work of each country's resident fleet, base year, in Mtkm.
+
+    Composed from three governed sources, because no single one has it:
+    the Fourth IMO GHG Study for the world level of transport work, UNCTAD
+    seaborne trade to carry that level from the study's 2018 base to ours,
+    and UNCTAD's fleet by beneficial ownership for each country's share.
+
+    Beneficial ownership is the point: it is the economy commercially
+    responsible for the vessel, which is the residence concept the table
+    needs, and deliberately not the flag (Panama and Liberia would
+    otherwise own a third of world shipping). Territorial tonne-km measure
+    a different thing — work done on a country's coast, by anyone — and ITF
+    reports none at all for Greece, whose fleet is the world's largest.
+
+    The fleet series starts in 2014, so an earlier base year borrows the
+    earliest shares. Fleet ownership moves slowly; it is still an
+    approximation.
+    """
+    world = sum(float(r["value"]) for r in fetch(
+        {"parameter": "Total output",
+         "source": "Fourth IMO GHG Study 2020 — world transport work",
+         "limit": "1000"}))
+    if world <= 0:
+        raise SystemExit("nxbase has no IMO world transport work (source IMO.GHG4)")
+    world *= NM_KM                                      # Mtnm -> Mtkm
+
+    loaded: dict[str, float] = defaultdict(float)
+    for r in fetch({"parameter": "Total output",
+                    "source": "UNCTAD seaborne trade, goods loaded", "limit": "200000"}):
+        parts = r["item_1"].split("-")
+        if len(parts) == 4:
+            loaded[parts[3]] += float(r["value"])
+    if not {BASE_PERIOD, IMO_REF} <= set(loaded):
+        raise SystemExit(f"UNCTAD seaborne trade covers neither {BASE_PERIOD} nor {IMO_REF}")
+    world *= loaded[BASE_PERIOD] / loaded[IMO_REF]
+
+    dwt: dict[str, dict[str, float]] = defaultdict(dict)
+    for r in fetch({"parameter": "Stock",
+                    "source": "UNCTAD merchant fleet by beneficial ownership",
+                    "limit": "200000"}):
+        parts = r["item_1"].split("-")
+        if len(parts) == 4:
+            dwt[parts[3]][parts[2]] = float(r["value"])
+    pick = BASE_PERIOD if BASE_PERIOD in dwt else sorted(dwt)[0]
+    fleet = dwt[pick]
+    total = sum(fleet.values())
+    out = {site: world * v / total for site, v in fleet.items()}
+    print(f"lavoro marittimo per residenza: {len(out)} paesi, mondo "
+          f"{world / 1e6:,.1f} mld tkm (quote flotta {pick})")
+    return out
+
+
 def main() -> None:
     # --- tier 1: SBS shares per country (Y11) ---
     sbs: dict[tuple[str, str, str], float] = defaultdict(float)
@@ -205,6 +263,7 @@ def main() -> None:
                 float(r["share"]), r["tier"], r["provenance"])
 
     air_pkm = air_passenger_pkm(fetch_api)
+    sea_work = sea_transport_work(fetch_api)
 
     # --- volumes (Y11) for Q and fuel shares ---
     volume: dict[tuple[str, str, str], tuple[float, str]] = {}
@@ -219,6 +278,10 @@ def main() -> None:
     for iso2, q in air_pkm.items():
         if iso2 in EXIOBASE_REGIONS:
             volume[(iso2, "air", "AIR.PAX")] = (q, "WB pax x ICAO stage length")
+    for iso2, q in sea_work.items():
+        if iso2 in EXIOBASE_REGIONS:
+            volume[(iso2, "sea", "SEA")] = (
+                q, "IMO world transport work x UNCTAD fleet share (residence)")
     swapped: list[tuple] = []
     for (block, child), specs in VOLUMES.items():
         for iso2 in EXIOBASE_REGIONS:
@@ -350,7 +413,11 @@ def main() -> None:
                 frt_c = next((c for c in children if c.endswith("FRT")), None)
                 w_pax = volume.get((region, block, pax_c), (0.0, ""))[0] * PAX_TONNE
                 w_frt = volume.get((region, block, frt_c), (0.0, ""))[0]
-                if w_pax + w_frt > 0:
+                if len(children) == 1:
+                    # water: one child, so the whole liquid-fuel row is its own
+                    emit(region, block, "fuel_liquid", children[0], 1.0,
+                         "4-single-child", "one child on the block: nothing to split")
+                elif w_pax + w_frt > 0:
                     tot_w = w_pax + w_frt
                     emit(region, block, "fuel_liquid", pax_c, w_pax / tot_w,
                          "4-tonne-km-equivalent",
@@ -372,7 +439,8 @@ def main() -> None:
                     continue
                 q, src = volume.get((region, block, c), (0.0, ""))
                 if q > 0:
-                    unit = "Mtkm" if c in ("ROAD.FRT", "TRN.F") else "Mpkm"
+                    unit = ("Mtkm" if c in ("ROAD.FRT", "TRN.F", "SEA", "IWW",
+                                            "AIR.FRT") else "Mpkm")
                     emit(region, block, "Q", c, q, "observed",
                          f"{src} Y11, {unit}; child re-denominates to it")
                 else:

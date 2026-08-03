@@ -2,7 +2,7 @@
 
 The write pass of the deterministic split validated by stage 2a:
 
-1. **Register** the four children in the grid via MARIO's standard
+1. **Register** the children in the grid via MARIO's standard
    inventory path (`read_add_sectors_excel` + `add_sectors()`) with a
    register-only template generated from the blastfurnacegas.xlsx base
    (Master rows swapped, empty inventory sheets, DB-units extended) —
@@ -14,10 +14,10 @@ The write pass of the deterministic split validated by stage 2a:
    the parent, `update_scenarios('baseline', z, v, e, Y)` +
    `reset_to_coefficients`.
 3. **Re-denomination**: child outputs are physical — X = Q (Mtkm/Mpkm)
-   observed; where Q is unobserved it is synthesised as M ÷ median
-   table-implied price of the child type (from the stage-2a dry-run CSV;
-   the grid needs uniform units per commodity — declared per region).
-   Rail/road children only; pipelines are already their own MEUR sector.
+   observed; where Q is unobserved it is synthesised as M ÷ the median
+   table-implied price of that child type, computed from this run's own
+   observed pairs (the grid needs uniform units per commodity — declared
+   per region). Pipelines are already their own MEUR sector.
 4. **Checks**: parent output gone, children alive, per-region commodity
    balance (supply == use) on the children, IT spot values; then
    `to_txt` export of the split baseline for inspection/reload.
@@ -61,31 +61,27 @@ CHILD_DEF = {
     "ROAD.PAX": ("Road passenger transport", "Road passenger transport services", "Mpkm", "RPX"),
     "TRN.P": ("Rail passenger transport", "Rail passenger transport services", "Mpkm", "RLP"),
     "TRN.F": ("Rail freight transport", "Rail freight transport services", "Mtkm", "RLF"),
-    "SEA.FRT": ("Sea and coastal freight transport",
-                "Sea and coastal freight transport services", "Mtkm", "SEF"),
-    "SEA.PAX": ("Sea and coastal passenger transport",
-                "Sea and coastal passenger transport services", "Mpkm", "SEP"),
-    "IWW.FRT": ("Inland water freight transport",
-                "Inland water freight transport services", "Mtkm", "IWF"),
-    "IWW.PAX": ("Inland water passenger transport",
-                "Inland water passenger transport services", "Mpkm", "IWP"),
+    "SEA": ("Sea and coastal transport",
+            "Sea and coastal transport services", "Mtkm", "SEA"),
+    "IWW": ("Inland waterway transport",
+            "Inland waterway transport services", "Mtkm", "IWW"),
     "AIR.FRT": ("Air freight transport", "Air freight transport services",
                 "Mtkm", "AIF"),
     "AIR.PAX": ("Air passenger transport", "Air passenger transport services",
                 "Mpkm", "AIP"),
 }
 CHILDREN = {"road_pipe": ["ROAD.FRT", "ROAD.PAX"], "rail": ["TRN.P", "TRN.F"],
-    "sea": ["SEA.FRT", "SEA.PAX"], "iww": ["IWW.FRT", "IWW.PAX"],
+    "sea": ["SEA"], "iww": ["IWW"],
     "air": ["AIR.FRT", "AIR.PAX"],
 }
-# no open pkm exists for these: they keep the monetary denomination
-# every transport child is now physical: air passenger-km derive
-# from ICAO, sea passenger-km come from Eurostat, and inland
-# waterway passengers — which no statistical system collects, by
-# the explicit exclusion in Regulation (EC) 1365/2006 — are scaled
-# with the sea passenger price (declared proxy, tiny sector).
+# Every transport child is physical; none keeps the monetary denomination.
+# Water carries ONE child rather than a freight/passenger pair: the split
+# would need both sides measured the same way, and for water they cannot be
+# — a shipping sector's fuel and revenue belong to the resident fleet
+# wherever it sails, and the only per-country work observation on that basis
+# (UNCTAD fleet x IMO world transport work) is cargo. Passengers fold in at
+# 100 kg each, the convention the air block already uses for its fuel.
 MONETARY_CHILDREN: set[str] = set()
-PRICE_PROXY = {"IWW.PAX": "SEA.PAX"}
 FUEL_NAMES = [
     "Motor Gasoline", "Gas/Diesel Oil", "Liquefied Petroleum Gases (LPG)",
     "Biogasoline", "Biodiesels", "Other Liquid Biofuels", "Kerosene",
@@ -110,17 +106,6 @@ def load_spec() -> dict:
                 for c in shares:
                     shares[c] /= tot
     return spec
-
-
-def median_prices() -> dict[str, float]:
-    """Median table-implied price per child (stage-2a dry-run) — the
-    synthesiser for regions without observed Q."""
-    vals: dict[str, list[float]] = defaultdict(list)
-    with open(HERE / "data" / "moveb_split_dryrun.csv") as f:
-        for r in csv.DictReader(f):
-            if r["implied_price"]:
-                vals[r["child"]].append(float(r["implied_price"]))
-    return {c: statistics.median(v) for c, v in vals.items()}
 
 
 def hgv_load_factors() -> dict[str, float]:
@@ -225,10 +210,8 @@ def apply(db) -> None:
     print("children registrati:", list(db.new_activities), flush=True)
 
     spec = load_spec()
-    prices = median_prices()
     load = hgv_load_factors()
-    print("prezzi mediani (sintesi Q mancanti):",
-          {k: round(v, 3) for k, v in prices.items()}, flush=True)
+    seen_prices: dict[str, list[float]] = defaultdict(list)
 
     U, V, E, S, Y = db.U, db.V, db.E, db.S, db.Y
     X = db.X
@@ -289,48 +272,61 @@ def apply(db) -> None:
             self_row_key = (region, "Commodity", p_com)
             self_val = float(u_row[self_col_key])
 
-            Q: dict[str, float] = {}
+            observed = {c: q_spec.get(c, 0.0) for c in children}
+            monetary = {c: sh_other.get(c, 0.0) * M for c in children}
             for c in children:
-                m_child = sh_other.get(c, 0.0) * M
-                if c in MONETARY_CHILDREN:      # identity: output stays MEUR
-                    Q[c] = m_child
-                    continue
-                q = q_spec.get(c, 0.0)
-                if q > 0 and c in prices and m_child > 0:
-                    # The observed volume ALWAYS wins: the physical output must
-                    # match the statistics. A wildly off implied price is
-                    # (almost always) the MONETARY side misbehaving — SBS
-                    # coverage, transit, a sector that also does other things —
-                    # so substituting Q with M / median price would replace a
-                    # good observation with a value derived from the suspect
-                    # one. Flag it for the radar instead.
-                    price = m_child / q
-                    if not (prices[c] / 4 <= price <= prices[c] * 4):
-                        implausible.append((region, c, round(price, 4)))
-                if q <= 0:
-                    proxy = PRICE_PROXY.get(c)
-                    if c not in prices and proxy in prices:
-                        prices[c] = prices[proxy]
-                    if m_child > 0 and c not in prices:
-                        # no observed Q and no median price to synthesise from:
-                        # the dry-run has not been re-run for this child. Refuse
-                        # rather than scale a physical unit by a monetary value.
-                        raise SystemExit(
-                            f"{c}: nessun prezzo mediano (rilancia il dry-run "
-                            f"apply_moveb_split.py prima del write)")
-                    q = m_child / prices[c] if m_child > 0 else 0.0
-                    synth += 1
-                Q[c] = q
-            # the fuel split follows the physical work the table will carry,
-            # so it uses these Q — never the spec's observed-only volumes,
-            # which read an unmeasured sibling as zero activity
-            sh_fuel = fuel_shares(block, children, Q, region, load) or sh_fuel
+                if observed[c] > 0 and monetary[c] > 0:
+                    seen_prices[c].append(monetary[c] / observed[c])
             blocks[(region, block)] = dict(
-                region=region, p_act=p_act, p_com=p_com, children=children, M=M, Q=Q,
+                observed=observed, monetary=monetary,
+                region=region, p_act=p_act, p_com=p_com, children=children, M=M,
                 sh_other=sh_other, sh_fuel=sh_fuel, self_val=self_val,
                 u_col=u_col, v_col=v_col, e_col=e_col, fuel_mask=fuel_mask,
                 u_row=u_row, y_row=y_row, users=users,
                 self_col_key=self_col_key, self_row_key=self_row_key)
+
+    # Pass 1b — the physical output each child will carry.
+    #
+    # The observed volume ALWAYS wins where one exists: it is the measured
+    # quantity, and an implied price far from its peers is almost always the
+    # MONETARY side misbehaving (SBS coverage, transit traffic, a class that
+    # also does other things), so substituting it would replace a good
+    # observation with a value derived from the suspect one. Such cases are
+    # flagged, never overridden.
+    #
+    # Where no volume is observed the child is scaled by the median implied
+    # price of its own type, so that each commodity keeps ONE unit worldwide.
+    # The medians come from the run itself rather than from a dry-run CSV: a
+    # stale file was one failure mode too many.
+    prices = {c: statistics.median(v) for c, v in seen_prices.items() if v}
+    print("prezzi impliciti mediani (sintesi dei Q mancanti):",
+          {k: round(v, 3) for k, v in sorted(prices.items())}, flush=True)
+    for (region, block), B in blocks.items():
+        Q: dict[str, float] = {}
+        for c in B["children"]:
+            q, m_child = B["observed"][c], B["monetary"][c]
+            if c in MONETARY_CHILDREN:          # identity: output stays MEUR
+                Q[c] = m_child
+            elif q > 0:
+                if m_child > 0 and c in prices:
+                    price = m_child / q
+                    if not (prices[c] / 4 <= price <= prices[c] * 4):
+                        implausible.append((region, c, round(price, 4)))
+                Q[c] = q
+            elif m_child > 0:
+                if c not in prices:
+                    raise SystemExit(
+                        f"{c}: nessuna regione ha un volume osservato, quindi non "
+                        f"esiste un prezzo mediano da cui sintetizzare")
+                Q[c] = m_child / prices[c]
+                synth += 1
+            else:
+                Q[c] = 0.0
+        B["Q"] = Q
+        # the fuel split follows the physical work the table will carry, so it
+        # uses these Q — never the observed-only volumes, where a sibling that
+        # is merely unmeasured reads as zero activity
+        B["sh_fuel"] = fuel_shares(block, B["children"], Q, region, load) or B["sh_fuel"]
 
     # parent activity column -> the children that replace it, with the
     # monetary share and the physical output to divide by
@@ -379,21 +375,26 @@ def apply(db) -> None:
         users, self_val = B["users"], B["self_val"]
         self_col_key, self_row_key = B["self_col_key"], B["self_row_key"]
 
-        pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
-        frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
         users2 = users.drop(self_col_key)          # self allocated apart
         neg = users2.clip(upper=0.0).to_numpy()
         pos = users2.clip(lower=0.0).to_numpy()
-        is_final = np.array(
-            [(lvl[1] != "Activity" and any(k in str(lvl[2]) for k in
-              ("households", "non-profit", "government")))
-             for lvl in users2.index], dtype=bool)
-        rule = np.zeros((len(children), len(users2)))
-        rule[children.index(pax), is_final] = pos[is_final]
-        rule[children.index(frt), ~is_final] = pos[~is_final]
         shares_vec = np.array([sh_other.get(c, 0.0) for c in children])
-        seed = 0.9 * rule + 0.1 * np.outer(shares_vec, pos)
-        closed = ipf(seed, shares_vec * pos.sum(), pos) + np.outer(shares_vec, neg)
+        if len(children) == 1:
+            # water: nothing to split, the parent's whole use row is the
+            # child's. No use rule, no IPF — both would be identities here.
+            closed = np.vstack([users2.to_numpy()])
+        else:
+            is_final = np.array(
+                [(lvl[1] != "Activity" and any(k in str(lvl[2]) for k in
+                  ("households", "non-profit", "government")))
+                 for lvl in users2.index], dtype=bool)
+            pax = next(c for c in children if c.endswith("PAX") or c == "TRN.P")
+            frt = next(c for c in children if c.endswith("FRT") or c == "TRN.F")
+            rule = np.zeros((len(children), len(users2)))
+            rule[children.index(pax), is_final] = pos[is_final]
+            rule[children.index(frt), ~is_final] = pos[~is_final]
+            seed = 0.9 * rule + 0.1 * np.outer(shares_vec, pos)
+            closed = ipf(seed, shares_vec * pos.sum(), pos) + np.outer(shares_vec, neg)
         # monetary row total per child = sh x (M - self) + sh x self = sh x M
 
         n_u = len(u_row) - 1                      # users2 U-part length
