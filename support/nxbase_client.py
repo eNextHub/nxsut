@@ -657,6 +657,67 @@ def get_aluminium_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source
     return get_trade_mix(api_url, ALUMINIUM_COMMODITY, year, regions, source, baci_path)
 
 
+NM_KM = 1.852                       # a nautical mile, for the maritime work level
+
+
+def get_sea_transport_work(
+    api_url: str = DEFAULT_API,
+    year: int = 2011,
+    regions=None,
+) -> dict[str, float]:
+    """Maritime freight work of each country's RESIDENT fleet, in Mtkm.
+
+    The denominator a maritime footprint needs. Emissions in an
+    input-output table follow residence — the fuel a resident shipping
+    company buys, wherever it buys it — so the physical work underneath
+    them has to be the resident fleet's work, wherever performed.
+    Territorial tonne-km (ITF coastal shipping) measure something else
+    entirely: the work done on a country's own coast, by anyone. Greece's
+    globe-spanning fleet against Greek cabotage puts its emission intensity
+    an order of magnitude out.
+
+    Composed from three governed sources, none of which could do it alone:
+
+    - **IMO.GHG4** — world transport work for 2018 (Fourth IMO GHG Study,
+      Table 71, Clarksons). The level;
+    - **UNCTAD.SEABORNE** — tonnes loaded per year. Carries that level to
+      the requested year by the tonnage actually shipped;
+    - **UNCTAD.FLEET** — deadweight tonnage by beneficial ownership, i.e.
+      by the economy commercially responsible for the vessel. The share.
+
+    The fleet series starts in 2014, so earlier years borrow the earliest
+    shares; fleet ownership moves slowly, but the consumer should say so.
+    """
+    work = _get_csv(api_url, {"parameter": "Total output", "source":
+                              "Fourth IMO GHG Study 2020 — world transport work"})
+    if work.empty:
+        raise RuntimeError("nxbase has no IMO world transport work (source IMO.GHG4)")
+    world_mtkm = float(work["value"].sum()) * NM_KM       # Mtnm -> Mtkm
+
+    loaded = _get_csv(api_url, {"parameter": "Total output",
+                                "source": "UNCTAD seaborne trade, goods loaded"})
+    loaded["year"] = loaded["item_1"].map(lambda s: split_item(s)[3])
+    by_year = loaded.groupby("year")["value"].sum()
+    ref, want = f"Y{2018 % 100:02d}", f"Y{year % 100:02d}"
+    if want not in by_year or ref not in by_year:
+        raise RuntimeError(f"UNCTAD seaborne trade covers neither {want} nor {ref}")
+    world_mtkm *= float(by_year[want]) / float(by_year[ref])
+
+    fleet = _get_csv(api_url, {"parameter": "Stock",
+                               "source": "UNCTAD merchant fleet by beneficial ownership"})
+    parts = fleet["item_1"].map(split_item)
+    fleet["site"] = parts.map(lambda p: p[2])
+    fleet["year"] = parts.map(lambda p: p[3])
+    years = sorted(fleet["year"].unique())
+    pick = want if want in years else years[0]            # series starts in 2014
+    dwt = fleet[fleet["year"] == pick].groupby("site")["value"].sum()
+    share = dwt / dwt.sum()
+    if regions is not None:
+        share = share.reindex(regions).dropna()
+        share = share / share.sum() * (dwt.reindex(regions).dropna().sum() / dwt.sum())
+    return {site: world_mtkm * s for site, s in share.items()}
+
+
 def get_glass_recycled_share(
     api_url: str = DEFAULT_API,
     year: int = 2024,
