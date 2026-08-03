@@ -31,14 +31,14 @@ BG,Manufacture of beverages,6275.0,0.745,0.8
 BG,Manufacture of machinery and equipment n.e.c. (29),6043.0,0.279,0.3
 BG,"Manufacture of medical, precision and optical instrumen",4087.0,0.279,0.3
 BG,"Manufacture of cement, lime and plaster",3627.0,0.466,0.5
-BR,"Wholesale trade and commission trade, except of motor v",302634.0,0.155,1.0
-BR,"Retail trade, except of motor vehicles and motorcycles;",221994.0,0.155,1.0
-BR,Sugar refining,179969.0,0.124,0.8
-BR,Construction (45),151628.0,0.093,0.6
-BR,"Sale, maintenance, repair of motor vehicles, motor vehi",52936.0,0.155,1.0
-BR,Manufacture of beverages,52600.0,0.124,0.8
-BR,Processing of Food products nec,41494.0,0.124,0.8
-BR,"Manure treatment (conventional), storage and land appli",36674.0,0.108,0.7
+BR,"Wholesale trade and commission trade, except of motor v",302824.0,0.155,1.0
+BR,"Retail trade, except of motor vehicles and motorcycles;",222133.0,0.155,1.0
+BR,Sugar refining,180081.0,0.124,0.8
+BR,Construction (45),151723.0,0.093,0.6
+BR,"Sale, maintenance, repair of motor vehicles, motor vehi",52969.0,0.155,1.0
+BR,Manufacture of beverages,52633.0,0.124,0.8
+BR,Processing of Food products nec,41520.0,0.124,0.8
+BR,"Manure treatment (conventional), storage and land appli",36697.0,0.108,0.7
 CA,"Wholesale trade and commission trade, except of motor v",440451.0,0.341,1.0
 CA,Construction (45),394499.0,0.205,0.6
 CA,"Retail trade, except of motor vehicles and motorcycles;",290907.0,0.341,1.0
@@ -159,14 +159,14 @@ HU,Manufacture of office machinery and computers (30),4347.0,0.098,0.3
 HU,"Manufacture of cement, lime and plaster",4105.0,0.164,0.5
 HU,Processing of Food products nec,3288.0,0.262,0.8
 HU,Paper,3090.0,0.131,0.4
-ID,"Wholesale trade and commission trade, except of motor v",157246.0,0.131,1.0
-ID,"Retail trade, except of motor vehicles and motorcycles;",115543.0,0.131,1.0
-ID,Cultivation of oil seeds,66139.0,0.026,0.2
-ID,Construction (45),65106.0,0.078,0.6
-ID,Processed rice,63883.0,0.105,0.8
-ID,"Manufacture of cement, lime and plaster",47768.0,0.065,0.5
-ID,Processing of Food products nec,43926.0,0.105,0.8
-ID,Paper,27529.0,0.052,0.4
+ID,"Wholesale trade and commission trade, except of motor v",157344.0,0.131,1.0
+ID,"Retail trade, except of motor vehicles and motorcycles;",115615.0,0.131,1.0
+ID,Cultivation of oil seeds,66180.0,0.026,0.2
+ID,Construction (45),65146.0,0.079,0.6
+ID,Processed rice,63923.0,0.105,0.8
+ID,"Manufacture of cement, lime and plaster",47798.0,0.065,0.5
+ID,Processing of Food products nec,43953.0,0.105,0.8
+ID,Paper,27547.0,0.052,0.4
 IE,"Wholesale trade and commission trade, except of motor v",29256.0,0.132,1.0
 IE,Construction (45),15186.0,0.079,0.6
 IE,"Retail trade, except of motor vehicles and motorcycles;",13599.0,0.132,1.0
@@ -231,9 +231,9 @@ LV,Manufacture of beverages,1949.0,0.184,0.8
 LV,"Sale, maintenance, repair of motor vehicles, motor vehi",1553.0,0.231,1.0
 LV,Processing of Food products nec,1197.0,0.184,0.8
 LV,"Manure treatment (conventional), storage and land appli",1134.0,0.161,0.7
-MT,"Wholesale trade and commission trade, except of motor v",2587.0,0.526,1.0
-MT,"Retail trade, except of motor vehicles and motorcycles;",1809.0,0.526,1.0
-MT,Construction (45),1010.0,0.316,0.6
+MT,"Wholesale trade and commission trade, except of motor v",2589.0,0.526,1.0
+MT,"Retail trade, except of motor vehicles and motorcycles;",1810.0,0.526,1.0
+MT,Construction (45),1011.0,0.316,0.6
 MT,"Sale, maintenance, repair of motor vehicles, motor vehi",383.0,0.526,1.0
 MT,Manufacture of beverages,95.0,0.421,0.8
 MT,"Waste water treatment, other",54.0,0.368,0.7
@@ -287,14 +287,14 @@ RO,"Manufacture of cement, lime and plaster",23589.0,0.212,0.5
 RO,Processing of Food products nec,12873.0,0.339,0.8
 RO,"Manure treatment (conventional), storage and land appli",9069.0,0.297,0.7
 RO,"Waste water treatment, other",7103.0,0.297,0.7
-RU,"Wholesale trade and commission trade, except of motor v",204529.0,0.341,1.0
-RU,"Sale, maintenance, repair of motor vehicles, motor vehi",151948.0,0.341,1.0
-RU,"Retail trade, except of motor vehicles and motorcycles;",127880.0,0.341,1.0
-RU,Manufacture of beverages,108119.0,0.273,0.8
-RU,"Manufacture of cement, lime and plaster",105693.0,0.171,0.5
-RU,Construction (45),92172.0,0.205,0.6
-RU,Sugar refining,62412.0,0.273,0.8
-RU,Processing of Food products nec,54561.0,0.273,0.8
+RU,"Wholesale trade and commission trade, except of motor v",204657.0,0.341,1.0
+RU,"Sale, maintenance, repair of motor vehicles, motor vehi",152044.0,0.341,1.0
+RU,"Retail trade, except of motor vehicles and motorcycles;",127960.0,0.341,1.0
+RU,Manufacture of beverages,108186.0,0.273,0.8
+RU,"Manufacture of cement, lime and plaster",105759.0,0.171,0.5
+RU,Construction (45),92230.0,0.205,0.6
+RU,Sugar refining,62451.0,0.273,0.8
+RU,Processing of Food products nec,54595.0,0.273,0.8
 SE,"Wholesale trade and commission trade, except of motor v",38892.0,0.149,1.0
 SE,"Retail trade, except of motor vehicles and motorcycles;",18588.0,0.149,1.0
 SE,"Sale, maintenance, repair of motor vehicles, motor vehi",12162.0,0.149,1.0
@@ -335,51 +335,51 @@ US,"Sale, maintenance, repair of motor vehicles, motor vehi",772852.0,0.502,1.0
 US,Paper,667907.0,0.201,0.4
 US,Processing of Food products nec,620473.0,0.401,0.8
 US,"Manufacture of cement, lime and plaster",387230.0,0.251,0.5
-WA,"Wholesale trade and commission trade, except of motor v",561155.0,0.262,1.0
-WA,Construction (45),387518.0,0.157,0.6
-WA,"Retail trade, except of motor vehicles and motorcycles;",350078.0,0.262,1.0
-WA,Processed rice,309061.0,0.21,0.8
-WA,Sugar refining,273315.0,0.21,0.8
-WA,"Manufacture of cement, lime and plaster",231341.0,0.131,0.5
-WA,"Manure treatment (conventional), storage and land appli",211893.0,0.183,0.7
-WA,Recycling of waste and scrap,178727.0,0.183,0.7
-WE,"Wholesale trade and commission trade, except of motor v",80683.0,0.153,1.0
-WE,Construction (45),71509.0,0.092,0.6
-WE,"Retail trade, except of motor vehicles and motorcycles;",53418.0,0.153,1.0
-WE,Manufacture of beverages,25106.0,0.123,0.8
-WE,Sugar refining,18900.0,0.123,0.8
-WE,"Sale, maintenance, repair of motor vehicles, motor vehi",15965.0,0.153,1.0
-WE,"Manufacture of cement, lime and plaster",15475.0,0.077,0.5
-WE,Processing of Food products nec,14473.0,0.123,0.8
-WF,"Wholesale trade and commission trade, except of motor v",451691.0,0.185,1.0
-WF,"Retail trade, except of motor vehicles and motorcycles;",308664.0,0.185,1.0
-WF,Construction (45),230414.0,0.111,0.6
-WF,"Sale, maintenance, repair of motor vehicles, motor vehi",104003.0,0.185,1.0
-WF,"Manure treatment (conventional), storage and land appli",61809.0,0.129,0.7
-WF,Manufacture of beverages,53217.0,0.148,0.8
-WF,"Manufacture of cement, lime and plaster",44157.0,0.092,0.5
-WF,Recycling of waste and scrap,37856.0,0.129,0.7
-WL,"Wholesale trade and commission trade, except of motor v",388427.0,0.212,1.0
-WL,"Retail trade, except of motor vehicles and motorcycles;",280039.0,0.212,1.0
-WL,Construction (45),223177.0,0.127,0.6
-WL,Sugar refining,123973.0,0.169,0.8
-WL,"Manufacture of cement, lime and plaster",92585.0,0.106,0.5
-WL,Manufacture of beverages,87155.0,0.169,0.8
-WL,Processing of Food products nec,77047.0,0.169,0.8
-WL,"Sale, maintenance, repair of motor vehicles, motor vehi",74777.0,0.212,1.0
-WM,"Wholesale trade and commission trade, except of motor v",638469.0,0.135,1.0
-WM,"Retail trade, except of motor vehicles and motorcycles;",489583.0,0.135,1.0
-WM,Construction (45),217127.0,0.081,0.6
-WM,"Manufacture of cement, lime and plaster",206465.0,0.068,0.5
-WM,"Sale, maintenance, repair of motor vehicles, motor vehi",166559.0,0.135,1.0
-WM,Processing of Food products nec,27974.0,0.108,0.8
-WM,Sugar refining,27315.0,0.108,0.8
-WM,Manufacture of office machinery and computers (30),23998.0,0.041,0.3
-ZA,"Wholesale trade and commission trade, except of motor v",127124.0,0.218,1.0
-ZA,"Retail trade, except of motor vehicles and motorcycles;",91123.0,0.218,1.0
-ZA,Construction (45),75371.0,0.131,0.6
-ZA,"Sale, maintenance, repair of motor vehicles, motor vehi",23288.0,0.218,1.0
-ZA,Re-processing of secondary wood material into new wood ,20700.0,0.153,0.7
-ZA,Manufacture of glass and glass products,10544.0,0.109,0.5
-ZA,Sugar refining,8639.0,0.174,0.8
-ZA,Processing of Food products nec,6251.0,0.174,0.8
+WA,"Wholesale trade and commission trade, except of motor v",561506.0,0.262,1.0
+WA,Construction (45),387760.0,0.157,0.6
+WA,"Retail trade, except of motor vehicles and motorcycles;",350297.0,0.262,1.0
+WA,Processed rice,309255.0,0.21,0.8
+WA,Sugar refining,273486.0,0.21,0.8
+WA,"Manufacture of cement, lime and plaster",231486.0,0.131,0.5
+WA,"Manure treatment (conventional), storage and land appli",212026.0,0.184,0.7
+WA,Recycling of waste and scrap,178839.0,0.184,0.7
+WE,"Wholesale trade and commission trade, except of motor v",80733.0,0.153,1.0
+WE,Construction (45),71554.0,0.092,0.6
+WE,"Retail trade, except of motor vehicles and motorcycles;",53452.0,0.153,1.0
+WE,Manufacture of beverages,25121.0,0.123,0.8
+WE,Sugar refining,18912.0,0.123,0.8
+WE,"Sale, maintenance, repair of motor vehicles, motor vehi",15975.0,0.153,1.0
+WE,"Manufacture of cement, lime and plaster",15485.0,0.077,0.5
+WE,Processing of Food products nec,14482.0,0.123,0.8
+WF,"Wholesale trade and commission trade, except of motor v",451974.0,0.185,1.0
+WF,"Retail trade, except of motor vehicles and motorcycles;",308857.0,0.185,1.0
+WF,Construction (45),230558.0,0.111,0.6
+WF,"Sale, maintenance, repair of motor vehicles, motor vehi",104068.0,0.185,1.0
+WF,"Manure treatment (conventional), storage and land appli",61847.0,0.129,0.7
+WF,Manufacture of beverages,53251.0,0.148,0.8
+WF,"Manufacture of cement, lime and plaster",44185.0,0.092,0.5
+WF,Recycling of waste and scrap,37880.0,0.129,0.7
+WL,"Wholesale trade and commission trade, except of motor v",388670.0,0.212,1.0
+WL,"Retail trade, except of motor vehicles and motorcycles;",280214.0,0.212,1.0
+WL,Construction (45),223317.0,0.127,0.6
+WL,Sugar refining,124050.0,0.17,0.8
+WL,"Manufacture of cement, lime and plaster",92643.0,0.106,0.5
+WL,Manufacture of beverages,87209.0,0.17,0.8
+WL,Processing of Food products nec,77095.0,0.17,0.8
+WL,"Sale, maintenance, repair of motor vehicles, motor vehi",74824.0,0.212,1.0
+WM,"Wholesale trade and commission trade, except of motor v",638869.0,0.135,1.0
+WM,"Retail trade, except of motor vehicles and motorcycles;",489889.0,0.135,1.0
+WM,Construction (45),217263.0,0.081,0.6
+WM,"Manufacture of cement, lime and plaster",206594.0,0.068,0.5
+WM,"Sale, maintenance, repair of motor vehicles, motor vehi",166663.0,0.135,1.0
+WM,Processing of Food products nec,27991.0,0.108,0.8
+WM,Sugar refining,27332.0,0.108,0.8
+WM,Manufacture of office machinery and computers (30),24013.0,0.041,0.3
+ZA,"Wholesale trade and commission trade, except of motor v",127204.0,0.218,1.0
+ZA,"Retail trade, except of motor vehicles and motorcycles;",91180.0,0.218,1.0
+ZA,Construction (45),75418.0,0.131,0.6
+ZA,"Sale, maintenance, repair of motor vehicles, motor vehi",23303.0,0.218,1.0
+ZA,Re-processing of secondary wood material into new wood ,20713.0,0.153,0.7
+ZA,Manufacture of glass and glass products,10551.0,0.109,0.5
+ZA,Sugar refining,8644.0,0.174,0.8
+ZA,Processing of Food products nec,6255.0,0.174,0.8
