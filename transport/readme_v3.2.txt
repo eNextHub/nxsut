@@ -294,6 +294,74 @@ measurement rather than by assuming one:
   that each commodity keeps one unit worldwide.
 
 
+WHAT THE BUILD MEASURES (acceptance, 2023 vintage)
+==================================================
+
+Structural, before any footprint is read:
+
+  negative outputs      36 of 19.680 (the base EXIOBASE table carries ~40;
+                        they are its own artefacts - Estonian lignite, US and
+                        Indonesian refinery feedstocks, Chinese patent fuel)
+  epsilon-scale outputs none
+
+GHG AR6 footprint, weighted by output over every producing region, against
+the literature band:
+
+  Road freight transport                 51 g/tkm   [30-250]    OK
+  Own-account road freight              147 g/tkm   [30-300]    OK
+  Road passenger transport               35 g/pkm   [20-150]    OK
+  Rail passenger transport               41 g/pkm   [10-150]    OK
+  Rail freight transport                 24 g/tkm   [5-100]     OK
+  Sea and coastal freight               144 g/tkm   [5-100]     OUT (see 8)
+  Sea and coastal passenger             498 g/pkm   [50-800]    OK
+  Inland water freight                   25 g/tkm   [10-120]    OK
+  Inland water passenger                343 g/pkm   [50-800]    OK
+  Air freight transport                1585 g/tkm   [300-2500]  OK
+  Air passenger transport               173 g/pkm   [60-400]    OK
+  Private car, gasoline                 144 g/pkm   [80-250]    OK  (0/48 out)
+  Private car, diesel                   147 g/pkm   [80-250]    OK  (0/48 out)
+  Private car, LPG                      126 g/pkm   [60-250]    OK  (0/10 out)
+  Private car, natural gas               70 g/pkm   [40-200]    OK  (0/14 out)
+  Private car, electric                  56 g/pkm   [0-200]     OK  (0/40 out)
+  Private motorcycle                    105 g/pkm   [40-200]    OK  (0/9 out)
+
+Sixteen of seventeen land inside their band. The exception is sea freight,
+and it is a perimeter gap that is measured rather than mysterious
+(limitation 8): divide it by the ~12x between the sector's carrier-based
+work and its territorial tonne-km and it lands at ~12 g/tkm, in the middle
+of the published range.
+
+Electricity anchor (regression against v3.0): Italy "Electricity need"
+93,1 tCO2eq/TJ = 335 gCO2eq/kWh, against ~358 in v3.0 — the shift the
+UNSD-first supply mix is expected to produce, not a break.
+
+Road fuel perimeter (Move C's own test, transport/check_fuel_balance.py).
+All road motor fuel, whoever burns it, should sit in the road transport
+family's columns; what a household bought beyond its bottom-up transport
+demand stays in final demand, so the table gives a bracket. Against the
+observed UNSD/IRES transaction 1221, liquid fuels only:
+
+              activities   + households   observed 1221   ratio
+  IT             19,7 Mt      24,3 Mt        33,0 Mt      0,60 - 0,74
+  DE             33,2         45,4           49,5         0,67 - 0,92
+  FR              2,9         33,9           43,9         0,07 - 0,77
+  ES             12,3         16,1           29,3         0,42 - 0,55
+  PL              7,0          9,7           22,4         0,31 - 0,43
+  US            184,8        234,2          551,4         0,34 - 0,42
+  CN            106,4        106,5          150,3         0,71
+  JP             27,8         41,7           54,4         0,51 - 0,77
+
+Two things to read here. The bracket is wide for France because Move A's
+cap left most household fuel in final demand — the perimeter is right, the
+attribution between activity and final demand is not yet. And the level
+sits below the observation everywhere, most in the United States: the
+table carries EXIOBASE's 2011 volumes against a 2021-23 observation, and
+part of the gap is road fuel still sitting in industry columns that Move C's
+propensity table did not reach. Closing that gap on the observed totals is
+the NOWCAST's job, not this layer's: v3.2 fixes the STRUCTURE (who produces
+what, in which physical unit), the level calibration comes after.
+
+
 KNOWN LIMITATIONS (v0 of the layer)
 ===================================
 
