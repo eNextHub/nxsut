@@ -54,7 +54,7 @@ TEMPLATE_OUT = HERE / "out" / "_movec_add_sectors.xlsx"
 ACT = "Own-account road freight transport"
 COM = "Own-account road transport"
 DIESEL = "Gas/Diesel Oil"
-EF_DIES = 3.17          # tCO2 / t
+EF_FUEL = "DIES"        # governed factor, fetched from nxbase at apply time
 # class-dependent cap: fleet-dominated cells (propensity >= 0.8) can yield
 # up to 0.8 of their diesel; everything else at most 0.5.
 ALPHA_FLEET, ALPHA_BASE, FLEET_PROP = 0.8, 0.5, 0.8
@@ -116,6 +116,12 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
     ``validate`` runs the in-run footprint check)."""
     regions = list(db.get_index("Region"))
     rules = load_propensity()
+
+    import sys  # noqa: PLC0415
+    sys.path.insert(0, str(ROOT))
+    from support import nxbase_client as nxc  # noqa: PLC0415
+    ef_dies = nxc.get_combustion_factors()[EF_FUEL]
+    print(f"fattore di emissione da nxbase: {EF_FUEL} = {ef_dies:.4f} tCO2/t", flush=True)
 
     if write:
         build_template()
@@ -233,7 +239,7 @@ def apply(db, write: bool = True, validate: bool = True) -> None:
                 new_col[key] += amt
                 own_fuel_cells[key][act_key] = own_fuel_cells[key].get(act_key, 0.0) + amt
             # direct CO2 moves with the fuel (capped by the cell satellite)
-            dco2 = val * EF_DIES
+            dco2 = val * ef_dies
             xs = float(x_series.get(c, 0.0))
             eav = float(E.loc[CO2_ROW, c])
             dmove = min(dco2, max(eav, 0.0))

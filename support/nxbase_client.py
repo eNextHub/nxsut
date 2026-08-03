@@ -660,6 +660,39 @@ def get_aluminium_trade_mix(api_url=DEFAULT_API, year=2024, regions=None, source
 NM_KM = 1.852                       # a nautical mile, for the maritime work level
 
 
+def get_combustion_factors(api_url: str = DEFAULT_API) -> dict[str, float]:
+    """CO2 released per tonne of each fuel burned, tCO2/t, by fuel short.
+
+    The IPCC publishes its default emission factors per unit of ENERGY (kg
+    CO2 per TJ, on a net calorific basis) and the net calorific values
+    separately, so a hybrid table denominated in tonnes needs both. nxbase
+    governs them as published — IPCCGL.EF and IPCCGL.NCV — and the product
+    is taken here rather than stored, because the calorific value is also
+    the mass-to-energy conversion factor and is needed on its own.
+
+    Motor gasoline: 69.300 kg/TJ x 44,3 MJ/kg = 3,07 tCO2/t, which is where
+    the constant this replaces came from. The others were rounded: diesel
+    3,186 against the 3,17 that was in the code, natural gas 2,693 against
+    2,75.
+    """
+    ef = _get_csv(api_url, {"parameter": "Intensity",
+                            "source": "IPCC 2006 Guidelines — default CO2 emission factors"})
+    ncv = _get_csv(api_url, {"parameter": "Net calorific value",
+                             "source": "IPCC 2006 Guidelines — default net calorific values"})
+    if ef.empty or ncv.empty:
+        raise RuntimeError("nxbase has no IPCC combustion factors "
+                           "(sources IPCCGL.EF / IPCCGL.NCV)")
+    # Keyed on the item SHORT, not the displayed name: the Rosetta rules
+    # deliberately let a concept keep one short across classifications, so
+    # IPCC's GASO and the canonical NXB gasoline share it and the rendered
+    # name is ambiguous. The short is unambiguous given the source, and it
+    # is the code the consumers already use for their carriers.
+    kg_per_tj = {split_item(i)[0]: v for i, v in zip(ef["item_2"], ef["value"])}
+    mj_per_kg = {split_item(i)[0]: v for i, v in zip(ncv["item_1"], ncv["value"])}
+    return {fuel: kg_per_tj[fuel] * mj / 1e6
+            for fuel, mj in mj_per_kg.items() if fuel in kg_per_tj}
+
+
 def get_sea_transport_work(
     api_url: str = DEFAULT_API,
     year: int = 2011,

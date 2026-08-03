@@ -64,10 +64,11 @@ TECH_ACT = {
     "CAR.E": "Private car transport, electric",
     "MOTO": "Private motorcycle transport",
 }
-# IPCC combustion EFs, tCO2 per t fuel (declared v0: CO2 only — CH4/N2O are
-# ~1-2% of road CO2e; ELE has no tailpipe). Used to re-attribute household
-# driving combustion from EY to the car activities (exact conservation).
-EF_CO2 = {"GASO": 3.07, "DIES": 3.17, "LPG": 3.02, "NGAS": 2.75, "ELE": 0.0}
+# Combustion emission factors come from nxbase (IPCCGL.EF x IPCCGL.NCV,
+# keyed on the fuel short, which is the same code the carriers use). CO2
+# only, declared v0: CH4 and N2O are ~1-2% of road CO2e. Electricity has no
+# tailpipe, so it is the one carrier with no governed factor.
+EF_ELECTRIC = {"ELE"}
 
 # carrier -> commodity row name in the grid (containment-matched at runtime
 # for the natural-gas variants; asserted, never silent)
@@ -141,6 +142,13 @@ def apply(db, validate: bool = True) -> None:
     with open(HERE / "data" / "movea_spec.csv") as f:
         for r in csv.DictReader(f):
             spec[r["region"]].append(r)
+
+    import sys  # noqa: PLC0415
+    sys.path.insert(0, str(ROOT))
+    from support import nxbase_client as nxc  # noqa: PLC0415
+    ef_co2 = nxc.get_combustion_factors()
+    print("fattori di emissione da nxbase:",
+          {k: round(ef_co2[k], 3) for k in ("GASO", "DIES", "LPG", "NGAS")}, flush=True)
 
     U, E, Y = db.U, db.E, db.Y
     EY = db.EY
@@ -239,7 +247,8 @@ def apply(db, validate: bool = True) -> None:
         # EY -> E re-attribution: household driving combustion moves to the
         # car activities (IPCC EFs, CO2 only), capped by the EY availability
         # so nothing goes negative and conservation is exact by construction.
-        co2_direct = {t: mv * EF_CO2[carr] for t, (mv, carr) in moved_fuel.items()}
+        co2_direct = {t: (0.0 if carr in EF_ELECTRIC else mv * ef_co2[carr])
+                      for t, (mv, carr) in moved_fuel.items()}
         tot_dir = sum(co2_direct.values())
         avail = float(EY.loc[CO2_ROW, hh])
         move_tot = min(tot_dir, max(avail, 0.0))
