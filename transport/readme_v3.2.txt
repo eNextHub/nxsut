@@ -127,12 +127,15 @@ is impossible (pkm and tkm do not add up).
 
   2. Re-denomination: output = the observed physical volume Q, coefficients
      divided by Q. The implicit price M/Q is a DIAGNOSTIC OUTPUT, never an
-     input; a child whose implicit price lands outside its plausibility band
-     keeps the monetary denomination. Observed Q per child (number of
-     regions): road freight 38, rail passenger 37, rail freight 37, air
-     freight 40, inland-waterway freight 22, road passenger 19, sea freight
-     15. Where Q is missing the child is scaled by the median implicit price
-     of that child type, so the commodity keeps ONE unit worldwide.
+     input: a child whose implicit price lands outside its plausibility band
+     is FLAGGED, not overridden — the observed volume wins, because it is
+     the measured quantity (see limitation 7). Observed Q per child (number
+     of regions): air passenger 41, air freight 40, road freight 38, rail
+     passenger 37, rail freight 37, inland-waterway freight 22, sea
+     passenger 20, road passenger 19, sea freight 15. Where Q is missing the
+     child is scaled by the median implicit price of that child type (200 of
+     ~480 cells, mostly the Rest-of-World aggregates and the small water
+     sectors), so the commodity keeps ONE unit worldwide.
 
   3. Carve, do not rebuild. The liquid-fuel rows are re-split bottom-up
      (vehicle-km x fuel intensity); every other input and value added is
