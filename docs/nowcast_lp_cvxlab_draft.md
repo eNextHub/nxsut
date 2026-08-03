@@ -449,13 +449,16 @@ si piega dove il dato c'è.
 
 ### Da governare, alto valore
 
-1. **UNSD Industrial Commodity Statistics** — produzione fisica di ~600
-   commodity industriali per paese e anno, **stessa famiglia SDMX** di
-   UNSD Energy, quindi lo script di pull esiste già nella forma giusta. È
-   il singolo intervento che aumenta di più il numero di `x_obs`: copre
-   cemento, vetro, carta, chimica di base, laterizi, fertilizzanti — cioè
-   proprio i settori che oggi non hanno alcuna ancora fisica. **Da fare per
-   primo.**
+1. ~~**UNSD Industrial Commodity Statistics**~~ — **SCARTATA (2026-08-03,
+   verify-before-assert)**: il dataflow SDMX non esiste (UNdata serve solo
+   Energy/EnergyBalance/GHG) e il mart aperto su data.un.org (`d=ICS`) si
+   ferma al **2016** — il database completo/aggiornato è un prodotto
+   commerciale UNSD (shop.un.org). Fuori sia dalla regola open sia dalla
+   finestra 2021-23. Al suo posto, per le ancore industriali fisiche:
+   **USGS Mineral Commodity Summaries data release** (CSV su ScienceBase,
+   DOI 10.5066/P13XCP3R, pubblico dominio, ~90 commodity non-fuel incl.
+   **cemento**, produzione mondiale per paese fino al 2024) + FAOSTAT per
+   l'agroalimentare. **USGS da fare per primo.**
 2. **FAOSTAT** — produzione di colture e allevamento, uso del suolo,
    fertilizzanti, foreste; e le **Food Balance Sheets** per il lato domanda
    finale alimentare (`Y_obs`). API pubblica, CC BY 4.0, copertura mondiale
@@ -754,8 +757,9 @@ For the IT×2023 pilot the LP needs, in nxbase: **D16** (set rows → B_ires),
 **D18** (bunkers/stocks/households), **BACI.Q.Y23** full import (EXP
 anchors — recipe exists, table registered at 0 rows), **D17** (VA
 targets); and in nxsut: **WS-NET + v3.2 rebuild** (D15), then the bridge.
-Everything else widens coverage but does not block the pilot: UNSD
-Industrial Commodity Statistics (the biggest `x_obs` win — first after the
-critical path), WDI + EDGAR (benchmarks; `EMBER.CI25` is already governed
+Everything else widens coverage but does not block the pilot: **USGS
+Mineral Commodity Summaries** (the biggest `x_obs` win — first after the
+critical path; replaces UNSD ICS, whose open mart stops at 2016 — see the
+sources section), WDI + EDGAR (benchmarks; `EMBER.CI25` is already governed
 and idle — KPI 3 at zero cost), Eurostat `nrg_bal_c` (EU quality upgrade),
 FAOSTAT (food anchors + FBS).
