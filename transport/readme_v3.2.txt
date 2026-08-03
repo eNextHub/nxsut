@@ -66,16 +66,26 @@ NEW COMMODITIES (12), with their units
   Inland water freight transport services                    Mtkm
   Own-account road transport                                 Mtkm
   Private road mobility                                      Mpkm
-  Sea and coastal passenger transport services               Meuro
-  Inland water passenger transport services                  Meuro
-  Air freight transport services                             Meuro
-  Air passenger transport services                           Meuro
+  Sea and coastal passenger transport services               Mpkm
+  Inland water passenger transport services                  Mpkm
+  Air freight transport services                             Mtkm
+  Air passenger transport services                           Mpkm
 
-World outputs of the physical children (2023): road freight 13,377 Gtkm,
-own-account road freight 2,164 Gtkm, road passenger 2,737 Gpkm, rail
-passenger 3,286 Gpkm, rail freight 7,256 Gtkm, sea and coastal freight
-5,579 Gtkm, inland-waterway freight 3,420 Gtkm, private mobility 16,032
-Gpkm.
+Every one of the twelve is physical: no transport commodity the layer
+creates is denominated in money.
+
+World outputs (2023): road freight 13,377 Gtkm, own-account road freight
+2,164 Gtkm, road passenger 2,737 Gpkm, rail passenger 3,286 Gpkm, rail
+freight 7,256 Gtkm, sea and coastal freight 5,579 Gtkm, inland-waterway
+freight 3,420 Gtkm, private mobility 16,032 Gpkm, air passenger 4,844 Gpkm,
+air freight 126 Gtkm, sea and coastal passenger 113 Gpkm, inland-waterway
+passenger 16 Gpkm.
+
+Two of those are checkable against published world totals and land where
+they should: world air revenue passenger-km were ~5,100 Gpkm in 2011
+(ICAO/IATA), against 4,844 here — 95%, the gap being the countries outside
+the 48 EXIOBASE regions; and Italian air passenger-km come within 1.3% of
+Eurostat's independent national series.
 
 The five split parents (road, rail, sea, inland water, air) end up with zero
 output. Four of them are FOLDED AWAY at the end of the layer into the fifth
@@ -362,3 +372,25 @@ REPRODUCING
   the electricity pooling. Its inputs (split specification, propensity table,
   recipe master, step-0 selection) are committed under transport/data/ and
   nowcast/data/ in the nxsut repository.
+
+  transport/build_v32.py runs the same notebook cells headless and prints a
+  negative-output report after every stage. Use it when a build has to be
+  watched: nbconvert does not stream cell output, which is how a broken
+  Leontief inverse shipped twice unnoticed.
+
+CHECKING A BUILD
+================
+
+  transport/validate_v32.py [year] [version]
+      Structural gate first — negative-output count against the ~40 the base
+      EXIOBASE table carries, and a screen for outputs at 1e-30 scale (a
+      sector annihilated by an aggregation) — then the GHG footprint of all
+      17 transport activities against literature bands, averaged over every
+      producing region, with p10/p50/p90 and the count outside the band.
+      A negative or epsilon-scale output invalidates every footprint in the
+      table, so nothing below the gate is worth reading until it is clean.
+
+  transport/check_fuel_balance.py [year] [version]
+      Move C's perimeter test: all road motor fuel, whoever burns it, should
+      sit in the road transport family's columns, and that total should line
+      up with the observed UNSD/IRES transaction 1221.
