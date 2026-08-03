@@ -1,0 +1,485 @@
+# Nowcast LP on cvxlab — design draft (for review)
+
+> Part of the **nxsut update master plan** — see [nxsut_update_plan.md](nxsut_update_plan.md) for the pipeline order, status and build sequence.
+
+Companion to [tech_coefficient_update_plan.md](tech_coefficient_update_plan.md)
+(section *Volumes — final demand*): maps the agreed nowcast/reconciliation model
+onto **cvxlab** concretely — sets, data tables/variables, constants, expressions
+— as a first draft of the `structure_sets.yml` / `structure_variables.yml` /
+`problem.yml` triplet. Drafted 2026-07-31 after a full recon of cvxlab 1.0.1
+(readthedocs, installed source, MARIO `split_sectors`, MIMO `model_ESM-SFC-IT`).
+**Nothing here is built yet** — this is the reviewable blueprint.
+
+## cvxlab in ten lines (what the recon established)
+
+- A model is a **directory**: settings (3 YAML files or one `model_settings.xlsx`
+  with 3 equivalent sheets) + `sets.xlsx` (coordinates) + input data files +
+  a generated SQLite `database.db` that holds everything (inputs and results).
+- **Sets** are the dimensions. `split_problem: true` sets are *inter-problem*:
+  every coordinate combination becomes an independently solved sub-problem
+  (scenario grid). Dimension sets index variables (`dim: rows|cols|intra`).
+- **Data tables** are SQLite-backed value collections typed
+  `exogenous | endogenous | constant | hybrid`; **variables** are named
+  *slices* of a table (per-set `dim` + `filters` on set attributes) — one
+  table, many symbols (the MARIO/MIMO workhorse pattern).
+- **Problems** are lists of string expressions over variable names and a
+  restricted operator DSL (`@ tran diag sum mult pow minv shift …`,
+  `Minimize/Maximize`, `== <= >=`). No objective ⇒ solved as an equation
+  system. Multiple named problems + `hybrid` variables ⇒ block Gauss–Seidel.
+- Lifecycle: `create_model_dir` → fill settings → `Model()` → fill `sets.xlsx`
+  → `initialize_model_environment()` → fill inputs →
+  `refresh_database_and_initialize_problem()` → `run_model()` →
+  `load_results_to_database()`. MARIO's `cvxlab_bridge.py` shows how to drive
+  every step programmatically (blank-sets → fill → load-coordinates → blank
+  data → fill → refresh), which is exactly what our bridge will do.
+
+## Design decisions (proposed)
+
+1. **`regions` × `years` as `split_problem` sets — DECIDED (2026-08-01),
+   starting with `years = {2023}`** (UNSD balances reach 2023; 2021-22 join
+   later for trend/validation). Per-region grid of **independent small LPs**
+   (~4-5k endogenous each), embarrassingly parallel, matching the per-country
+   data. Cross-region trade: **fixed import shares** from the trade-mix
+   update, and **exports anchored to observed BACI flows** (goods; services
+   prior-scaled) — exports are observable, not a frozen prior. **Global
+   correctness is audited, not assumed**: post-solve, the world balance per
+   commodity (Σ solved exports vs Σ solved imports) must close within
+   tolerance — this *is* the global physical-balance check; if violated
+   beyond ε, one Gauss-Seidel sweep re-anchors each region's export demand
+   from the others' solved imports and re-solves (fast: trade shares are
+   fixed). A global coupled solve stays the fallback if the audit keeps
+   failing.
+2. **Only the energy-carrier rows of U are endogenous.** Dedicated `fuels`
+   set = the NXS **energy carriers**: fuels *plus* **electricity** (balances
+   `7000` × sector) *plus* **distributed heat** (`8000/8000T` → the existing
+   `HWAT` "Steam and hot water supply services" row — present in every NXS
+   variant, no disaggregation needed; direct-use geo/solar `DG`/`DS` stay
+   out of the constraint). The rest of the technology is frozen as exogenous
+   `u0` (Leontief).
+3. **L1 objective, deviation measured at endogenous scale — DECIDED
+   (2026-08-01), with relative weighting**: `absol(mult(W, U_f − u0_f @
+   diag(x)))` — deviation from *prior coefficients times endogenous
+   activity* (linear in (U, x), the rigorous "percentage update"), scaled by
+   the exogenous weight matrix `W = 1 / max(|prior flow|, floor)`. The
+   weighting is what makes the hybrid-unit objective meaningful: it prices a
+   **1% adjustment identically** across rows in t, TJ and MEUR and across
+   country scales (unweighted L1 would arbitrage units and wipe out small
+   entries/countries first). The floor keeps zero-prior cells finite;
+   *structural* zeros are enforced by masks (the split_sectors `Zero_mask`
+   pattern), never by weights. `absol = cp.abs` via
+   `user_defined_operators.py`; problem stays an **LP** → HIGHS/CLARABEL.
+   (Alternative kept on the shelf: KL/entropy à la `split_sectors` — conic,
+   multiplicative RAS-like adjustments.)
+4. **Concordances as exogenous 0/1 incidence tables**, filled by the bridge
+   from the nxbase set graph: `B_ires` (activities × IRES buckets — the
+   NXS30→IRES walk) and `G_va` (activities × VA groups). Observations bind
+   at bucket/group granularity; within-bucket allocation comes from priors.
+5. **Identities exact; observations as two-sided bands** `*(1±ε)` (MARIO's
+   proven pattern — exact equality on data is numerically brittle).
+   Tolerances live in a `scalars` set (MARIO pattern), workbook-editable;
+   objective weights live in the `W`/`W_y`/`W_v` data matrices (see the
+   validation notes — DCP + hybrid-unit normalization).
+6. **Bridge = a script in the nxsut repo** mirroring `mario/ops/cvxlab_bridge.py`:
+   chdir into the model dir for every cvxlab call (cvxlab resolves paths
+   against CWD), `multiple_input_files=True` + CSV inputs, and the pandas-3
+   shims MARIO already carries (cvxlab pins pandas 2.3.3 *because* of the
+   settings-pivot bug; MARIO monkeypatches it — reuse that or run in the
+   mario env).
+7. **Prior = the nxsut table *after* the deterministic updates** (decided
+   2026-08-01, from the discussion with Nicolò — not EXIOBASE 2011 re-derived
+   inside the LP). Supply mixes (EMBER, routes) and trade mixes
+   (BACI/ENTSO-E) are *exact share rewrites from data*: redoing them inside
+   the LP would degrade them to estimates. Sequence: deterministic mix
+   updates → LP closure with the post-update table as prior; the *same*
+   external data re-enters the LP as **elastic anchors**, so "fixed vs free"
+   is just the band width ε and consistency is automatic. This also answers
+   Nicolò's core concern head-on: the **physical/energy balance is the hard
+   skeleton** of the model — balance identities are exact constraints (mass
+   conservation per commodity row), and the `F_obs` bands *are* the energy
+   balance by construction.
+8. **Electricity source hierarchy: UNSD-first, EMBER-as-arbiter — extended
+   2026-08-01 (Lorenzo)**. Step 0 selects the source per country: where
+   UNSD ≈ EMBER, **UNSD is primary everywhere — use side, `x_obs` anchors
+   and the generation mix itself** (it carries the CHP plant-type split
+   `015CC/CE/CH`, separated waste-to-energy `01RW/01NRW`, finer by-fuel
+   thermal detail incl. `01MG` manufactured gases, and the main/auto split
+   the netting needs — all structure-consistent with the Merciai CHP/waste
+   by-product activities, which EMBER cannot see); where they diverge or
+   UNSD under-reports, EMBER arbitrates. Implied efficiencies (UNSD `088x`
+   inputs vs outputs) are the quantitative criterion; EMBER also remains
+   the timeliness source (2024+).
+9. **Autoproduction netting — a deterministic prior transformation (2026-08-01,
+   Lorenzo)**. The prior table has off-diagonal electricity supply (rooftop PV
+   on factories, etc.); observed generation cannot attribute it by sector, and
+   anchoring `x_power` to *total* generation would double-count it. Fix, applied
+   to the prior in gen_v3 (the BFG/OFG pattern), **not** an LP constraint: zero
+   the off-diagonal electricity supply of **non-energy activities** and reduce
+   the same activities' electricity use by the same amount (self-consumption
+   netting), **capped at own use** (no negative U; any excess stays or moves to
+   the power activity). Do **not** net the energy-sector by-producers — CHP/heat
+   activities (electricity is their structural by-product in the EXIOBASE
+   construction) and waste-to-energy (real grid sales, observed by UNSD
+   `01RW`/`01NRW`) — for these two, the UNSD plant-type/waste production
+   data makes the by-product electricity supply **updatable**, not merely
+   exempt from netting. Data leverage: UNSD observes the **main-vs-autoproducer
+   split** (`015x` vs `016x` production families, incl. `016SP` solar-PV
+   autoproduction; `08811/08812` fuel inputs) — so the netted quota is a datum
+   per country/source/year, and the anchor becomes coherent by construction:
+   `x_power` ↔ the `015x` main-activity family, with EMBER totals decomposed via
+   the UNSD split (a step-0 task). Reversible: grid sales by non-energy sectors
+   can return later as an explicit autoproducer activity (add_sectors pattern).
+10. **Power efficiency band — RETIRED AS REDUNDANT (2026-08-01, Lorenzo)**.
+    With UNSD-first on *both* sides of the electricity balance, the implied
+    efficiency is already confined by construction: the use-side bands
+    (`Σ U_f→power ∈ F_obs(088x)·(1±ε_f)`) and the supply-side anchors
+    (`x_power ∈ gen_obs(015x)·(1±ε_x)`) imply
+    `eff ∈ eff_obs·(1 ± ε_x ± ε_f)` — and the D10 bounds would have been
+    computed from the same UNSD balances: the same information entered
+    twice (redundant rows at best; an unintended feasible-space cut at
+    worst, if the ε calibrations drift apart). Same holds for CHP (heat
+    output `8000T` by plant type is observed too). Residual role, **dormant
+    guard only**: wide engineering bounds (e.g. thermal 20-65%), activated
+    exclusively where the data is one-sided (one balance side masked) *and*
+    only if pilots show the slack-absorber pathology — elsewhere the L1
+    objective already defends the prior efficiency (`U → u0·x`). Implied
+    efficiencies stay alive where they are useful: the step-0 arbitration
+    criterion and the post-solve diagnostic radar.
+11. **Transport buckets — FALLBACK ONLY (superseded by the v2-first
+    decision, 2026-08-01)**: the transport service layer is built *before*
+    the first production nowcast (see
+    [transport_service_layer_plan.md](transport_service_layer_plan.md)), so
+    transport enters the LP through vehicle-tech activities with observed
+    vkm/pkm `x_obs` anchors and natural `122x` bands. The treatment below
+    is kept documented only as the fallback if the layer stalls.
+    Original design (2026-08-01, Lorenzo — the mode-vs-user mismatch). The `122x` balance
+    flows are classified by *mode*, not by *user*: `1221` road = transport
+    industry + every sector's own-account logistics + **households' private
+    cars**; and `1231` residential *excludes* transport. So for the
+    transport buckets the band constrains
+    `U_f @ B_transport + mult(m_b, Y_f)` — the incidence gains a **Y-side
+    term** (households' motor fuel), and `B_transport` columns span *all*
+    motor-fuel-using activities (support taken from the prior's fuel-use
+    pattern, not from the IRES→NACE graph walk, which stays valid only for
+    the Rosetta anchor of the IRES rows). Within-bucket split = prior
+    shares (the EXIOBASE hybrid construction already sectorized transport
+    fuel; we inherit that 2011 reallocation — the honest v1 limit is that
+    no 2023 observation updates it). Household motor-fuel Y anchors come
+    from a share of `1221`, never from `1231`. `1223/1224` are domestic
+    only; international bunkers are the separate `051/052` flows (in the
+    snapshot). Still linear — one extra term in the transport-bucket bands.
+
+## Draft `structure_sets.yml`
+
+```yaml
+regions:
+    description: NXS/EXIOBASE regions (49)
+    split_problem: true
+years:
+    description: target years (2021-2023)
+    split_problem: true
+activities:
+    description: NXS30 activities (~190)
+    filters:
+        anchored: [ember, wsteel]        # output-anchored subsets
+commodities:
+    description: NXS products (~200)
+    filters:
+        role: [fuel, nonfuel]
+fuels:
+    description: fuel commodities (ordered copy of commodities role=fuel)
+buckets:
+    description: IRES consuming-sector buckets (balance granularity)
+va_groups:
+    description: aggregated value-added target groups (~15)
+scalars:
+    description: tolerances and objective weights
+    filters:
+        kind: [tolerance, weight]
+```
+
+## Draft `structure_variables.yml` (core tables)
+
+```yaml
+# ---- endogenous ----
+x:
+    description: activity output, target year
+    type: endogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        x: {nonneg: true, activities: {dim: rows}}
+U_fuel:
+    description: fuel-use flows (the free technology rows)
+    type: endogenous
+    coordinates: [regions, years, fuels, activities]
+    variables_info:
+        U_f: {nonneg: true, fuels: {dim: rows}, activities: {dim: cols}}
+Y:
+    description: final demand by product
+    type: endogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y_f:  {nonneg: true, commodities: {dim: rows, filters: {role: [fuel]}}}
+        Y_nf: {nonneg: true, commodities: {dim: rows, filters: {role: [nonfuel]}}}
+V:
+    description: value added by activity
+    type: endogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        V: {activities: {dim: rows}}
+IM:
+    description: imports by product (aux, trade-share closure)
+    type: endogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        IM_f:  {nonneg: true, commodities: {dim: rows, filters: {role: [fuel]}}}
+        IM_nf: {nonneg: true, commodities: {dim: rows, filters: {role: [nonfuel]}}}
+
+# ---- exogenous: priors (shared across years — no years coordinate) ----
+s_prior:        # supply coefficients, post supply-mix update (EMBER, routes)
+    type: exogenous
+    coordinates: [regions, commodities, activities]
+    variables_info:
+        s_f:  {commodities: {dim: rows, filters: {role: [fuel]}}, activities: {dim: cols}}
+        s_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}, activities: {dim: cols}}
+u0_nonfuel:     # frozen technology
+    type: exogenous
+    coordinates: [regions, commodities, activities]
+    variables_info:
+        u0_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}, activities: {dim: cols}}
+u0_fuel:        # prior fuel coefficients (the L1 anchor)
+    type: exogenous
+    coordinates: [regions, fuels, activities]
+    variables_info:
+        u0_f: {fuels: {dim: rows}, activities: {dim: cols}}
+v0:             # prior VA coefficients (per unit activity output)
+    type: exogenous
+    coordinates: [regions, activities]
+    variables_info:
+        v0: {activities: {dim: rows}}
+im_sh:          # import shares from the trade-mix update (BACI / ENTSO-E)
+    type: exogenous
+    coordinates: [regions, commodities]
+    variables_info:
+        im_sh_f:  {commodities: {dim: rows, filters: {role: [fuel]}}}
+        im_sh_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}}
+
+# ---- exogenous: observations (per year) ----
+F_obs:          # energy-balance fuel use per IRES bucket (UNSD.USE / Eurostat)
+    type: exogenous
+    coordinates: [regions, years, fuels, buckets]
+    variables_info:
+        F_obs: {fuels: {dim: rows}, buckets: {dim: cols}, blank_fill: 0}
+M_fuel:         # 0/1 observation mask of F_obs — its OWN table (validation
+                # lesson 1): bands bind only where the country reports that
+                # (fuel x bucket); "not reported" must never read as
+                # "observed zero". Coarse reporters bind on the 121 aggregate
+                # only (no double counting: 121 = sum of its sub-buckets).
+    type: exogenous
+    coordinates: [regions, years, fuels, buckets]
+    variables_info:
+        M_f: {fuels: {dim: rows}, buckets: {dim: cols}, blank_fill: 0}
+W_fuel:         # relative L1 weights = 1/max(|prior flow|, floor)
+    type: exogenous
+    coordinates: [regions, fuels, activities]
+    variables_info:
+        W: {fuels: {dim: rows}, activities: {dim: cols}}
+W_y:            # idem for final demand (per-commodity prior scale)
+    type: exogenous
+    coordinates: [regions, commodities]
+    variables_info:
+        Wy_f:  {commodities: {dim: rows, filters: {role: [fuel]}}}
+        Wy_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}}
+W_v:            # idem for value added
+    type: exogenous
+    coordinates: [regions, activities]
+    variables_info:
+        Wv: {activities: {dim: rows}}
+x_obs:          # output anchors (EMBER TWh by power tech; worldsteel)
+    type: exogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        x_obs: {activities: {dim: rows}, blank_fill: 0}
+m_x:            # 0/1 mask of anchored activities
+    type: exogenous
+    coordinates: [regions, years, activities]
+    variables_info:
+        m_x: {activities: {dim: rows}, blank_fill: 0}
+Y_obs:          # Y anchors (residential fuels 1231; FAOSTAT food)
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y_obs_f: {commodities: {dim: rows, filters: {role: [fuel]}}, blank_fill: 0}
+        # (nonfuel slices analogous, for food)
+M_y:            # 0/1 observation mask of Y_obs — separate table (lesson 1)
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        m_y_f: {commodities: {dim: rows, filters: {role: [fuel]}}, blank_fill: 0}
+Y_prior:        # nowcast prior for the free Y components
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        Y0_f:  {commodities: {dim: rows, filters: {role: [fuel]}}}
+        Y0_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}}
+EXP:            # exports — OBSERVED from BACI for goods (per origin x year),
+                # prior-scaled for services; not a frozen 2011 prior
+    type: exogenous
+    coordinates: [regions, years, commodities]
+    variables_info:
+        EXP_f:  {commodities: {dim: rows, filters: {role: [fuel]}}}
+        EXP_nf: {commodities: {dim: rows, filters: {role: [nonfuel]}}}
+VA_tgt:         # EXIOBASE 3.10.2 VA (to 2024), aggregated groups
+    type: exogenous
+    coordinates: [regions, years, va_groups]
+    variables_info:
+        VA_tgt: {va_groups: {dim: rows}}
+GDP:
+    type: exogenous
+    coordinates: [regions, years]
+    variables_info:
+        GDP: {}          # scalar per (region, year) sub-problem
+
+# ---- exogenous: concordances (0/1, bridge-generated from the nxbase graph) ----
+B_ires:
+    type: exogenous
+    coordinates: [activities, buckets]
+    variables_info:
+        B: {activities: {dim: rows}, buckets: {dim: cols}}
+G_va:
+    type: exogenous
+    coordinates: [activities, va_groups]
+    variables_info:
+        G: {activities: {dim: rows}, va_groups: {dim: cols}}
+
+# ---- scalars (weights/tolerances) & constants ----
+tol:
+    type: exogenous
+    coordinates: [scalars]
+    variables_info:
+        eps_f: {scalars: {filters: {kind: [tolerance]}}}   # one row each:
+        eps_x: {scalars: {filters: {kind: [tolerance]}}}   # eps_f eps_x eps_y eps_g
+        eps_y: {scalars: {filters: {kind: [tolerance]}}}
+        eps_g: {scalars: {filters: {kind: [tolerance]}}}
+        # objective weights live in the W/W_y/W_v matrices (DCP + unit
+        # normalization), not here
+i_a:
+    description: activity sum vector
+    type: constant
+    coordinates: [activities]
+    variables_info:
+        i_a: {value: sum_vector, activities: {dim: rows}}
+```
+
+## Draft `problem.yml`
+
+```yaml
+objective:
+    - >-
+      Minimize( w_u * sum(absol(U_f - u0_f @ diag(x)))
+              + w_y * ( sum(absol(Y_f - Y0_f)) + sum(absol(Y_nf - Y0_nf)) )
+              + w_v * sum(absol(V - mult(v0, x))) )
+expressions:
+    # ---- accounting identities (EXACT) ----
+    - 's_f  @ x + IM_f  == U_f @ i_a + Y_f  + EXP_f'     # fuel commodity balance
+    - 's_nf @ x + IM_nf == u0_nf @ x + Y_nf + EXP_nf'    # non-fuel balance (frozen tech)
+    - 'IM_f  == mult(im_sh_f,  U_f @ i_a + Y_f)'         # trade-share closure
+    - 'IM_nf == mult(im_sh_nf, u0_nf @ x + Y_nf)'
+    # ---- observations (ELASTIC, two-sided bands) ----
+    - 'U_f @ B <= mult(F_obs, 1 + eps_f)'                # energy balances per bucket
+    - 'U_f @ B >= mult(F_obs, 1 - eps_f)'
+    - 'mult(m_x, x) <= mult(m_x, x_obs) * (1 + eps_x)'   # EMBER / worldsteel output anchors
+    - 'mult(m_x, x) >= mult(m_x, x_obs) * (1 - eps_x)'
+    - 'mult(m_y_f, Y_f) <= mult(m_y_f, Y_obs_f) * (1 + eps_y)'   # residential energy (+ food twin)
+    - 'mult(m_y_f, Y_f) >= mult(m_y_f, Y_obs_f) * (1 - eps_y)'
+    - 'tran(G) @ V <= mult(VA_tgt, 1 + eps_g)'           # VA targets, aggregated groups
+    - 'tran(G) @ V >= mult(VA_tgt, 1 - eps_g)'
+    - 'sum(V) <= GDP * (1 + eps_g)'                      # GDP closure (per country)
+    - 'sum(V) >= GDP * (1 - eps_g)'
+```
+
+`user_defined_operators.py` (gotcha: import modules only — every module-level
+callable gets registered):
+
+```python
+import cvxpy as cp
+
+def absol(expression):
+    return cp.abs(expression)
+```
+
+## Where each exogenous number comes from
+
+| table | source |
+|---|---|
+| `F_obs` | **UNSD.USE** (nxbase, 2021-23, open) + Eurostat `nrg_bal_c` for EU |
+| `x_obs` | **EMBER** generation (nxbase, `OUT`) · **worldsteel** (WSTEEL) — power anchors arbitrated vs UNSD per step 0 (D8) |
+| `Y_obs` | balances flow `1231` households (the `CON` sibling recipe) · FAOSTAT FBS |
+| `VA_tgt`, `GDP` | **EXIOBASE 3.10.2** monetary (to 2024; no emissions needed) aggregated; WB deflators + ECB FX (nxbase) for constant-price alignment |
+| `s_prior`, `u0_*`, `v0`, `Y_prior` | current nxsut table (post supply-mix + trade update) via MARIO |
+| `EXP` | **BACI observed exports** (goods, per origin × year — the full local table); services prior-scaled |
+| `im_sh` | trade-mix update output (BACI / ENTSO-E) |
+| `B_ires`, `G_va` | **nxbase set graph** (NXS30→NACE→bridge→IRES walk; VA groups) |
+| inventory-change Y anchors | **UNSD flow `06` Stock changes** (per fuel × country × year — already in the governed snapshot, all transactions were pulled) · FAO FBS *Stock Variation* (food) · EXIOBASE 3.10.2 monetary inventory column as prior for the rest |
+| candidate extra `x_obs` anchors (later) | **UNSD Industrial Commodity Statistics** (same UNdata SDMX family — physical production of ~600 industrial commodities) · **USGS** mineral/metal production (public domain) · **FAOSTAT** production (agri) · capacity sanity bounds (EMBER capacity: `x_power ≤ cap·8760·CF_max`) |
+| electricity prices (expenditure-side cross-check) | **GTAP** price file (the eNextGen electricity-footprint article dataset) — governable as a `visibility=local` source (GTAP licence is proprietary, never hosted); `scripts/gtap/` already exists in nxbase |
+
+## Validated end-to-end on cvxlab (2026-08-01)
+
+The full structure was built and **solved** as a toy instance
+([`nowcast/toy_model/`](../nowcast/toy_model/): 1 region × 1 year, 3
+activities, 4 commodities of which 2 energy carriers, every draft mechanism
+exercised — split_problem grid, filtered slices, observation masks, relative
+L1 weights, `absol` user operator, elastic bands, HIGHS). Every mechanism
+behaved as designed: anchors bind at the nearest band edge (sparse L1
+adjustments), the unobserved bucket stays free (mask works), balance
+residuals are exactly zero, GDP/VA land inside their bands.
+
+Two **corrections discovered by the validation** (applied to the YAML below):
+
+1. **Masks live in separate tables** (`M_fuel`, `M_x`, `M_y`): two variables
+   of one cvxlab table covering the same cells read the *same* data — a
+   value and its mask cannot share a table.
+2. **All objective weights are data matrices** (`W`, `W_y`, `W_v`), no
+   scalar weights in the objective: cvxpy rejects (DCP) a sign-unknown
+   Parameter multiplying a convex expression — and the weight matrices were
+   needed anyway for hybrid-unit normalization of the Y and V terms, not
+   just U. Objective:
+   `Minimize( sum(absol(mult(W, U_f - u0_f @ diag(x)))) +
+   sum(absol(mult(Wy_f, Y_f - Y0_f))) + sum(absol(mult(Wy_nf, Y_nf -
+   Y0_nf))) + sum(absol(mult(Wv, V - mult(v0, x)))) )`.
+
+Operational notes: cvxlab 1.0.1 API is `initialize_model_environment()` →
+`refresh_database_and_initialize_problem()` → `run_model()` (the MIMO
+notebook's granular calls are the older API); interactive erase prompts need
+stdin answers when driving it from scripts; results are read with
+`m.variable(name, scenario_key=<n>)`.
+
+## Resolved 2026-08-01 (with Lorenzo)
+
+- **Grid per (region × year)**, starting `{2023}`; global behaviour via the
+  world-balance audit + optional Gauss-Seidel sweep (D1).
+- **Energy carriers all in**: electricity and distributed heat join the
+  endogenous rows; heat maps to the existing `HWAT` row, no disaggregation
+  needed (D2).
+- **L1 with relative weighting** `W = 1/max(|prior|, floor)` (D3); entropy
+  stays the shelf alternative.
+- **Observation mask `M_f`** on the balance bands (not-reported ≠ observed
+  zero); coarse countries bind on the `121` aggregate only.
+- **Inventory changes**: free-signed Y slice, anchored where observable
+  (UNSD flow `06` for energy — already in the snapshot; FAO FBS for food),
+  EX3.10.2 monetary prior for the rest. Net-tax V rows also free-signed.
+
+## Open points (for review)
+
+1. **Slice ordering contract** — `fuels` set must equal the `role=fuel`
+   commodity slice in the same order (bridge-enforced, needs an assert).
+2. **Solver** — HIGHS (installed via cvxpy) for LP; MARIO's conic default
+   (ECOS/SCS/CLARABEL) only needed if we ever switch to entropy.
+3. **Grid validation** — quantify the export-feedback error once: one year,
+   grid solve vs one coupled Gauss-Seidel iteration, compare footprints.
+
+*(Resolved 2026-08-01: the heat-node duplication is fixed — SIEC
+`8000/8000T/DG/DS` anchor to the pre-existing `NXB | Steam and hot water`,
+the stale `HEAT` node is removed, and the 4 `HWAT` variant rows re-anchored
+there from EBOPS 10.3.5 — the SIEC↔NXS heat concordance is now a shared
+parent in the graph.)*
