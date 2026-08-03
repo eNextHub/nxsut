@@ -41,6 +41,12 @@ import yaml
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 
+# NXTR v0 recipe constants for the bottom-up fuel split; kept in step with
+# build_moveb_split_spec, which declares them for the spec's provenance
+INT_HGV, INT_BUS = 2.7e-4, 2.5e-4       # t fuel per vehicle-km
+LOAD_DEFAULT, OCC_BUS = 10.0, 15.0      # tkm/vkm, pkm/vkm
+PAX_TONNE = 0.1                         # one passenger = 100 kg of payload
+
 PARENTS = {
     "road_pipe": ("Other land transport", "Other land transportation services"),
     "rail": ("Transport via railways", "Railway transportation services"),
@@ -117,6 +123,55 @@ def median_prices() -> dict[str, float]:
     return {c: statistics.median(v) for c, v in vals.items()}
 
 
+def hgv_load_factors() -> dict[str, float]:
+    """Per-country observed HGV load factor (tkm/vkm), for the road split."""
+    load: dict[str, float] = {}
+    with open(HERE / "data" / "derived_recipes_v0.csv") as f:
+        for r in csv.DictReader(f):
+            if (r["tech"] == "HGV" and r["coef"] == "load_factor_total"
+                    and r["year"] == "Y11"):
+                load[r["country"]] = float(r["value"])
+    return load
+
+
+def fuel_shares(block: str, children: list[str], Q: dict[str, float],
+                region: str, load: dict[str, float]) -> dict[str, float]:
+    """Split the parent's liquid fuel between the children by PHYSICAL WORK.
+
+    Computed here rather than in the spec because here Q is final — observed
+    where a statistic exists, synthesised from the child's revenue and its
+    median implied price where none does. The spec could only see the
+    observed volumes, and a volume that is merely *unmeasured* read there as
+    zero activity: with one sibling missing the split degenerated to 0/1 and
+    the whole of a country's marine bunker landed on its passenger child.
+    Germany is the case in point — ITF publishes no coastal freight tonne-km
+    for it, so its sea passenger sector came out at 128.021 gCO2eq/pkm on
+    744 Mpkm. 33 of 48 regions were in that position for sea freight.
+
+    Rules, unchanged in substance:
+      - road: vehicle-km x NXTR fuel intensity (HGV against the country's
+        observed load factor, bus against a default occupancy);
+      - rail: traffic units, one intensity per unit at this stage;
+      - water and air: tonne-km-equivalent, a passenger counting as 100 kg
+        with baggage (ICAO DATA+, IATA RP 1726, EN 16258, GLEC). Splitting
+        by revenue instead would hand ferries' and airlines' passenger side
+        most of the fuel, since passenger revenue per unit of physical work
+        is an order of magnitude above freight's.
+    """
+    if block == "road_pipe":
+        w = {"ROAD.FRT": Q.get("ROAD.FRT", 0.0) / load.get(region, LOAD_DEFAULT) * INT_HGV,
+             "ROAD.PAX": Q.get("ROAD.PAX", 0.0) / OCC_BUS * INT_BUS}
+    elif block == "rail":
+        w = {c: Q.get(c, 0.0) for c in children}
+    else:
+        w = {c: Q.get(c, 0.0) * (PAX_TONNE if c.endswith("PAX") or c == "TRN.P" else 1.0)
+             for c in children}
+    tot = sum(w.values())
+    if tot <= 0:
+        return {}
+    return {c: v / tot for c, v in w.items()}
+
+
 def ipf(seed: np.ndarray, rt: np.ndarray, ct: np.ndarray, iters: int = 30) -> np.ndarray:
     a = np.array(seed, dtype=float)
     for _ in range(iters):
@@ -171,6 +226,7 @@ def apply(db) -> None:
 
     spec = load_spec()
     prices = median_prices()
+    load = hgv_load_factors()
     print("prezzi mediani (sintesi Q mancanti):",
           {k: round(v, 3) for k, v in prices.items()}, flush=True)
 
@@ -265,6 +321,10 @@ def apply(db) -> None:
                     q = m_child / prices[c] if m_child > 0 else 0.0
                     synth += 1
                 Q[c] = q
+            # the fuel split follows the physical work the table will carry,
+            # so it uses these Q — never the spec's observed-only volumes,
+            # which read an unmeasured sibling as zero activity
+            sh_fuel = fuel_shares(block, children, Q, region, load) or sh_fuel
             blocks[(region, block)] = dict(
                 region=region, p_act=p_act, p_com=p_com, children=children, M=M, Q=Q,
                 sh_other=sh_other, sh_fuel=sh_fuel, self_val=self_val,

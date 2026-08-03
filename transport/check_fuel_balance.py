@@ -84,25 +84,39 @@ def main() -> None:
           flush=True)
 
     obs = unsd_road_fuel(api, year)
-    print(f"\n{'paese':6}{'tavola (Mt)':>14}{'UNSD 1221 (Mt)':>17}{'rapporto':>11}",
-          flush=True)
+    Y = db.Y
+    # Move A moves household motor fuel into the car activities only up to the
+    # bottom-up transport demand (vehicle-km x intensity); whatever a
+    # household bought beyond that stays in final demand. It is still road
+    # fuel as far as transaction 1221 is concerned, so the comparison is a
+    # BRACKET: activities alone are the lower bound, activities plus all the
+    # household motor fuel left in Y the upper one (the upper bound leaks a
+    # little heating oil, since Gas/Diesel Oil serves both).
+    hh = [col for col in Y.columns
+          if "households" in str(col[2]) or "non-profit" in str(col[2])]
+    print(f"\n{'paese':6}{'attivita (Mt)':>15}{'+ famiglie':>13}"
+          f"{'UNSD 1221':>12}{'rapporto':>20}", flush=True)
     for c in COUNTRIES:
         # every origin: an energy balance counts the fuel burned in the
         # country whoever refined it, so imported fuel counts too
         rows = U.loc[(slice(None), "Commodity", fuels), (c, "Activity", acts)]
-        tab = float(rows.to_numpy().sum()) / 1e6
+        low = float(rows.to_numpy().sum()) / 1e6
+        hh_c = [col for col in hh if col[0] == c]
+        resid = float(Y.loc[(slice(None), "Commodity", fuels), hh_c].to_numpy().sum()) / 1e6
+        high = low + resid
         o = float(obs.get(c, float("nan"))) / 1e6
-        ratio = tab / o if o else float("nan")
-        flag = "OK " if 0.5 <= ratio <= 1.2 else "!! "
-        print(f"{flag}{c:4}{tab:>13,.1f}{o:>17,.1f}{ratio:>11.2f}", flush=True)
+        r_lo, r_hi = (low / o, high / o) if o else (float("nan"),) * 2
+        flag = "OK " if r_lo <= 1.2 and r_hi >= 0.7 else "!! "
+        print(f"{flag}{c:4}{low:>14,.1f}{high:>13,.1f}{o:>12,.1f}"
+              f"{r_lo:>11.2f} - {r_hi:.2f}", flush=True)
     print("\nLettura. Il test e' di PERIMETRO, non di livello: la tavola porta i "
           "volumi fisici dell'anno base EXIOBASE (2011) — il '2023' riguarda i mix "
           "elettrici e di trade — mentre l'osservato e' 2021-23, quindi un divario "
           "di vintage e' atteso (crescita fuori UE, calo in UE).", flush=True)
-    print("Quel che conta: il rapporto deve stare nello stesso ordine di grandezza "
-          "e NON superare di molto 1. Un rapporto molto sotto 0,5 vorrebbe dire "
-          "carburante stradale rimasto nelle colonne industriali, cioe' Move C non "
-          "ha estratto abbastanza; molto sopra 1,2 vorrebbe dire che ha preso anche "
+    print("L'osservato dovrebbe cadere DENTRO l'intervallo, o poco sotto il suo "
+          "estremo superiore. Sotto l'estremo inferiore vorrebbe dire carburante "
+          "stradale rimasto nelle colonne industriali (Move C non ha estratto "
+          "abbastanza); sopra l'estremo superiore, che la tavola ha preso anche "
           "combustibile che 1221 esclude (calore di processo, macchine off-road).",
           flush=True)
 
