@@ -633,3 +633,129 @@ stdin answers when driving it from scripts; results are read with
 the stale `HEAT` node is removed, and the 4 `HWAT` variant rows re-anchored
 there from EBOPS 10.3.5 — the SIEC↔NXS heat concordance is now a shared
 parent in the graph.)*
+
+## Review 2026-08-03 — the draft against the built v3.2 (D12–D18)
+
+The draft above was written before the v3.2 vintage existed. Now that the
+table is built (transport service layer + UNSD-first mixes, year 2023), the
+design was re-read against the real grid. Everything structural survives —
+the LP shape, the identities, the elastic-band machinery, the priors-after-
+deterministic-updates sequence. What changes is concrete: the sets, three
+constraint families, and the data build order. Numbered as decisions D12–D18.
+
+**D12 — Grid constants come from the built table.** 48 regions (not 49 —
+hybrid EXIOBASE has 43 countries + 5 RoW), **201 activities × 205
+commodities**. The `fuels` set is now enumerable from `units.txt`: the
+**~55 SIEC-mappable energy-carrier rows** — the fuel commodities in tonnes
+(coals, cokes, manufactured gases, oil products, biofuels, natural gas,
+peat) plus `Electricity` **and `Electricity need`** (TJ, see D13) and
+`Steam and hot water supply services` (TJ, the `HWAT` row). **`Nuclear
+fuel` stays exogenous**: no energy-balance observation prices its use by
+sector (UNSD tracks nuclear *heat*, not uranium flows), and the nuclear
+activity is already output-anchored via `x_obs`; making the row endogenous
+would add freedom with no data to bind it. Feedstock-grade rows (bitumen,
+lubricants, paraffin waxes, white spirit, additives) stay **in** the fuels
+set but simply have no observation mask anywhere (UNSD non-energy flow `11`
+is not imported): the L1 objective keeps them at prior — declared, and the
+flow-`11` import remains stage-3 material (carbon balance), not an LP input.
+
+**D13 — The pooled commodities are two rows each; the pool column is
+structural.** The trade-pooled commodities (`Electricity`, steel,
+aluminium) exist as `X` and `X need` twins: producers supply `X`, one pool
+activity per region consumes `X` (domestic + import mix) and supplies
+`X need`, consumers buy `X need`. Consequences: (a) both electricity rows
+belong to `fuels`; (b) in `B_ires` the **pool activity's column maps to no
+bucket** (its use of `Electricity` is plumbing, not sectoral consumption —
+counting it would double every kWh against the `7000` balances); (c) the
+power-tech columns map to bucket `088` (transformation) through the graph
+as-is (NXS power tech → `NXB power*` → NACE D.35.11 → IRES 088 ✓); (d) the
+sectoral electricity bands bind on the **`Electricity need` row × consumer
+columns**. The supply mixes stay untouchable by construction — `s_prior`
+is exogenous, so this falls out for free (the mix update is never redone).
+
+**D14 — Transport constraints, final form.** The service layer changes the
+transport blocks from "the hard residual" to the best-observed part of the
+model:
+
+- **`x_obs` anchors for the transport children** from the governed volumes
+  (ITF/ESTAT pkm-tkm, ICAO/WB air, own-account tkm, private pkm from the
+  Move-A machinery), in the activities' own native units (Mpkm/Mtkm). They
+  join EMBER/worldsteel in the anchor family, as designed.
+- **Road bands regain a Y term — reduced and observed** (the D11 retirement
+  was too absolute). Move A moved household motor fuel into the car
+  activities *up to the bottom-up cap*; what exceeds the cap stays in
+  final demand (France most of all — see `check_fuel_balance.py`). So the
+  road balance is: `U_f @ B_road + m_mf·Y_f ∈ (F_obs(1221) +
+  F_obs(1231)_mf)·(1±ε)`, where `m_mf` masks the four motor-fuel rows
+  (gasoline, gas/diesel oil, LPG, natural gas) and `F_obs(1231)_mf` — the
+  households' *stationary* use of those same fuels — moves to the target
+  side as an observed constant. Composed with the `1231` anchor on `Y_f`
+  itself (the `CON` recipe), the split "stationary vs residual driving"
+  is pinned by two observations instead of a declared share. Linear,
+  no new machinery.
+- **Air and water bands include the bunkers** (residence basis, the layer's
+  own rule): air = `1223 + 051` (the carrier-based sector burns ~1.07× the
+  domestic+international bunker total), sea = `1224 + 052`. Inland
+  waterways stay territorial — declared, as in the layer. Requires
+  importing IRES transactions `051/052` (D18).
+- Rail = `1222`, pipeline = `1226`, both clean.
+
+**D15 — Autoproduction netting (D9) lands *before* the pilot.** The built
+v3.2 does **not** include the netting yet (stage 1c of the master plan).
+Since it is a prior transformation and the UNSD `015x/016x` split is
+governed, the order is: implement WS-NET in the transport-style
+`apply(db)` form, insert it in gen_v3 next to the transport layer, rebuild
+the 2023 vintage, and only then bridge the LP. Piloting on the un-netted
+table would double-count exactly the autoproduction the anchors are being
+decomposed for (rooftop PV is *half* of Italian solar).
+
+**D16 — The v3.2 grid needs its set rows in nxbase.** The `NXS3` namespace
+carries the 188 v3.0/3.1 activities: the layer's **15 activities + 10
+physical commodities are missing**, so today the `B_ires`/`G_va` walk
+cannot see the transport children, and a future v3.2 import could not
+resolve its labels. Extension kit (the `enextsut_v3_namespace` pattern):
+activities — B-children on their NACE 2.1 classes (road freight → H.49.4x,
+road passenger → H.49.3, rail P/F → H.49.1/.2, sea → H.50.2, inland →
+H.50.4, air P/F → H.51.1/.21), private car/moto on `NXB | Private road
+mobility`, own-account on the ITF own-account row (containment, the one
+honest parent); commodities — the service rows on their EBOPS transport
+leaves (or `MOB.PASS`/`MOB.FRT` where EBOPS has no mode split at that
+grain). With those rows in place `B_ires` is a pure graph walk **plus one
+declared rule**: the road-family bucket (`1221`) collects every road
+column (B children + own-account + CAR.* + MOTO) — the IRES `122x` rows
+anchor at NACE H.49/H.50/H.51 granularity, so the mode-level mapping
+inside land transport is the declared piece, mirroring the layer's own
+construction.
+
+**D17 — VA targets and the GDP closure.** New **local** source
+`EX3102m.VA.*` (EXIOBASE 3.10.2 monetary ixi, reaches 2024): value-added
+rows per activity through the existing `VA` parameter (`item_1 = Flow` —
+the `VA.*` component flows already exist — `item_2 = Activity`,
+`Site;Period`), `from_mario` recipe on the factor-input block. `G_va`
+aggregates the 163 EX3m industries onto ~15 groups and the bridge maps
+them onto NXS30 activities via the shared EXIOBASE labels (both sides are
+EXIOBASE nomenclature — no external concordance). **GDP closure v1 =
+Σ VA_tgt from the same source** (self-consistent, no price vector, no
+basic-vs-market-prices trap); World Bank WDI GDP is **benchmark only**
+(KPI 1, GVA-vs-GVA as the honest comparison). Governing WDI needs a
+parameter decision (a macro aggregate is neither `VA`-by-activity nor a
+`dfl`-like index) — deferred to the benchmark brick, with Lorenzo.
+
+**D18 — UNSD governance extensions (small, one family).** Same snapshot,
+recipe siblings of `UNSD.USE`: (a) **bunkers `051/052`** (needed by D14's
+air/sea bands); (b) **stock changes flow `06`** (the inventory-change Y
+anchors); (c) **households `1231` → the `CON` recipe** (residential Y
+anchors + the D14 stationary term). Non-energy flow `11` deliberately not
+imported (D12).
+
+### Data build order (pilot critical path first)
+
+For the IT×2023 pilot the LP needs, in nxbase: **D16** (set rows → B_ires),
+**D18** (bunkers/stocks/households), **BACI.Q.Y23** full import (EXP
+anchors — recipe exists, table registered at 0 rows), **D17** (VA
+targets); and in nxsut: **WS-NET + v3.2 rebuild** (D15), then the bridge.
+Everything else widens coverage but does not block the pilot: UNSD
+Industrial Commodity Statistics (the biggest `x_obs` win — first after the
+critical path), WDI + EDGAR (benchmarks; `EMBER.CI25` is already governed
+and idle — KPI 3 at zero cost), Eurostat `nrg_bal_c` (EU quality upgrade),
+FAOSTAT (food anchors + FBS).

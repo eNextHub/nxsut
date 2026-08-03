@@ -78,7 +78,7 @@ the LP closes; emissions recompute last. Status legend: ✅ done · 🔧 designe
 | 1b | Trade mixes | ENTSO-E (electricity), BACI (materials); extension to *all* tradable goods pending | ✅ / ⬜ ext. |
 | 1c | Autoproduction netting | off-diagonal electricity of non-energy sectors netted vs own use; anchors ↔ UNSD `015x/016x` split (LP draft **D9**) | 🔧 |
 | 1d | **Transport service layer** | Moves B (split commercial) + A (private mobility MIMO) + C (own-account externalised); NXTR.V0 recipes governed | ✅ (v3.2) |
-| 2 | **LP nowcast** (cvxlab) | per (region × year={2023}) grid; energy-carrier rows free, L1 relative weights, elastic bands, GDP/VA closure; world-balance audit | 🔧 toy-validated |
+| 2 | **LP nowcast** (cvxlab) | per (region × year={2023}) grid; energy-carrier rows free, L1 relative weights, elastic bands, GDP/VA closure; world-balance audit | 🔧 toy-validated · reviewed vs v3.2 (D12–D18) |
 | 3 | Emission recompute | bottom-up fuel × **EF-by-fuel (IPCC 2006, governed like GWP)**; carbon mass balance on ~10 feedstock sectors | 🔧 |
 | 4 | Validation | step-0 UNSD↔EMBER; implied efficiencies/economies; EDGAR + Climate TRACE radar; CRF `1.A.3.b` transport split; world trade audit | 🔧 |
 | 5 | Publication | licensing per source; promote `WSTEEL`; nowcast table as new NXS vintage | ⬜ |
@@ -126,6 +126,22 @@ buchi reali e non casi particolari:
   di emissione **per unità di energia**, mentre la tavola è in tonnellate.
 
 ## Decision log (consolidated)
+
+**2026-08-03 (pm)** — **LP draft reviewed against the built v3.2** (draft
+§D12–D18): grid constants from the table (48 × 201 × 205; `fuels` = ~55
+SIEC-mappable carrier rows incl. both pooled electricity rows, nuclear fuel
+exogenous); pool activity columns masked out of `B_ires` (plumbing, not
+consumption); transport bands final form — road regains a **reduced,
+observed Y term** (`1221 + 1231_mf` combined target; the D11 retirement was
+too absolute), air/sea bands include bunkers `051/052` (residence), children
+get pkm/tkm `x_obs`; **netting (D9/WS-NET) must land before the pilot**
+(v3.2 rebuild); `NXS3` namespace extension in nxbase (15 activities + 10
+commodities) so `B_ires` walks the graph; VA targets from a new local
+`EX3102m.VA` source (existing `VA` parameter + `VA.*` flows), **GDP closure
+v1 = Σ VA_tgt same-source**, WDI benchmark-only. Data build order: pilot
+critical path = NXS3 ext → UNSD ext (051/052, flow 06, `1231`→CON) →
+BACI.Q.Y23 → EX3102m.VA → WS-NET+rebuild → bridge; coverage wideners after
+(UNSD ICS first, then WDI/EDGAR benchmarks, `nrg_bal_c`, FAOSTAT).
 
 **2026-07-31** — BACI governed native (`TRD`, `HS22`→CN26, ETALAB); pooling
 KPI = materiality × heterogeneity, gate = physically-traded goods; pooled =
@@ -180,7 +196,7 @@ hosted); full-table import via the nxbase bulk path.
 
 ## Build order (workstreams)
 
-1. **WS-T — Transport service layer** ← *active first*
+1. **WS-T — Transport service layer** — **DONE 2026-08-02** (v3.2 built)
    1. ~~nxbase governance kits: ITF + Eurostat transport~~ **DONE
       2026-08-01** (22 156 rows open; cross-source check ITF ≡ ESTAT).
    2. Taxonomy + recipe table v0 — **global, 14 techs** (decided: one gas
@@ -191,11 +207,10 @@ hosted); full-table import via the nxbase bulk path.
       data-rich region, then all — acceptance = `1221` band closes.
    4. Population waves: observed countries → RoW proxies (stock × mileage ×
       GFEI economy).
-2. **WS-0 — Step-0 script** (independent, feeds anchors, netting & the mix
-   source): UNSD↔EMBER mix comparison → **per-country source selection**
-   (UNSD-first where similar, EMBER where divergent), main/autoproducer
-   decomposition, implied efficiencies; + the `UNSD.GEN` sibling recipe.
-3. **WS-EF — EF-by-fuel kit** (IPCC 2006; the GWP pattern; small).
+2. **WS-0 — Step-0 script** — **DONE 2026-08-02** (selector + implied
+   efficiencies + `UNSD.GEN`; arbitrated blend live in the client).
+3. **WS-EF — EF-by-fuel kit** — **DONE 2026-08-03** (`IPCCGL.EF` +
+   `IPCCGL.NCV` governed, consumed by Moves A/C).
 4. **WS-CON — households recipe** (`1231`→`CON`) + **Eurostat `nrg_bal_c`**
    twin (EU quality upgrade on the same SIEC/IRES namespaces).
 5. **WS-NET — autoproduction netting** implementation (D9, gen_v3).
